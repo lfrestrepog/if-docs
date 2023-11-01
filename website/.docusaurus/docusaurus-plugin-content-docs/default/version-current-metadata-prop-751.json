@@ -36,68 +36,68 @@
           {
             "type": "link",
             "label": "Computation Pipeline",
-            "href": "/docs/specification/Computation Pipeline",
-            "docId": "specification/Computation Pipeline"
+            "href": "/docs/specification/computation-pipeline",
+            "docId": "specification/computation-pipeline"
           },
           {
             "type": "link",
             "label": "Durations",
-            "href": "/docs/specification/Durations",
-            "docId": "specification/Durations"
+            "href": "/docs/specification/durations",
+            "docId": "specification/durations"
           },
           {
             "type": "link",
             "label": "Granularity",
-            "href": "/docs/specification/Granularity",
-            "docId": "specification/Granularity"
+            "href": "/docs/specification/granularity",
+            "docId": "specification/granularity"
           },
           {
             "type": "link",
             "label": "Impact Engine Framework",
-            "href": "/docs/specification/Impact Engine Framework",
-            "docId": "specification/Impact Engine Framework"
+            "href": "/docs/specification/impact-engine-framework",
+            "docId": "specification/impact-engine-framework"
           },
           {
             "type": "link",
             "label": "Impact Graph",
-            "href": "/docs/specification/Impact Graph",
-            "docId": "specification/Impact Graph"
+            "href": "/docs/specification/impact-graph",
+            "docId": "specification/impact-graph"
           },
           {
             "type": "link",
             "label": "Impact Model Plugin",
-            "href": "/docs/specification/Impact Model Plugin",
-            "docId": "specification/Impact Model Plugin"
+            "href": "/docs/specification/impact-model-plugin",
+            "docId": "specification/impact-model-plugin"
           },
           {
             "type": "link",
             "label": "Impact",
-            "href": "/docs/specification/Impact",
-            "docId": "specification/Impact"
+            "href": "/docs/specification/impact",
+            "docId": "specification/impact"
           },
           {
             "type": "link",
             "label": "Impl (Impact YAML)",
-            "href": "/docs/specification/Impl (Impact YAML)",
-            "docId": "specification/Impl (Impact YAML)"
+            "href": "/docs/specification/impl",
+            "docId": "specification/impl"
           },
           {
             "type": "link",
             "label": "Inputs",
-            "href": "/docs/specification/Inputs",
-            "docId": "specification/Inputs"
+            "href": "/docs/specification/inputs",
+            "docId": "specification/inputs"
           },
           {
             "type": "link",
             "label": "Model Pipeline",
-            "href": "/docs/specification/Model Pipeline",
-            "docId": "specification/Model Pipeline"
+            "href": "/docs/specification/model-pipeline",
+            "docId": "specification/model-pipeline"
           },
           {
             "type": "link",
             "label": "Model Plugin Configuration",
-            "href": "/docs/specification/Model Plugin Configuration",
-            "docId": "specification/Model Plugin Configuration"
+            "href": "/docs/specification/model-plugin-config",
+            "docId": "specification/model-plugin-config"
           }
         ],
         "href": "/docs/specification/"
@@ -186,8 +186,8 @@
           {
             "type": "link",
             "label": "IMPL writing guide",
-            "href": "/docs/tutorials/How to write impls",
-            "docId": "tutorials/How to write impls"
+            "href": "/docs/tutorials/how-to-write-impls",
+            "docId": "tutorials/how-to-write-impls"
           }
         ],
         "href": "/docs/tutorials/"
@@ -279,50 +279,50 @@
       "description": "Impact Framework (IF) aims to make software carbon measurements easy.",
       "sidebar": "tutorialSidebar"
     },
-    "specification/Computation Pipeline": {
-      "id": "specification/Computation Pipeline",
+    "specification/computation-pipeline": {
+      "id": "specification/computation-pipeline",
       "title": "Computation Pipeline",
       "description": "Introduction",
       "sidebar": "tutorialSidebar"
     },
-    "specification/Durations": {
-      "id": "specification/Durations",
+    "specification/durations": {
+      "id": "specification/durations",
       "title": "Durations",
       "description": "Terminology",
       "sidebar": "tutorialSidebar"
     },
-    "specification/Granularity": {
-      "id": "specification/Granularity",
+    "specification/granularity": {
+      "id": "specification/granularity",
       "title": "Granularity",
       "description": "An Impact Graph (graph) can be created that is very coarse-grained, a single top-level component, with a single input of long duration.",
       "sidebar": "tutorialSidebar"
     },
-    "specification/Impact": {
-      "id": "specification/Impact",
+    "specification/impact": {
+      "id": "specification/impact",
       "title": "Impact",
       "description": "Introduction",
       "sidebar": "tutorialSidebar"
     },
-    "specification/Impact Engine Framework": {
-      "id": "specification/Impact Engine Framework",
+    "specification/impact-engine-framework": {
+      "id": "specification/impact-engine-framework",
       "title": "Impact Engine Framework",
       "description": "A Framework to Model, Measure, siMulate and Monitor the environmental impacts of software.",
       "sidebar": "tutorialSidebar"
     },
-    "specification/Impact Graph": {
-      "id": "specification/Impact Graph",
+    "specification/impact-graph": {
+      "id": "specification/impact-graph",
       "title": "Impact Graph",
       "description": "Introduction",
       "sidebar": "tutorialSidebar"
     },
-    "specification/Impact Model Plugin": {
-      "id": "specification/Impact Model Plugin",
+    "specification/impact-model-plugin": {
+      "id": "specification/impact-model-plugin",
       "title": "Impact Model Plugin",
       "description": "Calculating Impact Metric 's (outputs) for every component in an Impact Graph (graph) requires the use of an Impact Model (model) called through an Impact Model Plugin (model plugin).",
       "sidebar": "tutorialSidebar"
     },
-    "specification/Impl (Impact YAML)": {
-      "id": "specification/Impl (Impact YAML)",
+    "specification/impl": {
+      "id": "specification/impl",
       "title": "Impl (Impact YAML)",
       "description": "- Impact YAML (IMPL) is a file format based on yaml  to represent an Impact Graph.",
       "sidebar": "tutorialSidebar"
@@ -333,20 +333,20 @@
       "description": "Here you will find the IF specification.",
       "sidebar": "tutorialSidebar"
     },
-    "specification/Inputs": {
-      "id": "specification/Inputs",
+    "specification/inputs": {
+      "id": "specification/inputs",
       "title": "Inputs",
       "description": "inputs are a core component of an Impact Graph (graph), and they form the primary input into an Impact Model Plugin (model).",
       "sidebar": "tutorialSidebar"
     },
-    "specification/Model Pipeline": {
-      "id": "specification/Model Pipeline",
+    "specification/model-pipeline": {
+      "id": "specification/model-pipeline",
       "title": "Model Pipeline",
       "description": "Introduction",
       "sidebar": "tutorialSidebar"
     },
-    "specification/Model Plugin Configuration": {
-      "id": "specification/Model Plugin Configuration",
+    "specification/model-plugin-config": {
+      "id": "specification/model-plugin-config",
       "title": "Model Plugin Configuration",
       "description": "There are several places in an Impl file where you can add configuration for a model.",
       "sidebar": "tutorialSidebar"
@@ -357,8 +357,8 @@
       "description": "[!tip]",
       "sidebar": "tutorialSidebar"
     },
-    "tutorials/How to write impls": {
-      "id": "tutorials/How to write impls",
+    "tutorials/how-to-write-impls": {
+      "id": "tutorials/how-to-write-impls",
       "title": "IMPL writing guide",
       "description": "The Impact Framework receives all its configuration and input data in the form of a yaml file known as an impl (input-yaml).",
       "sidebar": "tutorialSidebar"

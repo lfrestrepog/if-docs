@@ -38,68 +38,13 @@ export default [
     exact: true
   },
   {
-    path: '/blog',
-    component: ComponentCreator('/blog', '933'),
-    exact: true
-  },
-  {
-    path: '/blog/archive',
-    component: ComponentCreator('/blog/archive', 'ebe'),
-    exact: true
-  },
-  {
-    path: '/blog/first-blog-post',
-    component: ComponentCreator('/blog/first-blog-post', '18f'),
-    exact: true
-  },
-  {
-    path: '/blog/long-blog-post',
-    component: ComponentCreator('/blog/long-blog-post', '67b'),
-    exact: true
-  },
-  {
-    path: '/blog/mdx-blog-post',
-    component: ComponentCreator('/blog/mdx-blog-post', '6ab'),
-    exact: true
-  },
-  {
-    path: '/blog/tags',
-    component: ComponentCreator('/blog/tags', '1cf'),
-    exact: true
-  },
-  {
-    path: '/blog/tags/docusaurus',
-    component: ComponentCreator('/blog/tags/docusaurus', '341'),
-    exact: true
-  },
-  {
-    path: '/blog/tags/facebook',
-    component: ComponentCreator('/blog/tags/facebook', 'fce'),
-    exact: true
-  },
-  {
-    path: '/blog/tags/hello',
-    component: ComponentCreator('/blog/tags/hello', 'a27'),
-    exact: true
-  },
-  {
-    path: '/blog/tags/hola',
-    component: ComponentCreator('/blog/tags/hola', '1d5'),
-    exact: true
-  },
-  {
-    path: '/blog/welcome',
-    component: ComponentCreator('/blog/welcome', 'b7f'),
-    exact: true
-  },
-  {
     path: '/markdown-page',
     component: ComponentCreator('/markdown-page', '06b'),
     exact: true
   },
   {
     path: '/docs',
-    component: ComponentCreator('/docs', '1cb'),
+    component: ComponentCreator('/docs', 'f8c'),
     routes: [
       {
         path: '/docs/background',
@@ -192,68 +137,68 @@ export default [
         sidebar: "tutorialSidebar"
       },
       {
-        path: '/docs/specification/Computation Pipeline',
-        component: ComponentCreator('/docs/specification/Computation Pipeline', '408'),
+        path: '/docs/specification/computation-pipeline',
+        component: ComponentCreator('/docs/specification/computation-pipeline', '8d8'),
         exact: true,
         sidebar: "tutorialSidebar"
       },
       {
-        path: '/docs/specification/Durations',
-        component: ComponentCreator('/docs/specification/Durations', 'dfa'),
+        path: '/docs/specification/durations',
+        component: ComponentCreator('/docs/specification/durations', '0f9'),
         exact: true,
         sidebar: "tutorialSidebar"
       },
       {
-        path: '/docs/specification/Granularity',
-        component: ComponentCreator('/docs/specification/Granularity', '09d'),
+        path: '/docs/specification/granularity',
+        component: ComponentCreator('/docs/specification/granularity', 'f47'),
         exact: true,
         sidebar: "tutorialSidebar"
       },
       {
-        path: '/docs/specification/Impact',
-        component: ComponentCreator('/docs/specification/Impact', '280'),
+        path: '/docs/specification/impact',
+        component: ComponentCreator('/docs/specification/impact', '67e'),
         exact: true,
         sidebar: "tutorialSidebar"
       },
       {
-        path: '/docs/specification/Impact Engine Framework',
-        component: ComponentCreator('/docs/specification/Impact Engine Framework', 'a43'),
+        path: '/docs/specification/impact-engine-framework',
+        component: ComponentCreator('/docs/specification/impact-engine-framework', '466'),
         exact: true,
         sidebar: "tutorialSidebar"
       },
       {
-        path: '/docs/specification/Impact Graph',
-        component: ComponentCreator('/docs/specification/Impact Graph', '544'),
+        path: '/docs/specification/impact-graph',
+        component: ComponentCreator('/docs/specification/impact-graph', '384'),
         exact: true,
         sidebar: "tutorialSidebar"
       },
       {
-        path: '/docs/specification/Impact Model Plugin',
-        component: ComponentCreator('/docs/specification/Impact Model Plugin', 'dc1'),
+        path: '/docs/specification/impact-model-plugin',
+        component: ComponentCreator('/docs/specification/impact-model-plugin', 'e2a'),
         exact: true,
         sidebar: "tutorialSidebar"
       },
       {
-        path: '/docs/specification/Impl (Impact YAML)',
-        component: ComponentCreator('/docs/specification/Impl (Impact YAML)', '941'),
+        path: '/docs/specification/impl',
+        component: ComponentCreator('/docs/specification/impl', '59a'),
         exact: true,
         sidebar: "tutorialSidebar"
       },
       {
-        path: '/docs/specification/Inputs',
-        component: ComponentCreator('/docs/specification/Inputs', '0a8'),
+        path: '/docs/specification/inputs',
+        component: ComponentCreator('/docs/specification/inputs', '949'),
         exact: true,
         sidebar: "tutorialSidebar"
       },
       {
-        path: '/docs/specification/Model Pipeline',
-        component: ComponentCreator('/docs/specification/Model Pipeline', '1e4'),
+        path: '/docs/specification/model-pipeline',
+        component: ComponentCreator('/docs/specification/model-pipeline', 'ec4'),
         exact: true,
         sidebar: "tutorialSidebar"
       },
       {
-        path: '/docs/specification/Model Plugin Configuration',
-        component: ComponentCreator('/docs/specification/Model Plugin Configuration', '804'),
+        path: '/docs/specification/model-plugin-config',
+        component: ComponentCreator('/docs/specification/model-plugin-config', '168'),
         exact: true,
         sidebar: "tutorialSidebar"
       },
@@ -270,8 +215,8 @@ export default [
         sidebar: "tutorialSidebar"
       },
       {
-        path: '/docs/tutorials/How to write impls',
-        component: ComponentCreator('/docs/tutorials/How to write impls', '8f5'),
+        path: '/docs/tutorials/how-to-write-impls',
+        component: ComponentCreator('/docs/tutorials/how-to-write-impls', '2b1'),
         exact: true,
         sidebar: "tutorialSidebar"
       }

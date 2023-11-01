@@ -1,0 +1,27 @@
+{
+  "unversionedId": "specification/model-pipeline",
+  "id": "specification/model-pipeline",
+  "title": "Model Pipeline",
+  "description": "Introduction",
+  "source": "@site/docs/04-specification/model-pipeline.md",
+  "sourceDirName": "04-specification",
+  "slug": "/specification/model-pipeline",
+  "permalink": "/docs/specification/model-pipeline",
+  "draft": false,
+  "editUrl": "https://github.com/Green-Software-Foundation/ief/docs/04-specification/model-pipeline.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "author": "Asim Hussain (@jawache)",
+    "abstract": "How models are chained together into a pipeline in order to compute the impacts of"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Inputs",
+    "permalink": "/docs/specification/inputs"
+  },
+  "next": {
+    "title": "Model Plugin Configuration",
+    "permalink": "/docs/specification/model-plugin-config"
+  }
+}

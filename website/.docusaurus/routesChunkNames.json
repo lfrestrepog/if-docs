@@ -42,143 +42,6 @@
       "plugin": "plugin---docusaurus-debug-122-f5a"
     }
   },
-  "/blog-933": {
-    "__comp": "__comp---theme-blog-list-pagea-6-a-7ba",
-    "__context": {
-      "plugin": "plugin---blogc-12-0a9"
-    },
-    "sidebar": "sidebar---blog-814-8ac",
-    "items": [
-      {
-        "content": "content---blog-766-e3c"
-      },
-      {
-        "content": "content---blogf-4-f-cd7"
-      },
-      {
-        "content": "content---blog-871-381"
-      },
-      {
-        "content": "content---blog-925-e00"
-      }
-    ],
-    "metadata": "metadata---blogb-2-b-df1"
-  },
-  "/blog/archive-ebe": {
-    "__comp": "__comp---theme-blog-archive-page-9-e-4-1d8",
-    "__context": {
-      "plugin": "plugin---blogc-12-0a9"
-    },
-    "archive": "archive---blog-archiveb-2-f-393"
-  },
-  "/blog/first-blog-post-18f": {
-    "__comp": "__comp---theme-blog-post-pageccc-cab",
-    "__context": {
-      "plugin": "plugin---blogc-12-0a9"
-    },
-    "sidebar": "sidebar---blog-814-8ac",
-    "content": "content---blog-first-blog-poste-27-4a1"
-  },
-  "/blog/long-blog-post-67b": {
-    "__comp": "__comp---theme-blog-post-pageccc-cab",
-    "__context": {
-      "plugin": "plugin---blogc-12-0a9"
-    },
-    "sidebar": "sidebar---blog-814-8ac",
-    "content": "content---blog-long-blog-post-736-bc7"
-  },
-  "/blog/mdx-blog-post-6ab": {
-    "__comp": "__comp---theme-blog-post-pageccc-cab",
-    "__context": {
-      "plugin": "plugin---blogc-12-0a9"
-    },
-    "sidebar": "sidebar---blog-814-8ac",
-    "content": "content---blog-mdx-blog-post-593-37b"
-  },
-  "/blog/tags-1cf": {
-    "__comp": "__comp---theme-blog-tags-list-page-01-a-d0b",
-    "__context": {
-      "plugin": "plugin---blogc-12-0a9"
-    },
-    "sidebar": "sidebar---blog-814-8ac",
-    "tags": "tags---blog-tagsa-70-da2"
-  },
-  "/blog/tags/docusaurus-341": {
-    "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
-    "__context": {
-      "plugin": "plugin---blogc-12-0a9"
-    },
-    "sidebar": "sidebar---blog-814-8ac",
-    "items": [
-      {
-        "content": "content---blog-766-e3c"
-      },
-      {
-        "content": "content---blogf-4-f-cd7"
-      },
-      {
-        "content": "content---blog-871-381"
-      },
-      {
-        "content": "content---blog-925-e00"
-      }
-    ],
-    "tag": "tag---blog-tags-docusaurusa-80-728",
-    "listMetadata": "listMetadata---blog-tags-docusaurus-608-c09"
-  },
-  "/blog/tags/facebook-fce": {
-    "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
-    "__context": {
-      "plugin": "plugin---blogc-12-0a9"
-    },
-    "sidebar": "sidebar---blog-814-8ac",
-    "items": [
-      {
-        "content": "content---blog-766-e3c"
-      }
-    ],
-    "tag": "tag---blog-tags-facebook-031-c52",
-    "listMetadata": "listMetadata---blog-tags-facebook-096-d31"
-  },
-  "/blog/tags/hello-a27": {
-    "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
-    "__context": {
-      "plugin": "plugin---blogc-12-0a9"
-    },
-    "sidebar": "sidebar---blog-814-8ac",
-    "items": [
-      {
-        "content": "content---blog-766-e3c"
-      },
-      {
-        "content": "content---blog-871-381"
-      }
-    ],
-    "tag": "tag---blog-tags-hello-30-a-bed",
-    "listMetadata": "listMetadata---blog-tags-hello-664-70a"
-  },
-  "/blog/tags/hola-1d5": {
-    "__comp": "__comp---theme-blog-tags-posts-page-687-b6c",
-    "__context": {
-      "plugin": "plugin---blogc-12-0a9"
-    },
-    "sidebar": "sidebar---blog-814-8ac",
-    "items": [
-      {
-        "content": "content---blog-925-e00"
-      }
-    ],
-    "tag": "tag---blog-tags-holae-16-18a",
-    "listMetadata": "listMetadata---blog-tags-hola-4-c-9-a24"
-  },
-  "/blog/welcome-b7f": {
-    "__comp": "__comp---theme-blog-post-pageccc-cab",
-    "__context": {
-      "plugin": "plugin---blogc-12-0a9"
-    },
-    "sidebar": "sidebar---blog-814-8ac",
-    "content": "content---blog-welcomed-9-f-ffb"
-  },
   "/markdown-page-06b": {
     "__comp": "__comp---theme-mdx-page-1-f-3-b90",
     "__context": {
@@ -186,7 +49,7 @@
     },
     "content": "content---markdown-page-393-028"
   },
-  "/docs-1cb": {
+  "/docs-f8c": {
     "__comp": "__comp---theme-doc-page-1-be-9be",
     "__context": {
       "plugin": "plugin---docs-434-559"
@@ -253,49 +116,49 @@
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---docs-specification-da-4-411"
   },
-  "/docs/specification/Computation Pipeline-408": {
+  "/docs/specification/computation-pipeline-8d8": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-specification-computation-pipelinee-39-99e"
+    "content": "content---docs-specification-computation-pipelinef-7-b-af4"
   },
-  "/docs/specification/Durations-dfa": {
+  "/docs/specification/durations-0f9": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-specification-durations-4-e-3-bce"
+    "content": "content---docs-specification-durations-5-b-7-b42"
   },
-  "/docs/specification/Granularity-09d": {
+  "/docs/specification/granularity-f47": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-specification-granularity-136-dfd"
+    "content": "content---docs-specification-granularity-4-a-4-8cd"
   },
-  "/docs/specification/Impact-280": {
+  "/docs/specification/impact-67e": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-specification-impact-053-7aa"
+    "content": "content---docs-specification-impact-6-d-7-fb8"
   },
-  "/docs/specification/Impact Engine Framework-a43": {
+  "/docs/specification/impact-engine-framework-466": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-specification-impact-engine-framework-2-b-4-d21"
+    "content": "content---docs-specification-impact-engine-frameworkc-29-389"
   },
-  "/docs/specification/Impact Graph-544": {
+  "/docs/specification/impact-graph-384": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-specification-impact-graph-93-d-11a"
+    "content": "content---docs-specification-impact-graphf-26-cbd"
   },
-  "/docs/specification/Impact Model Plugin-dc1": {
+  "/docs/specification/impact-model-plugin-e2a": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-specification-impact-model-plugin-9-f-4-e09"
+    "content": "content---docs-specification-impact-model-plugincf-3-17f"
   },
-  "/docs/specification/Impl (Impact YAML)-941": {
+  "/docs/specification/impl-59a": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-specification-impl-impact-yaml-8-fd-5ad"
+    "content": "content---docs-specification-impl-749-375"
   },
-  "/docs/specification/Inputs-0a8": {
+  "/docs/specification/inputs-949": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-specification-inputsd-13-98b"
+    "content": "content---docs-specification-inputs-901-868"
   },
-  "/docs/specification/Model Pipeline-1e4": {
+  "/docs/specification/model-pipeline-ec4": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-specification-model-pipeline-769-c36"
+    "content": "content---docs-specification-model-pipelinee-0-f-45c"
   },
-  "/docs/specification/Model Plugin Configuration-804": {
+  "/docs/specification/model-plugin-config-168": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-specification-model-plugin-configurationdfc-23f"
+    "content": "content---docs-specification-model-plugin-config-5-c-0-125"
   },
   "/docs/Terminology-580": {
     "__comp": "__comp---theme-doc-item-178-a40",
@@ -305,9 +168,9 @@
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---docs-tutorials-12-f-0db"
   },
-  "/docs/tutorials/How to write impls-8f5": {
+  "/docs/tutorials/how-to-write-impls-2b1": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---docs-tutorials-how-to-write-impls-838-f62"
+    "content": "content---docs-tutorials-how-to-write-impls-865-66b"
   },
   "/-ddf": {
     "__comp": "__comp---site-src-pages-index-tsx-1-df-d3e",

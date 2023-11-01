@@ -29,10 +29,6 @@ export default {
           "sidebarPath": "/home/joe/Code/if-docs/website/sidebars.js",
           "editUrl": "https://github.com/Green-Software-Foundation/ief"
         },
-        "blog": {
-          "showReadingTime": true,
-          "editUrl": "https://github.com/Green-Software-Foundation/ief"
-        },
         "theme": {
           "customCss": "/home/joe/Code/if-docs/website/src/css/custom.css"
         }
@@ -53,11 +49,6 @@ export default {
           "sidebarId": "tutorialSidebar",
           "position": "left",
           "label": "Docs"
-        },
-        {
-          "to": "/blog",
-          "label": "Blog",
-          "position": "left"
         },
         {
           "href": "https://github.com/Green-Software-Foundation/ief",

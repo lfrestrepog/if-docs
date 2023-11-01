@@ -1,0 +1,24 @@
+{
+  "unversionedId": "specification/impact",
+  "id": "specification/impact",
+  "title": "Impact",
+  "description": "Introduction",
+  "source": "@site/docs/04-specification/impact.md",
+  "sourceDirName": "04-specification",
+  "slug": "/specification/impact",
+  "permalink": "/docs/specification/impact",
+  "draft": false,
+  "editUrl": "https://github.com/Green-Software-Foundation/ief/docs/04-specification/impact.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Impact Model Plugin",
+    "permalink": "/docs/specification/impact-model-plugin"
+  },
+  "next": {
+    "title": "Impl (Impact YAML)",
+    "permalink": "/docs/specification/impl"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "unversionedId": "specification/durations",
+  "id": "specification/durations",
+  "title": "Durations",
+  "description": "Terminology",
+  "source": "@site/docs/04-specification/durations.md",
+  "sourceDirName": "04-specification",
+  "slug": "/specification/durations",
+  "permalink": "/docs/specification/durations",
+  "draft": false,
+  "editUrl": "https://github.com/Green-Software-Foundation/ief/docs/04-specification/durations.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "author": "Asim Hussain (@jawache)",
+    "abstract": "A core component of impact graphing is the concept of time and specifically a duration of time. This document describes the core concept of duration as related to the calculation of an impact graph."
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Computation Pipeline",
+    "permalink": "/docs/specification/computation-pipeline"
+  },
+  "next": {
+    "title": "Granularity",
+    "permalink": "/docs/specification/granularity"
+  }
+}

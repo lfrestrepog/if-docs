@@ -81,43 +81,43 @@
               "sidebar": "tutorialSidebar"
             },
             {
-              "id": "specification/Computation Pipeline",
-              "path": "/docs/specification/Computation Pipeline",
+              "id": "specification/computation-pipeline",
+              "path": "/docs/specification/computation-pipeline",
               "sidebar": "tutorialSidebar"
             },
             {
-              "id": "specification/Durations",
-              "path": "/docs/specification/Durations",
+              "id": "specification/durations",
+              "path": "/docs/specification/durations",
               "sidebar": "tutorialSidebar"
             },
             {
-              "id": "specification/Granularity",
-              "path": "/docs/specification/Granularity",
+              "id": "specification/granularity",
+              "path": "/docs/specification/granularity",
               "sidebar": "tutorialSidebar"
             },
             {
-              "id": "specification/Impact",
-              "path": "/docs/specification/Impact",
+              "id": "specification/impact",
+              "path": "/docs/specification/impact",
               "sidebar": "tutorialSidebar"
             },
             {
-              "id": "specification/Impact Engine Framework",
-              "path": "/docs/specification/Impact Engine Framework",
+              "id": "specification/impact-engine-framework",
+              "path": "/docs/specification/impact-engine-framework",
               "sidebar": "tutorialSidebar"
             },
             {
-              "id": "specification/Impact Graph",
-              "path": "/docs/specification/Impact Graph",
+              "id": "specification/impact-graph",
+              "path": "/docs/specification/impact-graph",
               "sidebar": "tutorialSidebar"
             },
             {
-              "id": "specification/Impact Model Plugin",
-              "path": "/docs/specification/Impact Model Plugin",
+              "id": "specification/impact-model-plugin",
+              "path": "/docs/specification/impact-model-plugin",
               "sidebar": "tutorialSidebar"
             },
             {
-              "id": "specification/Impl (Impact YAML)",
-              "path": "/docs/specification/Impl (Impact YAML)",
+              "id": "specification/impl",
+              "path": "/docs/specification/impl",
               "sidebar": "tutorialSidebar"
             },
             {
@@ -126,18 +126,18 @@
               "sidebar": "tutorialSidebar"
             },
             {
-              "id": "specification/Inputs",
-              "path": "/docs/specification/Inputs",
+              "id": "specification/inputs",
+              "path": "/docs/specification/inputs",
               "sidebar": "tutorialSidebar"
             },
             {
-              "id": "specification/Model Pipeline",
-              "path": "/docs/specification/Model Pipeline",
+              "id": "specification/model-pipeline",
+              "path": "/docs/specification/model-pipeline",
               "sidebar": "tutorialSidebar"
             },
             {
-              "id": "specification/Model Plugin Configuration",
-              "path": "/docs/specification/Model Plugin Configuration",
+              "id": "specification/model-plugin-config",
+              "path": "/docs/specification/model-plugin-config",
               "sidebar": "tutorialSidebar"
             },
             {
@@ -146,8 +146,8 @@
               "sidebar": "tutorialSidebar"
             },
             {
-              "id": "tutorials/How to write impls",
-              "path": "/docs/tutorials/How to write impls",
+              "id": "tutorials/how-to-write-impls",
+              "path": "/docs/tutorials/how-to-write-impls",
               "sidebar": "tutorialSidebar"
             },
             {

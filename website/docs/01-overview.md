@@ -16,7 +16,7 @@ Modern applications are composed of many smaller pieces of software (components)
 
 The impacts of software components also vary over time, so as well as understanding **which** components contribute most to the overall impacts, there is also a question of **when** they contribute the most.
 
-Only through a granular analysis of the impacts of your software system can investments in reducing its impact be prioritized and verified. Measurement is the first and most crucial step in greening a software system, and the first step in that process with the [Impact Engine Framework](Impact%20Engine%20Framework.md) is to create an [Impact Graph](Impact%20Graph.md).
+Only through a granular analysis of the impacts of your software system can investments in reducing its impact be prioritized and verified. Measurement is the first and most crucial step in greening a software system, and the first step in that process with the [Impact Engine Framework](./04-specification/impact-engine-framework.md) is to create an [Impact Graph](./04-specification/impact-graph.md).
 
 ## Navigating these docs
 
@@ -26,5 +26,5 @@ You can find specification pages for individual components of the framework in [
 
 In [`tutorials`](./tutorials) you will find walkthrouhg guides and tutorials explaining how to achieve specific tasks, such as writing an `impl`, running the model and creating new plugins. 
 
-You will find documentation for the individual built-in model implementations in [`models`](./05-models/).
+You will find documentation for the individual built-in model implementations in [`models`](./models/).
 

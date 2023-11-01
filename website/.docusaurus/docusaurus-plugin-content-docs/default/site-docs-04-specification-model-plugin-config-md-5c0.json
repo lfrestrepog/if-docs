@@ -1,0 +1,24 @@
+{
+  "unversionedId": "specification/model-plugin-config",
+  "id": "specification/model-plugin-config",
+  "title": "Model Plugin Configuration",
+  "description": "There are several places in an Impl file where you can add configuration for a model.",
+  "source": "@site/docs/04-specification/model-plugin-config.md",
+  "sourceDirName": "04-specification",
+  "slug": "/specification/model-plugin-config",
+  "permalink": "/docs/specification/model-plugin-config",
+  "draft": false,
+  "editUrl": "https://github.com/Green-Software-Foundation/ief/docs/04-specification/model-plugin-config.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Model Pipeline",
+    "permalink": "/docs/specification/model-pipeline"
+  },
+  "next": {
+    "title": "Model Documentation",
+    "permalink": "/docs/models/"
+  }
+}
