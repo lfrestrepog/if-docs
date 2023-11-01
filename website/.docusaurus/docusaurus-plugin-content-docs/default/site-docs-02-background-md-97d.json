@@ -1,0 +1,28 @@
+{
+  "unversionedId": "background",
+  "id": "background",
+  "title": "Background",
+  "description": "This project has evolved over the two years of the GSF's existence.",
+  "source": "@site/docs/02-background.md",
+  "sourceDirName": ".",
+  "slug": "/background",
+  "permalink": "/docs/background",
+  "draft": false,
+  "editUrl": "https://github.com/Green-Software-Foundation/ief/docs/02-background.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "author": "Asim Hussain (@jawache)",
+    "abstract": "Discussion of the history and evolution of this project in the GSF."
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Overview",
+    "permalink": "/docs/overview"
+  },
+  "next": {
+    "title": "Terminology",
+    "permalink": "/docs/Terminology"
+  }
+}

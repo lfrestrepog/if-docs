@@ -1,0 +1,24 @@
+{
+  "unversionedId": "tutorials/index",
+  "id": "tutorials/index",
+  "title": "Tutorials",
+  "description": "Here you can find tutorials and walk through guides for how to achieve several fundamnetal Impact Framework tasks, such as creating an impl, choosing models and creating new plugins.",
+  "source": "@site/docs/06-tutorials/index.md",
+  "sourceDirName": "06-tutorials",
+  "slug": "/tutorials/",
+  "permalink": "/docs/tutorials/",
+  "draft": false,
+  "editUrl": "https://github.com/Green-Software-Foundation/ief/docs/06-tutorials/index.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "WattTime Grid Emissions Model",
+    "permalink": "/docs/models/watt-time"
+  },
+  "next": {
+    "title": "IMPL writing guide",
+    "permalink": "/docs/tutorials/How to write impls"
+  }
+}

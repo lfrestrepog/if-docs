@@ -1,0 +1,24 @@
+{
+  "unversionedId": "models/sci-e",
+  "id": "models/sci-e",
+  "title": "SCI-E (total energy)",
+  "description": "sci-e is a model that simply sums up the contributions to a component's energy use. The model retunrs energy which is used as the input to the sci-o model that calculates operational emissions for the component.",
+  "source": "@site/docs/05-models/sci-e.md",
+  "sourceDirName": "05-models",
+  "slug": "/models/sci-e",
+  "permalink": "/docs/models/sci-e",
+  "draft": false,
+  "editUrl": "https://github.com/Green-Software-Foundation/ief/docs/05-models/sci-e.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Cloud Instance Metadata",
+    "permalink": "/docs/models/cloud-instance-metadata"
+  },
+  "next": {
+    "title": "SCI-M: embodied carbon",
+    "permalink": "/docs/models/sci-m"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "unversionedId": "overview",
+  "id": "overview",
+  "title": "Overview",
+  "description": "Impact Framework (IF) aims to make software carbon measurements easy.",
+  "source": "@site/docs/01-overview.md",
+  "sourceDirName": ".",
+  "slug": "/overview",
+  "permalink": "/docs/overview",
+  "draft": false,
+  "editUrl": "https://github.com/Green-Software-Foundation/ief/docs/01-overview.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "next": {
+    "title": "Background",
+    "permalink": "/docs/background"
+  }
+}

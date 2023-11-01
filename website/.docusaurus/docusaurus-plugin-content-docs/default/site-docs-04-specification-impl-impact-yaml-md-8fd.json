@@ -1,0 +1,27 @@
+{
+  "unversionedId": "specification/Impl (Impact YAML)",
+  "id": "specification/Impl (Impact YAML)",
+  "title": "Impl (Impact YAML)",
+  "description": "- Impact YAML (IMPL) is a file format based on yaml  to represent an Impact Graph.",
+  "source": "@site/docs/04-specification/Impl (Impact YAML).md",
+  "sourceDirName": "04-specification",
+  "slug": "/specification/Impl (Impact YAML)",
+  "permalink": "/docs/specification/Impl (Impact YAML)",
+  "draft": false,
+  "editUrl": "https://github.com/Green-Software-Foundation/ief/docs/04-specification/Impl (Impact YAML).md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "author": "Asim Hussain (@jawache)",
+    "abstract": "Describes the structure and purpose of Impact YAML, a file format to represent an Impact Graph."
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Impact",
+    "permalink": "/docs/specification/Impact"
+  },
+  "next": {
+    "title": "Inputs",
+    "permalink": "/docs/specification/Inputs"
+  }
+}

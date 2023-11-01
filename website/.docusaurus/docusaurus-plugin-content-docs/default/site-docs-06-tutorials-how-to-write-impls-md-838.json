@@ -1,0 +1,23 @@
+{
+  "unversionedId": "tutorials/How to write impls",
+  "id": "tutorials/How to write impls",
+  "title": "IMPL writing guide",
+  "description": "The Impact Framework receives all its configuration and input data in the form of a yaml file known as an impl (input-yaml).",
+  "source": "@site/docs/06-tutorials/How to write impls.md",
+  "sourceDirName": "06-tutorials",
+  "slug": "/tutorials/How to write impls",
+  "permalink": "/docs/tutorials/How to write impls",
+  "draft": false,
+  "editUrl": "https://github.com/Green-Software-Foundation/ief/docs/06-tutorials/How to write impls.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "author": "Joseph Cook (@jmcook1186)",
+    "abstract": "Guidance for writing valid impls."
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Tutorials",
+    "permalink": "/docs/tutorials/"
+  }
+}

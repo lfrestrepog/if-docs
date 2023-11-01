@@ -1,0 +1,27 @@
+{
+  "unversionedId": "specification/Impact Graph",
+  "id": "specification/Impact Graph",
+  "title": "Impact Graph",
+  "description": "Introduction",
+  "source": "@site/docs/04-specification/Impact Graph.md",
+  "sourceDirName": "04-specification",
+  "slug": "/specification/Impact Graph",
+  "permalink": "/docs/specification/Impact Graph",
+  "draft": false,
+  "editUrl": "https://github.com/Green-Software-Foundation/ief/docs/04-specification/Impact Graph.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "author": "Asim Hussain (@jawache)",
+    "abstract": "An impact graph is the core construct in an Impact Engine Framework through which all the other components interact."
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Impact Engine Framework",
+    "permalink": "/docs/specification/Impact Engine Framework"
+  },
+  "next": {
+    "title": "Impact Model Plugin",
+    "permalink": "/docs/specification/Impact Model Plugin"
+  }
+}

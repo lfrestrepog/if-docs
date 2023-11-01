@@ -1,0 +1,24 @@
+{
+  "unversionedId": "models/sci-m",
+  "id": "models/sci-m",
+  "title": "SCI-M: embodied carbon",
+  "description": "Software systems cause emissions through the hardware that they operate on, both through the energy that the physical hardware consumes and the emissions associated with manufacturing the hardware. Embodied carbon refers to the carbon emitted during the manufacture and eventual disposal of a component. It is added to the operational carbon (carbon emitted when a component is used) to give an overall SCI score.",
+  "source": "@site/docs/05-models/sci-m.md",
+  "sourceDirName": "05-models",
+  "slug": "/models/sci-m",
+  "permalink": "/docs/models/sci-m",
+  "draft": false,
+  "editUrl": "https://github.com/Green-Software-Foundation/ief/docs/05-models/sci-m.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "SCI-E (total energy)",
+    "permalink": "/docs/models/sci-e"
+  },
+  "next": {
+    "title": "SCI-O (operational emissions)",
+    "permalink": "/docs/models/sci-o"
+  }
+}

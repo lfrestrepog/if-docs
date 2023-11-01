@@ -1,0 +1,24 @@
+{
+  "unversionedId": "models/teads-cpu",
+  "id": "models/teads-cpu",
+  "title": "Teads' CPU Estimation Model",
+  "description": "Teads Engineering team has built a model that is capable of estimating CPU usages across varying type of CPUs using a curve commonly known as Teads Curve.",
+  "source": "@site/docs/05-models/teads-cpu.md",
+  "sourceDirName": "05-models",
+  "slug": "/models/teads-cpu",
+  "permalink": "/docs/models/teads-cpu",
+  "draft": false,
+  "editUrl": "https://github.com/Green-Software-Foundation/ief/docs/05-models/teads-cpu.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Teads' AWS Estimation Model",
+    "permalink": "/docs/models/teads-aws"
+  },
+  "next": {
+    "title": "WattTime Grid Emissions Model",
+    "permalink": "/docs/models/watt-time"
+  }
+}

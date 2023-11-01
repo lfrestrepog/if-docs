@@ -1,0 +1,24 @@
+{
+  "unversionedId": "models/watt-time",
+  "id": "models/watt-time",
+  "title": "WattTime Grid Emissions Model",
+  "description": "Introduction",
+  "source": "@site/docs/05-models/watt-time.md",
+  "sourceDirName": "05-models",
+  "slug": "/models/watt-time",
+  "permalink": "/docs/models/watt-time",
+  "draft": false,
+  "editUrl": "https://github.com/Green-Software-Foundation/ief/docs/05-models/watt-time.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Teads' CPU Estimation Model",
+    "permalink": "/docs/models/teads-cpu"
+  },
+  "next": {
+    "title": "Tutorials",
+    "permalink": "/docs/tutorials/"
+  }
+}

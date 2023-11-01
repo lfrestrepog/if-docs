@@ -1,0 +1,373 @@
+{
+  "pluginId": "default",
+  "version": "current",
+  "label": "Next",
+  "banner": null,
+  "badge": false,
+  "noIndex": false,
+  "className": "docs-version-current",
+  "isLast": true,
+  "docsSidebars": {
+    "tutorialSidebar": [
+      {
+        "type": "link",
+        "label": "Overview",
+        "href": "/docs/overview",
+        "docId": "overview"
+      },
+      {
+        "type": "link",
+        "label": "Background",
+        "href": "/docs/background",
+        "docId": "background"
+      },
+      {
+        "type": "link",
+        "label": "Terminology",
+        "href": "/docs/Terminology",
+        "docId": "Terminology"
+      },
+      {
+        "type": "category",
+        "label": "Specification",
+        "collapsible": true,
+        "collapsed": true,
+        "items": [
+          {
+            "type": "link",
+            "label": "Computation Pipeline",
+            "href": "/docs/specification/Computation Pipeline",
+            "docId": "specification/Computation Pipeline"
+          },
+          {
+            "type": "link",
+            "label": "Durations",
+            "href": "/docs/specification/Durations",
+            "docId": "specification/Durations"
+          },
+          {
+            "type": "link",
+            "label": "Granularity",
+            "href": "/docs/specification/Granularity",
+            "docId": "specification/Granularity"
+          },
+          {
+            "type": "link",
+            "label": "Impact Engine Framework",
+            "href": "/docs/specification/Impact Engine Framework",
+            "docId": "specification/Impact Engine Framework"
+          },
+          {
+            "type": "link",
+            "label": "Impact Graph",
+            "href": "/docs/specification/Impact Graph",
+            "docId": "specification/Impact Graph"
+          },
+          {
+            "type": "link",
+            "label": "Impact Model Plugin",
+            "href": "/docs/specification/Impact Model Plugin",
+            "docId": "specification/Impact Model Plugin"
+          },
+          {
+            "type": "link",
+            "label": "Impact",
+            "href": "/docs/specification/Impact",
+            "docId": "specification/Impact"
+          },
+          {
+            "type": "link",
+            "label": "Impl (Impact YAML)",
+            "href": "/docs/specification/Impl (Impact YAML)",
+            "docId": "specification/Impl (Impact YAML)"
+          },
+          {
+            "type": "link",
+            "label": "Inputs",
+            "href": "/docs/specification/Inputs",
+            "docId": "specification/Inputs"
+          },
+          {
+            "type": "link",
+            "label": "Model Pipeline",
+            "href": "/docs/specification/Model Pipeline",
+            "docId": "specification/Model Pipeline"
+          },
+          {
+            "type": "link",
+            "label": "Model Plugin Configuration",
+            "href": "/docs/specification/Model Plugin Configuration",
+            "docId": "specification/Model Plugin Configuration"
+          }
+        ],
+        "href": "/docs/specification/"
+      },
+      {
+        "type": "category",
+        "label": "Model Documentation",
+        "collapsible": true,
+        "collapsed": true,
+        "items": [
+          {
+            "type": "link",
+            "label": "Boavizta",
+            "href": "/docs/models/boavizta",
+            "docId": "models/boavizta"
+          },
+          {
+            "type": "link",
+            "label": "Cloud Carbon Footprint",
+            "href": "/docs/models/ccf",
+            "docId": "models/ccf"
+          },
+          {
+            "type": "link",
+            "label": "Cloud Instance Metadata",
+            "href": "/docs/models/cloud-instance-metadata",
+            "docId": "models/cloud-instance-metadata"
+          },
+          {
+            "type": "link",
+            "label": "SCI-E (total energy)",
+            "href": "/docs/models/sci-e",
+            "docId": "models/sci-e"
+          },
+          {
+            "type": "link",
+            "label": "SCI-M: embodied carbon",
+            "href": "/docs/models/sci-m",
+            "docId": "models/sci-m"
+          },
+          {
+            "type": "link",
+            "label": "SCI-O (operational emissions)",
+            "href": "/docs/models/sci-o",
+            "docId": "models/sci-o"
+          },
+          {
+            "type": "link",
+            "label": "SCI (software carbon intensity)",
+            "href": "/docs/models/sci",
+            "docId": "models/sci"
+          },
+          {
+            "type": "link",
+            "label": "Shell-imp",
+            "href": "/docs/models/shell",
+            "docId": "models/shell"
+          },
+          {
+            "type": "link",
+            "label": "Teads' AWS Estimation Model",
+            "href": "/docs/models/teads-aws",
+            "docId": "models/teads-aws"
+          },
+          {
+            "type": "link",
+            "label": "Teads' CPU Estimation Model",
+            "href": "/docs/models/teads-cpu",
+            "docId": "models/teads-cpu"
+          },
+          {
+            "type": "link",
+            "label": "WattTime Grid Emissions Model",
+            "href": "/docs/models/watt-time",
+            "docId": "models/watt-time"
+          }
+        ],
+        "href": "/docs/models/"
+      },
+      {
+        "type": "category",
+        "label": "Tutorials",
+        "collapsible": true,
+        "collapsed": true,
+        "items": [
+          {
+            "type": "link",
+            "label": "IMPL writing guide",
+            "href": "/docs/tutorials/How to write impls",
+            "docId": "tutorials/How to write impls"
+          }
+        ],
+        "href": "/docs/tutorials/"
+      }
+    ]
+  },
+  "docs": {
+    "background": {
+      "id": "background",
+      "title": "Background",
+      "description": "This project has evolved over the two years of the GSF's existence.",
+      "sidebar": "tutorialSidebar"
+    },
+    "models/boavizta": {
+      "id": "models/boavizta",
+      "title": "Boavizta",
+      "description": "Boavizta is an environmental impact calculator that exposes an API we use in IEF to retrieve energy and embodied carbon estimates.",
+      "sidebar": "tutorialSidebar"
+    },
+    "models/ccf": {
+      "id": "models/ccf",
+      "title": "Cloud Carbon Footprint",
+      "description": "\"Cloud Carbon Footprint is an open source tool that provides visibility and tooling to measure, monitor and reduce your cloud carbon emissions. We use best practice methodologies to convert cloud utilization into estimated energy usage and carbon emissions, producing metrics and carbon savings estimates that can be shared with employees, investors, and other stakeholders.\" - CCF",
+      "sidebar": "tutorialSidebar"
+    },
+    "models/cloud-instance-metadata": {
+      "id": "models/cloud-instance-metadata",
+      "title": "Cloud Instance Metadata",
+      "description": "This plugin allows you to determine an instance's CPU based on its instance name.",
+      "sidebar": "tutorialSidebar"
+    },
+    "models/index": {
+      "id": "models/index",
+      "title": "Model Documentation",
+      "description": "Here you can find documentation for individual model implementations. Each file contains an explanation of the model, its parameters and return values and examples of how to invoke the model in Typescript and from an impl.",
+      "sidebar": "tutorialSidebar"
+    },
+    "models/sci": {
+      "id": "models/sci",
+      "title": "SCI (software carbon intensity)",
+      "description": "SCI is the final value the framework ultimately aims to return for some component or application. It represents the amount of carbon emitted per functional unit.",
+      "sidebar": "tutorialSidebar"
+    },
+    "models/sci-e": {
+      "id": "models/sci-e",
+      "title": "SCI-E (total energy)",
+      "description": "sci-e is a model that simply sums up the contributions to a component's energy use. The model retunrs energy which is used as the input to the sci-o model that calculates operational emissions for the component.",
+      "sidebar": "tutorialSidebar"
+    },
+    "models/sci-m": {
+      "id": "models/sci-m",
+      "title": "SCI-M: embodied carbon",
+      "description": "Software systems cause emissions through the hardware that they operate on, both through the energy that the physical hardware consumes and the emissions associated with manufacturing the hardware. Embodied carbon refers to the carbon emitted during the manufacture and eventual disposal of a component. It is added to the operational carbon (carbon emitted when a component is used) to give an overall SCI score.",
+      "sidebar": "tutorialSidebar"
+    },
+    "models/sci-o": {
+      "id": "models/sci-o",
+      "title": "SCI-O (operational emissions)",
+      "description": "Operational emissions refer to the carbon generated by a component while it is in use. It is the product of the energy used by the component in kWh and the grid intensity in gCO2e/kWh. The operational emissions are added to the embodied emissions (calculated using sci-m) to provide an overall SCI score for the component.",
+      "sidebar": "tutorialSidebar"
+    },
+    "models/shell": {
+      "id": "models/shell",
+      "title": "Shell-imp",
+      "description": "The shell-imp is a wrapper enabling models external to IEF to be executed as part of an IEF pipeline. For example, you might have a standalone model written in Python. shell-imp spawns a subprocess to execute that Python model in a dedicated shell and pipes the results back into IEF's Typescript process.",
+      "sidebar": "tutorialSidebar"
+    },
+    "models/teads-aws": {
+      "id": "models/teads-aws",
+      "title": "Teads' AWS Estimation Model",
+      "description": "Teads Engineering Team built a model for estimating AWS Instances energy usage. This model creates a power curve on a correlation to SPEC Power database. This allows the model to generate a power curve for any AWS EC2 instance type based on publicly available AWS EC2 Instance CPU data.",
+      "sidebar": "tutorialSidebar"
+    },
+    "models/teads-cpu": {
+      "id": "models/teads-cpu",
+      "title": "Teads' CPU Estimation Model",
+      "description": "Teads Engineering team has built a model that is capable of estimating CPU usages across varying type of CPUs using a curve commonly known as Teads Curve.",
+      "sidebar": "tutorialSidebar"
+    },
+    "models/watt-time": {
+      "id": "models/watt-time",
+      "title": "WattTime Grid Emissions Model",
+      "description": "Introduction",
+      "sidebar": "tutorialSidebar"
+    },
+    "overview": {
+      "id": "overview",
+      "title": "Overview",
+      "description": "Impact Framework (IF) aims to make software carbon measurements easy.",
+      "sidebar": "tutorialSidebar"
+    },
+    "specification/Computation Pipeline": {
+      "id": "specification/Computation Pipeline",
+      "title": "Computation Pipeline",
+      "description": "Introduction",
+      "sidebar": "tutorialSidebar"
+    },
+    "specification/Durations": {
+      "id": "specification/Durations",
+      "title": "Durations",
+      "description": "Terminology",
+      "sidebar": "tutorialSidebar"
+    },
+    "specification/Granularity": {
+      "id": "specification/Granularity",
+      "title": "Granularity",
+      "description": "An Impact Graph (graph) can be created that is very coarse-grained, a single top-level component, with a single input of long duration.",
+      "sidebar": "tutorialSidebar"
+    },
+    "specification/Impact": {
+      "id": "specification/Impact",
+      "title": "Impact",
+      "description": "Introduction",
+      "sidebar": "tutorialSidebar"
+    },
+    "specification/Impact Engine Framework": {
+      "id": "specification/Impact Engine Framework",
+      "title": "Impact Engine Framework",
+      "description": "A Framework to Model, Measure, siMulate and Monitor the environmental impacts of software.",
+      "sidebar": "tutorialSidebar"
+    },
+    "specification/Impact Graph": {
+      "id": "specification/Impact Graph",
+      "title": "Impact Graph",
+      "description": "Introduction",
+      "sidebar": "tutorialSidebar"
+    },
+    "specification/Impact Model Plugin": {
+      "id": "specification/Impact Model Plugin",
+      "title": "Impact Model Plugin",
+      "description": "Calculating Impact Metric 's (outputs) for every component in an Impact Graph (graph) requires the use of an Impact Model (model) called through an Impact Model Plugin (model plugin).",
+      "sidebar": "tutorialSidebar"
+    },
+    "specification/Impl (Impact YAML)": {
+      "id": "specification/Impl (Impact YAML)",
+      "title": "Impl (Impact YAML)",
+      "description": "- Impact YAML (IMPL) is a file format based on yaml  to represent an Impact Graph.",
+      "sidebar": "tutorialSidebar"
+    },
+    "specification/index": {
+      "id": "specification/index",
+      "title": "Specification",
+      "description": "Here you will find the IF specification.",
+      "sidebar": "tutorialSidebar"
+    },
+    "specification/Inputs": {
+      "id": "specification/Inputs",
+      "title": "Inputs",
+      "description": "inputs are a core component of an Impact Graph (graph), and they form the primary input into an Impact Model Plugin (model).",
+      "sidebar": "tutorialSidebar"
+    },
+    "specification/Model Pipeline": {
+      "id": "specification/Model Pipeline",
+      "title": "Model Pipeline",
+      "description": "Introduction",
+      "sidebar": "tutorialSidebar"
+    },
+    "specification/Model Plugin Configuration": {
+      "id": "specification/Model Plugin Configuration",
+      "title": "Model Plugin Configuration",
+      "description": "There are several places in an Impl file where you can add configuration for a model.",
+      "sidebar": "tutorialSidebar"
+    },
+    "Terminology": {
+      "id": "Terminology",
+      "title": "Terminology",
+      "description": "[!tip]",
+      "sidebar": "tutorialSidebar"
+    },
+    "tutorials/How to write impls": {
+      "id": "tutorials/How to write impls",
+      "title": "IMPL writing guide",
+      "description": "The Impact Framework receives all its configuration and input data in the form of a yaml file known as an impl (input-yaml).",
+      "sidebar": "tutorialSidebar"
+    },
+    "tutorials/index": {
+      "id": "tutorials/index",
+      "title": "Tutorials",
+      "description": "Here you can find tutorials and walk through guides for how to achieve several fundamnetal Impact Framework tasks, such as creating an impl, choosing models and creating new plugins.",
+      "sidebar": "tutorialSidebar"
+    }
+  }
+}
