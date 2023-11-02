@@ -109,7 +109,7 @@ The `configure()` method simply has to load config data into the class variables
   }
 ```
 
-The `execute()` ethods is where all the actual model logic is implemented. For `sci-e` the model simply has to return the sum of whichever of `e-cpu`, `e-net` and `e-mem` are available in the input data.
+The `execute()` methods is where all the actual model logic is implemented. For `sci-e` the model simply has to return the sum of whichever of `e-cpu`, `e-net` and `e-mem` are available in the input data.
 
 The method below includes some basic inpout value validation, then a `map` over the contents of `inputs`. This code iterates over each `inputs` and passes each element to a `calculateEnergy` method, appending the result to `inputs['energy']`. The array of data, with the new field appended, is returned. 
 
