@@ -49,7 +49,7 @@
     },
     "content": "content---markdown-page-393-028"
   },
-  "/docs-f8c": {
+  "/docs-439": {
     "__comp": "__comp---theme-doc-page-1-be-9be",
     "__context": {
       "plugin": "plugin---docs-434-559"
@@ -167,6 +167,10 @@
   "/docs/tutorials/-434": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---docs-tutorials-12-f-0db"
+  },
+  "/docs/tutorials/how-to-build-models-099": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---docs-tutorials-how-to-build-modelse-64-266"
   },
   "/docs/tutorials/how-to-write-impls-2b1": {
     "__comp": "__comp---theme-doc-item-178-a40",

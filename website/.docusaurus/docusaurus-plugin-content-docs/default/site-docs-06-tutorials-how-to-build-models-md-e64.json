@@ -1,0 +1,24 @@
+{
+  "unversionedId": "tutorials/how-to-build-models",
+  "id": "tutorials/how-to-build-models",
+  "title": "Building model plugins",
+  "description": "The IF is designed to be as composable as possible. This means you can develop your own models and use them in a model pipeline.",
+  "source": "@site/docs/06-tutorials/how-to-build-models.md",
+  "sourceDirName": "06-tutorials",
+  "slug": "/tutorials/how-to-build-models",
+  "permalink": "/docs/tutorials/how-to-build-models",
+  "draft": false,
+  "editUrl": "https://github.com/Green-Software-Foundation/ief/docs/06-tutorials/how-to-build-models.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Tutorials",
+    "permalink": "/docs/tutorials/"
+  },
+  "next": {
+    "title": "IMPL writing guide",
+    "permalink": "/docs/tutorials/how-to-write-impls"
+  }
+}

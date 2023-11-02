@@ -18,7 +18,7 @@
     "permalink": "/docs/models/watt-time"
   },
   "next": {
-    "title": "IMPL writing guide",
-    "permalink": "/docs/tutorials/how-to-write-impls"
+    "title": "Building model plugins",
+    "permalink": "/docs/tutorials/how-to-build-models"
   }
 }

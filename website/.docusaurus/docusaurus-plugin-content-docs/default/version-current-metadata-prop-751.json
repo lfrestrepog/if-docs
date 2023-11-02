@@ -185,6 +185,12 @@
         "items": [
           {
             "type": "link",
+            "label": "Building model plugins",
+            "href": "/docs/tutorials/how-to-build-models",
+            "docId": "tutorials/how-to-build-models"
+          },
+          {
+            "type": "link",
             "label": "IMPL writing guide",
             "href": "/docs/tutorials/how-to-write-impls",
             "docId": "tutorials/how-to-write-impls"
@@ -355,6 +361,12 @@
       "id": "Terminology",
       "title": "Terminology",
       "description": "[!tip]",
+      "sidebar": "tutorialSidebar"
+    },
+    "tutorials/how-to-build-models": {
+      "id": "tutorials/how-to-build-models",
+      "title": "Building model plugins",
+      "description": "The IF is designed to be as composable as possible. This means you can develop your own models and use them in a model pipeline.",
       "sidebar": "tutorialSidebar"
     },
     "tutorials/how-to-write-impls": {
