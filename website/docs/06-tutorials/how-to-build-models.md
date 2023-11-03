@@ -196,3 +196,9 @@ initialize:
 
 ...
 ```
+
+Now, when you run the `impl` using the IF CLI, it will load the model automatically. Run using:
+
+```sh
+npx ts-node scripts/impact.ts --impl <path-to-your-impl> --ompl <path-to-save-output>
+```
