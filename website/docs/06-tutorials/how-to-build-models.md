@@ -168,3 +168,31 @@ return e_cpu + e_net + e_mem;
 You can replace the logic inside `execute()` with whatever you need for your specific model implementation. As long as you conform to the interface, meaning youy provide methods with the expected parameters and return types, your model will integrate with IF.
 
 ## Running your model
+
+You can simply save your model in a public Github repository and pass the path to it in your impl.
+For example, for a model saved in `github.com/my-repo/my-model` you can do the following:
+
+yarn install your model:
+
+```
+yarn add https://github.com/my-repo/my-model
+```
+
+Then, in your `impl`, provide the path in the model instantiation. You also need to specify which class the model instantiates. In this case you are using the IOutputModelInterface, so you can specify `OutputModel`. 
+
+```yaml
+name: model-demo
+description: loads model
+tags: null
+initialize:
+  models:
+    - name: my-model
+      kind: plugin
+      model: OutputModel
+      path: https://github.com/my-repo/my-model
+      config:
+        allocation: LINEAR
+        verbose: true
+
+...
+```
