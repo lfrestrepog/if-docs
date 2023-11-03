@@ -71,3 +71,25 @@ The Azure importer model will enrich your `impl` with the following data:
 - `location`: VM region
 
 These can be used as inputs in other models in the pipeline. Typically, the `instance-type` can be used to obtain `tdp` data that can then, along with `cpu-util`, feed a model such as `teads-curve`. 
+
+The outputs look as follows:
+
+```yaml
+outputs:
+- timestamp: Thu Nov 02 2023 10:35:00 GMT+0000 (Greenwich Mean Time)
+    cpu-util: '0.314'
+    mem-util: '488636416'
+    location: uksouth
+    instance-type: Standard_B1s
+- timestamp: Thu Nov 02 2023 10:40:00 GMT+0000 (Greenwich Mean Time)
+    cpu-util: '0.314'
+    mem-util: '489789849.6'
+    location: uksouth
+    instance-type: Standard_B1s
+- timestamp: Thu Nov 02 2023 10:45:00 GMT+0000 (Greenwich Mean Time)
+    cpu-util: '0.301'
+    mem-util: '490733568'
+    location: uksouth
+    instance-type: Standard_B1s
+...
+```
