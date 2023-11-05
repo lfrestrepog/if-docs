@@ -69,6 +69,10 @@ The Azure importer model will enrich your `impl` with the following data:
 - `cpu-util`: percentage CPU utilization
 - `instance-type`: VM instance name
 - `location`: VM region
+- `mem-availableGB`: Amount of memory *not* in use by your application, in GB.
+- `mem-usedGB`: Amount of memory being used by your application, in GB. Calculated as the difference between `total-memoryGB` and `memory-availableGB`.
+- `total-memoryGB`: The total memory allocated to your virtual machine, in GB.
+- `mem-util`: memory utilized, expressed as a percentage (`memory-usedGB`/`total-memoryGB` * 100)
 
 These can be used as inputs in other models in the pipeline. Typically, the `instance-type` can be used to obtain `tdp` data that can then, along with `cpu-util`, feed a model such as `teads-curve`. 
 
@@ -76,19 +80,20 @@ The outputs look as follows:
 
 ```yaml
 outputs:
-- timestamp: Thu Nov 02 2023 10:35:00 GMT+0000 (Greenwich Mean Time)
+  - timestamp: '2023-11-02T10:35:00.000Z'
     cpu-util: '0.314'
-    mem-util: '488636416'
+    mem-availableGB: 0.488636416
+    mem-usedGB: 0.5113635839999999
+    total-memoryGB: '1'
+    mem_util: 51.13635839999999
     location: uksouth
     instance-type: Standard_B1s
-- timestamp: Thu Nov 02 2023 10:40:00 GMT+0000 (Greenwich Mean Time)
+  - timestamp: '2023-11-02T10:40:00.000Z'
     cpu-util: '0.314'
-    mem-util: '489789849.6'
-    location: uksouth
-    instance-type: Standard_B1s
-- timestamp: Thu Nov 02 2023 10:45:00 GMT+0000 (Greenwich Mean Time)
-    cpu-util: '0.301'
-    mem-util: '490733568'
+    mem-availableGB: 0.48978984960000005
+    mem-usedGB: 0.5102101504
+    total-memoryGB: '1'
+    mem_util: 51.021015039999995
     location: uksouth
     instance-type: Standard_B1s
 ...
