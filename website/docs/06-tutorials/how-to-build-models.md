@@ -61,7 +61,6 @@ export class SciEModel implements IOutputModelInterface {
   }
 
   async configure(
-    name: string,
     staticParams: object | undefined = undefined
   ): Promise<IOutputModelInterface> {
 
@@ -88,10 +87,8 @@ The `configure()` method simply has to load config data into the class variables
 
 ```ts
   async configure(
-    name: string,
     staticParams: object | undefined = undefined
   ): Promise<IOutputModelInterface> {
-    this.name = name;
     this.staticParams = staticParams;
 
     if (staticParams === undefined) {
