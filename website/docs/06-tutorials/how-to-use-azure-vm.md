@@ -10,9 +10,60 @@ The Azure importer model allows you to provide some basic details about an Azure
 
 ## Prerequisites
 
-First, you need to have a VM instance running on Azure. You can create one using [portal.azure.com](https://portal.azure.com). You also need to create a metrics application for that virtual machine and assign the relevant permissions.
+### First, you need to have a VM instance running on Azure
 
-Next, you should create a `.env` file in the IF project root directory. This is where you can store your Azure authentication details. Your `.env` file should look as follows:
+You can create one using [portal.azure.com](https://portal.azure.com). You also need to create a metrics application for that virtual machine and assign the relevant permissions.
+
+### Next, Provide an Azure identity for the IEF Azure Importer to access Azure VM metadata and observability metrics
+
+The Azure Importer uses [AzureDefaultCredentials\(\)](https://learn.microsoft.com/en-us/dotnet/api/azure.identity.defaultazurecredential?view=azure-dotnet) method which is an abstraction for different scenarios of authentication
+
+* When hosting the IEF Azure Importer on an Azure service, you can provide a [managed identity](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview).
+* When running the Azure Importer outside of Azure, e.g on your local machine, you can use an [App registration](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) (an App registration is a represenation of a technical service principal account ; you can view it as an identity for your App on Azure).
+
+The following steps in this tutorial use a service principal. You can learn more on https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app
+
+### Create An App registration/service principal for the Azure Importer
+
+On the Azure Portal, search for **App registrations**, then create new one with default values.
+![image](https://github.com/Green-Software-Foundation/if-docs/assets/966110/f77fd653-4386-4f4b-9488-ea7ae521d7d1)
+
+
+Then create a credential secret for this App registration, to use it for authenication with the Azure Importer => note that secret
+![image](https://github.com/Green-Software-Foundation/if-docs/assets/966110/c3f380e1-2bc9-471f-b212-ce8c31a158b1)
+
+
+Then, on the Overview Tab, copy/paste the **client_id** and **tenant_id** for this App registration
+![image](https://github.com/Green-Software-Foundation/if-docs/assets/966110/e1615088-9ee6-41ef-a340-7ab72c1bc488)
+
+Now we have credentials to authenticate to azure as the service principal (of this App registration)
+
+### Provide IAM access rights for the service principal to Query Azure VM info
+next, we need to provide access rights to this service principal to the test VM (or its ressource group).
+
+On the IAM Tab of the Ressource Group that contains the VM, add new Role Assignment
+
+![image](https://github.com/Green-Software-Foundation/if-docs/assets/966110/0588530c-bd67-4876-b26b-c076d5cda08d)
+
+
+We'll need 2 role Assignments:
+* Reader
+* Monitor Reader
+  
+![image](https://github.com/Green-Software-Foundation/if-docs/assets/966110/52af6111-dde3-4f99-8739-769d72fdb5d8)
+
+Then Add the service principal you created as a member for the Role assignment
+![image](https://github.com/Green-Software-Foundation/if-docs/assets/966110/be097243-66a7-421a-9cee-e8fe77906a82)
+
+Repeat for the the role Monior Reader
+![image](https://github.com/Green-Software-Foundation/if-docs/assets/966110/5bf34f7a-9a01-4eb8-b3a4-aed70db44e72)
+
+
+
+
+### On your local machine, add the service principal credentials ENV vars to Azure Importer
+
+you should create a `.env` file in the IF project root directory. This is where you can store your Azure authentication details. Your `.env` file should look as follows:
 
 ```txt
 AZURE_TENANT_ID: <your-tenant-id>
