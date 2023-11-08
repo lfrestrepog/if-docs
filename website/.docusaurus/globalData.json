@@ -146,6 +146,11 @@
               "sidebar": "tutorialSidebar"
             },
             {
+              "id": "tutorials/how-to-build-models",
+              "path": "/docs/tutorials/how-to-build-models",
+              "sidebar": "tutorialSidebar"
+            },
+            {
               "id": "tutorials/how-to-write-impls",
               "path": "/docs/tutorials/how-to-write-impls",
               "sidebar": "tutorialSidebar"

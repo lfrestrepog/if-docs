@@ -17,7 +17,7 @@
   },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "Tutorials",
-    "permalink": "/docs/tutorials/"
+    "title": "Building model plugins",
+    "permalink": "/docs/tutorials/how-to-build-models"
   }
 }

@@ -44,7 +44,7 @@ export default [
   },
   {
     path: '/docs',
-    component: ComponentCreator('/docs', 'f8c'),
+    component: ComponentCreator('/docs', '439'),
     routes: [
       {
         path: '/docs/background',
@@ -211,6 +211,12 @@ export default [
       {
         path: '/docs/tutorials/',
         component: ComponentCreator('/docs/tutorials/', '434'),
+        exact: true,
+        sidebar: "tutorialSidebar"
+      },
+      {
+        path: '/docs/tutorials/how-to-build-models',
+        component: ComponentCreator('/docs/tutorials/how-to-build-models', '099'),
         exact: true,
         sidebar: "tutorialSidebar"
       },

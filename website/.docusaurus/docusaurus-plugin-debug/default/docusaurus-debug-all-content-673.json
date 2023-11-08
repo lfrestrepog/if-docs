@@ -694,6 +694,30 @@
               }
             },
             {
+              "unversionedId": "tutorials/how-to-build-models",
+              "id": "tutorials/how-to-build-models",
+              "title": "Building model plugins",
+              "description": "The IF is designed to be as composable as possible. This means you can develop your own models and use them in a model pipeline.",
+              "source": "@site/docs/06-tutorials/how-to-build-models.md",
+              "sourceDirName": "06-tutorials",
+              "slug": "/tutorials/how-to-build-models",
+              "permalink": "/docs/tutorials/how-to-build-models",
+              "draft": false,
+              "editUrl": "https://github.com/Green-Software-Foundation/ief/docs/06-tutorials/how-to-build-models.md",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {},
+              "sidebar": "tutorialSidebar",
+              "previous": {
+                "title": "Tutorials",
+                "permalink": "/docs/tutorials/"
+              },
+              "next": {
+                "title": "IMPL writing guide",
+                "permalink": "/docs/tutorials/how-to-write-impls"
+              }
+            },
+            {
               "unversionedId": "tutorials/how-to-write-impls",
               "id": "tutorials/how-to-write-impls",
               "title": "IMPL writing guide",
@@ -712,8 +736,8 @@
               },
               "sidebar": "tutorialSidebar",
               "previous": {
-                "title": "Tutorials",
-                "permalink": "/docs/tutorials/"
+                "title": "Building model plugins",
+                "permalink": "/docs/tutorials/how-to-build-models"
               }
             },
             {
@@ -736,8 +760,8 @@
                 "permalink": "/docs/models/watt-time"
               },
               "next": {
-                "title": "IMPL writing guide",
-                "permalink": "/docs/tutorials/how-to-write-impls"
+                "title": "Building model plugins",
+                "permalink": "/docs/tutorials/how-to-build-models"
               }
             }
           ],
@@ -874,6 +898,10 @@
                 "collapsible": true,
                 "collapsed": true,
                 "items": [
+                  {
+                    "type": "doc",
+                    "id": "tutorials/how-to-build-models"
+                  },
                   {
                     "type": "doc",
                     "id": "tutorials/how-to-write-impls"

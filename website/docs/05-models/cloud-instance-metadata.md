@@ -32,7 +32,7 @@ Cloud Instance Metadata currently implements only for 'AWS'.
 
 ## Usage
 
-In IEF, the model is called from an `impl`. An `impl` is a `.yaml` file that contains configuration metadata and usage inputs. This is interpreted by the command line tool, `impact`. There, the model's `configure` method is called first. The model config shall be empty. Each input is expected to contain `cloud-vendor` and `cloud-instance-type` fields.
+In IEF, the model is called from an `impl`. An `impl` is a `.yaml` file that contains configuration metadata and usage inputs. This is interpreted by the command line tool, `impact-engine`. There, the model's `configure` method is called first. The model config shall be empty. Each input is expected to contain `cloud-vendor` and `cloud-instance-type` fields.
 
 You can see example Typescript invocations for each vendor below:
 
@@ -75,7 +75,7 @@ graph:
           cpu-util: 10
 ```
 
-This impl is run using `impact` using the following command, run from the project root:
+This impl is run using `impact-engine` using the following command, run from the project root:
 
 ```sh
 npx ts-node scripts/impact.ts --impl ./examples/impls/cimd-test.yml --ompl ./examples/ompls/cimd-test.yml
