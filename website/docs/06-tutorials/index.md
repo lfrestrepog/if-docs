@@ -4,3 +4,4 @@ Here you can find tutorials and walk through guides for how to achieve several f
 
 * [Writing impls](./how-to-write-impls.md)
 * [Building models](./how-to-build-models.md)
+* [Importing Azure metrics](./how-to-use-azure-vm.md)
