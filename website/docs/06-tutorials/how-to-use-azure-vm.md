@@ -66,8 +66,9 @@ This will grab Azure metrics for `my_vm` in `my_group` for a one hour period beg
 
 The Azure importer model will enrich your `impl` with the following data:
 
+- `duration`: the per-input duration in seconds, calculated from `azure-observation-window`
 - `cpu-util`: percentage CPU utilization
-- `instance-type`: VM instance name
+- `cloud-instance-type`: VM instance name
 - `location`: VM region
 - `mem-availableGB`: Amount of memory *not* in use by your application, in GB.
 - `mem-usedGB`: Amount of memory being used by your application, in GB. Calculated as the difference between `total-memoryGB` and `memory-availableGB`.
@@ -81,20 +82,22 @@ The outputs look as follows:
 ```yaml
 outputs:
   - timestamp: '2023-11-02T10:35:00.000Z'
+    duration: 300
     cpu-util: '0.314'
     mem-availableGB: 0.488636416
     mem-usedGB: 0.5113635839999999
     total-memoryGB: '1'
     mem_util: 51.13635839999999
     location: uksouth
-    instance-type: Standard_B1s
+    cloud-instance-type: Standard_B1s
   - timestamp: '2023-11-02T10:40:00.000Z'
+      duration: 300
     cpu-util: '0.314'
     mem-availableGB: 0.48978984960000005
     mem-usedGB: 0.5102101504
     total-memoryGB: '1'
     mem_util: 51.021015039999995
     location: uksouth
-    instance-type: Standard_B1s
+    cloud-instance-type: Standard_B1s
 ...
 ```
