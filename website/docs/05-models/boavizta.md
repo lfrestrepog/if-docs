@@ -112,7 +112,7 @@ graph:
           
 ```
 
-You can run this by passing it to `impact`. Run impact using the following command run from the project root:
+You can run this by passing it to `impact-engine`. Run impact using the following command run from the project root:
 
 ```sh
 npx ts-node scripts/impact.ts --impl ./examples/impls/boavizta.yml --ompl ./examples/ompls/boavizta.yml

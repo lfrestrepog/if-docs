@@ -1,8 +1,8 @@
-# Impact
+# Impact Engine
 
 ## Introduction
 
-Impact is a command line tool that computes [Impl (Impact YAML)](Impl%20(Impact%20YAML).md) files. 
+`impact-engine` is a command line tool that computes [Impl (Impact YAML)](Impl%20(Impact%20YAML).md) files. 
 
 ## Quickstart
 
@@ -25,7 +25,7 @@ impact
 To use Impact, you must first configure an impl. Then, you can simply pass the path to the impl to Impact on the command line. You can also pass a path where you would like to save the output file to. For example, the following command, run from the project root, loads the `mst-eshoppen.yml` impl file from the examples directory, executes all the models defined in the impl, and saves the output to `examples/ompls/e-shoppen.yml`:
 
 ```sh
-npx ts-node scripts/Impact.ts --impl ./examples/impls/msft-eshoppen.yaml --ompl ./examples/ompls/e-shoppen.yml
+npx ts-node impact-engine.ts --impl ./examples/impls/msft-eshoppen.yaml --ompl ./examples/ompls/e-shoppen.yml
 ```
 
 
@@ -38,7 +38,7 @@ There are a series of functions defined in a [Lifecycle](#Lifecycle) section whi
 At the end a processed graph is serialized back out to the end user for them to use the data.
 ## Lifecycle
 
-Every `impact` execution goes through a lifecycle, a set of distinct steps which process the graph in stages.
+Every `impact-engine` execution goes through a lifecycle, a set of distinct steps which process the graph in stages.
 
 Currenty the lifecycle is fixed but in the future this maybe be configurable via plugins.
 

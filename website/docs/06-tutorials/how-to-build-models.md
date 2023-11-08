@@ -12,10 +12,8 @@ The `IOutputModelInterface` is structured as follows:
 
 ```ts
 export interface IOutputModelInterface {
-  modelIdentifier(): string;
 
   configure(
-    name: string,
     staticParams: object | undefined
   ): Promise<IOutputModelInterface>;
 
@@ -27,15 +25,9 @@ export interface IOutputModelInterface {
 
 There are four required methods:
 
-- `modelIdentifier()`
-  - This method simply returns the model name
-  - **Params**: None
-  - **Returns**: 
-    - the model name as a `string`
 - `configure()`
   - This method completes any configuration steps for the model, such as loading config data from the `impl` file.
   - **Params**: None
-    - `name`: the model name
     - `staticParams`: the model config data 
   - **Returns**: 
     - an instance of `IOutputModelInterface`

@@ -47,7 +47,7 @@ You can read a detailed explanation ofn the calculations in the [CCF docs](https
 
 ## Usage
 
-In IEF, the model is called from an `impl`. An `impl` is a `.yaml` file that contains configuration metadata and usage inputs. This is interpreted by the command line tool, `impact`. There, the model's `configure` method is called first. The model config should define a `vendor` and `instance-type`. Each input is expected to contain `duration`,`cpu-util` and `timestamp` fields.
+In IEF, the model is called from an `impl`. An `impl` is a `.yaml` file that contains configuration metadata and usage inputs. This is interpreted by the command line tool, `impact-engine`. There, the model's `configure` method is called first. The model config should define a `vendor` and `instance-type`. Each input is expected to contain `duration`,`cpu-util` and `timestamp` fields.
 
 You can see example Typescript invocations for each vendor below:
 
@@ -134,7 +134,7 @@ graph:
           cpu-util: 10
 ```
 
-This impl is run using `impact` using the following command, run from the project root:
+This impl is run using `impact-engine` using the following command, run from the project root:
 
 ```sh
 npx ts-node scripts/impact.ts --impl ./examples/impls/ccf-test.yml --ompl ./examples/ompls/ccf-test.yml

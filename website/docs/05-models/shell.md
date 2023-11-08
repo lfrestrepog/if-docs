@@ -44,7 +44,7 @@ Since the design space for external models is so large, it is up to external mod
 
 ## Example impl
 
-IEF users will typically call the shell model as part of a pipeline defined in an `impl` file. In this case, instantiating and configuring the model is handled by `impact` and does not have to be done explicitly by the user. The following is an example `impl` that calls an external model via `shell-imp`. It asumes the model takes `e-cpu` and `e-mem` as inputs and returns `energy`:
+IEF users will typically call the shell model as part of a pipeline defined in an `impl` file. In this case, instantiating and configuring the model is handled by `impact-engine` and does not have to be done explicitly by the user. The following is an example `impl` that calls an external model via `shell-imp`. It asumes the model takes `e-cpu` and `e-mem` as inputs and returns `energy`:
 
 ```yaml
 name: shell-demo

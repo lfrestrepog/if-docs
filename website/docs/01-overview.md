@@ -24,7 +24,7 @@ The lefthand sidebar contains links to all the information you need to understan
 
 You can find specification pages for individual components of the framework in [`specification`](./specification/). 
 
-In [`tutorials`](./tutorials) you will find walkthrouhg guides and tutorials explaining how to achieve specific tasks, such as writing an `impl`, running the model and creating new plugins. 
+In [`tutorials`](./tutorials) you will find walkthrough guides and tutorials explaining how to achieve specific tasks, such as writing an `impl`, running the model and creating new plugins. 
 
 You will find documentation for the individual built-in model implementations in [`models`](./models/).
 
