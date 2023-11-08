@@ -3,7 +3,7 @@ author: Joseph Cook (@jmcook1186)
 abstract: Guidance for using the Azure importer.
 ---
 
-## Importing data from Azure
+# Importing data from Azure
 
 The Azure importer model allows you to provide some basic details about an Azure virtual machine and automatically populate your `impl` with usage metrics that can then be passed along a model pipeline to calculate energy and carbon impacts.
 
