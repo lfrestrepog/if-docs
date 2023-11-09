@@ -1,5 +1,7 @@
 # Teads' CPU Estimation Model
 
+**Please note** `Teads-AWS` is a community model, not part of the IF standard library. This means the IF core team are not closely monitoring these models to keep them up to date. You should do your own research before implementing them!
+
 Teads Engineering team has built a model that is capable of estimating CPU usages across varying type of CPUs using a curve commonly known as Teads Curve.
 
 ## Model name
@@ -80,4 +82,33 @@ const results = teads.execute([
     datetime: '2021-01-01T00:00:00Z', // ISO8601 / RFC3339 timestamp
   },
 ]);
+```
+
+## Example impl
+
+```yaml
+name: teads-cpu
+description: simple demo invoking sci-m
+tags:
+initialize:
+  models:
+    - name: teads-cpu
+      kind: plugin
+      model: TeadsCpu
+      path: teads-cpu
+graph:
+  children:
+    child:
+      pipeline: 
+        - teads-cpu # duration & config -> embodied
+      config:
+        sci-m:
+          total-embodied-emissions: 1533.120 # gCO2eq
+          time-reserved: 1 # s per hour
+          expected-lifespan: 3 # 3 years in seconds        
+          resources-reserved: 1
+          total-resources: 8
+      inputs: 
+        - timestamp: 2023-07-06T00:00
+          duration: 3600
 ```
