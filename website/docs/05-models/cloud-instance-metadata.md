@@ -91,7 +91,9 @@ description: example impl invoking Cloud Instance Metadata model
 initialize:
   models:
     - name: cloud-instance-metadata
-      kind: builtin
+      kind: plugin
+      model: CloudInstanceMetadataModel
+      path: cloud-instance-metadata
 graph:
   children:
     front-end:
