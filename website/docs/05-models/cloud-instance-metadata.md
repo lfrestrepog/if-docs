@@ -1,6 +1,6 @@
 # Cloud Instance Metadata
 
-This plugin allows you to determine an instance's CPU based on its instance name.
+This plugin allows you to determine an instance's physical processor and thermal design power based on its instance name.
 
 ## Model name
 
@@ -52,7 +52,7 @@ const results = cimm.execute([
 
 ## Example Impl
 
-The following is an example of how cloud instance metadata can be invoked using an `impl`.
+The following is an example of how cloud instance metadata can be invoked using an `impl`. This assumes you have already installed the IF standard library of models using `yarn add https://github.com/Green-Software-Foundation/if-models/`.
 
 ```yaml
 name: cloud-instance-metadata-demo
@@ -60,7 +60,9 @@ description: example impl invoking Cloud Instance Metadata model
 initialize:
   models:
     - name: cloud-instance-metadata
-      kind: builtin
+      kind: plugin
+      model: CloudInstanceMetadataModel
+      path: cloud-instance-metadata
 graph:
   children:
     child:
