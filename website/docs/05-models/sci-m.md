@@ -35,17 +35,17 @@ m = te * ts * rs
 ```
 Where:
 
-- `total-embodied` = Total embodied emissions; the sum of Life Cycle Assessment (LCA) emissions for the component.
+- `total-embodied-emissions` = Total embodied emissions; the sum of Life Cycle Assessment (LCA) emissions for the component.
 
-- `ts` = Time-share; the share of the total life span of the hardware reserved for use by an application. 
-  - `ts` is calculated as `tir/el`, where:
-    - `tir` = Time Reserved; the length of time the hardware is reserved for use by the software.
-    - `el` = Expected lifespan: the length of time, in seconds, between a component's manufacture and its disposal
+- `timeShare` = Time-share; the share of the total life span of the hardware reserved for use by an application. 
+  - `timeShare` is calculated as `time-reserved/expedted-lifespan`, where:
+    - `time-reserved` = Time Reserved; the length of time the hardware is reserved for use by the software.
+    - `expected-lifespan` = Expected lifespan: the length of time, in seconds, between a component's manufacture and its disposal
 
-- `rs` = Resource-share; the share of the total available resources of the hardware reserved for use by an application. 
-  - `rs` is calculated as `rr/tor`, where:
-    - `rr` = Resources reserved; the number of resources reserved for use by the software.
-    - `tor` = Total Resources; the total number of resources available.
+- `resourceshare` = Resource-share; the share of the total available resources of the hardware reserved for use by an application. 
+  - `resourceShare` is calculated as `resources-reserved/total-resources`, where:
+    - `resources-reserved` = Resources reserved; the number of resources reserved for use by the software.
+    - `total-resources` = Total Resources; the total number of resources available.
 
 
 ## Implementation
@@ -83,10 +83,10 @@ description: simple demo invoking sci-m
 tags:
 initialize:
   models:
-    - name: sci-m # a model that calculates m from te, tir, el, rr and rtor
-      kind: builtin
-      verbose: false
-      path: ''
+    - name: sci-m
+      kind: plugin
+      model: SciMModel
+      path: sci-m
 graph:
   children:
     child:
