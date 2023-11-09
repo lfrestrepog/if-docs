@@ -1,5 +1,8 @@
 # Teads' AWS Estimation Model
 
+**Please note** `Teads-AWS` is a community model, not part of the IF standard library. This means the IF core team are not closely monitoring these models to keep them up to date. You should do your own research before implemnting them!
+
+
 Teads Engineering Team built a model for estimating AWS Instances energy usage. This model creates a power curve on a correlation to SPEC Power database. This allows the model to generate a power curve for any AWS EC2 instance type based on publicly available AWS EC2 Instance CPU data. 
 
 The main benefit of this model is that it accounts for all the components involved in an instance's compute capacity. 
@@ -53,4 +56,33 @@ const results = teads.execute([
     datetime: '2021-01-01T00:00:00Z', // ISO8601 / RFC3339 timestamp
   }
 ]);
+```
+
+## Example impl
+
+```yaml
+name: teads-aws
+description: simple demo invoking sci-m
+tags:
+initialize:
+  models:
+    - name: teads-aws
+      kind: plugin
+      model: TeadsAWS
+      path: teads-aws
+graph:
+  children:
+    child:
+      pipeline: 
+        - sci-m # duration & config -> embodied
+      config:
+        sci-m:
+          total-embodied-emissions: 1533.120 # gCO2eq
+          time-reserved: 1 # s per hour
+          expected-lifespan: 3 # 3 years in seconds        
+          resources-reserved: 1
+          total-resources: 8
+      inputs: 
+        - timestamp: 2023-07-06T00:00
+          duration: 3600
 ```
