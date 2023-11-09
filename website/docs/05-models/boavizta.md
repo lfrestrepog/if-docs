@@ -1,5 +1,8 @@
 # Boavizta
 
+**Please note** Boavizta is a community cmodel, not part of the IF standard library. This means the IF core team are not closely monitoring these models to keep them up to date. You should do your own research before implemnting them!
+
+
 [Boavizta](https://boavizta.org/) is an environmental impact calculator that exposes an API we use in IEF to retrieve energy and embodied carbon estimates.
 
 ## Implementation
@@ -89,7 +92,9 @@ tags:
 initialize:
   models:
     - name: boavizta-cpu
-      kind: builtin
+      kind: plugin
+      model: BoaviztaOutputModel
+      path: boavizta-cpu
       config:
         allocation: LINEAR
         verbose: true
