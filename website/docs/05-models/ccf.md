@@ -1,5 +1,7 @@
 # Cloud Carbon Footprint
 
+**Please note** Boavizta is a community cmodel, not part of the IF standard library. This means the IF core team are not closely monitoring these models to keep them up to date. You should do your own research before implemnting them!
+
 "Cloud Carbon Footprint is an open source tool that provides visibility and tooling to measure, monitor and reduce your cloud carbon emissions. We use best practice methodologies to convert cloud utilization into estimated energy usage and carbon emissions, producing metrics and carbon savings estimates that can be shared with employees, investors, and other stakeholders." - [CCF](https://www.cloudcarbonfootprint.org/)
 
 ## Model name
@@ -118,7 +120,9 @@ description: example impl invoking CCF model
 initialize:
   models:
     - name: ccf
-      kind: builtin
+      kind: plugin
+      model: CloudCarbonFootprint
+      path: ccf
 graph:
   children:
     child:
@@ -148,7 +152,9 @@ description: example impl invoking CCF model
 initialize:
   models:
     - name: ccf
-      kind: builtin
+      kind: plugin
+      model: CloudCarbonFootprint
+      path: ccf
 graph:
   children:
     front-end:
