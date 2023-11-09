@@ -77,22 +77,21 @@ description:
 tags:
 initialize:
   models:
-    - name: sci-e
-      kind: builtin
     - name: sci-o
-      kind: builtin
+      kind: plugin
+      model: SciOModel
+      path: sci-o
 graph:
   children:
     child:
       pipeline:
-        - sci-e
         - sci-o
       config:
         sci-e:
       inputs:
         - timestamp: 2023-08-06T00:00
           duration: 3600
-          energy-cpu: 0.001
+          energy: 0.001
           grid-carbon-intensity: 800
 
 ```
