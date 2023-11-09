@@ -32,7 +32,8 @@ plus:
 
 ## Returns
 
-- `operational-carbon`: the carbon emitted during a applications operation, in gCO2eq
+- `carbon`: the total carbon, calculated as the sum of `operational-carbon` and `embodied-carbon`, in gCO2eq
+- `sci`: carbon expressed in terms of the given functional unit
 
 
 ## Calculation
@@ -108,9 +109,10 @@ description: example invoking sci model
 tags:
 initialize:
   models:
-    - name: sci # sums SCI components and converts to f.unit
-      kind: builtin
-      path: ''
+    - name: sci
+      kind: plugin
+      model: SciModel
+      path: sci
 graph:
   children:
     child:
