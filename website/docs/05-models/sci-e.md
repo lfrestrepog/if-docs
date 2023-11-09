@@ -67,7 +67,9 @@ tags:
 initialize:
   models:
     - name: sci-e
-      kind: builtin
+      kind: plugin
+      model: SciEModel
+      path: sci-e
 graph:
   children:
     child:
