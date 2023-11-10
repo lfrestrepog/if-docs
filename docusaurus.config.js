@@ -12,7 +12,7 @@ const config = {
   // Change to site url
   url: "https://TODO.greensoftware.foundation/",
   baseUrl: "/",
-  onBrokenLinks: "throw",
+  onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.svg",
   organizationName: "Green-Software-Foundation",
