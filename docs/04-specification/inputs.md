@@ -61,7 +61,7 @@ Each component in your graph needs `inputs`; we need inputs to compute outputs.
 
 A helpful feature of the Impact Framework is that you don't need to synchronize all your `inputs` for all your components with each other. You can provide `inputs` at different intervals for every component in the graph. 
 
-![](../../static/img//72efce519e8c2264406864148a8a3151.png)
+![](../../static/img/72efce519e8c2264406864148a8a3151.png)
 
 In the [](Computation%20Pipeline.md#Normalization|Normalization) phase of the computation of a graph, we do synchronize the output Impact Metrices, but we don't need the `inputs` synchronized to do this.
 
