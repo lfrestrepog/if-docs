@@ -1,5 +1,8 @@
 # Model Plugin Configuration
 
+> **WARNING**: this material is not fully implemented in the alpha release. It signals future upgrades on the roadmap for future releases.
+
+
 There are several places in an Impl file where you can add configuration for a model. 
 
 - input

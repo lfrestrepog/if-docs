@@ -2,9 +2,9 @@
 author: Asim Hussain (@jawache)
 abstract: Standardising the interface to measurement models.
 ---
-# Impact Model Plugin
+# Model Plugin
 
-Calculating [Impact Metric](Impact%20Metric) 's (outputs) for every component in an [Impact Graph](Impact%20Graph.md) (graph) requires the use of an **Impact Model** (model) called through an [Impact Model Plugin](Impact%20Model%20Plugin.md) (model plugin).
+Calculating outputs for every component in an [Impact Graph](Impact%20Graph.md) (graph) requires the use of an **Impact Model** (model) called through an [Impact Model Plugin](Impact%20Model%20Plugin.md) (model plugin).
 
 ## What are Impact Models?
 

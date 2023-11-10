@@ -56,6 +56,8 @@ graph: # sum = 52
 
 ### Temporal Granularity
 
+**WARNING** this is not yet implemented, but it is on the roadmap for future releases!
+
 A graph can calculate a single Impact Metric for its whole duration (graph duration) or create a time series of Impact Metrics for smaller durations (impact durations).
 
 Impact Framework will handle normalizing, bucketing, and slicing time to generate any output time series from any sets of input inputs. The input inputs don't need to be in the same frequency or interval as the output time series. They don't need to be synchronized with the other components or output outputs.

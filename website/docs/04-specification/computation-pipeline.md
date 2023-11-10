@@ -70,68 +70,6 @@ component:
         cpu: 11%
 ```
 
-## Enrichment
-
-This phase involves enriching the calculated outputs with any other data. The primary use case for this phase is to convert any energy values in the outputs to carbon values using grid emissions data.
-
-### Grid Emissions
-The enrichment phase enables us to consistently apply the same grid emissions source, granularity, and methodology (average vs. marginal), to all components.
-
-This phase should instantiate a global grid emissions service. The service *could* return simply a global yearly average if grid emissions are not crucial in this graph. The service could be more advanced, using a vendor that produces granular data for grid emissions by time and region. The important thing is that we are using the **same grid emissions service and methodology for all outputs**.
-
-> For the enrichment with grid emissions to work, each impact metric needs to have 
-> - time 
-> - duration 
-> - location 
-> - energy
-> 
-> If all those parameters exist, then we can source a grid emissions intensity and apply to energy to generate carbon (operational emissions as per the SCI spec)
-
-### Example
-
-Represented as [Impl (Impact YAML)](Impl%20(Impact%20YAML).md), the enrichment phase would compute every component node in the tree with **energy outputs** and **locations** like so:
-
-```yaml
-component:
-  outputs:
-      - timestamp: 2023-07-06T00:00
-        duration: 15 
-        location: west-us
-        energy: 23 mWh
-      - timestamp: 2023-07-06T00:05
-        duration: 5
-        location: west-us
-        energy: 20 mWh
-      - timestamp: 2023-07-06T00:05
-        duration: 5
-        location: west-us
-        energy: 18 mWh  
-```
-
-Into nodes with operational carbon emissions (energy * grid emissions) using the grid emissions intensity at the time and location, like so:
-
-```yaml
-component:
-  outputs:
-      - timestamp: 2023-07-06T00:00
-        duration: 15 mins
-        location: west-us
-        energy: 43 mWh
-        grid-intensity: 500 gCO2e / kWh
-        operational-carbon: 4.7g gCO2e
-      - timestamp: 2023-07-06T15:00
-        duration: 5 mins
-        location: west-us
-        energy: 20 mWh
-        grid-intensity: 490 gCO2e / kWh
-        operational-carbon: 2.9 gCO2e       
-      - timestamp: 2023-07-06T25:00
-        duration: 5 mins
-        location: west-us
-        energy: 18 mWh  
-        grid-intensity: 470 gCO2e / kWh
-        operational-carbon: 2.8g gCO2e         
-```
 
 ## Normalization
 
