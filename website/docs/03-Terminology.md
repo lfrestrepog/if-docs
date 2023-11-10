@@ -38,7 +38,7 @@ A [Graph](specification/graph.md) is made up of nodes, each node represents eith
 ### Component
 
 **aka**: *component node*
-A component is something that creates environmental impacts, for example a server, network traffic. If it creates and environmental impact it's called a component. They effectively form the leaf nodes of an [Impact Graph](specification/graph.md). Each component has at least one [Model Plugin](specification/model-plugin.md) configured as well as some [Inputs](inputs.md). We pass the observations to the model plugin which interacts with a model to calculate the [Impact](Impact) for this component.
+A component is something that creates environmental impacts, for example a server, network traffic. If it creates and environmental impact it's called a component. They effectively form the leaf nodes of an [Graph](specification/graph.md). Each component has at least one [Model Plugin](specification/model-plugin.md) configured as well as some [Inputs](inputs.md). We pass the observations to the model plugin which interacts with a model to calculate the [Impact](Impact) for this component.
 
 ### Grouping
 
@@ -74,7 +74,7 @@ Every [Input](input.md) is for a particular timespan, known as the duration. The
 
 ### Computation
 **aka**: ~
-Is the act of calculating the impacts of an [Impact Graph](specification/graph.md).
+Is the act of calculating the impacts of a [Graph](specification/graph.md).
 
 ### Computation Pipeline
 **aka**: *computation pipeline*

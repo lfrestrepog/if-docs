@@ -4,7 +4,7 @@ abstract: Why granularity is important to impact graphing and the two main types
 ---
 # Granularity
 
-An [Impact Graph](Impact%20Graph.md) (graph) can be created that is very coarse-grained, a single top-level component, with a single input of long duration.
+A [Graph](graph.md) (graph) can be created that is very coarse-grained, a single top-level component, with a single input of long duration.
 
 ```yaml
 name: My application

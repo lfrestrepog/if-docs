@@ -28,7 +28,7 @@ We loop through the impact graph and component node by component node, pass in t
 > [!important] 
 > Each input input is for a time and duration, and each output impact metric is for the same time and duration. We should link an Impact Metric to the exact input used to generate it.
 
-Represented as [Impl (Impact YAML)](Impl%20(Impact%20YAML).md), the calculation phase would compute every component node in the tree with **inputs** like so:
+Represented as [Impl](impl.md), the calculation phase would compute every component node in the tree with **inputs** like so:
 
 ```yaml
 component:

@@ -5,7 +5,7 @@ abstract: Describes an input in the context of an Impact Graph.
 
 # Inputs
 
-`inputs` are a core component of an [Impact Graph](Impact%20Graph.md) (graph), and they form the primary input into an [Impact Model Plugin](Impact%20Model%20Plugin.md) (model).
+`inputs` are a core component of an [Impact Graph](graph.md) (graph), and they form the primary input into an [Impact Model Plugin](Impact%20Model%20Plugin.md) (model).
 
 An **input** is something you measure regarding a component in your software system. For example, an `input` about a server might be CPU utilization. `inputs` are passed into models which generate impact metrics.
 
@@ -75,7 +75,7 @@ As discussed in the [Granularity](Granularity.md) design document, an essential 
 
 One dimension of granularity is time, and `inputs` are how we provide that temporal granularity.
 
-You can provide one single `input` for a long duration for every component in an [Impact Graph](Impact%20Graph.md); however, this won't give you a view of how the impacts changed over time. 
+You can provide one single `input` for a long duration for every component in an [Impact Graph](graph.md); however, this won't give you a view of how the impacts changed over time. 
 
 This is why `inputs` are a time series; the more inputs you can provide about components over time, the more the Impact Framework can surface impacts over time.
 

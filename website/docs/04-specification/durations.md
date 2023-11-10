@@ -8,7 +8,7 @@ abstract: A core component of impact graphing is the concept of time and specifi
 
 
 > Terminology
-> - **Graph Duration**: Total global duration for the whole Impact Graph.
+> - **Graph Duration**: Total global duration for the whole Graph.
 > - **Impact Duration**: The duration of an individual Impact Metric.
 > - **input Duration**: The duration of an individual input.
 
@@ -43,7 +43,7 @@ When it comes to outputting time series it's much more likely to surface useful 
 
 From the image above you can see that the input input time series and output impact metric time series are **not** synchronized. 
 
-This is a very useful feature of the [Impact Graph](Impact%20Graph.md), you don't need to synchronize the time series of *any thing* with another thing other. inputs of components don't need to be synchronized with each other or with any output time series which you configure. There is a normalization phase [Computation Pipeline](Computation%20Pipeline.md) which handles any required synchronization. You can write plugins to customize how this synchronization occurs but by default it's weighted by time. 
+This is a very useful feature of the [Graph](graph.md), you don't need to synchronize the time series of *any thing* with another thing other. inputs of components don't need to be synchronized with each other or with any output time series which you configure. There is a normalization phase [Computation Pipeline](Computation%20Pipeline.md) which handles any required synchronization. You can write plugins to customize how this synchronization occurs but by default it's weighted by time. 
 
 This means you can provide the input inputs for components with as much [Granularity](Granularity.md) as you can but it doesn't need to match the output time series. For some you can provide very granular data, for others you can provide less or even just one input. inputs don't need to be synchronized with each other or anything else.
 

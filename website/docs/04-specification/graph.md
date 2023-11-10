@@ -10,17 +10,17 @@ A Graph is part of the manifest file that defines everything you need to calcula
 
 You can describe it in YAML format ([impl](Impl%20(Impact%20YAML).md)) and execute using a command line tool ([Impact Engine](impact-engine.md)) using static input data.
 
-The flexibility of impact graphs means they can represent a running software application, a user journey, or a campaign - it should be possible to measure anything with an impact graph. We call the thing an Impact Graph is measuring an **Impact Subject**.
+The flexibility of impact graphs means they can represent a running software application, a user journey, or a campaign - it should be possible to measure anything with an impact graph. We call the thing a Graph is measuring an **Impact Subject**.
 
 It represents an Ontology of a software system—a graph of all the nested components and sub-components.
 
-Impact Graph is the core of the Impact Framework.
+A Graph is the core of the Impact Framework.
 
 ## Structure
 
-See the [Impl](./impl.md) spec for the latest and complete information regarding the structure of an Impact Graph.
+See the [Impl](./impl.md) spec for the latest and complete information regarding the structure of a Graph.
 
-In summary, an Impact Graph has a root node containing configuration detailing **how** the graph is computed and a graph node containing details about all the components that make up this impact subject.
+In summary, a Graph has a root node containing configuration detailing **how** the graph is computed and a graph node containing details about all the components that make up this impact subject.
 
 The graph's leaf nodes (**Components**) represent the components that need impacts calculated, e.g. servers, networking, and devices.
 
@@ -43,11 +43,11 @@ During graph computation, we first calculate the Component nodes to generate Imp
 
 ![](../../static/img//bcb0066204a750f6b18a43a627c66b90.png)
 
-A computation of an Impact Graph can create one Impact Metric. It can also be configured to return a **time series of outputs**, so you can identify the moments when impact is higher or lower. Importantly a time series is computed for every node (grouping or component) in the graph so that you can analyze the source of impact structurally and temporally.
+A computation of a Graph can create one Impact Metric. It can also be configured to return a **time series of outputs**, so you can identify the moments when impact is higher or lower. Importantly a time series is computed for every node (grouping or component) in the graph so that you can analyze the source of impact structurally and temporally.
 
 ### Pipeline
 
-See [Computation Pipeline](./computation-pipeline.md) for details regarding the phases of an Impact Graph Computation. 
+See [Computation Pipeline](./computation-pipeline.md) for details regarding the phases of a Graph Computation. 
 
 In summary, there are 4 phases:
 - **Calculation**: Calculating the outputs of every component leaf node.
@@ -59,7 +59,7 @@ Through the above pipeline process, we can handle multiple types of calculations
 
 ## Supporting the 4M's of Green Software
 
-We can apply the **4Ms** using an Impact Graph.
+We can apply the **4Ms** using a Graph.
 
 - **Mapping**: Map clearly what you want to measure, the *boundary* of the subject.
 - **Measure**: Decide the models you want to use to measure the subject's impact.
