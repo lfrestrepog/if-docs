@@ -5,7 +5,7 @@ abstract: Describes an input in the context of a Graph.
 
 # Inputs
 
-`inputs` are a core component of a [Graph](graph.md) (graph), and they form the primary input into an [Impact Model Plugin](Impact%20Model%20Plugin.md) (model).
+`inputs` are a core component of a [Graph](graph.md) (graph), and they form the primary input into an [Impact Model Plugin](model-plugin.md) (model).
 
 An **input** is something you measure regarding a component in your software system. For example, an `input` about a server might be CPU utilization. `inputs` are passed into models which generate impact metrics.
 
@@ -63,7 +63,7 @@ A helpful feature of the Impact Framework is that you don't need to synchronize 
 
 ![](../../static/img/72efce519e8c2264406864148a8a3151.png)
 
-In the [](Computation%20Pipeline.md#Normalization|Normalization) phase of the computation of a graph, we do synchronize the output Impact Metrices, but we don't need the `inputs` synchronized to do this.
+In the [](computation-pipeline.md#Normalization|Normalization) phase of the computation of a graph, we do synchronize the output Impact Metrices, but we don't need the `inputs` synchronized to do this.
 
 ### How does an `input` differ from Telemetry?
 
@@ -71,7 +71,7 @@ Telemetry is the automatic recording and transmission of very fine-grain data ab
 
 ### `inputs` drive temporal granularity
 
-As discussed in the [Granularity](Granularity.md) design document, an essential feature of the [Impact Framework](Impact%20Framework.md) is to provide a granular analysis of the impacts of a software system.
+As discussed in the [Granularity](granularity.md) design document, an essential feature of the [Impact Framework](impact-framework.md) is to provide a granular analysis of the impacts of a software system.
 
 One dimension of granularity is time, and `inputs` are how we provide that temporal granularity.
 

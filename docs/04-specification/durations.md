@@ -43,9 +43,9 @@ When it comes to outputting time series it's much more likely to surface useful 
 
 From the image above you can see that the input input time series and output impact metric time series are **not** synchronized. 
 
-This is a very useful feature of the [Graph](graph.md), you don't need to synchronize the time series of *any thing* with another thing other. inputs of components don't need to be synchronized with each other or with any output time series which you configure. There is a normalization phase [Computation Pipeline](Computation%20Pipeline.md) which handles any required synchronization. You can write plugins to customize how this synchronization occurs but by default it's weighted by time. 
+This is a very useful feature of the [Graph](graph.md), you don't need to synchronize the time series of *any thing* with another thing other. inputs of components don't need to be synchronized with each other or with any output time series which you configure. There is a normalization phase [Computation Pipeline](computation-pipeline.md) which handles any required synchronization. You can write plugins to customize how this synchronization occurs but by default it's weighted by time. 
 
-This means you can provide the input inputs for components with as much [Granularity](Granularity.md) as you can but it doesn't need to match the output time series. For some you can provide very granular data, for others you can provide less or even just one input. inputs don't need to be synchronized with each other or anything else.
+This means you can provide the input inputs for components with as much [Granularity](granularity.md) as you can but it doesn't need to match the output time series. For some you can provide very granular data, for others you can provide less or even just one input. inputs don't need to be synchronized with each other or anything else.
 
 You can configure the output impact time series for every computation, and the normalization phase of computation handles everything else. You might start with one summary impact calculated for the whole window of time, then move to smaller windows of time and see if the output time series surfaces more useful information. You can play around, experiment, with the output time series as much as you want without needing to adjust any input input time series.
 
