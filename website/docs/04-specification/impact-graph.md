@@ -1,6 +1,6 @@
 ---
 author: Asim Hussain (@jawache)
-abstract: An impact graph is the core construct in an Impact Engine Framework through which all the other components interact.
+abstract: An impact graph is the core construct in an Impact Framework through which all the other components interact.
 ---
 # Impact Graph
 
@@ -18,7 +18,7 @@ The flexibility of impact graphs means they can represent a running software app
 
 It represents an Ontology of a software system—a graph of all the nested components and sub-components.
 
-Impact Graph is the core of the Impact Engine Framework.
+Impact Graph is the core of the Impact Framework.
 
 ## Structure
 

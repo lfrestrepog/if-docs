@@ -1,4 +1,4 @@
-# Impact Engine Framework
+# Impact Framework
 
 A Framework to **M**odel, **M**easure, si**M**ulate and **M**onitor the environmental impacts of software.
 

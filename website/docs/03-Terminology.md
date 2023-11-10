@@ -21,7 +21,7 @@ Is a model that given some input inputs returns some output impact metric. For e
 
 ### Impact Model Plugin
 **aka**: *imp*, *model plugin*, *plugin*
-Is a software package/module external to the [Impact Engine Framework](./specification/Impact%20Engine%20Framework.md) exposing a class implementing the Model Plugin Interface. It's code you download and install which let's you interact with an [Impact Model](Impact%20Model) in a standard way.
+Is a software package/module external to the [Impact Framework](./specification/Impact%20Framework.md) exposing a class implementing the Model Plugin Interface. It's code you download and install which let's you interact with an [Impact Model](Impact%20Model) in a standard way.
 
 ### Impact Model Interface
 **aka**: *model interface*

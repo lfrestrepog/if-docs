@@ -42,7 +42,7 @@ Any configuration here should be:
 
 Ultimately, the inputs are passed to the model through the `execute(inputs: Array<input>)` function. 
 
-An essential characteristic of the Impact Engine is that the model is passed everything it needs to perform its calculation in the input nodes. All the data required to calculate an input exists in each input node. Ensuring all the required data is self-contained in an input makes building and testing models easier. 
+An essential characteristic of the Impact Framework is that the model is passed everything it needs to perform its calculation in the input nodes. All the data required to calculate an input exists in each input node. Ensuring all the required data is self-contained in an input makes building and testing models easier. 
 
 As such, the most important place to put configuration that is directly related to the calculation of an input is in the input, like so: 
 

@@ -6,7 +6,7 @@ Here you will find the IF specification.
 - [Durations](./Durations.md)
 - [Impact Graph](./Impact%20Graph.md)
 - [Granularity](./Granularity.md)
-- [Impact Framework](./Impact%20Engine%20Framework.md)
+- [Impact Framework](./Impact%20Framework.md)
 - [Impact Graph](./Impact%20Graph.md)
 - [Impact](./Impact.md)
 - [Impl](./Impl%20(Impact%20YAML).md)

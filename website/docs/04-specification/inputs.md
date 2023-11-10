@@ -59,7 +59,7 @@ Each type of `input` has a **default unit** and **default name**. For example, i
 
 Each component in your graph needs `inputs`; we need inputs to compute outputs.
 
-A helpful feature of the engine is that you don't need to synchronize all your `inputs` for all your components with each other. You can provide `inputs` at different intervals for every component in the graph. 
+A helpful feature of the Impact Framework is that you don't need to synchronize all your `inputs` for all your components with each other. You can provide `inputs` at different intervals for every component in the graph. 
 
 ![](../../static/img//72efce519e8c2264406864148a8a3151.png)
 
@@ -71,12 +71,12 @@ Telemetry is the automatic recording and transmission of very fine-grain data ab
 
 ### `inputs` drive temporal granularity
 
-As discussed in the [Granularity](Granularity.md) design document, an essential feature of the [Impact Engine Framework](Impact%20Engine%20Framework.md) is to provide a granular analysis of the impacts of a software system.
+As discussed in the [Granularity](Granularity.md) design document, an essential feature of the [Impact Framework](Impact%20Framework.md) is to provide a granular analysis of the impacts of a software system.
 
 One dimension of granularity is time, and `inputs` are how we provide that temporal granularity.
 
 You can provide one single `input` for a long duration for every component in an [Impact Graph](Impact%20Graph.md); however, this won't give you a view of how the impacts changed over time. 
 
-This is why `inputs` are a time series; the more inputs you can provide about components over time, the more the engine can surface impacts over time.
+This is why `inputs` are a time series; the more inputs you can provide about components over time, the more the Impact Framework can surface impacts over time.
 
 Another reason to provide multiple `inputs` is to gain a much more accurate emissions estimate. Many of the models used to translate `inputs` into outputs are non-linear. This means just providing an average value over time will give you a less accurate value than providing more data points over time.
