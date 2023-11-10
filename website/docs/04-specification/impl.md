@@ -1,15 +1,15 @@
 ---
 author: Asim Hussain (@jawache)
-abstract: Describes the structure and purpose of Impact YAML, a file format to represent an Impact Graph.
+abstract: Describes the structure and purpose of Impact YAML, a file format to represent a Graph.
 ---
 # Impl (Impact YAML)
 
-- Impact YAML (IMPL) is a file format based on [yaml](https://circleci.com/blog/what-is-yaml-a-beginner-s-guide/)  to represent an [Impact Graph](graph.md). 
-- Just like an Impact Graph, an IMPL is a calculation manifest containing everything you want to measure and how you want to measure it. 
+- Impact YAML (IMPL) is a file format based on [yaml](https://circleci.com/blog/what-is-yaml-a-beginner-s-guide/)  to represent a [Graph](graph.md). 
+- Just like a Graph, an IMPL is a calculation manifest containing everything you want to measure and how you want to measure it. 
 - IMPL being YAML means it's more human-readable and can be used as a **formal method of writing use cases**, such as SCI use cases.
 - IMPL files can be named `.yaml` (or `.impl`).
 - IMPLs can be computed on the command line using the [Impact](Impact.md) tool, printing out the results to file or STDOUT.
-- You can do much more using the [Impact Graph](graph.md) SDK directly; however, for many use cases, IMPL works fine.
+- You can do much more using the [Graph](graph.md) SDK directly; however, for many use cases, IMPL works fine.
 
 ## Use Cases
 
@@ -29,8 +29,8 @@ The command line tool [Impact](Impact.md) can compute an IMPL file and generate 
 
 ### To bootstrap code
 
-- IMPLs will be able to represent simple calculation manifest but to handle larger, more complex systems, we will have to write Impact Graphs as code using our SDK.
-- To help bootstrap the process, humans can write the high-level structure using IMPL and run through a tool to generate starter Impact Graph code in any language our SDK supports.
+- IMPLs will be able to represent simple calculation manifest but to handle larger, more complex systems, we will have to write Graphs as code using our SDK.
+- To help bootstrap the process, humans can write the high-level structure using IMPL and run through a tool to generate starter Graph code in any language our SDK supports.
 
 ## Structure
 
