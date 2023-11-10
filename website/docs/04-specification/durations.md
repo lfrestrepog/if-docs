@@ -4,6 +4,8 @@ abstract: A core component of impact graphing is the concept of time and specifi
 ---
 # Durations
 
+> **WARNING** Much of the following material is not yet implemented in the alpha releae, but is on the roadmap for future releases.
+
 
 > Terminology
 > - **Graph Duration**: Total global duration for the whole Impact Graph.
@@ -12,7 +14,7 @@ abstract: A core component of impact graphing is the concept of time and specifi
 
 ## Introduction
 
-- Every [Impact Graph](Impact%20Graph.md) (graph) represents a **duration** of time.
+- Every [graph](graph.md) (graph) represents a **duration** of time.
 - The **duration** can be explicitly defined in the graph or it can be implied by the timestamp of the first input in any of it's components and the last timestamp (+duration of that input).
 - Duration and time is a core component of any impact measurement, every input is for a time and duration and every output impact metric is for a time and duration. 
 - The times and durations of input inputs and output impact metrics do not have to match.

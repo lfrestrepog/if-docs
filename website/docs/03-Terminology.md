@@ -18,7 +18,7 @@ Is a graph of nodes that defines an ontology we want to model, for example an ap
 ### Model
 
 **aka:** *model*
-Is a model that given some  inputs returns some outputs. For example, if you input some CPU utilization, it might be a model that translate that into an estimate of energy consumed.
+Is a model that given some Inputs returns some outputs. For example, if you input some CPU utilization, it might be a model that translate that into an estimate of energy consumed.
 
 ### Model Plugin
 
@@ -47,24 +47,30 @@ This is a node in the graph used to group multiple components and/or other group
 
 ### Observation
 
-**aka**: *inputs*
-An **input** is something you measure regarding a component in your subject at a particular time and for a particular duration. For example, an input about a server might be CPU utilization.
+**aka**: *Input fields*
+An **Observation** is something you measure regarding a component in your subject at a particular time and for a particular duration. For example, an observation about a server might be CPU utilization. An Input is made up of observations.
+
+### Input
+
+an Input is a collection of ModelParams containing Observations. An Input is all the information connected with one timespan.
+
 
 ### ModelParams
 
-ModelParams are parameters passed to a model. Some are inputs, some are observations, some may have other meanings. They all conform to a defined [Type](https://github.com/Green-Software-Foundation/if/blob/29280ff9cd9c9a843ab1842c728751aafdf21756/src/types/impl.ts#L14).
+ModelParams are parameters passed to a model. Some are inputs, some are observations, some may have other meanings. They all conform to a defined [Type](https://github.com/Green-Software-Foundation/if/blob/29280ff9cd9c9a843ab1842c728751aafdf21756/src/types/impl.ts#L14). Inputs are composed of a collection of ModelParams.
 
 ### Graph Duration
 **aka**: ~
 Every [Graph](specification/graph.md) represents a duration of time for which observations have been gathered about it's components. By default the graph duration will be the time from the earliest observations to the latest observation for all of it's components.
 
-### Impact Duration
+### Duration
 **aka**: ~
-Every Impact Metric is for a particular time and duration. The duration of a Metric determines the granularity of the output timeseries. If the impact duration is equal to the graph duration then only one Metric will be computed for the whole graph. If the impact duration is less than the graph duration then multiple Metrics might be computed.
 
-### Input Duration
+Every Input is for a particular time and duration. The duration of a Metric determines the granularity of the output timeseries. If the impact duration is equal to the graph duration then only one Metric will be computed for the whole graph. If the impact duration is less than the graph duration then multiple Metrics might be computed.
+
+### Duration
 **aka**: ~
-Every [input](input.md) is for a particular time and duration, this is called the input duration. There are usually multiple inputs provided as a time series, the input duration does not need to equal the impact duration which does not need to equal the graph duration.
+Every [Input](input.md) is for a particular timespan, known as the duration. There are usually multiple Inputs provided as a time series, the duration does not need to equal the impact duration which does not need to equal the graph duration.
 
 ### Computation
 **aka**: ~
