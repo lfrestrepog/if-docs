@@ -50,6 +50,10 @@ This is a node in the graph used to group multiple components and/or other group
 **aka**: *inputs*
 An **input** is something you measure regarding a component in your subject at a particular time and for a particular duration. For example, an input about a server might be CPU utilization.
 
+### ModelParams
+
+ModelParams are parameters passed to a model. Some are inputs, some are observations, some may have other meanings. They all conform to a defined [Type](https://github.com/Green-Software-Foundation/if/blob/29280ff9cd9c9a843ab1842c728751aafdf21756/src/types/impl.ts#L14).
+
 ### Graph Duration
 **aka**: ~
 Every [Graph](specification/graph.md) represents a duration of time for which observations have been gathered about it's components. By default the graph duration will be the time from the earliest observations to the latest observation for all of it's components.
