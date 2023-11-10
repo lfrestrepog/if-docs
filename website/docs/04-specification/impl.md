@@ -126,7 +126,7 @@ graph: # The nodes under this root node
 
 ## Example
 
-A simple 3 component web server application running on GCP, Azure, and AWS and using multiple IMMs and specifically calculating an SCI score.
+A simple 3 component web server application running on GCP, Azure, and AWS and using multiple models and specifically calculating an SCI score.
 
 ```yaml
 name: My application
