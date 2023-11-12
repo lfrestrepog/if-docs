@@ -23,22 +23,22 @@ Is a model that given some Inputs returns some outputs. For example, if you inpu
 ### Model Plugin
 
 **aka**: *imp*, *model plugin*, *plugin*
-Is a software package/module external to the [Impact Framework](./specification/impact-framework.md) exposing a class implementing the Model Plugin Interface. It's code you download and install which let's you interact with a Model Plugin in a standard way.
+Is a software package/module external to the [Impact Framework](./04-specification/impact-framework.md) exposing a class implementing the Model Plugin Interface. It's code you download and install which let's you interact with a Model Plugin in a standard way.
 
 ### Model Plugin Interface
 
 **aka**: *model interface*
-Is a common class interface that every [Impact Model Plugin](specification/model-plugin.md) needs to extend and implement. Every model might be very different from each other, but through a [Model Plugin](specification/model-plugin.md) that implements the same interface. By sharing that same interface we can easily compare, swap, use one plugin or another since they all expose the same interface.
+Is a common class interface that every [Impact Model Plugin](./04-specification/model-plugin.md) needs to extend and implement. Every model might be very different from each other, but through a [Model Plugin](./04-specification/model-plugin.md) that implements the same interface. By sharing that same interface we can easily compare, swap, use one plugin or another since they all expose the same interface.
 
 ### Graph Node
 
 **aka**: *graph node*, *node*
-A [Graph](specification/graph.md) is made up of nodes, each node represents either a [Grouping](#Grouping) or a [Component](#Component). 
+A [Graph](/04-specification/graph.md) is made up of nodes, each node represents either a [Grouping](#Grouping) or a [Component](#Component). 
 
 ### Component
 
 **aka**: *component node*
-A component is something that creates environmental impacts, for example a server, network traffic. If it creates and environmental impact it's called a component. They effectively form the leaf nodes of a [Graph](specification/graph.md). Each component has at least one [Model Plugin](specification/model-plugin.md) configured as well as some [Inputs](inputs.md). We pass the observations to the model plugin which interacts with a model to calculate the [Impact](Impact) for this component.
+A component is something that creates environmental impacts, for example a server, network traffic. If it creates and environmental impact it's called a component. They effectively form the leaf nodes of a [Graph](/04-specification/graph.md). Each component has at least one [Model Plugin](./04-specification/model-plugin.md) configured as well as some [Inputs](/04-specification/inputs.md). We pass the observations to the model plugin which interacts with a model to calculate the [Impact](Impact) for this component.
 
 ### Grouping
 
@@ -61,7 +61,7 @@ ModelParams are parameters passed to a model. Some are inputs, some are observat
 
 ### Graph Duration
 **aka**: ~
-Every [Graph](specification/graph.md) represents a duration of time for which observations have been gathered about it's components. By default the graph duration will be the time from the earliest observations to the latest observation for all of it's components.
+Every [Graph](/04-specification/graph.md) represents a duration of time for which observations have been gathered about it's components. By default the graph duration will be the time from the earliest observations to the latest observation for all of it's components.
 
 ### Duration
 **aka**: ~
@@ -70,17 +70,17 @@ Every Input is for a particular time and duration. The duration of a Metric dete
 
 ### Duration
 **aka**: ~
-Every [Input](input.md) is for a particular timespan, known as the duration. There are usually multiple Inputs provided as a time series, the duration does not need to equal the impact duration which does not need to equal the graph duration.
+Every [Input](/04-specification/inputs.md) is for a particular timespan, known as the duration. There are usually multiple Inputs provided as a time series, the duration does not need to equal the impact duration which does not need to equal the graph duration.
 
 ### Computation
 **aka**: ~
-Is the act of calculating the impacts of a [Graph](specification/graph.md).
+Is the act of calculating the impacts of a [Graph](/04-specification/graph.md).
 
 ### Computation Pipeline
 **aka**: *computation pipeline*
-Computing a [Graph](specification/graph.md) involves several phases, calculation, enrichment, normalization and aggregation, they are configurable to allow the framework to be used in multiple contexts, e.g. SCI and GHG. The pipeline describes those phases.
+Computing a [Graph](/04-specification/graph.md) involves several phases, calculation, enrichment, normalization and aggregation, they are configurable to allow the framework to be used in multiple contexts, e.g. SCI and GHG. The pipeline describes those phases.
 
 ### Computation Pipeline
 **aka**: ~
-Is an external package/module which is used to customize one or more phases in the [Computation Pipeline](computation-pipeline.md).
+Is an external package/module which is used to customize one or more phases in the [Computation Pipeline](/04-specification/computation-pipeline.md).
 

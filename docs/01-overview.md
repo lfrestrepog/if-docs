@@ -6,7 +6,7 @@ IF allows you to calculate the energy and carbon impacts of your software applic
 
 The project is entirely open source and composability is a core design principle - we want you to be able to create your own models and plug them in to our framework, or pick from a broad universe of open source models created by others.
 
-# Motivation
+# Motivation 
 
 If you can't measure, you can't improve. Software has many negative environmental **impacts** which we need to optimize, carbon, water, and energy, to name just a few.
 
@@ -16,7 +16,7 @@ Modern applications are composed of many smaller pieces of software (components)
 
 The impacts of software components also vary over time, so as well as understanding **which** components contribute most to the overall impacts, there is also a question of **when** they contribute the most.
 
-Only through a granular analysis of the impacts of your software system can investments in reducing its impact be prioritized and verified. Measurement is the first and most crucial step in greening a software system, and the first step in that process with the [Impact Framework](./04-specification/impact-framework.md) is to create a [Graph](./04-specification/impact-graph.md).
+Only through a granular analysis of the impacts of your software system can investments in reducing its impact be prioritized and verified. Measurement is the first and most crucial step in greening a software system, and the first step in that process with the [Impact Framework](./04-specification/impact-framework.md) is to create a [Graph](./04-specification/graph.md).
 
 ## Navigating these docs
 

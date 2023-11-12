@@ -8,7 +8,7 @@ Calculating outputs for every component in a [Graph](graph.md) (graph) requires 
 
 ## What are Impact Models?
 
-A model converts an input [input](input.md) into some output [Impact Metric](Impact%20Metric), for example, models that convert an input of CPU utilization into an impact of energy.
+A model converts an input [input](inputs.md) into some output [Impact Metric](Impact%20Metric), for example, models that convert an input of CPU utilization into an impact of energy.
 
 There are many different **models**, [Boavizta](https://dataviz.boavizta.org/), [Cloud Carbon Footprint](https://github.com/cloud-carbon-footprint/ccf-coefficients), [Climatiq](https://www.climatiq.io/data) are some great examples of open-source IMs, there are **many other** closed source, commercial and private models being built in-house inside organizations.
 
@@ -44,7 +44,7 @@ This is a simple dictionary used to set up a model. Each model is different and 
 
 ### input
 
-- An [input](input.md) is a data unit describing some inputs to a model. 
+- An [input](inputs.md) is a data unit describing some inputs to a model. 
 - Since every model differs, we can only specify a little. However, the only two fields that would be mandatory for each input are the date/time when the measurement was gathered and the duration for which the input is valid. 
 - For example, you might have some input for CPU utilization, but we also need to know when this input was gathered and for what period the input spans.
 

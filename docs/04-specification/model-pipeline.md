@@ -11,7 +11,7 @@ As [Peter H. Salus](https://en.wikipedia.org/wiki/Peter_H._Salus "Peter H. Salus
 - Write programs to work together.
 - Write programs to handle text streams, because that is a universal interface.
 
-Our approach to models in the [Impact Engine Framework](Impact%20Engine%20Framework.md) is the same. 
+Our approach to models in the [Impact Engine Framework](impact-framework.md) is the same. 
 - Each model will do one thing and do it well. 
 - Models work with each other. 
 - The [Impl (Impact YAML)](Impl%20(Impact%20YAML).md) text format is the communication medium between models.

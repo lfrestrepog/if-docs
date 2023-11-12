@@ -8,11 +8,11 @@ This is a template repository based on docusaurus.io
 
 This configuration file defines many of the top level features of the website such as the menu, title etc...
 
-Replace all references to `TODO` and `PROJECT-TITLE` with the appropriate content for your website.
+Replace all references to `TODO` and `Impact Framework` with the appropriate content for your website.
 
 ### README.md
 
-- Replace the `PROJECT-TITLE` with your projects title.
+- Replace the `Impact Framework` with your projects title.
 - Replace the `TODO's` with your content, including the main title.
 - Ensure it refers to the right working group and URL.
 - Ensure it refers to the right license.
@@ -21,7 +21,7 @@ Replace all references to `TODO` and `PROJECT-TITLE` with the appropriate conten
 
 This is the landing page of the website.
 
-- Replace the `PROJECT-TITLE` with your projects title.
+- Replace the `Impact Framework` with your projects title.
 - Replace the `TODO's` with your content, including the main title.
 - Add the right people to the Team section.
   - Every team member must have a GitHub profile.

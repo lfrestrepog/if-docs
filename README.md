@@ -1,10 +1,10 @@
 Follow the instructions in [CONFIGURE.md](CONFIGURE.md) to learn how to configure this template repository.
 
-# PROJECT-TITLE
+# Impact Framework
 
-TODO
+Impact Framework
 
-This is a project run through the [Community Working Group](https://grnsft.org/community-wg) in the [Green Software Foundation](https://greensoftware.foundation) and can be viewed through https://TODO.greensoftware.foundation
+This is a project run through the [Community Working Group](https://grnsft.org/community-wg) in the [Green Software Foundation](https://greensoftware.foundation) and can be viewed through https://if.greensoftware.foundation
 
 ## Copyright
 This project is copyrighted under [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/).
