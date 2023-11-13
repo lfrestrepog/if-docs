@@ -10,7 +10,8 @@ IF allows you to calculate the environmental impacts, such as carbon, of your so
 
 The project is entirely open source and composability is a core design principle - we want you to be able to create your own models and plug them in to our framework, or pick from a broad universe of open source models created by others.
 
-# Motivation 
+
+## Motivation 
 
 If you can't measure, you can't improve. Software has many negative environmental **impacts** which we need to optimize, carbon, water, and energy, to name just a few.
 
@@ -21,6 +22,17 @@ Modern applications are composed of many smaller pieces of software (components)
 The impacts of software components also vary over time, so as well as understanding **which** components contribute most to the overall impacts, there is also a question of **when** they contribute the most.
 
 Only through a granular analysis of the impacts of your software system can investments in reducing its impact be prioritized and verified. Measurement is the first and most crucial step in greening a software system, and the first step in that process with the [Impact Framework](./04-specification/impact-framework.md) is to create a [Graph](./04-specification/graph.md).
+
+## Project Structure
+
+The **IF source code** can be found in the [IF Github repository](https://github.com/Green-Software-Foundation/if). The code there covers the framework, which includes all the infrastructure for reading and writing input and output yamls, invoking models, running the command line tool and associated helper functions. However, it does not include the actual models themselves. Part of the IF design philosophy is that all models should be plugins, so that the IF is as composable and configurable as possible. Therefore, to use IF, you have to either create your own models or find some prebuilt ones and install them yourself. This also implies that you take responsibility for the models you choose to install.
+
+We do provide a **standard library of models** built and maintained by the IF core team. These cna be found in the [`if-models` Github repository](https://github.com/Green-Software-Foundation/if-models). You can install these into `if` by running `yarn install https://github.com/Green-Software-Foundation/if-models` from the `if` project directory.
+
+There is also a second repository for **models we expect community members to maintain**. These can be found in the [`if-unofficial-models` Github repository](https://github.com/Green-Software-Foundation/if-unofficial-models). You can install these into `if` by running `yarn install https://github.com/Green-Software-Foundation/if-unofficial-models` from the `if` project directory.
+
+Finally, the **source code for this documentation** website is available at the [`if-docs` Github repository](https://github.com/Green-Software-Foundation/if-docs).
+
 
 ## Navigating these docs
 
