@@ -29,6 +29,7 @@ graph:
         - 
       config:
       inputs:
+
 ```
 
 The `impl` starts with some metadata about the project, specifically:
@@ -45,20 +46,18 @@ The next field is `initialize`. This is where you specify each individual model 
 ```yaml
 initialize:
     - name: sci-m
-      kind: builtin
-      verbose: false
       path: ''
+      model:
 ```
 
 
-`name` has to be precisely the model name recognized by IEF. You can check all the valid model names [here](../src/util/models-universe.ts).
-`kind` determines whether the model is one of IEF's built-in models, or whether the model is some external code being executed in a spawned shell. The options are `builtin` or `shell`. `verbose` determines how much information should be added to the output file. This is not yet implemented as shoudl default to `false`. `path` is used for models run in a spawned shell. It should be the path to an executable.
+`name` has to be precisely the model name recognized by IEF. You can check all the valid model names [here](../src/util/models-universe.ts). `path` defines where `IF` should look for the installed model, for example for our standard library of mopdels you would specify `if-models`, as this is the repository name and the name of the directory they are installed into in `node_modules`. For `model` you are expected to provide the name of the class your mdoel instantiates, fopr example for the `sci-e` model the correct value is `SciEModel`.
 
 ## `graph`
 
 `graph` is where you define the various components of your application. `graph` is organized into `children`. Each `child` is a component whose outputs should be summed to give the overall impact of your `graph`. `children` can be nested with arbitrary depth. Each `child` can have its own model pipeline and its own config. When no config is provided, it is inherited from the `graph` level config.
 
-In the following example, there is only one component. The model pipeline contains two models, `teads-curve` and `sci-m`. `teads-curve` requires the `tdp` to be defined in `config` and `sci-m` requires five pieces of `config` data: `total-embodied-emissions`, `time-reserved`, `expected-lifespan`, `resources-reserved` and `total-resources`.
+In the following example, there is only one component. The model pipeline contains two models, `teads-curve` and `sci-m`. Neither require any `config` data but they do expect certain information to be available in `inputs`.
 
 ```yaml
 graph:
@@ -68,9 +67,9 @@ graph:
         - teads-curve
         - sci-m
       config:
-        teads-curve:
-          tdp: 55
-        sci-m:
+      inputs:
+        - timestamp: '2023-11-02T10:35:31.820Z'
+          duration: 3600
           total-embodied-emissions: 1533.12
           time-reserved: 1
           expected-lifespan: 3
@@ -96,55 +95,70 @@ That's it! You now have a simple `impl` file that will use the model config and 
 
 ### Complex pipelines
 
-The basic `impl` in the previous section is valid, but it is minimal and doesn't return very interesting output data. We expect most users will want to calculate an SCI score, which requires both `operational-carbon` and `embodied-carbon` as inputs, which requires `sci` to be preceded by `sci-m` and `sci-o` in the model pipeline. In most cases, `sci-o` will have to be preceded by `sci-e` to ensure `energy` is available to be piped to `sci-o`. And, most likely, the inputs to `sci-e` will be coming from a model such as `teads-curve`. The `sci` model also requires `functional-unit` information so it can convert the estimated `carbon` into a useful unit.
+The basic `impl` in the previous section is valid, but it is minimal and doesn't return very interesting output data. We expect most users will want to calculate an SCI score, which requires both `operational-carbon` and `embodied-carbon` as inputs, which requires `sci` to be preceded by `sci-m` and `sci-o` in the model pipeline. In most cases, `sci-o` will have to be preceded by `sci-e` to ensure `energy` is available to be piped to `sci-o`. And, most likely, the inputs to `sci-e` will be coming from a model such as `teads-curve`. The `sci` model also requires `functional-unit` information so it can convert the estimated `carbon` into a useful unit. Youmay also wish to grab your `input` data by querying a metrics API on a virtual machine. In the example below, this full pipeline is implemented in an `impl` (if you have an Azure virtual machine and put your credentials in a `.env` file, you can run this `impl` to retrieve your SCI score).
 
-An example of a complex pipeline that executes all these model sin sequence is:
 
 ```yaml
-name: full-sci
-description: example executing a full pipeline from teads --> sci
+name: if-demo
+description: demo pipeline
 tags:
 initialize:
   models:
+    - name: azure-importer
+      model: AzureImporterModel
+      path: if-models
+    - name: cloud-instance-metadata
+      model: CloudInstanceMetadataModel
+      path: if-models
     - name: teads-curve
-      kind: builtin
-    - name: sci-m
-      kind: builtin
-    - name: sci-o
-      kind: builtin
+      model: TeadsCurveModel
+      path: if-community-models
     - name: sci-e
-      kind: builtin
+      model: SciEModel
+      path: if-models
+    - name: sci-o
+      model: SciOModel
+      path: if-models
+    - name: sci-e
+      model: SciEModel
+      path: if-models
+    - name: sci-m
+      model: SciMModel
+      path: if-models
     - name: sci
-      kind: builtin
+      model: SciModel
+      path: if-models
 graph:
   children:
     child:
       pipeline:
+        - azure-importer
+        - cloud-instance-metadata
         - teads-curve
-        - sci-m
         - sci-e
         - sci-o
+        - sci-m
         - sci
       config:
-        teads-curve:
-          tdp: 55
-        sci-m:
-          te: 1533.12
-          tir: 1
-          el: 3
-          rr: 1
-          tor: 8
         sci-o:
-          grid-ci: 1500     
+          grid-carbon-intensity: 951
         sci:
-          functional_unit_duration: 1 
-          functional_unit_time: 'minutes'
-          functional_unit: requests # factor to convert per time to per f.unit
+          functional-unit: ''
+          functional-unit-time: hour
+          functional-unit-duration: 1
       inputs:
-        - timestamp: 2023-07-06T00:00
-          duration: 1
-          cpu-util: 55
-          requests: 100
+          - timestamp: '2023-11-02T10:35:31.820Z'
+            duration: 3600
+            azure-observation-window: 5 min # value and unit must be space separated 
+            azure-observation-aggregation: 'average'
+            azure-subscription-id: 9ed7b18c-8a28-5b73-9451-45fc74e7d0d3
+            azure-resource-group: vm1_group
+            azure-vm-name: vm1
+            total-embodied-emissions: 1533.12
+            time-reserved: 300
+            expected-lifespan: 94348800 # 3 yrs in seconds
+            resources-reserved: 1
+            total-resources: 64
 
 ```
 
@@ -163,23 +177,20 @@ tags:
 initialize:
   models:
     - name: teads-curve
-      kind: builtin
+      model: TeadsCurveModel
+      path: if-community-models
     - name: sci-e
-      kind: builtin
-      verbose: false
-      path: ''
+      model: SciEModel
+      path: if-models
     - name: sci-m
-      kind: builtin
-      verbose: false
-      path: ''
+      path: if-models
+      model: SciMModel
     - name: sci-o
-      kind: builtin
-      verbose: false
-      path: ''
+      model: SciOModel
+      path: if-models
     - name: sci
-      kind: builtin
-      verbose: false
-      path: ''
+      model: SciModel
+      path: if-models
 graph:
   children:
     server: # an advanced grouping node
@@ -190,16 +201,6 @@ graph:
         - sci-o
         - sci
       config:
-        teads-curve:
-          tdp: 65
-        sci-m:
-          te: 251000 # gCO2eq
-          tir: 3600 # 1 hour in s
-          el: 126144000 # 4 years in seconds    
-          rr: 1 
-          tor: 1 
-        sci-o:
-          grid-ci: 457 # gCO2/kwh
         sci:
           functional_unit_duration: 1 
           functional_duration_time: ''
@@ -210,15 +211,29 @@ graph:
             - timestamp: 2023-07-06T00:00
               duration: 10
               cpu-util: 50
+              thermal-design-power: 65
               e-net: 0.000811 #kwh     
               requests: 380
+              total-embodied-emissions: 251000 # gCO2eq
+              time-reserved: 3600 # 1 hour in s
+              expected-lifespan: 126144000 # 4 years in seconds    
+              resources-reserved: 1 
+              total-resources: 1
+              grid-carbon-intensity: 451
         nested-2:
           inputs: 
             - timestamp: 2023-07-06T00:00
               duration: 10
               cpu-util: 33
+              thermal-design-poiwer: 65
               e-net: 0.000811 #kwh     
-              requests: 380 
+              requests: 380
+              total-embodied-emissions: 251000 # gCO2eq
+              time-reserved: 3600 # 1 hour in s
+              expected-lifespan: 126144000 # 4 years in seconds    
+              resources-reserved: 1 
+              total-resources: 1
+              grid-carbon-intensity: 451
 
 ```
 

@@ -92,7 +92,8 @@ description: example impl invoking Azure model
 initialize:
   models:
     - name: azure-importer
-      kind: builtin
+      model: AzureImporter
+      path: if-unofficial-models
 graph:
   children:
     child:
