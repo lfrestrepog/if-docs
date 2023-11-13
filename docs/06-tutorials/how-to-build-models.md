@@ -23,11 +23,11 @@ export interface IOutputModelInterface {
 }
 ```
 
-There are four required methods:
+There are three required methods:
 
 - `configure()`
   - This method completes any configuration steps for the model, such as loading config data from the `impl` file.
-  - **Params**: None
+  - **Params**:
     - `staticParams`: the model config data 
   - **Returns**: 
     - an instance of `IOutputModelInterface`
@@ -70,8 +70,6 @@ export class SciEModel implements IOutputModelInterface {
     ;
   }
 
-  modelIdentifier(): string {
-  }
 }
 ```
 
