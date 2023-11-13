@@ -19,7 +19,7 @@ Different models require different kinds of **model parameters** as input. If a 
 - Models take as input an array of **input observations**.
 - Modesl output an arry of **output observations**.
 
-In a [Manifest File](Impl%20(Impact%20YAML).md), a set of **input observations** are expressed like so:
+In a [Manifest File](manifest-file.md), a set of **input observations** are expressed like so:
 
 ```yaml
   inputs:      

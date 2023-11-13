@@ -14,7 +14,7 @@ As [Peter H. Salus](https://en.wikipedia.org/wiki/Peter_H._Salus "Peter H. Salus
 Our approach to models in the [Impact Engine Framework](impact-framework.md) is the same. 
 - Each model will do one thing and do it well. 
 - Models work with each other. 
-- The [Impl (Impact YAML)](Impl%20(Impact%20YAML).md) text format is the communication medium between models.
+- The [Manifest File](manifest-file.md) text format is the communication medium between models.
 
 Calculating a component's impacts often requires using multiple models in sequence. Each model takes as input the outputs of the previous model in the chain, all working together to calculate impacts from inputs.
 
@@ -29,7 +29,7 @@ The nature of the modification is flexible and defined by the model. Some model 
 
 ## Initialization
 
-All the model plugins used in any component in the graph are configured at the top of the [Impl (Impact YAML)](Impl%20(Impact%20YAML).md) in the initialize section. There are multiple places to add configuration for model plugins; any configuration added here is global and applied to every use of the model throughout the graph.
+All the model plugins used in any component in the graph are configured at the top of the [Manifest File](manifest-file.md) in the initialize section. There are multiple places to add configuration for model plugins; any configuration added here is global and applied to every use of the model throughout the graph.
 
 ```yaml
 .

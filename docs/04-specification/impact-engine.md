@@ -2,7 +2,7 @@
 
 ## Introduction
 
-`impact-engine` is a command line tool that computes [Impl (Impact YAML)](Impl%20(Impact%20YAML).md) files. 
+`impact-engine` is a command line tool that computes [Manifest File](manifest-file.md) files. 
 
 ## Quickstart
 
@@ -235,7 +235,7 @@ Each input input is for a time and duration, and each output impact is for the s
 
 :::
 
-Represented as [Impl (Impact YAML)](Impl%20(Impact%20YAML).md), the calculation phase would compute every component node in the tree with **inputs** like so:
+Represented as [Manifest File](manifest-file.md), the calculation phase would compute every component node in the tree with **inputs** like so:
 
 ```yaml
 component:

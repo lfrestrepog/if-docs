@@ -2,35 +2,34 @@
 author: Asim Hussain (@jawache)
 abstract: Describes the structure and purpose of Impact YAML, a file format to represent a Graph.
 ---
-# Impl (Impact YAML)
+# Manifest File
 
-- Impact YAML (IMPL) is a file format based on [yaml](https://circleci.com/blog/what-is-yaml-a-beginner-s-guide/)  to represent a [Graph](graph.md). 
+- An Impact Manifest is a file format based on [yaml](https://circleci.com/blog/what-is-yaml-a-beginner-s-guide/) to represent a [Graph](graph.md), it's also sometimes called Impact YAML or IMPL. 
 - Just like a Graph, an IMPL is a calculation manifest containing everything you want to measure and how you want to measure it. 
-- IMPL being YAML means it's more human-readable and can be used as a **formal method of writing use cases**, such as SCI use cases.
-- IMPL files can be named `.yaml` (or `.impl`).
-- IMPLs can be computed on the command line using the [Impact](impact-framework.md) tool, printing out the results to file or STDOUT.
-- You can do much more using the [Graph](graph.md) SDK directly; however, for many use cases, IMPL works fine.
+- Manifest files being YAML means it's more human-readable and can be used as a **formal method of writing use cases**, such as SCI use cases.
+- Manifest files can be named `.yaml` (or `.impl`).
+- Manifest files can be computed on the command line using the [Impact-Engine](impact-framework.md) tool, printing out the results to file or STDOUT.
 
 ## Use Cases
 
-There are several use cases for an IMPL file.
+There are several use cases for an Manifest file.
 
 ### A formal report
 
-An IMPL is a computable calculation manifest. A formal report detailing not just the end impact but all the assumptions, inputs, and models used in calculating the impact.
+An Manifest file is a computable calculation manifest. A formal report detailing not just the end impact but all the assumptions, inputs, and models used in calculating the impact.
 
 Being a very formal structure, it can be parsed by software, compared to other reports, adjusted, run, and verified.
 
-Currently, in the GSF several case studies have been written to calculate an SCI score for an application, these can all be re-written in IMPL format.
+Currently, in the GSF several case studies have been written to calculate an SCI score for an application, these can all be re-written in Manifest file format.
 
 ### An executable impact calculation manifest
 
-The command line tool [Impact](Impact.md) can compute an IMPL file and generate impact metrics. 
+The command line tool [Impact](Impact.md) can compute an Manifest file and generate impact metrics. 
 
 ### To bootstrap code
 
-- IMPLs will be able to represent simple calculation manifest but to handle larger, more complex systems, we will have to write Graphs as code using our SDK.
-- To help bootstrap the process, humans can write the high-level structure using IMPL and run through a tool to generate starter Graph code in any language our SDK supports.
+- Manifest files will be able to represent simple calculation manifest but to handle larger, more complex systems, we will have to write Graphs as code using our SDK.
+- To help bootstrap the process, humans can write the high-level structure using Manifest file and run through a tool to generate starter Graph code in any language our SDK supports.
 
 ## Structure
 

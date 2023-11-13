@@ -8,7 +8,7 @@ abstract: An impact graph is the core construct in an Impact Framework through w
 
 A Graph is part of the manifest file that defines everything you need to calculate the environmental impact of a piece of software. The graph itself it the part of the manifest that comes after the global config. It describes the architecture of the application being studied and contains the inputs for each component.
 
-You can describe it in YAML format ([impl](Impl%20(Impact%20YAML).md)) and execute using a command line tool ([Impact Engine](impact-engine.md)) using static input data.
+You can describe it in YAML format ([impl](manifest-file.md)) and execute using a command line tool ([Impact Engine](impact-engine.md)) using static input data.
 
 The flexibility of impact graphs means they can represent a running software application, a user journey, or a campaign - it should be possible to measure anything with an impact graph. We call the thing a Graph is measuring an **Impact Subject**.
 
