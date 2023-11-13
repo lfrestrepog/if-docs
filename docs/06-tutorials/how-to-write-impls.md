@@ -112,7 +112,7 @@ initialize:
       path: if-models
     - name: teads-curve
       model: TeadsCurveModel
-      path: if-community-models
+      path: if-unofficial-models
     - name: sci-e
       model: SciEModel
       path: if-models
@@ -178,7 +178,7 @@ initialize:
   models:
     - name: teads-curve
       model: TeadsCurveModel
-      path: if-community-models
+      path: if-unofficial-models
     - name: sci-e
       model: SciEModel
       path: if-models
