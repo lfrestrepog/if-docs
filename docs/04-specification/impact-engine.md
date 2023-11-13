@@ -229,8 +229,11 @@ After all these steps in the lifecycle every component node should have all the 
     - Pass the inputs through the model.
     - Store the results as sibling to `inputs` called `outputs` on the same component node.
 
-> [!important] 
-> Each input input is for a time and duration, and each output impact is for the same time and duration. We should link an impact to the exact input used to generate it.
+:::note 
+
+Each input input is for a time and duration, and each output impact is for the same time and duration. We should link an impact to the exact input used to generate it.
+
+:::
 
 Represented as [Impl (Impact YAML)](Impl%20(Impact%20YAML).md), the calculation phase would compute every component node in the tree with **inputs** like so:
 
@@ -281,8 +284,11 @@ component:
 
 Once all the component nodes have been computed the next step is to aggregate all the values up.
 
-> [!important] 
-> This step only makes sense if the nodes have been time synced. That is to say, every impact timestamp and duration snaps to a globally defined grid. If that's true then aggregation is a simple matter, if it's not true then aggregation might not make a lot of sense. 
+:::note Time Syncing
+
+This step only makes sense if the nodes have been time synced. That is to say, every impact timestamp and duration snaps to a globally defined grid. If that's true then aggregation is a simple matter, if it's not true then aggregation might not make a lot of sense. 
+
+:::
 
 ## Export (TBD)
 
@@ -292,8 +298,11 @@ The final step is to export the graph into a format that has been requested by t
 
 If a file param has been provided via `-ompl` then we export as a YAML file format, for now this also means we'll be exporting the long hand notation of the IMPL files and not any shorthand. If no `-ompl` was provided then we print the results to stdout.
 
-> [!important] 
-> Exporting as a CSV file only makes sense of the nodes have been time synced. That is to say, every impact timestamp and duration snaps to a globally defined grid. If that's true then exporting as a CSV is a simple matter, if it's not true then exporting as a CSV might not make a lot of sense. 
+:::note 
+
+Exporting as a CSV file only makes sense of the nodes have been time synced. That is to say, every impact timestamp and duration snaps to a globally defined grid. If that's true then exporting as a CSV is a simple matter, if it's not true then exporting as a CSV might not make a lot of sense. 
+
+:::
 
 If `-format csv` was specified then instead of outputting a YAML file we output a CSV file with each row being an impact metric for a node in the tree and each column being a specific timestamp and duration.
 

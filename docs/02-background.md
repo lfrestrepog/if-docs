@@ -1,12 +1,12 @@
 ---
-author: Asim Hussain (@jawache)
-abstract: Discussion of the history and evolution of this project in the GSF.
+description: Discussion of the history and evolution of this project in the GSF.
 ---
+
 # Background
 
 This project has evolved over the two years of the GSF's existence. 
 
-During the development of the [SCI](https://sci-guide.greensoftware.foundation/), we acknowledged that the biggest blocker to adoption was data regarding the emissions of software components on different platforms and runtimes.
+During the development of the [SCI](https://github.com/Green-Software-Foundation/sci/blob/dev/SPEC.md), we acknowledged that the biggest blocker to adoption was data regarding the emissions of software components on different platforms and runtimes.
 
 We then launched the sci-data project to help create the data sets required to calculate an SCI score.
 
@@ -14,6 +14,6 @@ After some investigation, the original sci-data team quickly realized that there
 
 The project evolved into the [sci-guide](https://sci-guide.greensoftware.foundation/) to document existing data sets, providing guidance for when to use one over another and how to use it to create your own software measurement reports.
 
-Finally, we had enough information, and SCI use cases started to be written. This was a milestone moment.
+Finally, we had enough information, and [SCI case studies](https://sci-guide.greensoftware.foundation/CaseStudies) started to be written. This was a milestone moment.
 
 But now we are in the next evolution, to have software measurement be a mainstream activity. For this to be an industry with thousands of professionals working to decarbonize software, for businesses to grow and thrive in a commercial software measurement ecosystem, we need to formalize software measurement into a discipline with standards and tooling. The SCI Specification is the standard, and the [Impact Framework](./04-specification/impact-framework.md) is the tooling.

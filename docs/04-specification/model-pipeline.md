@@ -231,8 +231,11 @@ pipeline:
   - ccf
 ```
 
-> [!important] Ecosystem of plugins
-> The model plugins are the bulk of functionality for the Impact Framework. A small set of tightly focused model plugins can be combined in multiple ways to meet many use cases.
+:::tip Ecosystem of plugins
+
+The model plugins are the bulk of functionality for the Impact Framework. A small set of tightly focused model plugins can be combined in multiple ways to meet many use cases.
+
+:::
 
 ### Upgradability
 

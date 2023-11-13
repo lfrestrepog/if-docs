@@ -1,8 +1,12 @@
+---
+sidebar_position: 1
+---
+
 # Overview
 
-Impact Framework (IF) aims to make software carbon measurements easy.
+Impact Framework (IF) aims to make the environmental impacts of software easier to calculate **and** share.
 
-IF allows you to calculate the energy and carbon impacts of your software applications without writing any code. All you have to do is write a simple manifest file, known as an `impl` and IF handles the rest.
+IF allows you to calculate the environmental impacts, such as carbon, of your software applications without writing any code. All you have to do is write a simple **manifest file**, known as an `impl` and IF handles the rest.
 
 The project is entirely open source and composability is a core design principle - we want you to be able to create your own models and plug them in to our framework, or pick from a broad universe of open source models created by others.
 
