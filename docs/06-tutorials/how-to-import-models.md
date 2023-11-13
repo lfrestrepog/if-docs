@@ -3,6 +3,8 @@ author: Joseph Cook (@jmcook1186)
 abstract: Guidance for importing models.
 ---
 
+# How to Import Models
+
 Models are developed separately to the IF core. However, the IF core developers maintain a standard library of models that can be found in this [Github repository](https://github.com/Green-Software-Foundation/if-models). We also provide some implementations of popular community models, but we do notcommit to maintaining these as part of IF.
 
 Anyojne can develop models. As long as you conform to our mnodel specification, you can load your model into IF an run it as part of a pipeline. For guidance on model building, see [How to build models](./how-to-build-models.md). We provide a [template](https://github.com/Green-Software-Foundation/if-model-template) to help you structure your models correctly.
