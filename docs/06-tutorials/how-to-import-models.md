@@ -25,7 +25,6 @@ tags: null
 initialize:
   models:
     - name: my-model
-      kind: plugin
       model: OutputModel
       path: https://github.com/my-repo/my-model
 ```
@@ -33,7 +32,6 @@ initialize:
 The necessary fields are:
 
 - `name`: the same name has to be used to refer to this moel everywhere across the impl
-- `kind`: the model is most likely a `plugin` model. Other kinds may be implemented later.
 - `model`: the class name for your model, e.g. `AzureImporterModel` or `OutputModel`
 - `path`: the path to the model
 
