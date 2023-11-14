@@ -19,8 +19,7 @@ tags:
 initialize:
   models:
     - name: 
-      kind: 
-      verbose: 
+      model:
       path: 
 graph:
   children:
