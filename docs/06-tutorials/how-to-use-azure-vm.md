@@ -93,7 +93,7 @@ initialize:
   models:
     - name: azure-importer
       model: AzureImporter
-      path: if-unofficial-models
+      path: "@grnsft/if-unofficial-models"
 graph:
   children:
     child:
