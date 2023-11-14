@@ -51,7 +51,7 @@ initialize:
 ```
 
 
-`name` has to be precisely the model name recognized by IEF. You can check all the valid model names [here](../src/util/models-universe.ts). `path` defines where `IF` should look for the installed model, for example for our standard library of mopdels you would specify `if-models`, as this is the repository name and the name of the directory they are installed into in `node_modules`. For `model` you are expected to provide the name of the class your mdoel instantiates, fopr example for the `sci-e` model the correct value is `SciEModel`.
+`name` has to be precisely the model name recognized by IEF. You can check all the valid model names [here](../src/util/models-universe.ts). `path` defines where `IF` should look for the installed model, for example for our standard library of models you would specify `"@grnsft/if-models"`, as this is the name of the directory they are installed into in `node_modules`. For `model` you are expected to provide the name of the class your mdoel instantiates, fopr example for the `sci-e` model the correct value is `SciEModel`.
 
 ## `graph`
 
@@ -106,7 +106,7 @@ initialize:
   models:
     - name: azure-importer
       model: AzureImporterModel
-      path: if-models
+      path: "@grnsft/"@grnsft/"@grnsft/if-models"""
     - name: cloud-instance-metadata
       model: CloudInstanceMetadataModel
       path: if-models
@@ -118,16 +118,16 @@ initialize:
       path: if-models
     - name: sci-o
       model: SciOModel
-      path: if-models
+      path: "@grnsft/if-models"
     - name: sci-e
       model: SciEModel
-      path: if-models
+      path: "@grnsft/if-models"
     - name: sci-m
       model: SciMModel
-      path: if-models
+      path: "@grnsft/if-models"
     - name: sci
       model: SciModel
-      path: if-models
+      path: "@grnsft/if-models"
 graph:
   children:
     child:
@@ -178,19 +178,19 @@ initialize:
   models:
     - name: teads-curve
       model: TeadsCurveModel
-      path: if-unofficial-models
+      path: "@grnsft/if-unofficial-models"
     - name: sci-e
       model: SciEModel
-      path: if-models
+      path: "@grnsft/if-models"
     - name: sci-m
-      path: if-models
+      path: "@grnsft/if-models"
       model: SciMModel
     - name: sci-o
       model: SciOModel
-      path: if-models
+      path: "@grnsft/if-models"
     - name: sci
       model: SciModel
-      path: if-models
+      path: "@grnsft/if-models"
 graph:
   children:
     server: # an advanced grouping node
