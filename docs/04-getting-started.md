@@ -85,13 +85,12 @@ graph:
           functional-unit-duration: 1 
           functional-duration-time: ''
           functional-unit: requests # factor to convert per time to per f.unit
-      children:
-        inputs:
+      inputs:
         - timestamp: '2023-07-06T00:00'
-            duration: 10
-            cpu-util: 50
-            e-net: 0.000811 #kwh     
-            requests: 380
+          duration: 10
+          cpu-util: 50
+          e-net: 0.000811 #kwh     
+          requests: 380
 ```
 
 Save the file.
