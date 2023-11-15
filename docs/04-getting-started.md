@@ -106,3 +106,87 @@ impact-engine --impl <path-to-your-impl>
 
 
 :tada:**Congratulations** :tada:! You have just used the Impact Framework to compute a software carbon intensity score!
+
+Your output data will be displayed in your console. You can also configure `impact-framework` to save yopur output data to another `yaml` file. To do this, add the `--ompl` flag and the path to save the file to:
+
+```sh
+impact-engine --impl <path-to-your-impl> --ompl <save-path>
+```
+
+Your output data will look as follows:
+
+```yaml
+name: example
+description: a simple example manifest
+tags: null
+initialize:
+  models:
+    - name: teads-curve
+      path: '@grnsft/if-unofficial-models'
+      model: TeadsCurveModel
+    - name: sci-e
+      path: '@grnsft/if-models'
+      model: SciEModel
+    - name: sci-m
+      path: '@grnsft/if-models'
+      model: SciMModel
+    - name: sci-o
+      path: '@grnsft/if-models'
+      model: SciOModel
+    - name: sci
+      path: '@grnsft/if-models'
+      model: SciModel
+graph:
+  children:
+    child:
+      pipeline:
+        - teads-curve
+        - sci-e
+        - sci-m
+        - sci-o
+        - sci
+      config:
+        teads-curve:
+          thermal-design-power: 65
+        sci-m:
+          total-embodied-emissions: 251000
+          time-reserved: 3600
+          expected-lifespan: 126144000
+          resources-reserved: 1
+          total-resources: 1
+        sci-o:
+          grid-carbon-intensity: 457
+        sci:
+          functional-unit-duration: 1
+          functional-duration-time: ''
+          functional-unit: requests
+      inputs:
+        - timestamp: 2023-07-06T00:00
+          duration: 10
+          cpu-util: 50
+          e-net: 0.000811
+          requests: 380
+      outputs:
+        - timestamp: 2023-07-06T00:00
+          duration: 10
+          cpu-util: 50
+          e-net: 0.000811
+          requests: 380
+          thermal-design-power: 65
+          total-embodied-emissions: 251000
+          time-reserved: 3600
+          expected-lifespan: 126144000
+          resources-reserved: 1
+          total-resources: 1
+          grid-carbon-intensity: 457
+          functional-unit-duration: 1
+          functional-duration-time: ''
+          functional-unit: requests
+          energy-cpu: 0.00013541666666666666
+          energy: 0.00013541666666666666
+          embodied-carbon: 7.16324200913242
+          operational-carbon: 0.061885416666666665
+          carbon: 0.7225127425799086
+          sci: 0.001901349322578707
+
+```
