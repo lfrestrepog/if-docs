@@ -20,29 +20,29 @@ Is a model that given some *Inputs* returns some *Outputs*. For example, if you 
 
 ### Model Plugin
 
-Is a software package/module external to the [Impact Framework](./04-specification/impact-framework.md) exposing a class implementing the [Model Plugin Interface](./04-specification/model-plugin.md). It's code you download and install which let's you interact with a Model using an open source standard interface.
+Is a software package/module external to the [Impact Framework](./06-specification/impact-framework.md) exposing a class implementing the [Model Plugin Interface](./06-specification/model-plugin.md). It's code you download and install which let's you interact with a Model using an open source standard interface.
 
 ### Model Plugin Interface
 
 **aka**: *model interface*
 
-Is a common class interface that every [Model Plugin](./04-specification/model-plugin.md) needs to extend and implement. Every model might be very different from each other, but through a [Model Plugin](./04-specification/model-plugin.md) that implements the same interface we can easily compare, swap, use one plugin to replace another since they all expose the same interface.
+Is a common class interface that every [Model Plugin](./06-specification/model-plugin.md) needs to extend and implement. Every model might be very different from each other, but through a [Model Plugin](./06-specification/model-plugin.md) that implements the same interface we can easily compare, swap, use one plugin to replace another since they all expose the same interface.
 
 ### Model Pipeline
 
-Since models all expose the same [interface](#model-plugin-interface) and use standardised parameters they can be joined together and work in a pipeline. Just like a unix pipeline can join multiple smaller commands together to form a more complex function, you can join multiple models together to form a complex computation pipeline, this is called the [Model Pipeline](./04-specification/model-pipeline.md).
+Since models all expose the same [interface](#model-plugin-interface) and use standardised parameters they can be joined together and work in a pipeline. Just like a unix pipeline can join multiple smaller commands together to form a more complex function, you can join multiple models together to form a complex computation pipeline, this is called the [Model Pipeline](./06-specification/model-pipeline.md).
 
 ### Graph Node
 
 **aka**: *graph node*, *node*
 
-A [Graph](/04-specification/graph.md) is made up of nodes, each node represents either a [Grouping](#Grouping) or a [Component](#Component). 
+A [Graph](/06-specification/graph.md) is made up of nodes, each node represents either a [Grouping](#Grouping) or a [Component](#Component). 
 
 ### Component
 
 **aka**: *component node*
 
-A component is something that creates environmental impacts, for example a server, network traffic. If it creates an environmental impact it's called a component. They effectively form the leaf nodes of a [Graph](./04-specification/graph.md). Each component has at least one [Model Plugin](./04-specification/model-plugin.md) configured as well as some [Input Observations](./04-specification/observations.md). We pass the observations to the model plugin which interacts with a model to calculate the output observations for this component.
+A component is something that creates environmental impacts, for example a server, network traffic. If it creates an environmental impact it's called a component. They effectively form the leaf nodes of a [Graph](./06-specification/graph.md). Each component has at least one [Model Plugin](./06-specification/model-plugin.md) configured as well as some [Input Observations](./06-specification/observations.md). We pass the observations to the model plugin which interacts with a model to calculate the output observations for this component.
 
 ### Grouping
 
@@ -63,7 +63,7 @@ ModelParams are parameters passed to a model. Some are inputs, some are observat
 ### Graph Duration
 
 **aka**: ~
-Every [Graph](/04-specification/graph.md) represents a duration of time for which observations have been gathered about it's components. By default the graph duration will be the time from the earliest observations to the latest observation for all of it's components.
+Every [Graph](/06-specification/graph.md) represents a duration of time for which observations have been gathered about it's components. By default the graph duration will be the time from the earliest observations to the latest observation for all of it's components.
 
 ### Observation Duration
 
@@ -76,11 +76,11 @@ Every [Observation](#observation) is for a particular time and **duration**. The
 
 **aka**: ~
 
-Is the act of calculating the output of a [Graph](/04-specification/graph.md).
+Is the act of calculating the output of a [Graph](/06-specification/graph.md).
 
 ### Computation Pipeline
 
 **aka**: *computation pipeline*
 
-Computing an entire [Graph](/04-specification/graph.md) involves several phases, the pipeline describes those phases.  pipeline is not to be confused with the model pipeline which is 
+Computing an entire [Graph](/06-specification/graph.md) involves several phases, the pipeline describes those phases.  pipeline is not to be confused with the model pipeline which is 
 

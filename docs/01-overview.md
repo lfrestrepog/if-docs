@@ -21,7 +21,7 @@ Modern applications are composed of many smaller pieces of software (components)
 
 The impacts of software components also vary over time, so as well as understanding **which** components contribute most to the overall impacts, there is also a question of **when** they contribute the most.
 
-Only through a granular analysis of the impacts of your software system can investments in reducing its impact be prioritized and verified. Measurement is the first and most crucial step in greening a software system, and the first step in that process with the [Impact Framework](./04-specification/impact-framework.md) is to create a [Graph](./04-specification/graph.md).
+Only through a granular analysis of the impacts of your software system can investments in reducing its impact be prioritized and verified. Measurement is the first and most crucial step in greening a software system, and the first step in that process with the [Impact Framework](./06-specification/impact-framework.md) is to create a [Graph](./06-specification/graph.md).
 
 ## Project Structure
 
