@@ -63,10 +63,9 @@ This data type holds the results of a model call, the estimated energy, carbon, 
 ## Class Interface
 
 ```ts
-interface ImpactModelPluginInterface {
-  public configure(name: string, config: Configuration): ImpactModelPluginInterface
-  public authenticate(authParams: AuthParams): void
-  public execute(inputs: Arrray<input>): Array<ImpactMetric>
+interface ModelPluginInterface {
+  public configure(name: string, config: Configuration): ModelPluginInterface
+  public execute(inputs: Arrray<ModelParam>): Array<ModelParam>
 }
 ```
 
@@ -75,13 +74,13 @@ interface ImpactModelPluginInterface {
 #### Signature
 
 ```ts
-public configure(name: string, config: Configuration): ImpactModelPluginInterface
+public configure(name: string, config: Configuration): ModelPluginInterface
 ```
 
 #### Example usage
 
 ```ts
-class ConcreteVM extends ImpactModelPluginInterface { ... }
+class ConcreteVM extends ModelPluginInterface { ... }
 
 let model = new ConcreteVM().configure("backend-server", {vendor: "GCP"});
 ```
@@ -103,7 +102,7 @@ _Due to the limitations of the JSII interface, we cannot use static methods and 
 
 #### Returns
 
-An instance of an **Impact Model Plugin** exposes the **Impact Model Plugin Interface**, which holds any state for this model.
+An instance of a **Model Plugin** exposes the **Model Plugin Interface**, which holds any state for this model.
 
 #### Raises
 
@@ -111,55 +110,15 @@ An instance of an **Impact Model Plugin** exposes the **Impact Model Plugin Inte
 * `IncorrectConfig`
 * `ExternalError`
 
-### Authentication
 
-
-#### Signature
-
-```ts
-public authenticate(authParams: AuthParams): void
-```
-
-#### Example usage
-
-```ts
-class ConcreteVM extends ImpactModelPluginInterface { ... }
-let model = new ConcreteVM().configure("backend-server", {vendor: "GCP"});
-try {
-    model.authenticate({username: "XXXX", password: "YYYY"})
-} catch AuthenticationError e {
-    ...
-}
-```
-
-#### Responsibilities
-
-* This is an optional call to authenticate using the model.
-* Some carbon models might be provided to users only through a commercial agreement or through an NDA. 
-* To restrict access to that, we need to have an authentication mechanism.
-* The spec does not currently prescribe a particular authentication mechanism, so it accepts multiple parameters to support multiple authentication methods.
-
-#### Parameters
-
-* **authParams** This is a dictionary of AuthenticationParams. Exact params depend on this model's authentication mechanism but could be a simple username/password, an API key, or another method.
-
-#### Returns
-
-Nothing. 
-
-#### Raises
-
-* `AuthenticationError`
-* `ExternalError`
-
-### Calculate
+### Execute
 
 This function estimates the emissions based on a single input input. For each input input, we calculate one output Impact Metric. inputs and Impact Metrics have a 1-1 mapping and relationship.
 
 #### Signature
 
 ```ts
-public execute(inputs: Array<input>): Arrray<ImpactMetric>
+public execute(inputs: Array<ModelParams>): Arrray<ModelParams>
 ```
 
 #### Example usage
