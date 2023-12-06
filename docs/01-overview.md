@@ -4,13 +4,6 @@ sidebar_position: 1
 
 # Overview
 
-> **IMPORTANT!**
-> 
-> **Incubation Project: This project is an [incubation project](https://oc.greensoftware.foundation/project-lifecycle.html) being run inside the [Green 
-> Software Foundation](https://greensoftware.foundation/); as such, we DON’T recommend using it in any critical use case. Incubation projects are experimental, offer no support guarantee, have minimal governance and process, and may be retired at any moment. This project > may one day Graduate, in which case this disclaimer will be removed.**
->
-> 
-
 Impact Framework (IF) aims to make the environmental impacts of software easier to calculate **and** share.
 
 IF allows you to calculate the environmental impacts, such as carbon, of your software applications without writing any code. All you have to do is write a simple **manifest file**, known as an `impl` and IF handles the rest.
