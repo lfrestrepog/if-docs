@@ -4,6 +4,26 @@ sidebar_position: 1
 
 # Overview
 
+## Hackathon!
+
+![](imgs/../../src/imgs/hack-banner.png)
+
+----------------------------
+From Monday, February 26 - Friday, March 15, 2024, participants will compete to showcase their best application of IF in measuring the environmental impacts of software. 
+ 
+Carbon Hack is a dynamic competition that combines healthy rivalry with collaborative innovation. Hackers will push the limits of the framework, uncover potential weaknesses, and create innovations to enhance the tool.
+
+CarbonHack is open to all, including software practitioners and those with a passion for Green Software.
+Find out more about CarbonHack 2024 on the [CarbonHack website](https://grnsft.org/hack/github)
+
+**Registration opens 15th January!**
+
+----------------------------
+
+<br />
+
+## Impact Framework
+
 Impact Framework (IF) aims to make the environmental impacts of software easier to calculate **and** share.
 
 IF allows you to calculate the environmental impacts, such as carbon, of your software applications without writing any code. All you have to do is write a simple **manifest file**, known as an `impl` and IF handles the rest.
@@ -27,7 +47,7 @@ Only through a granular analysis of the impacts of your software system can inve
 
 The **IF source code** can be found in the [IF Github repository](https://github.com/Green-Software-Foundation/if). The code there covers the framework, which includes all the infrastructure for reading and writing input and output yamls, invoking models, running the command line tool and associated helper functions. However, it does not include the actual models themselves. Part of the IF design philosophy is that all models should be plugins, so that the IF is as composable and configurable as possible. Therefore, to use IF, you have to either create your own models or find some prebuilt ones and install them yourself. This also implies that you take responsibility for the models you choose to install.
 
-We do provide a **standard library of models** built and maintained by the IF core team. These cna be found in the [`if-models` Github repository](https://github.com/Green-Software-Foundation/if-models). You can install these into `if` by running `yarn install https://github.com/Green-Software-Foundation/if-models` from the `if` project directory.
+We do provide a **standard library of models** built and maintained by the IF core team. These can be found in the [`if-models` Github repository](https://github.com/Green-Software-Foundation/if-models). You can install these into `if` by running `yarn install https://github.com/Green-Software-Foundation/if-models` from the `if` project directory.
 
 There is also a second repository for **models we expect community members to maintain**. These can be found in the [`if-unofficial-models` Github repository](https://github.com/Green-Software-Foundation/if-unofficial-models). You can install these into `if` by running `yarn install https://github.com/Green-Software-Foundation/if-unofficial-models` from the `if` project directory.
 
