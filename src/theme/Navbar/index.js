@@ -21,7 +21,7 @@ export default function NavbarWrapper(props) {
         this disclaimer will be removed.
         <br />
         <br />
-        We are running a Hackathon! CarbonHack is open to all, including software practitioners and those with a passion for Green Software. Find out more on the <a href='https://grnsft.org/hack/if-website'>CarbonHack website</a>
+        We are running a Hackathon! CarbonHack is open to all, including software practitioners and those with a passion for Green Software. Find out more on the <a href='https://grnsft.org/hack/github'>CarbonHack website</a>
       </div>
       <Navbar {...props} />
     </>
