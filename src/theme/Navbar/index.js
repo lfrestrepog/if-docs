@@ -19,6 +19,9 @@ export default function NavbarWrapper(props) {
         support guarantee, have minimal governance and process, and may be
         retired at any moment. This project may one day Graduate, in which case
         this disclaimer will be removed.
+        <br />
+        <br />
+        We are running a Hackathon! CarbonHack is open to all, including software practitioners and those with a passion for Green Software. Find out more on the <a href='https://grnsft.org/hack/github'>CarbonHack website</a>
       </div>
       <Navbar {...props} />
     </>
