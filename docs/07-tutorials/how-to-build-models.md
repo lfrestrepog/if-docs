@@ -158,13 +158,10 @@ You can replace the logic inside `execute()` with whatever you need for your spe
 
 ### Linking local model
 
-For running a locally developed model through `if`, `npm link` can be used. Beforehand please specify model name in your `package.json` file's `name` field. After Running `npm link` command from your project root repository will create a global module, which uses the same name from `package.json` file's `name` field.
+For using locally developed model in `if` please follow these steps: 
 
-Appropriately use the linked model in yaml file's by specifying `name`, `model`, `path` in initialize model section. 
-
-> Important: model should be the class name of your model, as a path npm linked name.
-
-> Hint: npm linked name of your module can be checked via `npm ls -g --depth=0 --link=true`
+1. On the root level of a locally developed model run `npm link`, which will create global package. It uses `package.json` file's `name` field as a package name. Additionally name can be checked by running `npm ls -g --depth=0 --link=true`.
+2. Use the linked model in impl by specifying `name`, `model`, `path` in initialize models section. 
 
 ### Using model from directly from github
 
