@@ -156,10 +156,22 @@ You can replace the logic inside `execute()` with whatever you need for your spe
 
 ## Running your model
 
+### Linking local model
+
+For running local developed model through `if`, `npm link` can be used. Beforehand please specify model name in your `package.json` file's `name` field. After Running `npm link` command in your repository level will create global module, which uses the same name from `package.json` file's `name` field.
+
+Appropriately use the linked model in yaml file's by specifying `name`, `model`, `path` in initialize model section. 
+
+> Important: model should be the class name of your model, as a path npm linked name.
+
+> Hint: npm linked name of your module can be checked via `npm ls -g --depth=0 --link=true`
+
+### Using model from directly from github
+
 You can simply save your model in a public Github repository and pass the path to it in your impl.
 For example, for a model saved in `github.com/my-repo/my-model` you can do the following:
 
-yarn install your model:
+yarn install your model: 
 
 ```
 yarn add https://github.com/my-repo/my-model
