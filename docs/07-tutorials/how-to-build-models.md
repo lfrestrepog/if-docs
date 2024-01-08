@@ -159,10 +159,10 @@ You can replace the logic inside `execute()` with whatever you need for your spe
 You can simply save your model in a public Github repository and pass the path to it in your impl.
 For example, for a model saved in `github.com/my-repo/my-model` you can do the following:
 
-yarn install your model:
+`npm` install your model:
 
 ```
-yarn add https://github.com/my-repo/my-model
+npm install https://github.com/my-repo/my-model
 ```
 
 Then, in your `impl`, provide the path in the model instantiation. You also need to specify which class the model instantiates. In this case you are using the IOutputModelInterface, so you can specify `OutputModel`. 
