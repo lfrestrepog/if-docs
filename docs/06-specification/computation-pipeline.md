@@ -15,7 +15,7 @@ Calculation --> Enrichment --> Normalization --> Aggregation
 
 - **Calculation**: Calculating the outputs of every component (leaf) node.
 - **Enrichment**: Enriching the outputs, for example, calculating the carbon from energy using grid emissions data.
-- **Normalization**: Bucketing the outputs into an output time series based on a configured *globally defined* impact duration.
+- **Normalization**: Bucketing the outputs into an output time series based on a configured *globally defined* start, stop and interval configuration.
 - **Aggregation**: Aggregating the inputs by each time bucket, up the impact graph, to the parent nodes, and finally, the root node 
 
 ## Calculation
@@ -26,7 +26,7 @@ We loop through the impact graph and component node by component node, pass in t
 
 
 > [!important] 
-> Each input input is for a time and duration, and each output impact metric is for the same time and duration. We should link an Impact Metric to the exact input used to generate it.
+> Each input is for a time and duration, and each output impact metric is for the same time and duration. We should link an Impact Metric to the exact input used to generate it.
 
 Represented as [Impl](impl.md), the calculation phase would compute every component node in the tree with **inputs** like so:
 
@@ -35,13 +35,13 @@ component:
   inputs: 
       - timestamp: 2023-07-06T00:00
         duration: 15 
-        cpu: 33%
+        cpu: 33
       - timestamp: 2023-07-06T00:05
         duration: 5
-        cpu: 23%
+        cpu: 23
       - timestamp: 2023-07-06T00:05
         duration: 5
-        cpu: 11%
+        cpu: 11
 ```
 
 To components with **outputs**, like so:
@@ -49,25 +49,26 @@ To components with **outputs**, like so:
 ```yaml
 component:
   outputs:
+    inputs: 
       - timestamp: 2023-07-06T00:00
         duration: 15 
-        energy: 23 mWh
+        cpu: 33
       - timestamp: 2023-07-06T15:00
         duration: 5
-        energy: 20 mWh
+        cpu: 23
       - timestamp: 2023-07-06T20:00
         duration: 5
-        energy: 18 mWh  
-  inputs: 
+        cpu: 11
+    outputs:
       - timestamp: 2023-07-06T00:00
         duration: 15 
-        cpu: 33%
+        energy: 23
       - timestamp: 2023-07-06T15:00
         duration: 5
-        cpu: 23%
+        energy: 20
       - timestamp: 2023-07-06T20:00
         duration: 5
-        cpu: 11%
+        energy: 18  
 ```
 
 
@@ -81,6 +82,10 @@ The next phase is for each leaf node to normalize the output impact metrics to a
 > The output impact metric is effectively zero if no impact metric overlaps a given time and duration. It means nothing was running then, so there could not be any emissions from the component.
 
 An impact metric might be of a longer or smaller duration than the new globally defined impact duration or overlaps the new impact duration in some way. There can be many algorithms we can use to bucket/slice up the values, but a good default strategy is to use a weighting of time. 
+
+### Implementation details
+
+Read our [time-sync model documentation](https://github.com/Green-Software-Foundation/if/tree/dev/src/models#time-sync) for a step-by-step walkthrough of how we do time synchronization.
 
 ### Example
 
