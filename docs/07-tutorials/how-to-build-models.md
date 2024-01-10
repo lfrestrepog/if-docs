@@ -156,6 +156,15 @@ You can replace the logic inside `execute()` with whatever you need for your spe
 
 ## Running your model
 
+### Linking local model
+
+For using locally developed model in `if` please follow these steps: 
+
+1. On the root level of a locally developed model run `npm link`, which will create global package. It uses `package.json` file's `name` field as a package name. Additionally name can be checked by running `npm ls -g --depth=0 --link=true`.
+2. Use the linked model in impl by specifying `name`, `model`, `path` in initialize models section. 
+
+### Using model from directly from github
+
 You can simply save your model in a public Github repository and pass the path to it in your impl.
 For example, for a model saved in `github.com/my-repo/my-model` you can do the following:
 
