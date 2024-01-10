@@ -4,7 +4,7 @@ This page will provide the basic instructions for getting up and running with Im
 
 ## 0: Set up your environment
 
-To run Impact Framework you need `node` installed on your computer. Node v18.17.1 is currently recommended. You can use `yarn` or `npm` to manage packages.
+To run Impact Framework you need `node` installed on your computer. Node v18.17.1 is currently recommended. You can use `npm` to manage packages.
 
 You can create a local project directory, say `if-project`.
 
@@ -12,10 +12,10 @@ You can create a local project directory, say `if-project`.
 mkdir if-project
 ```
 
-Navigate to that directory and initialize a yarn project
+Navigate to that directory and initialize an npm project
 
 ```
-cd if-project && yarn init
+cd if-project && npm init
 ```
 
 
@@ -24,7 +24,7 @@ cd if-project && yarn init
 Install the Impact Framework. This includes the `impact-engine` command line tool.
 
 ```sh
-yarn add @grnsft/if
+npm install -g @grnsft/if
 ```
 
 ## 2: Install some model plugins
@@ -32,8 +32,8 @@ yarn add @grnsft/if
 Install some of the models you want to include in your model pipeline. The pair of commands below will install both the official and unofficial IF model packages.
 
 ```sh
-yarn add @grnsft/if-models
-yarn add @grnsft/if-unofficial-models
+npm install -g @grnsft/if-models
+npm install -g @grnsft/if-unofficial-models
 ```
 
 ## 3: Create a manifest file
