@@ -3,7 +3,7 @@ author: Joseph Cook (@jmcook1186)
 abstract: Guidance for importing models.
 ---
 
-# How to Import Models
+# How to load model plugins
 
 Models are developed separately to the IF core. However, the IF core developers maintain a standard library of models that can be found in this [Github repository](https://github.com/Green-Software-Foundation/if-models). We also provide some implementations of popular community models, but we do not commit to maintaining these as part of IF, but rather expect these to be maintained by other members of the community.
 
