@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Major Concepts
 
-Here you will find the IF specification. 
+Here you will find explanations for the fundamnetal Impact Framework concepts. This includes: 
 
 - [Computation Pipeline](./computation-pipeline.md)
 - [Durations](./durations.md)

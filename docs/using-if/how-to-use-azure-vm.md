@@ -3,7 +3,7 @@ author: Joseph Cook (@jmcook1186)
 abstract: Guidance for using the Azure importer.
 ---
 
-# Importing data from Azure
+# How to import data from Azure
 
 > [!NOTE]
 > `Azure Importer` is an unofficial, not part of the IF standard library. This means the IF core team are not closely monitoring these models to keep them up to date. You should do your own research before implementing them!

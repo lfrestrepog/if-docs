@@ -1,4 +1,4 @@
-# Building model plugins
+# How to build model plugins
 
 The IF is designed to be as composable as possible. This means you can develop your own models and use them in a model pipeline. 
 To help developers write Typescript models to integrate easily into IF, we provide the `IOutputModelInterface` interface. Here's an overview of the stages you need to follow to integrate your model:
