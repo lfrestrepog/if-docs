@@ -1,4 +1,8 @@
-# Specification
+---
+sidebar_position: 2
+---
+
+# Major Concepts
 
 Here you will find the IF specification. 
 
