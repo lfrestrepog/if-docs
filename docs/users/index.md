@@ -14,4 +14,4 @@ The user documentation includes:
 - [How to use the Azue Importer](./how-to-use-azure-vm.md)
 
 
-If you are loking for guidance for how to *change or update* the Impact Framework by adding new features, fixing bugs or building new plugins, you should go to our [`developers` documentation](../developers/) instead.
+If you are looking for guidance for how to *change or update* the Impact Framework by adding new features, fixing bugs or building new plugins, you should go to our [`developers` documentation](../developers/) instead.
