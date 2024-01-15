@@ -31,7 +31,7 @@ initialize:
 ```
 
 
-Anyone can develop models. As long as you conform to our model specification, you can load your model into IF an run it as part of a pipeline. For guidance on model building, see [How to build models](./how-to-build-models.md). We provide a [template](https://github.com/Green-Software-Foundation/if-model-template) to help you structure your models correctly.
+Anyone can develop models. As long as you conform to our model specification, you can load your model into IF an run it as part of a pipeline. For guidance on model building, see [How to build models](./how-to-build-plugins.md). We provide a [template](https://github.com/Green-Software-Foundation/if-model-template) to help you structure your models correctly.
 
 You can then load your model directly from your Github repository, or from `npm` if you have published your model there. To load a model, first install it by providing the path to the repository to `npm install` as follows:
 
