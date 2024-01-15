@@ -25,4 +25,30 @@ npm install -g @grnsft/if-models
 npm install -g @grnsft/if-unofficial-models
 ```
 
-Now you have globally installed the framework and a set of models, so you can start using Impacty Framework for impact calculations for your applications.
+Now you have globally installed the framework and a set of models, so you can start using Impact Framework for impact calculations for your applications.
+
+
+## Installing locally
+
+You can also clone the Impact Framework repositories and install them locally. This is useful for developers that want to make changes or build new plugins. To do this, use the following commands:
+
+```sh
+git clone https://github.com/Green-Software-Foundation/if && \
+cd if && \
+npm install 
+```
+
+Then you can run Impact Framework as follows:
+
+```sh
+npm run impact-framework -- --impl <path to your manifest file>
+```
+
+You can install local plugin repositories using `npm link`. You can do this by entering the model folder and running:
+
+```sh
+npm link
+```
+
+This creates a global package with the same name as your project root directory. You can then load the package by passing the path in your manifest file.
+Read more in our [`plugin` guide](./how-to-import-plugins.md).
