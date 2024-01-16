@@ -33,9 +33,8 @@ Now you have globally installed the framework and a set of models, so you can st
 You can also clone the Impact Framework repositories and install them locally. This is useful for developers that want to make changes or build new plugins. To do this, use the following commands:
 
 ```sh
-git clone https://github.com/Green-Software-Foundation/if && \
-cd if && \
-npm install 
+git clone https://github.com/Green-Software-Foundation/if && cd if
+npm install
 ```
 
 Then you can run Impact Framework as follows:
