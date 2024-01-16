@@ -6,7 +6,7 @@ To help developers write Typescript models to integrate easily into IF, we provi
 - create a Typescript file that implements the `IOutputModelInterface`
 - provide the path to the model to the IF command line tool.
 
-*After you have read this basic guide to model building, read our page on [making models production-ready](./how-to-refine-models.md)*
+*After you have read this basic guide to model building, read our page on [making models production-ready](./how-to-refine-plugins.md)*
 
 ## The model interface
 
