@@ -1,6 +1,6 @@
 # How to install Impact Framework
 
-There are a cxouple of options for installing Impact Framework. For most users we recommend using our official releases. You can install these using `npm`. The way to do this is as follows:
+There are a couple of options for installing Impact Framework. For most users we recommend using our official releases. You can install these using `npm`. The way to do this is as follows:
 
 ```sh
 npm install -g @grnsft/if
