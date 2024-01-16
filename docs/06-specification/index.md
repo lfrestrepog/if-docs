@@ -10,5 +10,5 @@ Here you will find the IF specification.
 - [Impact](./impact.md)
 - [Impl](./impl.md)
 - [Model Pipeline](./model-pipeline.md)
-- [Model Plugin Configuration](./model-plugin-configuration.md)
+- [Model Plugin Configuration](./model-plugin-config.md)
 - [Inputs](./inputs.md)
