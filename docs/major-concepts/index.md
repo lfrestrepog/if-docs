@@ -14,5 +14,5 @@ Here you will find explanations for the fundamnetal Impact Framework concepts. T
 - [Impact](./impact.md)
 - [Impl](./impl.md)
 - [Model Pipeline](./model-pipeline.md)
-- [Model Plugin Configuration](./model-plugin-configuration.md)
+- [Model Plugin Configuration](./model-plugin-config.md)
 - [Inputs](./inputs.md)
