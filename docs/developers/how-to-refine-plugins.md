@@ -44,7 +44,7 @@ You can bootstrap all this configuration by starting your plugin development fro
 
 If your plugin requires substantial configuration data or global constant definitions, these can be moved to a `config.ts` file in the plugin folder and imported into `src/index.ts`.
 
-## Plugin code
+## 3. Plugin code
 
 ### Imports
 
@@ -155,10 +155,46 @@ export class EMemModel implements ModelPluginInterface {
 }
 ```
 
-## Unit tests
+## 4. Unit tests
 
+Your plugin should have unit tests with 100% coverage. We use `jest` to handle unit testing. We strive to have one `describe` per function. Each possible outcome from each function is separated using `it` with a precise and descriptive message.
 
-## Linting
+Here's an example that covers plugin initialization and the `configure()` function.
+
+```ts
+import {SciEModel} from '../../../../lib';
+import {ERRORS} from '../../../../util/errors';
+
+const {InputValidationError} = ERRORS;
+
+describe('lib/sci-e: ', () => {
+  describe('SciEModel: ', () => {
+    describe('init: ', () => {
+      it('successfully initalized.', () => {
+        const outputModel = new SciEModel();
+
+        expect(outputModel).toHaveProperty('configure');
+        expect(outputModel).toHaveProperty('execute');
+      });
+    });
+
+    describe('configure(): ', () => {
+      it('successfully returns model instance.', async () => {
+        const outputModel = new SciEModel();
+        await outputModel.configure();
+
+        expect.assertions(1);
+
+        expect(outputModel).toBeInstanceOf(SciEModel);
+      });
+    });
+  })
+})
+```
+
+We have a [dedicated page](./how-to-write-unit-tests.md) explaining in more detail how to write great unit tests for Impact Framework plugins. 
+
+## 5. Linting
 
 We use ESLint to format our code. We use a very simple configuration file (`eslintrc.json`), as follows:
 
@@ -173,4 +209,8 @@ We use ESLint to format our code. We use a very simple configuration file (`esli
 }
 ```
 
-For our repositories we use Github CI to enforce the linting ruels for any pull requests.
+For our repositories we use Github CI to enforce the linting rules for any pull requests.
+
+## Summary
+
+On this page we have outlined best practises for refining your model plugins so that they conform to our expected norms. This will help you write clean, efficient and understandable code!
