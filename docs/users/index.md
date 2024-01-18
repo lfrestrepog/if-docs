@@ -11,7 +11,5 @@ The user documentation includes:
 - [How to install and run IF](./how-to-install-if.md)
 - [How to load plugins](./how-to-import-plugins.md)
 - [How to write manifest files](./how-to-write-impls.md)
-- [How to use the Azue Importer](./how-to-use-azure-vm.md)
-
 
 If you are looking for guidance for how to *change or update* the Impact Framework by adding new features, fixing bugs or building new plugins, you should go to our [`developers` documentation](../developers/) instead.
