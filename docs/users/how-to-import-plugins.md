@@ -1,6 +1,5 @@
 ---
-author: Joseph Cook (@jmcook1186)
-abstract: Guidance for importing models.
+sidebar_position: 3
 ---
 
 # How to load model plugins

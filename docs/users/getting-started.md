@@ -1,3 +1,7 @@
+---
+sidebar_position: 2
+---
+
 # Getting started
 
 This page will provide the basic instructions for getting up and running with Impact Framework.

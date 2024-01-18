@@ -1,6 +1,5 @@
 ---
-author: Joseph Cook (@jmcook1186)
-abstract: Guidance for writing valid impls.
+sidebar_position: 4
 ---
 
 # How to write a manifest file
