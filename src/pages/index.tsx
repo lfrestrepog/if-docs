@@ -22,6 +22,12 @@ function HomepageHeader() {
             Video Walkthrough - 5min ⏱️
           </Link>
         </div>
+        <br />
+        <br />
+        <p><b>Welcome to the Impact Framework.</b></p>
+        <p> Impact Framework allows anyone to estimate the environmental impact of their software. </p>
+        <p> Whether you're a user or developer, on this site you will find step-by-step instructions for working with Impact Framework.
+        </p>
       </div>
     </header>
   );
