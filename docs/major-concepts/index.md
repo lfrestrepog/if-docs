@@ -6,6 +6,7 @@ sidebar_position: 2
 
 Here you will find explanations for the fundamnetal Impact Framework concepts. This includes: 
 
+- [Design philosophy](./design-philosophy.md)
 - [Computation Pipeline](./computation-pipeline.md)
 - [Durations](./durations.md)
 - [Granularity](./granularity.md)
