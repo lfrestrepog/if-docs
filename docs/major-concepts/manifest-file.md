@@ -24,7 +24,7 @@ Currently, in the GSF several case studies have been written to calculate an SCI
 
 ### An executable impact calculation manifest
 
-The command line tool [Impact](Impact.md) can compute an Manifest file and generate impact metrics. 
+The command line tool (`impact-engine`) can compute an Manifest file and generate impact metrics. 
 
 ### To bootstrap code
 
@@ -202,7 +202,7 @@ graph:
         cpu: 0.34
 ```
 
-Once it's computed through an application like [Impact](Impact.md), it might return/print out a YAML like so:
+Once it's computed through an application like `impact-engine`, it might return/print out a YAML like so:
 
 ```yaml
 name: My application
