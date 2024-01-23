@@ -40,3 +40,7 @@ To this end, what we are really building is a protocol. Impact Framework is just
 The Impact Protocol is the result of countless discussions, experiments, conversations with industry partners, academics, researchers and developers, and represents a community consensus for how certain actions should be executed, for example, how should a series of observations be aggregated, what standard units should be used, how should a manifest file be structured, etc.
 
 This means we can be neutral about what can be built with IF while also providing a set of canonical processes and standards.
+
+## Where to go next
+
+This page has outlined the design philosophies that guide Impact Framework development. Explore the other pages in this section to see how these principles have been applied to specific Impact Framework features, or head to our [user documentation](../users/) to get started running Impact Framework for yourself. 
