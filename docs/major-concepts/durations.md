@@ -1,54 +1,50 @@
 ---
-author: Asim Hussain (@jawache)
-abstract: A core component of impact graphing is the concept of time and specifically a duration of time. This document describes the core concept of duration as related to the calculation of an impact graph.
+sidebar-position: 2
 ---
-# Durations
 
-> **WARNING** Much of the following material is not yet implemented in the alpha releae, but is on the roadmap for future releases.
-
-
-> Terminology
-> - **Graph Duration**: Total global duration for the whole Graph.
-> - **Impact Duration**: The duration of an individual Impact Metric.
-> - **input Duration**: The duration of an individual input.
+# Time
 
 ## Introduction
 
-- Every [graph](graph.md) (graph) represents a **duration** of time.
-- The **duration** can be explicitly defined in the graph or it can be implied by the timestamp of the first input in any of it's components and the last timestamp (+duration of that input).
-- Duration and time is a core component of any impact measurement, every input is for a time and duration and every output impact metric is for a time and duration. 
-- The times and durations of input inputs and output impact metrics do not have to match.
+Every `observation` in an array on `inputs` represents a snapshot in time with known start time and a known duration.
+For example, the following `observation` shows that the CPU utilization for a resource was 20% for the 10 second period starting at 1500 on the 22nd January 2024.
 
-![](../../static/img/87a9d57e7434b7b59eb30b1b61633cb5.png)
+```yml
+inputs:
+    - timestamp: 2024-01-15T00:00:00.000Z
+      duration: 10
+      cpu-util: 20
+```
 
-## Time Series
+The total time covered by an `inputs` array is determined by the timestamp of the first `observation` in the array and the timestamp and duration in the last `observation` in the array.
 
-An IG can calculate one summary impact metric for the whole duration of the IG. 
-
-![](../../static/img/df140bba2035b620ecde3a563c1186c1.png)
-
-Or it can compute a **time series** of output metrics for smaller buckets of time, for example when you have multiple components that scale up/down, start/stop at different times during the input window.
-
-![](../../static/img/c911708f4edeb6d3ca7a96c724f64826.png)
-
-If you just have one input for one component, or one input for multiple components that span the input window, then generating a time series isn't so useful. It will just attribute the total impact equally across every time bucket, like so:
-
-![](../../static/img/af9a3bf0c4158e7262be6f38dbd56cc1.png)
-
-When it comes to outputting time series it's much more likely to surface useful information if there are multiple fine grained inputs about each component in our system. For example in the image below we have one component with a time series of inputs (cpu utilization)
-
-![](../../static/img/94f54a84d6331d9aa72ee0d8c0386c9f.png)
-
-### No Synchronization Required
-
-From the image above you can see that the input input time series and output impact metric time series are **not** synchronized. 
-
-This is a very useful feature of the [Graph](graph.md), you don't need to synchronize the time series of *any thing* with another thing other. inputs of components don't need to be synchronized with each other or with any output time series which you configure. There is a normalization phase [Computation Pipeline](computation-pipeline.md) which handles any required synchronization. You can write plugins to customize how this synchronization occurs but by default it's weighted by time. 
-
-This means you can provide the input inputs for components with as much [Granularity](granularity.md) as you can but it doesn't need to match the output time series. For some you can provide very granular data, for others you can provide less or even just one input. inputs don't need to be synchronized with each other or anything else.
-
-You can configure the output impact time series for every computation, and the normalization phase of computation handles everything else. You might start with one summary impact calculated for the whole window of time, then move to smaller windows of time and see if the output time series surfaces more useful information. You can play around, experiment, with the output time series as much as you want without needing to adjust any input input time series.
+Since every `observation` is required to have both a `timestamp` and a `duration`, an `inputs` array is always a time series.
 
 
 
+# Synchronizing time series
 
+The time series for each component is defined by its `inputs` array. However, a manifest file can contain many separate compoennts each with their own time series. There is no guarantee that an individual time series is continuous, or that al the components in a manifest file have the same start time, end time and resolution. This makes it difficult to aggregate, visualize or do like-for-like comparisons between components.
+
+To solve this problem, we provide a built-in feature (`time-sync`) that synchronizes the time series across all the components in a graph.
+
+The `time-sync` feature takes a global start time, end time and interval. It then forces every individual time series to conform to this global configuration.
+
+This works by first upsampling each time series to a comon base resolution (typically 1s). Any gaps in the time series are filled in with "zero objects" with identical structure to the real `observations` but with usage metrics set to zero (we assume that when there is no data, there is no usage).
+
+Next, we check to see whether the first timestamp in each time series is before, after or identical to the global start time.
+if a component's time series starts *after* the global start time, we pad the start of the time series with "zero objects" so that the start times are identical. If the component's time series starts *before* the global start time, we trim the time series down, discarding `observations` from before the global start time.
+
+Then the same trimming logic is applied to the end times.
+
+After synchronizing the start and end times and padding any discontinuities, we have a set of continuous time series of identical length. Then, we batch observations together into time bins whose size is define by the global `interval` value. This means that the resolution of the final time series' are identical and equal to `interval`. 
+
+This process yields synchronized time series for all components across a graph, enabling easy visualization and intercomparison. This synchronization is also a prerequisite for our aggregation function.
+
+
+![](../../static/img/time-sync-schematic.png)
+
+
+## Toggling off time sync
+
+Some applications will not want to pad with zero values, and instead be very strict about expecting continuous time series to be provided in the raw manifest file. In these cases, you can simply toggle the padding off in the manifest file.

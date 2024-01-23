@@ -7,7 +7,7 @@ sidebar_position: 2
 Here you will find explanations for the fundamnetal Impact Framework concepts. This includes: 
 
 - [Computation Pipeline](./computation-pipeline.md)
-- [Durations](./durations.md)
+- [Time](./durations.md)
 - [Granularity](./granularity.md)
 - [Impact Framework](./impact-framework.md)
 - [Graph](./graph.md)
