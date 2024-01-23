@@ -8,6 +8,7 @@ This section contains information for Impact Framework users. You are a user if 
 
 The user documentation includes:
 
+- [Quick start guide](./quick-start.md)
 - [How to install and run IF](./how-to-install-if.md)
 - [How to load plugins](./how-to-import-plugins.md)
 - [How to write manifest files](./how-to-write-impls.md)

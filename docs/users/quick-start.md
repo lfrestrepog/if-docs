@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Getting started
+# Quick start
 
 This page will provide the basic instructions for getting up and running with Impact Framework.
 
@@ -14,6 +14,8 @@ Install the Impact Framework globally using npm.
 npm install -g @grnsft/if
 ```
 
+Read more detail on [installing IF](./how-to-install-if.md).
+
 ## 2: Install some plugins
 
 Install some of the plugins you want to include in your pipeline. The pair of commands below will install both the official and unofficial IF model packages.
@@ -22,6 +24,8 @@ Install some of the plugins you want to include in your pipeline. The pair of co
 npm install -g @grnsft/if-models
 npm install -g @grnsft/if-unofficial-models
 ```
+
+Read more detail on [loading plugins](./how-to-import-plugins.md)
 
 ## 3: Create a manifest file
 
@@ -53,6 +57,8 @@ graph:
 
 Save the file.
 
+read mroe detail on [writing manifest files](./how-to-write-impls.md).
+
 ## 4: Compute your manifest file
 
 Run the pipeline by passing the path to your manifest file to the `impact-engine` command line tool:
@@ -61,10 +67,9 @@ Run the pipeline by passing the path to your manifest file to the `impact-engine
 impact-engine --impl <path-to-your-impl>
 ```
 
-
 :tada:**Congratulations** :tada:! You have just used the Impact Framework to compute the energy consumed by an application! Next, you can experiment by adding more plugins to the pipeline, for example add `sci-o` to convert energy into `operational-carbon`.
 
-Your output data will be displayed in your console. You can also configure `impact-framework` to save yopur output data to another `yaml` file. To do this, add the `--ompl` flag and the path to save the file to:
+Your output data will be displayed in your console. You can also configure `impact-framework` to save your output data to another `yaml` file. To do this, add the `--ompl` flag and the path to save the file to:
 
 ```sh
 impact-engine --impl <path-to-your-impl> --ompl <save-path>
