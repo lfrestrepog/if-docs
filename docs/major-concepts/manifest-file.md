@@ -140,12 +140,48 @@ graph:
 
 ## Computing a manifest file
 
-Impact Framework computes manifest files. For each component in the graph, the `inputs` array is passed to each plugin in the pipeline in sequence. Each plugin enriches the `inputs` array in soem spefcific way, typcially by adding a new `key-value` pair to each observation in the array. 
+Impact Framework computes manifest files. For each component in the graph, the `inputs` array is passed to each plugin in the pipeline in sequence. 
+
+Each plugin *enriches* the `inputs` array in some specific way, typically by adding a new `key-value` pair to each observation in the array. For example, the `teads-curve` plugin takes in CPU utilization expressed as a percentage as an input and appends `energy-cpu` expressed in kWh. `energy-cpu` is then available to be passed as an input to the `sci-e` plugin.
 
 This implies a sequence of plugins where the inputs for some plugin must either be present in the original manifest file or be outputs of the preceding plugins in the pipeline.
 
-There are also plugins and built-in features that can synchronize time series of `observations across an entire graph and aggregate data across time or across components.
+There are also plugins and built-in features that can synchronize time series of `observations` across an entire graph and aggregate data across time or across components.
 
+## Outputs
+
+When Impact Framework computes a manifest file, it appends new data to the manifest file and the final result is an enriched manifest that includes all the configuration and contextual data, the input data and the results of executing each plugin. This means the output file is compeltely auditable - the manifest file can be recovered simply by deleting the `outputs` section of the output file.
+
+Here's an example output file:
+
+```yaml
+name: e-mem
+description: null
+tags: null
+initialize:
+  models:
+    - name: e-mem
+      path: "@grnsft/if-models"
+      model: EMemModel
+graph:
+  children:
+    child:
+      pipeline:
+        - e-mem
+      config: null
+      inputs:
+        - timestamp: 2023-08-06T00:00
+          duration: 3600
+          mem-util: 40
+          total-memoryGB: 1
+      outputs:
+        - timestamp: 2023-08-06T00:00
+          duration: 3600
+          mem-util: 40
+          total-memoryGB: 1
+          coefficient: 0.38
+          energy-memory: 0.15200000000000002
+```
 
 ## Use Cases
 
