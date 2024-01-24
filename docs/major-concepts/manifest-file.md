@@ -12,9 +12,8 @@ Manifest files are absolutely fundamental to Impact Framework and they serve mul
 - They are shareable, portable and human readable
 - They can be used as verifiable audits form your application
 
-
 The manifest is a [yaml](https://circleci.com/blog/what-is-yaml-a-beginner-s-guide/) file with a particular structure. 
-It can be thought of as an "executable audit" because the file itself can be shared with others and re-executed to verify your environmental impact calculations. 
+It can be thought of as an "executable audit" because the file itself can be shared with others and re-executed to verify your environmental impact calculations. It is a formal report detailing not just the end impact but all the assumptions, inputs, and models used in calculating the impact.
 
 This is possible because *all* the configuration and data required to run Impact Framework is contained in the manifest file. anyone can download Impact Framework and execute a manifest file to verify the results. 
 
@@ -182,19 +181,3 @@ graph:
           coefficient: 0.38
           energy-memory: 0.15200000000000002
 ```
-
-## Use Cases
-
-There are several use cases for an Manifest file.
-
-### A formal report
-
-An Manifest file is a computable calculation manifest. A formal report detailing not just the end impact but all the assumptions, inputs, and models used in calculating the impact.
-
-Being a very formal structure, it can be parsed by software, compared to other reports, adjusted, run, and verified.
-
-Currently, in the GSF several case studies have been written to calculate an SCI score for an application, these can all be re-written in Manifest file format.
-
-### An executable impact calculation manifest
-
-The command line tool (`impact-engine`) can compute an Manifest file and generate impact metrics. 
