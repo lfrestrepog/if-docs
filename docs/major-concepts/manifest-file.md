@@ -13,9 +13,13 @@ Manifest files are absolutely fundamental to Impact Framework and they serve mul
 - They can be used as verifiable audits form your application
 
 The manifest is a [yaml](https://circleci.com/blog/what-is-yaml-a-beginner-s-guide/) file with a particular structure. 
-It can be thought of as an "executable audit" because the file itself can be shared with others and re-executed to verify your environmental impact calculations. It is a formal report detailing not just the end impact but all the assumptions, inputs, and models used in calculating the impact.
+It can be thought of as an ***executable audit*** because the file itself can be shared with others and re-executed to verify your environmental impact calculations. 
 
-This is possible because *all* the configuration and data required to run Impact Framework is contained in the manifest file. anyone can download Impact Framework and execute a manifest file to verify the results. 
+It is a formal report detailing not just the end impact but all the assumptions, inputs, and models used in calculating the impact.
+
+This is possible because *all the configuration and data required to run Impact Framework is contained in the manifest file*. 
+
+Anyone can download Impact Framework and execute a manifest file to verify the results. 
 
 ## Stucture of a manifest file
 
@@ -135,6 +139,15 @@ graph:
                   energy: 0.000811
 ```
 
+### Inputs
+
+Every component includes an `inputs` field that gets read into models as an array. `inputs` are divided into `observations`, each having a `timestamp` and a `duration`. Every `observation` refers to an element in `inputs` representing some snapshot in time.
+
+Each plugin takes the `inputs` array and applies some calculation or transformation to each `observation` in the array.
+
+Observations can inlude any type of data, including human judgment, assumptions, other models, APIs, survey data or telemetry.
+
+The separation of timestamps in the `inputs` array determines the temporal granularity of your impact calculations. The more frequent your observations, the more accurate your imapct assessment.
 
 
 ## Computing a manifest file
