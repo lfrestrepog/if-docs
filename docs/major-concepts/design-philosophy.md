@@ -6,12 +6,12 @@ sidebar-position: 1
 
 ## Transparency
 
-The *manifest file* is the lifeblood of Impact Framework. It defines all the context for an environmental imapct calculation, defining the architectire of an application, the observation period, the pipeline of calculations and transformations to execute, and the environmental impacts to track. This document can then be *executed* to generate impact values. This gives unparalleled transparency to an environmental audit, all in a standard, easy to read format that anyone can read or re-execute.
+The *manifest file* is the lifeblood of Impact Framework. It defines all the context for an environmental impact calculation, defining the architecture of an application, the observation period, the pipeline of calculations and transformations to execute, and the environmental impacts to track. This document can then be *executed* to generate impact values. This gives unparalleled transparency to an environmental audit, all in a standard, easy to read format that anyone can read or re-execute.
 
 
 ## Verifiability
 
-An Impact Framework manifest file is powerful because anyoen can re-execute it and verify an organization's impact calculation. You can even experiment by swapping out different plugins. The critical concept is that *everything* you need to calculate an impact is provided in the manifest file and *anyone* can re-run a calculation with the manifest file and the lightweight Impact Framework command line tool.
+An Impact Framework manifest file is powerful because anyone can re-execute it and verify an organization's impact calculation. You can even experiment by swapping out different plugins. The critical concept is that *everything* you need to calculate an impact is provided in the manifest file and *anyone* can re-run a calculation with the manifest file and the lightweight Impact Framework command line tool.
 
 
 # Flexibility
@@ -31,7 +31,7 @@ What we provide is a minimal set of rules and guardrails for model builders to c
 
 ## Neutrality
 
-Impact Framework aims to support maximally decentralized plugin development. We want anyone to be able to build plugins and use them to calculate their environmental impacts. We do not want to gatekeep what people can measaure and monitor - we want to encourage people to build freely and experiment on Impact Framework rails! 
+Impact Framework aims to support maximally decentralized plugin development. We want anyone to be able to build plugins and use them to calculate their environmental impacts. We do not want to gatekeep what people can measure and monitor - we want to encourage people to build freely and experiment on Impact Framework rails! 
 
 At the same time, we want to provide the helpers and guardrails that make impact calculations as friction free as possible. This means we focus on providing the minimal *protocol* required to support community plugin development and make it as safe as possible from unit errors and other footguns. ***We want to see the universe of Impact Framework plugins grow organically and permissionlessly in ways we can't even imagine today!***
 
