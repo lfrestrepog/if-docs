@@ -1,6 +1,6 @@
-# Model Plugins
+# Plugins
 
-The Impact Framework includes just one builtin model (`time-sync`). All other models are external plugins that have to be installed before they can be run in an IF pipeline. Anyone can create and install a new model plugin. As long as the mdoel conforms to the expected interface, IF can run it.
+The Impact Framework includes just one builtin model (`time-sync`). All other models are external plugins that have to be installed before they can be run in an IF pipeline. Anyone can create and install a new model plugin. As long as the model conforms to the expected interface, IF can run it.
 
 There are two repositories that were created by the IF core team. The `if-models` repository contains the "core" set of models that IF developers will maintain and support. We also provide a second repository of `if-unofficial` models that are mainly re-implementations of existing third party models or code that we expect community members to maintain independently of the IF core team.
 

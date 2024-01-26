@@ -1,4 +1,8 @@
-# Terminology
+---
+sidebar_position: 6
+---
+
+# Glossary
 
 ### Impact
 
@@ -83,4 +87,3 @@ Is the act of calculating the output of a [Graph](/06-specification/graph.md).
 **aka**: *computation pipeline*
 
 Computing an entire [Graph](/06-specification/graph.md) involves several phases, the pipeline describes those phases.  pipeline is not to be confused with the model pipeline which is 
-

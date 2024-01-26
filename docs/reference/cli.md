@@ -1,4 +1,4 @@
-# CLI (`impact-engine`)
+# CLI 
 
 The core feature of the Impact Framework is the command line tool, `impact-engine`. 
 

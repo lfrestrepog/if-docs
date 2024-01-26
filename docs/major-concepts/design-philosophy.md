@@ -1,5 +1,5 @@
 ---
-sidebar-position: 1
+sidebar_position: 1
 ---
 
 # Design philosophy
@@ -33,7 +33,9 @@ What we provide is a minimal set of rules and guardrails for model builders to c
 
 Impact Framework aims to support maximally decentralized plugin development. We want anyone to be able to build plugins and use them to calculate their environmental impacts. We do not want to gatekeep what people can measure and monitor - we want to encourage people to build freely and experiment on Impact Framework rails! 
 
-At the same time, we want to provide the helpers and guardrails that make impact calculations as friction free as possible. This means we focus on providing the minimal *protocol* required to support community plugin development and make it as safe as possible from unit errors and other footguns. ***We want to see the universe of Impact Framework plugins grow organically and permissionlessly in ways we can't even imagine today!***
+At the same time, we want to provide the helpers and guardrails that make impact calculations as friction free as possible. This means we focus on providing the minimal *protocol* required to support community plugin development and make it as safe as possible from unit errors and other footguns. 
+
+***We want to see the universe of Impact Framework plugins grow organically and permissionlessly in ways we can't even imagine today!***
 
 To this end, what we are really building is a protocol. Impact Framework is just a Typescript implementation of the protocol. The protocol itself is a set of fundamental principles that define how a manifest file should be processed, such that any implementation in any language will yield the same result from a given manifest file. 
 
@@ -43,4 +45,6 @@ This means we can be neutral about what can be built with IF while also providin
 
 ## Where to go next
 
-This page has outlined the design philosophies that guide Impact Framework development. Explore the other pages in this section to see how these principles have been applied to specific Impact Framework features, or head to our [user documentation](../users/) to get started running Impact Framework for yourself. 
+This page has outlined the design philosophies that guide Impact Framework development. 
+
+Explore the other pages in this section to see how these principles have been applied to specific Impact Framework features, or head to our [user documentation](../users/) to get started running Impact Framework for yourself. 

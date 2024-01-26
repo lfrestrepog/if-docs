@@ -1,8 +1,7 @@
 ---
-author: Asim Hussain (@jawache)
-abstract: Standardising the interface to measurement models.
+sidebar-position: 3
 ---
-# Model Plugin
+# Plugins
 
 Calculating outputs for every component in a [Graph](graph.md) (graph) requires the use of an **Impact Model** (model) called through an [Impact Model Plugin](Impact%20Model%20Plugin.md) (model plugin).
 
