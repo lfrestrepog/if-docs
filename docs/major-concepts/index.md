@@ -9,7 +9,7 @@ Here you will find explanations for the fundamnetal Impact Framework concepts. T
 - [Manifest files](./manifest-file.md)
 - [Design philosophy](./design-philosophy.md)
 - [Computation Pipeline](./computation-pipeline.md)
-- [Durations](./durations.md)
+- [Time](./durations.md)
 - [Granularity](./granularity.md)
 - [Impact Framework](./impact-framework.md)
 - [Model Pipeline](./model-pipeline.md)
