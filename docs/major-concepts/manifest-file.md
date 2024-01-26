@@ -1,236 +1,196 @@
 ---
-author: Asim Hussain (@jawache)
-abstract: Describes the structure and purpose of Impact YAML, a file format to represent a Graph.
+sidebar-position: 2
 ---
+
 # Manifest File
 
-- An Impact Manifest is a file format based on [yaml](https://circleci.com/blog/what-is-yaml-a-beginner-s-guide/) to represent a [Graph](graph.md), it's also sometimes called Impact YAML or IMPL. 
-- Just like a Graph, an IMPL is a calculation manifest containing everything you want to measure and how you want to measure it. 
-- Manifest files being YAML means it's more human-readable and can be used as a **formal method of writing use cases**, such as SCI use cases.
-- Manifest files can be named `.yaml` (or `.impl`).
-- Manifest files can be computed on the command line using the [Impact-Engine](impact-framework.md) tool, printing out the results to file or STDOUT.
+Manifest files are absolutely fundamental to Impact Framework and they serve multiple important purposes, including:
 
-## Use Cases
+- They contain all the necessary configuration for Impact Framework
+- They define your application architecture
+- They hold your input data
+- They are shareable, portable and human readable
+- They can be used as verifiable audits form your application
 
-There are several use cases for an Manifest file.
+The manifest is a [yaml](https://circleci.com/blog/what-is-yaml-a-beginner-s-guide/) file with a particular structure. 
+It can be thought of as an ***executable audit*** because the file itself can be shared with others and re-executed to verify your environmental impact calculations. 
 
-### A formal report
+It is a formal report detailing not just the end impact but all the assumptions, inputs, and models used in calculating the impact.
 
-An Manifest file is a computable calculation manifest. A formal report detailing not just the end impact but all the assumptions, inputs, and models used in calculating the impact.
+This is possible because *all the configuration and data required to run Impact Framework is contained in the manifest file*. 
 
-Being a very formal structure, it can be parsed by software, compared to other reports, adjusted, run, and verified.
+Anyone can download Impact Framework and execute a manifest file to verify the results. 
 
-Currently, in the GSF several case studies have been written to calculate an SCI score for an application, these can all be re-written in Manifest file format.
+## Stucture of a manifest file
 
-### An executable impact calculation manifest
+### Overview
 
-The command line tool (`impact-engine`) can compute an Manifest file and generate impact metrics. 
-
-### To bootstrap code
-
-- Manifest files will be able to represent simple calculation manifest but to handle larger, more complex systems, we will have to write Graphs as code using our SDK.
-- To help bootstrap the process, humans can write the high-level structure using Manifest file and run through a tool to generate starter Graph code in any language our SDK supports.
-
-## Structure
+Manifest files can be simple or very intricate, depending on the model pipeline you want to use and the complexity of your application. However, all manifest files conform to a basic structure that looks as follows:
 
 ```yaml
-name: <name>
-description: <description>
+name:
+description:
 tags:
-  <key>: <value>
-variables:
-  <key>: <value>
-config:
-  pipeline:
-    calculation: TBD
-    normalization: TBD
-    bucketing: TBD
-    aggregation: TBD
-graph: # The nodes under this root node
-
-  # Single input
-  <component>:
-    model: <imp-identifier>
-    config: 
-      <key>: <value>
-    input:
-      timestamp: <timestamp>
-      duration: <duration>
-      <key>: <value>
-
-  # Multiple inputs      
-  <component>:
-    model: <imp-identifier>
-    config: 
-      <key>: <value>
-    inputs:
-      common:
-        <key>: <value>
-      series:
-        - timestamp: <timestamp>
-          duration: <duration>
-          <key>: <value>
-        - timestamp: <timestamp>
-          duration: <duration>
-          <key>: <value>        
-      mapping:
-        <from-field>:
-          to: <to-field>
-          units: <units>
-
-  # Multiple inputs from CSV 
-  <component>:
-    model: <imp-identifier>
-    config: 
-      <key>: <value>
-    inputs:
-      common:
-        <key>: <value>
-      series:
-        csv: <path-to-csv>       
-      mapping:
-        <from-field>:
-          to: <to-field>
-          units: <units> 
-
-  # Simple grouping
-  <grouping>:
-    <component>:
-      model: <imp-identifier>
-      config: 
-        <key>: <value>
-      input:
-        timestamp: <timestamp>
-        duration: <duration>
-        <key>: <value>
-
-  # Advanced grouping
-  <grouping>:
-    model: <imp-identifier>
-    config: 
-      <key>: <value>
-    children:
-      <component-1>:
-        input:
-          timestamp: <timestamp>
-          duration: <duration>
-          <key>: <value>
-      <component-2>:
-        input:
-          timestamp: <timestamp>
-          duration: <duration>
-          <key>: <value>
-```
-
-
-## Example
-
-A simple 3 component web server application running on GCP, Azure, and AWS and using multiple models and specifically calculating an SCI score.
-
-```yaml
-name: My application
-description: A simple web server
-tags:
-  kind: web-server
-  complexity: simple
-  category: cloud
-config: 
-  pipeline: # config to define computation settings to support an SCI calculation
-    calculation: 
-      plugin: gsf.pipeline.calc.sci
-    enrichment:
-      plugin: gsf.pipeline.enrich.sci
-      grid-emissions-plugin: watttime
-    normalization:
-      plugin: gsf.pipeline.norm.sci
-      impact-window: 3600
-    aggregation:
-      plugin: gsf.pipeline.agg.sci
-      functional-unit: hour
+initialize:
+  models:
+    - name: 
+      model: 
+      path: 
 graph:
-  backend: # an advanced grouping node
-    model: boavizta.cloud.sci  
-    config: 
-      vendor: azure
-      region: east-us  
-    children: 
-      queue: # a leaf component
-        inputs: 
-          config:
-            sku: AC2
-          series:
-            - timestamp: 2023-07-06T00:00
-              span: 5 # this data is using span, but the model expects duration
-              cpu: 0.34
-            - timestamp: 2023-07-06T00:05
-              span: 5
-              cpu: 0.23
-            - timestamp: 2023-07-06T00:05
-              span: 5
-              cpu: 0.11
-          mapping:
-            span:
-              units: seconds
-              to: duration
-      servers: # a leaf component
-        config: ccf.cloud.sci  
-        params: 
-          vendor: aws
-          region: france
-        inputs: 
-          config:
-            sku: EC2
-          series:      
-            - datetime: 2023-07-06T00:00
-              duration: 5
-              cpu: 0.34
-            - datetime: 2023-07-06T00:05
-              duration: 5
-              cpu: 0.23
-            - datetime: 2023-07-06T00:05
-              duration: 5
-              cpu: 0.11
-  edge: # a simple grouping node
-    load-balancer: 
-      model: boavizta.cloud.sci
-      config: 
-        vendor: gcp
-        region: west-us
-      input: # a single input for the whole duration
-        datetime: 2023-07-06T00:00
-        duration: 15
-        cpu: 0.34
-```
-
-Once it's computed through an application like `impact-engine`, it might return/print out a YAML like so:
-
-```yaml
-name: My application
-graph:
-  outputs:
-    e: 63 mWh # sum of all the child node energy 
-    m: 61g # sum of all the child node embodied
   children:
-    edge:
-      outputs: 
-        e: 48 mWh
-        m: 4g
+    child:
+      pipeline:
+      config:
+      inputs:
+        - timestamp: 2023-08-06T00:00
+          duration: 3600
+```
+
+### Global metadata
+
+The global metadata includes the `name`, `description` and `tags` that can be used to describe the nature of the manifest file. For example you might name the file `Carbon Jan 2024` or similar. A short description might briefly outline the scope of the manifest file, e.g. `company x's carbon emissions due to web serves from Jab 24 - July 24`. Tags can be used to group manifest files (we do not explicitly use this field for anything at the current time).
+
+### Plugin initialization
+
+The initialize section is where tyou define which plugins will be used in your manifest file and provide the global configuration for them. The required values are:
+
+- `name`: the name used to refer to this specific mdoel across the manifest file
+- `model`: the name of the model class (identical to the class name defined in the model code). For example, for our `sci-e` model this value is `SciEModel`
+- `path`: the path to the model code. For example, for a model from our standard library installed from npm, this value would be `@grnsft/if-models`
+
+There is also an optional `config` field that can be used to set *global* configuration that is common to a plugin wherever it is invoked across the entire manifest file. A plugin reads this `config` as `staticParams` and sets it in its `configure()` method.
+
+Impact Framework uses the `initialize` section to instantiate classes for each model. A model cannot be invoked elsewhere in the manifest file unless it is included in this section.
+
+### Graph
+
+The `graph` section of a manifest file for defining the topology of all the components being measured. The shape of the `graph` defines the grouping of components. It describes the architecture of the application being studied and contains all the usage observations for each component. The graph is structured as a tree, with ijdividual components as leaves, intermediate nodes representing groupings, and the top level being the root.
+
+![](../../static/img/3f18767c1a55cee416e3de70314609e3.png)
+
+For example, a web application could be organized as follows:
+
+```
+graph:
+  children:
+    front-end:
+      build-pipeline:
+        vercel:
+        github-pages:
+    backend-database:
+      server1:
+      server2:
+      server3:
+    front-end:
+    networking:
+```
+
+This example has a relatively straightforward structure with a maximum of 3 levels of nesting. You can continue to nest components to any depth.
+
+Each component has some configuration, some input data, and a plugin pipeline.
+
+- `pipeline`: a list of plugins that should eb executed for a specific component
+- `config`: contains configuration for each model that applies just inside this specific component.
+- `inputs`: an array of `observation` data, with each `observation` containing usage data for a given timestep.
+
+
+If a component *does not* include its own `pipeline`, `config` or `inputs` values, they are inherited from the closest parent.
+
+Here's an example of a moderately complex graph:
+
+```yaml
+graph:
+  children:
+    child-0:
+      pipeline:
+        - sci-e
       children:
-        load-balancer:
+        child-0-1:
+          pipeline:
+            - sci-e
+          config: null
+          inputs:
+            - timestamp: 2023-07-06T00:00
+              duration: 10
+              cpu-util: 50
+              energy-network: 0.000811
           outputs:
-            e: 48 mWh
-            m: 4g
-  backend:
-    outputs:
-      e: 15 mWh
-      m: 57g  q3
-    children:
-      backend server:
-        outputs:
-          e: 5 mWh
-          m: 23g
-      caching layer:
-        outputs:    
-          e: 10 mWh
-          m: 34g
+            - timestamp: 2023-07-06T00:00
+              duration: 10
+              cpu-util: 50
+              energy-network: 0.000811
+              energy: 0.000811
+        child-0-2:
+          children:
+            child-0-2-1:
+              pipeline:
+                - sci-e
+              config: null
+              inputs:
+                - timestamp: 2023-07-06T00:00
+                  duration: 10
+                  cpu-util: 50
+                  energy-network: 0.000811
+              outputs:
+                - timestamp: 2023-07-06T00:00
+                  duration: 10
+                  cpu-util: 50
+                  energy-network: 0.000811
+                  energy: 0.000811
+```
+
+### Inputs
+
+Every component includes an `inputs` field that gets read into models as an array. `inputs` are divided into `observations`, each having a `timestamp` and a `duration`. Every `observation` refers to an element in `inputs` representing some snapshot in time.
+
+Each plugin takes the `inputs` array and applies some calculation or transformation to each `observation` in the array.
+
+Observations can inlude any type of data, including human judgment, assumptions, other models, APIs, survey data or telemetry.
+
+The separation of timestamps in the `inputs` array determines the temporal granularity of your impact calculations. The more frequent your observations, the more accurate your imapct assessment.
+
+
+## Computing a manifest file
+
+Impact Framework computes manifest files. For each component in the graph, the `inputs` array is passed to each plugin in the pipeline in sequence. 
+
+Each plugin *enriches* the `inputs` array in some specific way, typically by adding a new `key-value` pair to each observation in the array. For example, the `teads-curve` plugin takes in CPU utilization expressed as a percentage as an input and appends `energy-cpu` expressed in kWh. `energy-cpu` is then available to be passed as an input to the `sci-e` plugin.
+
+This implies a sequence of plugins where the inputs for some plugin must either be present in the original manifest file or be outputs of the preceding plugins in the pipeline.
+
+There are also plugins and built-in features that can synchronize time series of `observations` across an entire graph and aggregate data across time or across components.
+
+## Outputs
+
+When Impact Framework computes a manifest file, it appends new data to the manifest file and the final result is an enriched manifest that includes all the configuration and contextual data, the input data and the results of executing each plugin. This means the output file is compeltely auditable - the manifest file can be recovered simply by deleting the `outputs` section of the output file.
+
+Here's an example output file:
+
+```yaml
+name: e-mem
+description: null
+tags: null
+initialize:
+  models:
+    - name: e-mem
+      path: "@grnsft/if-models"
+      model: EMemModel
+graph:
+  children:
+    child:
+      pipeline:
+        - e-mem
+      config: null
+      inputs:
+        - timestamp: 2023-08-06T00:00
+          duration: 3600
+          mem-util: 40
+          total-memoryGB: 1
+      outputs:
+        - timestamp: 2023-08-06T00:00
+          duration: 3600
+          mem-util: 40
+          total-memoryGB: 1
+          coefficient: 0.38
+          energy-memory: 0.15200000000000002
 ```
