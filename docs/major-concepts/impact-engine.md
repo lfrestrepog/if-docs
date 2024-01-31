@@ -2,11 +2,11 @@
 sidebar-position: 4
 ---
 
-# Impact Engine
+# Impact engine
 
 ## Introduction
 
-`impact-engine` is a command line tool that computes [Manifest File](manifest-file.md) files. 
+The `impact-engine` is a command line tool that computes [manifest files](manifest-file.md). 
 
 ## Quickstart
 
@@ -20,49 +20,48 @@ impact
 ```
 
 - `impl`: path to an input IMPL file
-- `ompl`: path to the output IMPL file where the results as saved, if none is provided it prints to stdout.
-- `format`: the output file format. default to yaml but if csv is specified then it formats the outputs as a csv file for loading into another program.
+- `ompl`: path to the output IMPL file where the results as saved. If none is provided, it prints to stdout.
+- `format`: the output file format. Defaults to yaml, but if csv is specified then it formats the outputs as a csv file for loading into another program.
 - `verbose`: how much information to output about the calculation to aid investigation and debugging.
 - `help`: prints out the above help file.
 
 
-To use Impact, you must first configure an impl. Then, you can simply pass the path to the impl to Impact on the command line. You can also pass a path where you would like to save the output file to. For example, the following command, run from the project root, loads the `mst-eshoppen.yml` impl file from the examples directory, executes all the models defined in the impl, and saves the output to `examples/ompls/e-shoppen.yml`:
+To use Impact, you must first configure an impl, then simply pass the path to the impl to Impact on the command line. You can also pass a path where you would like to save the output file to. For example, the following command, run from the project root, loads the `mst-eshoppen.yml` impl file from the examples directory, executes all the models defined in the impl, and saves the output to `examples/ompls/e-shoppen.yml`:
 
 ```sh
 npx ts-node impact-engine.ts --impl ./examples/impls/msft-eshoppen.yaml --ompl ./examples/ompls/e-shoppen.yml
 ```
 
 
-## Design Ideology
+## Design ideology
 
 The state of an impact computation is stored in a `graph` object.
 
-There are a series of functions defined in a [Lifecycle](#Lifecycle) section which the `graph` object as input and mutate it somehow.
+There are a series of functions defined in the [lifecycle](#Lifecycle) section which the `graph` objects as input and mutates it somehow. A processed graph is then serialized back out to the end user for them to use the data.
 
-At the end a processed graph is serialized back out to the end user for them to use the data.
 ## Lifecycle
 
-Every `impact-engine` execution goes through a lifecycle, a set of distinct steps which process the graph in stages.
+Every `impact-engine` execution goes through a lifecycle; a set of distinct steps which process the graph in stages.
 
-Currenty the lifecycle is fixed but in the future this maybe be configurable via plugins.
+Currently the lifecycle is fixed but in the future this maybe be configurable via plugins.
 
 ```mermaid
 flowchart TB
 ExpandShorthand --> NamespaceConfig --> InitializeModels --> Compute --> Aggregate --> Export
 ```
 
-### Expand Shorthand
+### Expand shorthand
 
-- There is a short-hand way of defining an IMPL file and a long-hand way of defining it.
-- The first stage of the lifecycle is to expand out the shorthand format to make the graph object easier to parse for future stages in the lifecycle of a computation.
-- The first stage is to analyze the IMPL structure and if you can convert the short hand components over to the long hand form the graph object is restructured.
+There is a shorthand and longhand way of defining an impl file. The first stage of the lifecycle is to expand out the shorthand format to make the graph object easier to parse for subsequent stages.
+You would need to analyze the impl structure and, if you can convert the shorthand components to longhand, the graph object is restructured.
 
-### Auto Children
+### Auto children
 
-- Some nodes for brevity leave out the `children` node if it's obvious all the other parameters of that node are `children`.
-- Pseudo Code: If there is no parameter called `children`, add a parameter called `children` and add all the current params as children of that parameter.
+Some nodes leave out the `children` node for brevity if it's obvious all the other parameters of that node are `children`.
 
-**Shorthand Notation:**
+Pseudo Code: If there is no parameter called `children`, add one and then add all the existing parameters as children of that parameter.
+
+**Shorthand notation:**
 
 ```yaml
 graph:
@@ -74,7 +73,7 @@ graph:
         inputs: ~
 ```
 
-**Longhand Notation:**
+**Longhand notation:**
 
 ```yaml
 graph:
@@ -89,9 +88,9 @@ graph:
               inputs: ~
 ```
 
-### Mirror Pipeline To Component
+### Mirror pipeline to component
 
-For simplicity we may express a common pipeline in a higher grouping node rather than express it in every component node, like so:
+For simplicity, a common pipeline may be expressed in a higher grouping node rather than in every component node:
 
 ```yaml
 graph:
@@ -109,7 +108,7 @@ graph:
         inputs: ~        
 ```
 
-If a component doesn't have a pipeline defined, then copy the pipeline from the higher scope down into this component, like so:
+If a component doesn't have a defined pipeline, you can copy it from the higher scope. In the following example, `component-node-2` didn't have a pipeline defined, so we used the pipeline defined on the `grouping-node-1`:
 
 ```yaml
 graph:
@@ -130,13 +129,9 @@ graph:
         inputs: ~        
 ```
 
-In the above example `component-node-2` didn't have a pipeline defined so used the pipeline defined on the `grouping-node-1`.
+## Namespace config
 
-## Namespace Config
-
-All configuration on all levels of the graph is both merged into an input and also namespaced so that the config for different models do not conflict with each other.
-
-Take this example:
+The configuration on all levels of the graph is both merged into an input and also namespaced so that the config for different models do not conflict with each other:
 
 ```yaml
 graph:
@@ -159,7 +154,7 @@ graph:
               inputs: ~
 ```
 
-After the above lifecycle step the graph object turns into this:
+Continuing to the next lifecycle step, the graph object turns into the following:
 
 ```yaml
 graph:
@@ -186,9 +181,9 @@ graph:
                   key-3::model-1: value-3
 ```
 
-## Initialize Models
+## Initialize models
 
-This step in the lifecycle loads any configured models, initializes them and makes them available from a global service.
+This step in the lifecycle loads any configured models, initializes them, and makes them available from a global service.
 
 ```yaml
 .
@@ -206,7 +201,7 @@ graph: ~
 ```
 
 
-For every model defined in the initialize -> models configuration.
+For every model defined in the initialize -> models configuration;
 
 If the model is `built-in`
 - import it
@@ -219,13 +214,13 @@ If the model is a `plugin`
 - call `configure` with any provided config.
 
 If the model is a `shell`
-- create an instance of `ShellCommandImp` which allows you to interact with the shell command as if it was any other type of Imp. NOTE: This launches a sub-processes which you have to communicate with using STDIN/OUT.
+- create an instance of `ShellCommandImp` which allows you to interact with the shell command as if it was any other type of Imp. NOTE: This launches a sub-process which you have to communicate with using STDIN/OUT.
 
 Make every model available from a global `ModelService` object which returns an instance of the model for a given name.
 
 ## Compute
 
-After all these steps in the lifecycle every component node should have all the information self-contained to compute itself.
+After all these steps in the lifecycle, every component node should have all the information needed to compute itself.
 
 - Loop through the nodes in the tree.
 - For every component node:
@@ -235,11 +230,11 @@ After all these steps in the lifecycle every component node should have all the 
 
 :::note 
 
-Each input input is for a time and duration, and each output impact is for the same time and duration. We should link an impact to the exact input used to generate it.
+Each input is for a time and duration, and each output impact is for the same time and duration. As such, we should link an impact to the exact input used to generate it.
 
 :::
 
-Represented as [Manifest File](manifest-file.md), the calculation phase would compute every component node in the tree with **inputs** like so:
+Represented as [manifest file](manifest-file.md), the calculation phase would compute every component node in the tree with the following inputs:
 
 ```yaml
 component:
@@ -255,7 +250,7 @@ component:
         cpu-util: 11
 ```
 
-To components with **outputs**, like so:
+These inputs would then produce the following outputs:
 
 ```yaml
 component:
@@ -286,36 +281,36 @@ component:
 
 ## Aggregate (Not yet implemented)
 
-Once all the component nodes have been computed the next step is to aggregate all the values up.
+Once all the component nodes have been computed, the next step is to aggregate all the values.
 
-:::note Time Syncing
+:::note Time syncing
 
-This step only makes sense if the nodes have been time synced. That is to say, every impact timestamp and duration snaps to a globally defined grid. If that's true then aggregation is a simple matter, if it's not true then aggregation might not make a lot of sense. 
+This step only makes sense if the nodes have been time-synced. That is to say, every impact timestamp and duration snaps to a globally defined grid. If that's true then aggregation is a simple matter, if it's not true then aggregation might not be appropriate. 
 
 :::
 
 ## Export (TBD)
 
-> It is curently only possible to export data as an `ompl` (output yaml). Other export options will be implemnted soon.
+> It is curently only possible to export data as an `ompl` (output yaml). Other export options will be implemented soon.
 
 The final step is to export the graph into a format that has been requested by the end user.
 
-If a file param has been provided via `-ompl` then we export as a YAML file format, for now this also means we'll be exporting the long hand notation of the IMPL files and not any shorthand. If no `-ompl` was provided then we print the results to stdout.
+If a file param has been provided via `-ompl` then we export as a YAML file. For now, this also means we'll be exporting the longhand notation of the IMPL files rather than shorthand. If no `-ompl` was provided, then we print the results to stdout.
 
 :::note 
 
-Exporting as a CSV file only makes sense of the nodes have been time synced. That is to say, every impact timestamp and duration snaps to a globally defined grid. If that's true then exporting as a CSV is a simple matter, if it's not true then exporting as a CSV might not make a lot of sense. 
+Exporting as a CSV file only makes sense of the nodes have been time-synced. That is to say, every impact timestamp and duration snaps to a globally defined grid. If that's true then exporting as a CSV is a simple matter, if it's not true then exporting as a CSV might not be appropriate. 
 
 :::
 
-If `-format csv` was specified then instead of outputting a YAML file we output a CSV file with each row being an impact metric for a node in the tree and each column being a specific timestamp and duration.
+If `-format csv` was specified, then instead of outputting a YAML file we output a CSV file, with each row being an impact metric for a node in the tree and each column being a specific timestamp and duration.
 
 
 ## Verbosity (not yet implemented)
 
-The `-verbose` settings in impact exports a version of the graph after each step in the lifecycle process, so we can see how the lifecycle adjusts the graph and help debug any issues.
+The `-verbose` settings in impact export a version of the graph after each step in the lifecycle process. This allows us to see how the lifecycle adjusts the graph and helps debug any issues.
 
-For example with the settings `-ompl path/to/my.yaml` and `-verbose` these files might be output instead.
+For example, with the settings `-ompl path/to/my.yaml` and `-verbose`, the following files might be output instead:
 
 - `my.yaml`
 - `my.expand-shorthand.yaml`
