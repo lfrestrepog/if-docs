@@ -1,3 +1,7 @@
+---
+sidebar-position: 1
+---
+
 # How to build model plugins
 
 The IF is designed to be as composable as possible. This means you can develop your own models and use them in a model pipeline. 
