@@ -109,21 +109,30 @@ describe('execute():', () => {
 
 ## Errors
 
-Expect errors rather than catching them!
+We prefer to use `expect` to check the errors returned from a test. We do this by writing `expect` in a `catch` block. Here's an example from our `sci` plugin tests:
 
 ```ts
-it("When no product name, it throws error 400", async () => {
-  let errorWeExceptFor = null;
-  try {
-    const result = await addNewProduct({});
-  } catch (error) {
-    expect(error.code).to.equal("InvalidInput");
-    errorWeExceptFor = error;
-  }
-  expect(errorWeExceptFor).not.to.be.null;
+it('throws an exception on missing functional unit data.', async () => {
+  const inputs = [
+    {
+      timestamp: '2021-01-01T00:00:00Z',
+      'operational-carbon': 0.002,
+      'embodied-carbon': 0.0005,
+      'functional-unit': 'requests',
+      duration: 1,
+    },
+  ];
+  expect.assertions(1);
 
+  try {
+    await sciModel.execute(inputs);
+  } catch (error) {
+    expect(error).toBeInstanceOf(InputValidationError);
+  }
 });
 ```
+
+It is also necessary to include `expect.assertions(n)` for testing asynchronous code, where `n` is the number of assertiosn that should be tested before the test completes. 
 
 ## Mocks
 
@@ -137,15 +146,15 @@ Please use `jest --coverage` to see a coverage report for your plugin - your uni
 
 ```sh
 -------------------------------|---------|----------|---------|---------|-------------------
-File                           | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
--------------------------------|---------|----------|---------|---------|-------------------
-All files                      |     100 |      100 |     100 |     100 |                   
- lib                           |     100 |      100 |     100 |     100 |                   
-  index.ts                     |     100 |      100 |     100 |     100 |                   
- lib/cloud-instance-metadata   |     100 |      100 |     100 |     100 |                   
-  index.ts                     |     100 |      100 |     100 |     100 |                 
- lib/e-mem                     |     100 |      100 |     100 |     100 |                   
-  index.ts                     |     100 |      100 |     100 |     100 |                   
- lib/e-net                     |     100 |      100 |     100 |     100 |                   
-  index.ts                     |     100 |      100 |     100 |     100 |                                  
+| File                        | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s |
+| --------------------------- | ------- | -------- | ------- | ------- | ----------------- |
+| All files                   | 100     | 100      | 100     | 100     |
+| lib                         | 100     | 100      | 100     | 100     |
+| index.ts                    | 100     | 100      | 100     | 100     |
+| lib/cloud-instance-metadata | 100     | 100      | 100     | 100     |
+| index.ts                    | 100     | 100      | 100     | 100     |
+| lib/e-mem                   | 100     | 100      | 100     | 100     |
+| index.ts                    | 100     | 100      | 100     | 100     |
+| lib/e-net                   | 100     | 100      | 100     | 100     |
+| index.ts                    | 100     | 100      | 100     | 100     |
 ```
