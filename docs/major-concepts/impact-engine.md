@@ -2,7 +2,7 @@
 sidebar-position: 4
 ---
 
-# Impact Engine
+# Impact engine
 
 ## Introduction
 
