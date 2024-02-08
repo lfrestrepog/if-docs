@@ -1,16 +1,14 @@
 ---
-author: Joseph Cook (@jmcook1186)
-abstract: Guidance for writing valid impls.
+sidebar_position: 4
 ---
 
 # How to write a manifest file
 
-The Impact Framework receives all its configuration and input data in the form of a `yaml` file known as an `impl` (input-yaml).
-To use the framework, a user only has to write an `impl` file and pass its path to the command line tool. This guide will help you to understand how to construct an `impl` and use it to measure the energy and carbon usage of your app.
+The Impact Framework receives all its configuration and input data in the form of a manifest file known as an `impl` (input-yaml). To use the framework, you will need to write an `impl` file and pass its path to the command line tool. This guide will help you to understand how to construct one of these files and use it to measure the energy and carbon usage of your app.
 
 ## Structure of an `impl`
 
-The basic structure of an `impl` is very simple. 
+The basic structure of an `impl` is as follows: 
 
 ```yaml
 name: 
@@ -30,17 +28,19 @@ graph:
       inputs:
 
 ```
+### Project metadata
 
-The `impl` starts with some metadata about the project, specifically:
-- `name` 
-- `description`
-- `tags`. 
+The file starts with some metadata about the project. There are no strict specfications for what to put in these fields, they are for you to keep track of your manifest files and to help other users to understand your use case.
 
-There is no strict specfication for how these field are used; they are for you to keep track of your impls and to provide the necessary details for other users to understand your use case.
+```yaml
+name:
+description:
+tags:
+```
 
-## `initialize`
+### Initialize
 
-The next field is `initialize`. This is where you specify each individual model that will be instantiated in your pipeline. The models can be initialized in any order. Models cannot be invoked elsewhere in the `impl` if they have not been initialized by including them in this field. Models are initialized by providing their name and some configuration data. For example:
+The `initialize` fields are where you specify each individual model that will be initialized in your pipeline. The models can be initialized in any order, but can only be invoked elsewhere in the `impl` if they have been initialized first here. In each case, you will need to provide the name, path and model:
 
 ```yaml
 initialize:
@@ -50,13 +50,15 @@ initialize:
 ```
 
 
-`name` has to be precisely the model name recognized by IEF. You can check all the valid model names [here](../src/util/models-universe.ts). `path` defines where `IF` should look for the installed model, for example for our standard library of models you would specify `"@grnsft/if-models"`, as this is the name of the directory they are installed into in `node_modules`. For `model` you are expected to provide the name of the class your mdoel instantiates, fopr example for the `sci-e` model the correct value is `SciEModel`.
+- The `name` is the exact model name as recognized by Impact Framework. You can check all the valid model names [here](../src/util/models-universe.ts).
+- The `path` defines where IF should look for the installed model. For example, for our standard library of models you would specify `"@grnsft/if-models"`, as this is the name of the directory they are installed into in `node_modules`.
+- For the `model` field, you should provide the name of the class your model instantiates. For example, for the `sci-e` model, the correct value is `SciEModel`.
 
-## `graph`
+### Graph
 
-`graph` is where you define the various components of your application. `graph` is organized into `children`. Each `child` is a component whose outputs should be summed to give the overall impact of your `graph`. `children` can be nested with arbitrary depth. Each `child` can have its own model pipeline and its own config. When no config is provided, it is inherited from the `graph` level config.
+The `graph` fields are where you define the various components of your application. Each component is defined as `children`, where each `child`'s output is summed to give the overall impact. Each `child` can have its own model pipeline and its own configuration, but when none is provided, it is inherited from the graph-level configuration.
 
-In the following example, there is only one component. The model pipeline contains two models, `teads-curve` and `sci-m`. Neither require any `config` data but they do expect certain information to be available in `inputs`.
+In the following example, there is only one component but the model pipeline contains two models; `teads-curve` and `sci-m`. Neither requires any `config` data, but certain information is required in `inputs`.
 
 ```yaml
 graph:
@@ -77,9 +79,9 @@ graph:
 
 ```
 
-## `inputs`
+### Inputs
 
-Each `child` has its own set of `inputs`. These are the most granular data, each of which are associated with a specific timestamp. Every `input` must always include a `timestamp` and a `duration`.
+The most granular level of the manifest file are the `inputs`. This is where you can add specific data for each `child`. Inputs must always include a `timestamp` and a `duration`.
 
 ```yaml
 inputs:
@@ -88,13 +90,21 @@ inputs:
     cpu-util: 45
 ```
 
-That's it! You now have a simple `impl` file that will use the model config and input data to run the `teads-curve` and `sci-m` models! The output data will be appended to the `impl` under a new `outputs` field and saved as an `ompl` file.
+You now have a simple `impl` file that will use the model config and input data to run the `teads-curve` and `sci-m` models. The output data will be appended to the `impl` under a new `outputs` field and saved as an `ompl` file.
 
 ## More complex `impls`
 
 ### Complex pipelines
 
-The basic `impl` in the previous section is valid, but it is minimal and doesn't return very interesting output data. We expect most users will want to calculate an SCI score, which requires both `operational-carbon` and `embodied-carbon` as inputs, which requires `sci` to be preceded by `sci-m` and `sci-o` in the model pipeline. In most cases, `sci-o` will have to be preceded by `sci-e` to ensure `energy` is available to be piped to `sci-o`. And, most likely, the inputs to `sci-e` will be coming from a model such as `teads-curve`. The `sci` model also requires `functional-unit` information so it can convert the estimated `carbon` into a useful unit. Youmay also wish to grab your `input` data by querying a metrics API on a virtual machine. In the example below, this full pipeline is implemented in an `impl` (if you have an Azure virtual machine and put your credentials in a `.env` file, you can run this `impl` to retrieve your SCI score).
+Whilst the `impl` file we looked at above works perfectly well, it will only return the most basic output data. Most users will want to calculate an SCI score, which implies a number of additional steps:
+- `operational-carbon` and `embodied-carbon` must appear as inputs.
+- This means that `sci` will need to be preceded by `sci-m` and `sci-o` in the model pipeline.
+- In most cases, `sci-o` will have to be preceded by `sci-e` to ensure `energy` is available to be piped to `sci-o`.
+- The inputs to `sci-e` will most likely be coming from a model such as `teads-curve`.
+- The `sci` model also requires `functional-unit` information so it can convert the estimated `carbon` into a useful unit.
+- You may also wish to grab your `input` data by querying a metrics API on a virtual machine. 
+
+The example below gives you the full pipeline implemented in an `impl` (if you have an Azure virtual machine and put your credentials into a `.env` file, you can run this `impl` to retrieve your SCI score).
 
 
 ```yaml
@@ -163,8 +173,8 @@ graph:
 
 ### Complex applications
 
-The `impl` examples provided so far have only had a single component. However, IEF can handle any number of `children` that can be nested.
-The following snippet shows how you can nest multiple subcomponents. 
+The `impl` examples provided so far have only had a single component. However, Impact Framework can handle any number of nested `children`.
+The following example shows you how to nest multiple subcomponents. 
 
 ```yaml
 name: nesting-demo
@@ -236,19 +246,19 @@ graph:
 
 ```
 
-You can combine complex model pipelines and complex application architectures to calculate the energy and carbon outputs of complicated systems!
+In this way, you can combine complex model pipelines and application architectures to calculate the energy and carbon outputs of complicated systems.
 
 ## Choosing which models to run
 
-The models are designed to be composable, but they each have specific input requirements that must be met in order for the models to run correctly. For example, teh `teads-curve` model requires `tdp` to be available in the `impl`. If it is not there, the model cannot use it to calculate `e-cpu`.
+The models are designed to be composable, but they each have specific input requirements that must be met in order for the models to run correctly. For example, the `teads-curve` model requires `tdp` to be available in the `impl`. If it is not there, the model cannot use it to calculate `e-cpu`.
 
 It is also possible to leapfrog some models if you have access to high-level data. For example, perhaps you already know the energy being used by your CPU. In this case, there is no need to run `teads-curve`, you can simply provide `e-cpu` as an `input` and omit `teads-curve` from the model pipeline.
 
-We have deliberately made the models modular and composable so that you can be creative in developing new plugins to replace those provided as part of IEF.
+We have deliberately made the models modular and composable so that you can be creative in developing new plugins to replace those provided as part of IF.
 
 ## Running an `impl`
 
-You run an impl by providing its path to our command line tool, along with a path to save the results file to. You can run an `impl` named `my-impl.yml` as follows:
+You run an `impl` by providing its path to our command line tool and a path to save the results file to. You can run an `impl` named `my-impl.yml` using the following command:
 
 ```sh
 npx ts-node scripts/impact.ts --impl ./examples/impls/my-impl.yml --ompl ./examples/ompls/my-ompl.yml

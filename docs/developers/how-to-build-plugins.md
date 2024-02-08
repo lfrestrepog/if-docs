@@ -1,3 +1,7 @@
+---
+sidebar-position: 1
+---
+
 # How to build model plugins
 
 The IF is designed to be as composable as possible. This means you can develop your own models and use them in a model pipeline.
@@ -65,20 +69,46 @@ export interface ModelPluginInterface {
 
 ```ts
 export type ModelParams = {
-  [key: string]?: any;
+  [key: string]: any;
 };
 ```
 
-The `ModelParams` type therefore defines an array of key-value pairs. The keys must exist in the `UnitKeys` array in `units.ts`, so if your new model uses some novel input values or generates some metric that hasn't been used in IF before, then you will have to add them to that array.
+The `ModelParams` type therefore defines an array of key-value pairs.
 
-You should also add any keys that are new to IF to the `params.ts` file in `src/config` following the existing structure.
+IF needs to know about all the parameters used in each model pipeline. The default behaviour is that it grabs parameters from a local file, `params.ts`. This file defines the standard set of parameter names, their units, a descriptiona nd the method used to aggregate them across time or across a graph.
+
+If your new plugin uses new parameters that are not included in `params.ts`, you can simply add them to your manifest file in a section named `params`. For example:
+
+
+```yaml
+name: params-demo
+description: null
+tags:
+params: 
+  - name: new-param-1
+    description: dummy
+    aggregation: sum
+    unit: MT
+  - name: new-param-2
+    description: dummy
+    aggregation: sum
+    unit: s
+```
+
+This will append the new parameter informatrion to the object loaded from `params.ts` and you can use your plugin as normal. In effect, you have append-only access to `params.ts` via your manifest file without ever having to change any IF source code.
+
+However, if you are an advanced user and you want to use something other than out recommended standard set of parameters, you can provide a replacement `params.ts` file on the command line. This file should be a `json` or `js`/`ts` file with the ame structure as our `params.ts`. You can rename the file. You then pass the path to the file to the `override-params` command.
+
+```sh
+impact-engine --impl <path-to-manifest> --override-params <path-to-your-params-file>
+```
 
 ## Summary of steps
 
 - Create a new model conforming to the `ModelPlugin` interface
 - Complete any global configuration in the `configure` method, returning an instance of the `ModelPlugin`
 - Complete the actual model logic in the `execute` method, returning an array of `ModelParams`
-- Add any new values to `params.ts` and `units.ts`
+- Add any new values to the `params` field in your manifest file.
 
 You should also create unit tests for your model to demonstrate correct execution and handling of corner cases.
 

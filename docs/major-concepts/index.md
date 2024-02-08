@@ -6,13 +6,9 @@ sidebar_position: 2
 
 Here you will find explanations for the fundamnetal Impact Framework concepts. This includes: 
 
-- [Computation Pipeline](./computation-pipeline.md)
-- [Durations](./durations.md)
-- [Granularity](./granularity.md)
-- [Impact Framework](./impact-framework.md)
-- [Graph](./graph.md)
-- [Impact](./impact.md)
-- [Impl](./impl.md)
-- [Model Pipeline](./model-pipeline.md)
-- [Model Plugin Configuration](./model-plugin-config.md)
-- [Inputs](./inputs.md)
+- [Design philosophy](./design-philosophy.md)
+- [Manifest files](./manifest-file.md)
+- [Impact Engine](./impact-enbgine.md)
+- [Time](./durations.md)
+- [Plugins](./plugins.md)
+- [Glossary](./glossary.md)

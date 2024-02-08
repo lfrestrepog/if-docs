@@ -1,3 +1,6 @@
+---
+sidebar-position: 2
+---
 # How to make models production ready
 
 Our [How to build plugins](./how-to-build-plugins.md) guide covered the basics for how to construct an Impact Framework plugin. This guide will help you to refine your model to make it production-ready. These are best practice guidelines - if you intend to contribute your plugin to one of our repositories, following these guidelines will help your PR to get merged. Even if you are not aiming to have a model merged into one of our repositories, consistency with our norms is useful for debugging and maintaining and for making your model as useful as possible for other Impact Framework developers.
