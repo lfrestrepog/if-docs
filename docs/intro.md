@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Overview
+# Introduction
 
 ## Hackathon!
 
@@ -43,6 +43,24 @@ The impacts of software components also vary over time, so as well as understand
 
 Only through a granular analysis of the impacts of your software system can investments in reducing its impact be prioritized and verified. Measurement is the first and most crucial step in greening a software system, and the first step in that process with the [Impact Framework](./06-specification/impact-framework.md) is to create a [Graph](./06-specification/graph.md).
 
+
+## Background
+
+This project has evolved over the two years of the GSF's existence. 
+
+During the development of the [SCI](https://github.com/Green-Software-Foundation/sci/blob/dev/SPEC.md), we acknowledged that the biggest blocker to adoption was data regarding the emissions of software components on different platforms and runtimes.
+
+We then launched the sci-data project to help create the data sets required to calculate an SCI score.
+
+After some investigation, the original sci-data team quickly realized that there were several existing data sources, and many more were in development, free open source or private commercial. The future challenge wouldn't be to source them, it would be knowing which data set to use for which use case, how data sets differed in their methodology and interface and when to use one over the other, the pros/cons, and trade-offs.
+
+The project evolved into the [sci-guide](https://sci-guide.greensoftware.foundation/) to document existing data sets, providing guidance for when to use one over another and how to use it to create your own software measurement reports.
+
+Finally, we had enough information, and [SCI case studies](https://sci-guide.greensoftware.foundation/CaseStudies) started to be written. This was a milestone moment.
+
+But now we are in the next evolution, to have software measurement be a mainstream activity. For this to be an industry with thousands of professionals working to decarbonize software, for businesses to grow and thrive in a commercial software measurement ecosystem, we need to formalize software measurement into a discipline with standards and tooling. The SCI Specification is the standard, and the [Impact Framework](./06-specification/impact-framework.md) is the tooling.
+
+
 ## Project Structure
 
 The **IF source code** can be found in the [IF Github repository](https://github.com/Green-Software-Foundation/if). The code there covers the framework, which includes all the infrastructure for reading and writing input and output yamls, invoking models, running the command line tool and associated helper functions. However, it does not include the actual models themselves. Part of the IF design philosophy is that all models should be plugins, so that the IF is as composable and configurable as possible. Therefore, to use IF, you have to either create your own models or find some prebuilt ones and install them yourself. This also implies that you take responsibility for the models you choose to install.
@@ -63,4 +81,3 @@ You can find specification pages for individual components of the framework in [
 In [`tutorials`](./tutorials) you will find walkthrough guides and tutorials explaining how to achieve specific tasks, such as writing an `impl`, running the model and creating new plugins. 
 
 You will find documentation for the individual built-in model implementations in [`models`](./models/).
-
