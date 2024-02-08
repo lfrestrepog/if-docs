@@ -26,31 +26,7 @@ For example:
 
 Global constants can be given capitalized names, such as `TIME_UNITS_IN_SECONDS`.
 
-## 2. Repository structure
-
-Plugins are expected to have a top-level `src` directory containing several subdirectories: `interfaces`, `lib`, `types`, and `__tests__`. The actual plugin code should be in `src/index.ts`.
-
-```
-plugin
-  |- src
-    |- interfaces
-    |    |-index.ts  // interfaces used in the plugin defined here
-    |- lib
-    |    |- index.ts // plugin code in here
-    |- types
-    |    |- index.ts // types used in the plugin defined here
-    |- index.ts
-
-```
-
-Interfaces must include the Impact Framework `ModelPluginInterface`. Your plugin must implement this interface.
-Types must include the Impact Framework's `ModelParams` type. This is the type we use to handle `input` data from manifest files.
-
-You can bootstrap all this configuration by starting your plugin development from our [plugin template](https://github.com/Green-Software-Foundation/if-model-template). Simply clone the template and start developing your plugin code by creating the corresponding folder in the `src/lib` folder and adding the folder path in the `src/lib/index.ts`
-
-If your plugin requires substantial configuration data or global constant definitions, these can be moved to a `config.ts` file in the plugin folder.
-
-## 3. Plugin code
+## 2. Plugin code
 
 ### Imports
 
@@ -188,7 +164,7 @@ export class EMemModel implements ModelPluginInterface {
 }
 ```
 
-## 4. Unit tests
+## 3. Unit tests
 
 Your plugin should have unit tests with 100% coverage. We use `jest` to handle unit testing. We strive to have one `describe` per function. Each possible outcome from each function is separated using `it` with a precise and descriptive message.
 
@@ -227,7 +203,7 @@ describe('lib/sci-e: ', () => {
 
 We have a [dedicated page](./how-to-write-unit-tests.md) explaining in more detail how to write great unit tests for Impact Framework plugins.
 
-## 5. Linting
+## 4. Linting
 
 We use ESLint to format our code. We use a very simple configuration file (`eslintrc.json`), as follows:
 
