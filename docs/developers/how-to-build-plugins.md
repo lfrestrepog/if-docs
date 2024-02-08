@@ -4,13 +4,12 @@ sidebar-position: 1
 
 # How to build model plugins
 
-The IF is designed to be as composable as possible. This means you can develop your own models and use them in a model pipeline. 
+The IF is designed to be as composable as possible. This means you can develop your own models and use them in a model pipeline.
 To help developers write Typescript models to integrate easily into IF, we provide the `ModelPluginInterface` interface. Here's an overview of the stages you need to follow to integrate your model:
 
 - create a Typescript file that implements the `ModelPluginInterface`
 - install the model
 - initialize and invoke the model in your manifest file
-
 
 ## The model interface
 
@@ -48,8 +47,6 @@ export interface ModelPluginInterface {
 | ------------ | ------------------------------- | ---------------------------------------------------------------- |
 | `model`      | `Promise<ModelPluginInterface>` | `Promise` resolving to an instance of the `ModelPluginInterface` |
 
-
-
 ### execute
 
 `execute()` is where the main calculation logic of the model is implemented.
@@ -60,17 +57,15 @@ export interface ModelPluginInterface {
 | -------- | --------------- | ------------------------------------------------------------------------------ |
 | `inputs` | `ModelParams[]` | Array of data provided in the `inputs` field of a component in a manifest file |
 
-
 #### Returns
 
 | Return value | Type                     | Purpose                                                    |
 | ------------ | ------------------------ | ---------------------------------------------------------- |
 | `outputs`    | `Promise<ModelParams[]>` | `Promise` resolving to an array of updated `ModelParams[]` |
 
-
 ## What are `ModelParams`?
 
-`ModelParams` are a fundamental data type in the Impact Framework.  The type is defined as follows:
+`ModelParams` are a fundamental data type in the Impact Framework. The type is defined as follows:
 
 ```ts
 export type ModelParams = {
@@ -128,7 +123,7 @@ The `sci-e` model implements the following logic:
 
 Let's look at how you would implement this from scratch:
 
-The model must be a class implementing the `ModelPlugin` interface. You can call the class `SciEModel`, and inside the body you can add the method signatures for each of the required methods. This will look as follows:  
+The model must be a class implementing the `ModelPlugin` interface. You can call the class `SciEModel`, and inside the body you can add the method signatures for each of the required methods. This will look as follows:
 
 ```typescript
 export class SciEModel implements ModelPluginInterface {
@@ -148,15 +143,15 @@ export class SciEModel implements ModelPluginInterface {
   }
 ```
 
-our model now has the basic structure required for IF integration. Your next task is to add code to the body of each method to enable the actual model logic to be implemented. 
+our model now has the basic structure required for IF integration. Your next task is to add code to the body of each method to enable the actual model logic to be implemented.
 
 For `sci-e` there is no global configuration required. Everything that the model needs to run is provided in each individual set of `input` data - there are no global constants or names to define during model instantiation. This means you can leave the `configure()` method as it is. It returns an instance of the `SciEmodel` class.
 
-However, the `execute` function *does* require some additional code. 
+However, the `execute` function _does_ require some additional code.
 
 In its current state, the `execute` function simply echoes the input data. Instead, we want to return a mutated version of the `input` data that has a new field: `energy`. The value for `energy` is the sum of whichever `energy-` metrics are available.
 
-The snippet below shows an updated `execute()` method that includes a `map` over the contents of `inputs`. This `map` iterates over `inputs` and passes each element to a `calculateEnergy` method, appending the result to `inputs['energy']`. The array of data, with the new field appended to each object in the `inputs` array, is returned. 
+The snippet below shows an updated `execute()` method that includes a `map` over the contents of `inputs`. This `map` iterates over `inputs` and passes each element to a `calculateEnergy` method, appending the result to `inputs['energy']`. The array of data, with the new field appended to each object in the `inputs` array, is returned.
 
 ```ts
   /**
@@ -171,7 +166,7 @@ The snippet below shows an updated `execute()` method that includes a `map` over
   }
 ```
 
-Now, you can see what happened inside `calculateEnergy()`. `reduce` is applied over the object, accumulating tha values of any fields that appear in the `energyMetrics` array. The sum is returned.
+Now, you can see what happened inside `calculateEnergy()`. `reduce` is applied over the object, accumulating the values of any fields that appear in the `energyMetrics` array. The sum is returned.
 
 ```ts
   /**
@@ -190,13 +185,13 @@ Now, you can see what happened inside `calculateEnergy()`. `reduce` is applied o
 }
 ```
 
-You will likely want add some input data validation here too.
+You will likely want to add some input data validation here too.
 
-Finally, if your model used any fields in `inputs` or created new `outputs` that have not been used in the Impact Framework before, then you should add them to `units.yaml` and `units.ts`. 
+Finally, if your model used any fields in `inputs` or created new `outputs` that have not been used in the Impact Framework before, then you should add them to `params.ts`.
 
-`Units.yaml` can be found at the path `src/config/units.yaml`.
+`params.ts` can be found in the path `src/config`.
 
-Each entry in `units.yaml` looks as follows:
+Each entry in `params.ts` looks as follows:
 
 ```yaml
 carbon:
@@ -205,31 +200,15 @@ carbon:
   aggregation: sum
 ```
 
-This information allows `impact-engine` to programmatically make decisions about how to handle values in features such as aggregation, time normalization and visualizations, and also acts as a global reference document for understanding IF data. The example above is for `carbon`. 
+This information allows `impact-engine` to programmatically make decisions about how to handle values in features such as aggregation, time normalization and visualizations, and also acts as a global reference document for understanding IF data. The example above is for `carbon`.
 
-You should add your new data, giving a name, defining a unit and short description. The `aggregation` field determines how the value is treated when some manipulation has to be done to spread the value over time or aggregate it. 
+You should add your new data, give a name, define a unit and short description. The `aggregation` field determines how the value is treated when some manipulation has to be done to spread the value over time or aggregate it.
 
-For absolute metrics like carbon, the right value is `sum` because you would want to add carbon emissions from each timestep when you aggregate over time. 
+For absolute metrics like carbon, the right value is `sum` because you would want to add carbon emissions from each timestep when you aggregate over time.
 
 For proportional metrics, the right value is `avg`. For example, you would want to calculate the average `cpu-utilization` - it would not make sense to sum it when aggregating over multiple timesteps.
 
 Finally, values that should always be presented identically regardless of any aggregation, such as names or global constants, should be given the `aggregation-method` value `none`.
-
-
-`units.ts` can be found at the path `src/types/units.ts`.
-
-Inside `units.ts` is an array, `UnitKeys`:
-
-```ts
-export const UnitKeys = [
-  'carbon',
-  'core-units',
-  'cpu-util',
-  ...
-]
-```
-
-You can simply add your metric name to this array. This lets the IF know that it is a recognized parameter that can be included in `ModelParams`.
 
 Now you are ready to run your model using the `impact-engine` CLI tool!
 
@@ -237,13 +216,13 @@ Now you are ready to run your model using the `impact-engine` CLI tool!
 
 ### Linking local model
 
-For using locally developed model in `if` please follow these steps: 
+For using locally developed model in `if` please follow these steps:
 
-1. On the root level of a locally developed model run `npm link`, which will create global package. It uses `package.json` file's `name` field as a package name. Additionally name can be checked by running `npm ls -g --depth=0 --link=true`.
+1. On the root level of a locally developed model run `npm link`, which will create a global package. It uses `package.json` file's `name` field as a package name. Additionally, name can be checked by running `npm ls -g --depth=0 --link=true`.
 
-2. Use the linked model in impl by specifying `name`, `model`, `path` in initialize models section. 
+2. Use the linked model in impl by specifying `name`, `model`, `path` in initialize models section.
 
-### Using model from directly from github
+### Using model directly from github
 
 You can simply save your model in a public Github repository and pass the path to it in your impl.
 
@@ -255,7 +234,7 @@ npm install your model:
 npm install https://github.com/my-repo/my-model
 ```
 
-Then, in your manifest file, provide the path in the model instantiation. You also need to specify which class the model instantiates. Let's say you are using the `sci-e` model from the example above: 
+Then, in your manifest file, provide the path in the model instantiation. You also need to specify which class the model instantiates. Let's say you are using the `sci-e` model from the example above:
 
 ```yaml
 name: model-demo
@@ -272,8 +251,6 @@ graph:
     child:
       config:
       inputs:
-...
-
 ```
 
 Now, when you run the manifest file using the `impact-engine`, it will load the model automatically.
