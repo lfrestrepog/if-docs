@@ -95,8 +95,30 @@ To sign all commits by default in any local repository on your computer, run the
 $ git config --global commit.gpgsign true
 ```
 
+##### Commit Format
+
+We have transitioned to using Conventional Commits for our commit messages. From now on, commit messages should follow the structured format outlined below:
+
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+- **Type**: Describes the kind of change being made (e.g., feat, fix, docs, style, refactor, test, chore, ci, revert,
+  package).
+- **Scope**: (Optional) Specifies the part of the codebase affected by the change.
+- **Description**: A brief, imperative summary of the change.
+- **Body**: (Optional) Provides additional details explaining the change.
+- **Footer**: (Optional) Contains any relevant metadata or issue references.
+
+Example:
+
+`fix(validation): Resolve issue with form input validation`
+
 Commiting multiple files with changes on multiple resources is not allowed.
-Commit message should clearly describe on which resource changes are made.
 
 Add and commit:
 
