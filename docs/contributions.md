@@ -11,21 +11,37 @@ The following document is a rule set of guidelines for contributing.
 ## Table of Contents <!-- omit from toc -->
 
 - [Contributions](#contributions)
+  - [Before you start](#before-you-start)
   - [Code Contributions](#code-contributions)
-    - [Step 1: Fork](#step-1-fork)
-    - [Step 2: Branch](#step-2-branch)
-    - [Step 3: Commit](#step-3-commit)
-    - [Step 4: Sync](#step-4-sync)
-    - [Step 5: Push](#step-5-push)
-    - [Step 6: Pull Request](#step-6-pull-request)
+      - [Step 1: Fork](#step-1-fork)
+      - [Step 2: Branch](#step-2-branch)
+      - [Step 3: Commit](#step-3-commit)
+        - [Generating a GPG key](#generating-a-gpg-key)
+        - [Configure Git](#configure-git)
+        - [Commit Format](#commit-format)
+      - [Step 4: Sync](#step-4-sync)
+      - [Step 5: Push](#step-5-push)
+      - [Step 6: Pull Request](#step-6-pull-request)
   - [Commit message guidelines](#commit-message-guidelines)
   - [Coding guidelines](#coding-guidelines)
-    - [Code structuring patterns](#code-structuring-patterns)
-      - [Object Oriented Programming](#object-oriented-programming)
-      - [Functional Programming](#functional-programming)
-    - [Naming patterns](#naming-patterns)
-    - [Documentation](#documentation)
-    - [Writing tests](#writing-tests)
+      - [Code structuring patterns](#code-structuring-patterns)
+          - [Object Oriented Programming](#object-oriented-programming)
+          - [Functional Programming](#functional-programming)
+      - [Naming patterns](#naming-patterns)
+      - [Documentation](#documentation)
+      - [Writing tests](#writing-tests)
+
+## Before you start
+
+The best way to contribute to IF is to build your own plugins. You can build these in your own Github repositories or even publish them as packages, and then run them through IF without ever having to deal with IF core source code. 
+
+However, if you want to contribute changes to our repositories, either `if`, `if-docs`, `if-plugins` or `if-unofficial-plugins` the best way to start s to check the issue boards. 
+
+Issues that are well suited to community contributions are tagged `help-wanted`. If you see this tag, and no-one is assigned to the issue, then you can be confident that the issue describes a change we want to merge in and no-one is currently working on it. 
+
+It is recommended to comment on the issue to make contact with the core team and signal your intention to work on it. You can then start working on the issue when it is assigned to you. 
+
+Following this process makes it much more likely that your changes will get merged compared to raising unsolicited PRs.
 
 ## Code Contributions
 
