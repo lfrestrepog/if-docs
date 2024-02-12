@@ -35,7 +35,7 @@ The following document is a rule set of guidelines for contributing.
 
 The best way to contribute to IF is to build your own plugins. You can build these in your own Github repositories or even publish them as packages, and then run them through IF without ever having to deal with IF core source code. 
 
-However, if you want to contribute changes to our repositories, either `if`, `if-docs`, `if-plugins` or `if-unofficial-plugins` the best way to start s to check the issue boards. 
+However, if you want to contribute changes to our repositories, either `if`, `if-docs`, `if-plugins` or `if-unofficial-plugins` the best way to start is to check the issue boards. 
 
 Issues that are well suited to community contributions are tagged `help-wanted`. If you see this tag, and no-one is assigned to the issue, then you can be confident that the issue describes a change we want to merge in and no-one is currently working on it. 
 
