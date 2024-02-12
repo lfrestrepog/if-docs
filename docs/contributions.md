@@ -97,42 +97,19 @@ $ git config --global commit.gpgsign true
 
 ##### Commit Format
 
-We have transitioned to using Conventional Commits for our commit messages. From now on, commit messages should follow the structured format outlined below:
+We use [Conventional Commits](https://github.com/conventional-changelog/commitlint) for our commit messages. 
 
-```
-<type>[optional scope]: <description>
-
-[optional body]
-
-[optional footer(s)]
-```
-
-- **Type**: Describes the kind of change being made (e.g., feat, fix, docs, style, refactor, test, chore, ci, revert,
-  package).
-- **Scope**: (Optional) Specifies the part of the codebase affected by the change.
-- **Description**: A brief, imperative summary of the change.
-- **Body**: (Optional) Provides additional details explaining the change.
-- **Footer**: (Optional) Contains any relevant metadata or issue references.
+You can check our [config file](https://github.com/Green-Software-Foundation/if/blob/dev/.commitlintrc.js) for the allowed types.
 
 Example:
 
 `fix(validation): Resolve issue with form input validation`
 
-Commiting multiple files with changes on multiple resources is not allowed.
-
-Add and commit:
-
-```bash
-$ git add my/changed/files
-$ git commit
-```
-
 Commit your changes in logical chunks. Please do not push all changes in one commit.
 
 > Run `npm run fix` before commiting for not having conflict with CI linter.
 
-Please adhere to these [Commit message guidelines](#commit-message-guidelines)
-or your code is unlikely be merged into the main project.
+Please adhere to these [Commit message guidelines](#commit-message-guidelines).
 
 #### Step 4: Sync
 
