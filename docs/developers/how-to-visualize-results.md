@@ -2,7 +2,7 @@
 sidebar-position: 4
 ---
 
-# How to Visualize results
+# How to visualize results
 
 _(for any questions / help needed on IF visualization please raise an issue here: [IF issues](https://github.com/Green-Software-Foundation/if/issues))_
 
@@ -17,7 +17,6 @@ If you need to visualize other output parameters you can either use **Grafana** 
 
 ## Simple HTML Exporter plugin
 
-(see full documentation here: <URL TBD>)
 
 ### Input
 
@@ -75,4 +74,3 @@ This method requires converting the resulting output yml into a CSV. The standar
 ### Visualization example
 
 ![img.png](grafana-sample.png)
-
