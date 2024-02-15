@@ -4,7 +4,7 @@ sidebar-position: 4
 
 # How to Visualize results
 
-_(for any questions / help needed on IF visualization please _email: pazbarda@gmail.com_)_
+_(for any questions / help needed on IF visualization please raise an issue here: [IF issues](https://github.com/Green-Software-Foundation/if/issues))_
 
 There are currently 2 ways to visualize Impact Framework outputs:
 1. Using the **Simple HTML Exporter plugin**.
