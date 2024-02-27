@@ -26,17 +26,17 @@ If you need to visualize other output parameters you can either use **Grafana** 
 
 This plugin acts as a relay, returning the input as-is, with the generated HTML acting as a "side effect".
 
-### Example impl
+### Example manifest
 
 ```yaml
 name: simple-html-exporter-demo
 description:
 tags:
 initialize:
-  models:
-    - name: simple-html-exporter
-      model: SimpleHtmlExporter
-      path: "@grnsft/if-models"
+  plugins:
+    'simple-html-exporter'
+      method: SimpleHtmlExporter
+      path: "@grnsft/if-plugins"
 graph:
   children:
     child:
