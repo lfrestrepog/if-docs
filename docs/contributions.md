@@ -1,8 +1,5 @@
----
-sidebar_position: 6
----
+## Contribution Guidelines <!-- omit from toc -->
 
-# Contributions
 
 First off, thanks for taking the time to contribute! 🎉
 
@@ -10,38 +7,21 @@ The following document is a rule set of guidelines for contributing.
 
 ## Table of Contents <!-- omit from toc -->
 
-- [Contributions](#contributions)
-  - [Before you start](#before-you-start)
-  - [Code Contributions](#code-contributions)
-      - [Step 1: Fork](#step-1-fork)
-      - [Step 2: Branch](#step-2-branch)
-      - [Step 3: Commit](#step-3-commit)
-        - [Generating a GPG key](#generating-a-gpg-key)
-        - [Configure Git](#configure-git)
-        - [Commit Format](#commit-format)
-      - [Step 4: Sync](#step-4-sync)
-      - [Step 5: Push](#step-5-push)
-      - [Step 6: Pull Request](#step-6-pull-request)
-  - [Commit message guidelines](#commit-message-guidelines)
-  - [Coding guidelines](#coding-guidelines)
-      - [Code structuring patterns](#code-structuring-patterns)
-          - [Object Oriented Programming](#object-oriented-programming)
-          - [Functional Programming](#functional-programming)
-      - [Naming patterns](#naming-patterns)
-      - [Documentation](#documentation)
-      - [Writing tests](#writing-tests)
-
-## Before you start
-
-The best way to contribute to IF is to build your own plugins. You can build these in your own Github repositories or even publish them as packages, and then run them through IF without ever having to deal with IF core source code. 
-
-However, if you want to contribute changes to our repositories, either `if`, `if-docs`, `if-plugins` or `if-unofficial-plugins` the best way to start is to check the issue boards. 
-
-Issues that are well suited to community contributions are tagged `help-wanted`. If you see this tag, and no-one is assigned to the issue, then you can be confident that the issue describes a change we want to merge in and no-one is currently working on it. 
-
-It is recommended to comment on the issue to make contact with the core team and signal your intention to work on it. You can then start working on the issue when it is assigned to you. 
-
-Following this process makes it much more likely that your changes will get merged compared to raising unsolicited PRs.
+- [Code Contributions](#code-contributions)
+    - [Step 1: Fork](#step-1-fork)
+    - [Step 2: Branch](#step-2-branch)
+    - [Step 3: Commit](#step-3-commit)
+    - [Step 4: Sync](#step-4-sync)
+    - [Step 5: Push](#step-5-push)
+    - [Step 6: Pull Request](#step-6-pull-request)
+- [Commit message guidelines](#commit-message-guidelines)
+- [Coding guidelines](#coding-guidelines)
+    - [Code structuring patterns](#code-structuring-patterns)
+        - [Object Oriented Programming](#object-oriented-programming)
+        - [Functional Programming](#functional-programming)
+    - [Naming patterns](#naming-patterns)
+    - [Documentation](#documentation)
+    - [Writing tests](#writing-tests)
 
 ## Code Contributions
 
@@ -49,11 +29,11 @@ Following this process makes it much more likely that your changes will get merg
 
 Fork the project on [GitHub](git@github.com:Green-Software-Foundation/if.git)
 
-You then have your own copy of the repository that you can change.
+You then have your own copy of the repository that you can change. 
 
 #### Step 2: Branch
 
-Create new branch in your forked copy of the `if` repository, which will contain your new feature, fix or change.
+Create new branch in your forked copy of the `if` repository, which will contain your new feature, fix or change. 
 
     ```bash
     $ git checkout -b <topic-branch-name>
@@ -63,85 +43,43 @@ Create new branch in your forked copy of the `if` repository, which will contain
 
 Make sure git knows your name and email address:
 
-```bash
-$ git config --global user.name "Example User"
-$ git config --global user.email "user@example.com"
-```
+   ```bash
+   $ git config --global user.name "Example User"
+   $ git config --global user.email "user@example.com"
+   ```
 
-Before committing changes to a GitHub repository, it's essential to set up a GPG (GNU Privacy Guard) signing key. These keys are used to sign commits, tags, and other data in GitHub repositories, verifying their authenticity and integrity, and ensuring they haven't been tampered with. To use signing keys effectively, make sure to complete the following steps:
+Commiting multiple files with changes on multiple resources is not allowed.
+Commit message should clearly describe on which resource changes are made.
 
-##### Generating a GPG key
+Add and commit:
 
-If you haven't already done so, generate an OpenPGP keypair.
-
-- Download and install [the GPG command line tools](https://www.gnupg.org/download/) for your operating system. We generally recommend installing the latest version for your operating system.
-- Open Terminal.
-- Generate a GPG key pair.
-
-```bash
-$ gpg --full-generate-key
-```
-
-- At the prompt you can specify the kind of key, size, and the length of time the key should be valid or just press `Enter` to accept the default
-- Verify that your selections are correct.
-- Enter your user ID information.
-- Type a secure passphrase.
-- Use the `gpg --list-secret-keys --keyid-format=long` command to list the long form of the GPG keys for which you have both a public and private key. A private key is required for signing commits or tags.
-- From the list of GPG keys, copy the long form of the GPG key ID you'd like to use.
-- Paste the text below, substituting in the GPG key ID you'd like to use. In this example, the GPG key ID is `3AA5C34371567BD2`:
-
-```bash
-$ gpg --armor --export 3AA5C34371567BD2
-```
-
-- Copy your GPG key, beginning with `-----BEGIN PGP PUBLIC KEY BLOCK-----` and ending with `-----END PGP PUBLIC KEY BLOCK-----`.
-- Add the GPG key to your GitHub account.
-
-##### Configure Git
-
-Make sure Git is configured to use the correct signing key. You can do this by setting the `user.signingkey` configuration option in Git. Use the following command to set your signing key. In this example, the GPG key ID is `3AA5C34371567BD2`:
-
-```bash
-$ git config --global user.signingkey 3AA5C34371567BD2
-```
-
-To sign all commits by default in any local repository on your computer, run the following command:
-
-```bash
-$ git config --global commit.gpgsign true
-```
-
-##### Commit Format
-
-We use [Conventional Commits](https://github.com/conventional-changelog/commitlint) for our commit messages. 
-
-You can check our [config file](https://github.com/Green-Software-Foundation/if/blob/dev/.commitlintrc.js) for the allowed types.
-
-Example:
-
-`fix(validation): Resolve issue with form input validation`
-
+   ```bash
+   $ git add my/changed/files
+   $ git commit
+   ```  
+    
 Commit your changes in logical chunks. Please do not push all changes in one commit.
 
 > Run `npm run fix` before commiting for not having conflict with CI linter.
 
-Please adhere to these [Commit message guidelines](#commit-message-guidelines).
+Please adhere to these [Commit message guidelines](#commit-message-guidelines)
+   or your code is unlikely be merged into the main project.
 
 #### Step 4: Sync
 
 Use git pull/merge to synchronize your work with the IF repository.
 
-```bash
-$ git pull upstream dev
-```
-
+   ```bash
+   $ git pull upstream dev
+   ```
+   
 #### Step 5: Push
 
 Push your topic branch to your fork:
 
-```bash
-$ git push origin <topic-branch-name>
-```
+   ```bash
+   $ git push origin <topic-branch-name>
+   ```
 
 #### Step 6: Pull Request
 
@@ -155,39 +93,40 @@ CI included lint checks, running tests, and etc.
 
 The commit message should describe what changed and why.
 
-1.  The first line should:
-    - contain a short description of the change
-    - be 60 characters or less
-    - be prefixed with the name of the changed subsystem
-    - be entirely in lowercase with the exception of proper nouns, acronyms, and the words that refer to code,
-      like function/variable names
+   1. The first line should:
+       * contain a short description of the change
+       * be 60 characters or less
+       * be prefixed with the name of the changed subsystem
+       * be entirely in lowercase with the exception of proper nouns, acronyms, and the words that refer to code,
+         like function/variable names
+        
+       Examples:
+       
+       ```
+        util: add getInitializedModel method to models.
+        deps: add express package to dependencies.
+        service: refactor get user.
+       ```
+   2. Keep the second line blank. 
+          
+   3. Wrap all other lines at 72 columns:
+      * describe each line in logical chunks
+      * start each line with: space hyphen space ( - ...)
+      * be entirely in lowercase with the exception of proper nouns, acronyms, and the words that refer to code,
+        like function/variable names
+      
       Examples:
-    ```
-     util: add getInitializedModel method to models.
-     deps: add express package to dependencies.
-     service: refactor get user.
-    ```
-2.  Keep the second line blank.
-3.  Wrap all other lines at 72 columns:
-
-    - describe each line in logical chunks
-    - start each line with: space hyphen space ( - ...)
-    - be entirely in lowercase with the exception of proper nouns, acronyms, and the words that refer to code,
-      like function/variable names
-
-    Examples:
-
-    ```
-      - remove deprecated logger
-      - refactor some method
-      - add JSDoc on existing function
-    ```
-
+      
+      ```    
+        - remove deprecated logger
+        - refactor some method
+        - add JSDoc on existing function
+      ```
 ## Coding guidelines
 
 #### Code structuring patterns
 
-Avoid having functions which are responsible to do multiple things at the same time. Make sure one function/method does one thing, and does it well.
+Avoid having functions which are responsible to do multiple things at the same time. Make sure one function/method does one thing, and does it well. 
 
 ###### Object Oriented Programming
 
@@ -235,10 +174,9 @@ class MockClass {
 
 #### Writing tests
 
-One test file should be responsible for one module. `describe` blocks should be used for module and function/method description. First `describe` should follow `resource/module: ` pattern. Second describe title should follow `method(): ` pattern. Test units can use either `test` or `it`, title should exactly describe behaviour and input argument. Make sure each test case covers one branch.
+One test file should be responsible for one module. `describe` blocks should be used for module and function/method description. First `describe` should follow `resource/module: ` pattern. Second describe title should follow  `method(): ` pattern. Test units can use either `test` or `it`, title should exactly describe behaviour and input argument. Make sure each test case covers one branch.
 
-See example:
-
+See example: 
 ```ts
 describe('util/args: ', () => {
    describe('parseProcessArgument(): ', () => {
@@ -249,4 +187,4 @@ describe('util/args: ', () => {
 })
 ```
 
-_[⬅️ back to the root](/README.md#ief)_
+*[⬅️ back to the root](/README.md#ief)*
