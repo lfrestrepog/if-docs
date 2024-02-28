@@ -1,4 +1,4 @@
-## Contribution Guidelines <!-- omit from toc -->
+# Contribution Guidelines
 
 
 First off, thanks for taking the time to contribute! 🎉
@@ -7,21 +7,22 @@ The following document is a rule set of guidelines for contributing.
 
 ## Table of Contents <!-- omit from toc -->
 
-- [Code Contributions](#code-contributions)
-    - [Step 1: Fork](#step-1-fork)
-    - [Step 2: Branch](#step-2-branch)
-    - [Step 3: Commit](#step-3-commit)
-    - [Step 4: Sync](#step-4-sync)
-    - [Step 5: Push](#step-5-push)
-    - [Step 6: Pull Request](#step-6-pull-request)
-- [Commit message guidelines](#commit-message-guidelines)
-- [Coding guidelines](#coding-guidelines)
-    - [Code structuring patterns](#code-structuring-patterns)
-        - [Object Oriented Programming](#object-oriented-programming)
-        - [Functional Programming](#functional-programming)
-    - [Naming patterns](#naming-patterns)
-    - [Documentation](#documentation)
-    - [Writing tests](#writing-tests)
+- [Contribution Guidelines](#contribution-guidelines)
+  - [Code Contributions](#code-contributions)
+      - [Step 1: Fork](#step-1-fork)
+      - [Step 2: Branch](#step-2-branch)
+      - [Step 3: Commit](#step-3-commit)
+      - [Step 4: Sync](#step-4-sync)
+      - [Step 5: Push](#step-5-push)
+      - [Step 6: Pull Request](#step-6-pull-request)
+  - [Commit message guidelines](#commit-message-guidelines)
+  - [Coding guidelines](#coding-guidelines)
+      - [Code structuring patterns](#code-structuring-patterns)
+          - [Object Oriented Programming](#object-oriented-programming)
+          - [Functional Programming](#functional-programming)
+      - [Naming patterns](#naming-patterns)
+      - [Documentation](#documentation)
+      - [Writing tests](#writing-tests)
 
 ## Code Contributions
 
