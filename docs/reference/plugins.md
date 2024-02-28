@@ -1,10 +1,10 @@
 # Plugins
 
-The Impact Framework includes just one builtin model (`time-sync`). All other models are external plugins that have to be installed before they can be run in an IF pipeline. Anyone can create and install a new model plugin. As long as the model conforms to the expected interface, IF can run it.
+The Impact Framework includes just one builtin plugin (`time-sync`). All other plugins are external plugins that have to be installed before they can be run in an IF pipeline. Anyone can create and install a new plugin. As long as the plugin conforms to the expected interface, IF can run it.
 
-There are two repositories that were created by the IF core team. The `if-models` repository contains the "core" set of models that IF developers will maintain and support. We also provide a second repository of `if-unofficial` models that are mainly re-implementations of existing third party models or code that we expect community members to maintain independently of the IF core team.
+There are two repositories that were created by the IF core team. The `if-models` repository contains the "core" set of plugins that IF developers will maintain and support. We also provide a second repository of `if-unofficial` plugins that are mainly re-implementations of existing third party plugins or code that we expect community members to maintain independently of the IF core team.
 
-Documentation for the specific individual models are available in the model READMEs. Below you will find a brief description of each model and a link to its documentation:
+Documentation for the specific individual plugins are available in the plugin READMEs. Below you will find a brief description of each plugin and a link to its documentation:
 
 ### `built-in`
 
@@ -20,7 +20,7 @@ Documentation for the specific individual models are available in the model READ
 * [SCI-M](https://github.com/Green-Software-Foundation/if-models/blob/main/src/lib/sci-m/README.md) - Calculates the embodied carbon for a component.
 * [SCI-O](https://github.com/Green-Software-Foundation/if-models/blob/main/src/lib/sci-o/index.ts) - Calculates the operational carbon from the total energy and grid carbon intensity.
 * [SCI](https://github.com/Green-Software-Foundation/if-models/blob/main/src/lib/sci/README.md): Calculates the software carbon intensity.
-* [SHELL](https://github.com/Green-Software-Foundation/if-models/blob/main/src/lib/shell/README.md) - A model that enables external models in any language to be run in a child process
+* [SHELL](https://github.com/Green-Software-Foundation/if-models/blob/main/src/lib/shell/README.md) - A plugin that enables external code in any language to be run in a child process
 * [TDP-FINDER](https://github.com/Green-Software-Foundation/if-models/tree/main/src/lib/tdp-finder): Looks up the thermnal desig power for a given processor in a local database.
 * [Sum](https://github.com/Green-Software-Foundation/if-models/tree/main/src/lib/sum): a generic arithmetic plugin that allows you to sum any set of input parameters.
 * [Multiply](https://github.com/Green-Software-Foundation/if-models/tree/main/src/lib/multiply): a generic arithmetic plugin that allows you to multiply any set of input parameters.
