@@ -20,7 +20,7 @@ If you need to visualize other output parameters you can either use **Grafana** 
 
 ### Input
 
-`energy`[kWh], `carbon`[gCO2] and `timestamp` should be included in the input array items.
+`energy` (kWh), `carbon` (gCO2) and `timestamp` should be included in the input array items.
 
 ### Output
 

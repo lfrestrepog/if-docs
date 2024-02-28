@@ -11,7 +11,7 @@ The developer documentation includes:
 * [How to build plugins](./how-to-build-plugins.md)
 * [How to make plugins production-ready](./how-to-refine-plugins.md)
 * [How to write unit tests](./how-to-test-if.md)
-* [HOw to visualize results](./how-to-visualize-results.md)
+* [How to visualize results](./how-to-visualize-results.md)
 
 
 If you are looking for guidance for how to use IF to measure the environmental impact of your apps, you should go to our [`user` documentation](../users/) instead.
