@@ -76,8 +76,10 @@ Finally, the **source code for this documentation** website is available at the 
 
 The lefthand sidebar contains links to all the information you need to understand Impact Framework. 
 
-You can find specification pages for individual components of the framework in [`specification`](./specification/). 
+You can explore the key ideas underpinning Impact Framework in the [Major Concepts section](./major-concepts/).
 
-In [`tutorials`](./tutorials) you will find walkthrough guides and tutorials explaining how to achieve specific tasks, such as writing an manifest, running the plugin and creating new plugins. 
+Users can read our [guides](./users/) explaining how to use IF, including installation, using the CLI and loading plugins.
 
-You will find documentation for the individual built-in plugin implementations in [`plugins`](./plugins/).
+We also have [developer documentation](./developers/) to help you get started building with IF.
+
+You will find documentation for the individual built-in plugin implementations in [`plugins`](./reference/plugins.md).
