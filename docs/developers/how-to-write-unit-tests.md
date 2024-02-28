@@ -13,7 +13,7 @@ Both the IF and the project repositories include a `__test__` directory. Inside,
 
 ```sh
 
-if-unofficial-models
+if-unofficial-plugins
  |
  |- src
     |

@@ -21,8 +21,8 @@ Read our detailed guide to [installing IF](./how-to-install-if.md).
 Install some of the plugins you want to include in your pipeline. The following commands will install both the official and unofficial IF model packages.
 
 ```sh
-npm install -g @grnsft/if-models
-npm install -g @grnsft/if-unofficial-models
+npm install -g @grnsft/if-plugins
+npm install -g @grnsft/if-unofficial-plugins
 ```
 
 Read our detailed guide to [loading plugins](./how-to-import-plugins.md).
@@ -40,7 +40,7 @@ tags:
 initialize:
   plugins:
     teads-curve: 
-      path: '@grnsft/if-unofficial-models'
+      path: '@grnsft/if-unofficial-plugins'
       method: TeadsCurve
       global-config:
         interpolation: spline

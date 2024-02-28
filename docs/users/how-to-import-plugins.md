@@ -4,13 +4,13 @@ sidebar_position: 3
 
 # How to load plugins
 
-Plugins are developed separately to the Impact Framework core. However, the IF core developers maintain a standard library of plugins that can be found in this [Github repository](https://github.com/Green-Software-Foundation/if-models). We also provide some implementations of popular community plugins, although we rely on other members of the community to maintain them.
+Plugins are developed separately to the Impact Framework core. However, the IF core developers maintain a standard library of plugins that can be found in this [Github repository](https://github.com/Green-Software-Foundation/if-plugins). We also provide some implementations of popular community plugins, although we rely on other members of the community to maintain them.
 
-Use the following commands to install the `if-models` and `if-unofficial-models` repositories:
+Use the following commands to install the `if-plugins` and `if-unofficial-plugins` repositories:
 
 ```
-npm -i -g @grnsft/if-models
-npm -i -g @grnsft/if-unofficial-models
+npm -i -g @grnsft/if-plugins
+npm -i -g @grnsft/if-unofficial-plugins
 ```
 
 Plugins in these packages can then be invoked in an impl by providing their path in the plugin initialization, as shown in the following example:
@@ -23,17 +23,17 @@ initialize:
   plugins:
     - name: azure-importer
       method: AzureImporterModel
-      path: "@grnsft/if-unofficial-models"
+      path: "@grnsft/if-unofficial-plugins"
     - name: cloud-instance-metadata
       method: CloudInstanceMetadataModel
-      path: "@grnsft/if-models"
+      path: "@grnsft/if-plugins"
 ```
 
 
 Load your plugin directly from your Github repository, or from `npm` if you have published your plugin there. First, you'll need to install it by providing the path to the repository to `npm install` as follows:
 
 ```sh
-npm install https://github.com/Green-Software-Foundation/if-models
+npm install https://github.com/Green-Software-Foundation/if-plugins
 ```
 
 You'll need to provide the following fields:

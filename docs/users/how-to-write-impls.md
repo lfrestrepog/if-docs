@@ -52,7 +52,7 @@ initialize:
 
 
 - The `name` is the name you want this plugin instance to be recognized as by Impact Framework.
-- The `path` defines where IF should look for the installed plugin. For example, for our standard library of plugins you would specify `"@grnsft/if-models"`, as this is the name of the directory they are installed into in `node_modules`.
+- The `path` defines where IF should look for the installed plugin. For example, for our standard library of plugins you would specify `"@grnsft/if-plugins"`, as this is the name of the directory they are installed into in `node_modules`.
 - For the `method` field, you should provide the name of the function exported by your plugin. For example, for the `sci-e` plugin, the correct value is `SciE`.
 
 ### Tree
@@ -121,21 +121,21 @@ aggregation:
 initialize:
   plugins:
     "teads-curve":
-      path: "@grnsft/if-unofficial-models"
+      path: "@grnsft/if-unofficial-plugins"
       method: TeadsCurve
       global-config:
         interpolation: spline
     "sci-e":
-      path: "@grnsft/if-models"
+      path: "@grnsft/if-plugins"
       method: SciE
     "sci-m":
-      path: "@grnsft/if-models"
+      path: "@grnsft/if-plugins"
       method: SciM
     "sci-o":
-      path: "@grnsft/if-models"
+      path: "@grnsft/if-plugins"
       method: SciO
     "sci":
-      path: "@grnsft/if-models"
+      path: "@grnsft/if-plugins"
       method: Sci
       global-config:
         functional-unit: "requests"

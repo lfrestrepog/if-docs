@@ -57,7 +57,7 @@ The initialize section is where tyou define which plugins will be used in your m
 
 - `name`: the name used to refer to this specific mdoel across the manifest file
 - `method`: the name of the function exported by the plugin.
-- `path`: the path to the plugin code. For example, for a plugin from our standard library installed from npm, this value would be `@grnsft/if-models`
+- `path`: the path to the plugin code. For example, for a plugin from our standard library installed from npm, this value would be `@grnsft/if-plugins`
 
 There is also an optional `global-config` field that can be used to set *global* configuration that is common to a plugin wherever it is invoked across the entire manifest file.
 
@@ -177,7 +177,7 @@ tags: null
 initialize:
   plugins:
     - name: e-mem
-      path: "@grnsft/if-models"
+      path: "@grnsft/if-plugins"
       method: EMem
 graph:
   children:
