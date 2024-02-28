@@ -22,7 +22,11 @@ Documentation for the specific individual models are available in the model READ
 * [SCI](https://github.com/Green-Software-Foundation/if-models/blob/main/src/lib/sci/README.md): Calculates the software carbon intensity.
 * [SHELL](https://github.com/Green-Software-Foundation/if-models/blob/main/src/lib/shell/README.md) - A model that enables external models in any language to be run in a child process
 * [TDP-FINDER](https://github.com/Green-Software-Foundation/if-models/tree/main/src/lib/tdp-finder): Looks up the thermnal desig power for a given processor in a local database.
- 
+* [Sum](https://github.com/Green-Software-Foundation/if-models/tree/main/src/lib/sum): a generic arithmetic plugin that allows you to sum any set of input parameters.
+* [Multiply](https://github.com/Green-Software-Foundation/if-models/tree/main/src/lib/multiply): a generic arithmetic plugin that allows you to multiply any set of input parameters.
+* [Coefficient](https://github.com/Green-Software-Foundation/if-models/tree/main/src/lib/coefficient): a generic arithmetic plugin that allows you to multiply any input value by a coefficient.
+
+
 
 ### `if-unofficial-models`
 

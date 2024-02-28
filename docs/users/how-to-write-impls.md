@@ -4,27 +4,28 @@ sidebar_position: 4
 
 # How to write a manifest file
 
-The Impact Framework receives all its configuration and input data in the form of a manifest file known as an `impl` (input-yaml). To use the framework, you will need to write an `impl` file and pass its path to the command line tool. This guide will help you to understand how to construct one of these files and use it to measure the energy and carbon usage of your app.
+The Impact Framework receives all its configuration and input data in the form of a manifest file known as an manifest. To use the framework, you will need to write a manifest file and pass its path to the command line tool. This guide will help you to understand how to construct one of these files and use it to measure the energy and carbon usage of your app.
 
-## Structure of an `impl`
+## Structure of a manifest
 
-The basic structure of an `impl` is as follows: 
+The basic structure of a manifest is as follows: 
 
 ```yaml
 name: 
 description: 
 tags: 
 initialize:
-  models:
+  plugins:
     - name: 
-      model:
+      method:
       path: 
-graph:
+tree:
   children:
     child:
       pipeline:
         - 
       config:
+      defaults:
       inputs:
 
 ```
@@ -40,34 +41,35 @@ tags:
 
 ### Initialize
 
-The `initialize` fields are where you specify each individual model that will be initialized in your pipeline. The models can be initialized in any order, but can only be invoked elsewhere in the `impl` if they have been initialized first here. In each case, you will need to provide the name, path and model:
+The `initialize` fields are where you specify each individual plugin that will be initialized in your pipeline. The plugins can be initialized in any order, but can only be invoked elsewhere in the manifest if they have been initialized first here. In each case, you will need to provide the `name`, `path` and `method` (and `global-config` if your plugin requires it):
 
 ```yaml
 initialize:
-    - name: sci-m
+    sci-m
       path: ''
-      model:
+      method:
 ```
 
 
-- The `name` is the exact model name as recognized by Impact Framework. You can check all the valid model names [here](../src/util/models-universe.ts).
-- The `path` defines where IF should look for the installed model. For example, for our standard library of models you would specify `"@grnsft/if-models"`, as this is the name of the directory they are installed into in `node_modules`.
-- For the `model` field, you should provide the name of the class your model instantiates. For example, for the `sci-e` model, the correct value is `SciEModel`.
+- The `name` is the name you want this plugin instance to be recognized as by Impact Framework.
+- The `path` defines where IF should look for the installed plugin. For example, for our standard library of plugins you would specify `"@grnsft/if-models"`, as this is the name of the directory they are installed into in `node_modules`.
+- For the `method` field, you should provide the name of the function exported by your plugin. For example, for the `sci-e` plugin, the correct value is `SciE`.
 
-### Graph
+### Tree
 
-The `graph` fields are where you define the various components of your application. Each component is defined as `children`, where each `child`'s output is summed to give the overall impact. Each `child` can have its own model pipeline and its own configuration, but when none is provided, it is inherited from the graph-level configuration.
+The `tree` fields are where you define the various components of your application. Each component is defined as `children`, where each `child`'s output is summed to give the overall impact. Each `child` can have its own plugin pipeline and its own configuration, but when none is provided, it is inherited from the tree-level configuration.
 
-In the following example, there is only one component but the model pipeline contains two models; `teads-curve` and `sci-m`. Neither requires any `config` data, but certain information is required in `inputs`.
+In the following example, there is only one component but the plugin pipeline contains two plugins; `teads-curve` and `sci-m`. Neither requires any `config` data, but certain information is required in `inputs`.
 
 ```yaml
-graph:
+tree:
   children:
     child:
       pipeline:
         - teads-curve
         - sci-m
       config:
+      defaults:
       inputs:
         - timestamp: '2023-11-02T10:35:31.820Z'
           duration: 3600
@@ -90,176 +92,173 @@ inputs:
     cpu-util: 45
 ```
 
-You now have a simple `impl` file that will use the model config and input data to run the `teads-curve` and `sci-m` models. The output data will be appended to the `impl` under a new `outputs` field and saved as an `ompl` file.
+You now have a simple manifest file that will use the plugin config and input data to run the `teads-curve` and `sci-m` plugins. The output data will be appended to the manifest under a new `outputs` field and saved as an output file.
 
-## More complex `impls`
+## More complex manifests
 
 ### Complex pipelines
 
-Whilst the `impl` file we looked at above works perfectly well, it will only return the most basic output data. Most users will want to calculate an SCI score, which implies a number of additional steps:
+Whilst the manifest file we looked at above works perfectly well, it will only return the most basic output data. Most users will want to calculate an SCI score, which implies a number of additional steps:
+
 - `operational-carbon` and `embodied-carbon` must appear as inputs.
-- This means that `sci` will need to be preceded by `sci-m` and `sci-o` in the model pipeline.
+- This means that `sci` will need to be preceded by `sci-m` and `sci-o` in the plugin pipeline.
 - In most cases, `sci-o` will have to be preceded by `sci-e` to ensure `energy` is available to be piped to `sci-o`.
-- The inputs to `sci-e` will most likely be coming from a model such as `teads-curve`.
-- The `sci` model also requires `functional-unit` information so it can convert the estimated `carbon` into a useful unit.
+- The inputs to `sci-e` will most likely be coming from a plugin such as `teads-curve` or `boavizta`.
+- The `sci` plugin also requires `functional-unit` information so it can convert the estimated `carbon` into a useful unit.
 - You may also wish to grab your `input` data by querying a metrics API on a virtual machine. 
 
-The example below gives you the full pipeline implemented in an `impl` (if you have an Azure virtual machine and put your credentials into a `.env` file, you can run this `impl` to retrieve your SCI score).
+The example below gives you the full pipeline implemented in an manifest.There are also several other executable example manifests in `if/examples/impls/functional/` that you can run for yourself.
 
 
 ```yaml
-name: if-demo
-description: demo pipeline
+name: pipeline-demo
+description:
 tags:
+aggregation:
+  metrics:
+    - 'carbon'
+  type: 'both'
 initialize:
-  models:
-    - name: azure-importer
-      model: AzureImporterModel
-      path: "@grnsft/"@grnsft/"@grnsft/if-models"""
-    - name: cloud-instance-metadata
-      model: CloudInstanceMetadataModel
-      path: if-models
-    - name: teads-curve
-      model: TeadsCurveModel
-      path: if-unofficial-models
-    - name: sci-e
-      model: SciEModel
-      path: if-models
-    - name: sci-o
-      model: SciOModel
+  plugins:
+    "teads-curve":
+      path: "@grnsft/if-unofficial-models"
+      method: TeadsCurve
+      global-config:
+        interpolation: spline
+    "sci-e":
       path: "@grnsft/if-models"
-    - name: sci-e
-      model: SciEModel
+      method: SciE
+    "sci-m":
       path: "@grnsft/if-models"
-    - name: sci-m
-      model: SciMModel
+      method: SciM
+    "sci-o":
       path: "@grnsft/if-models"
-    - name: sci
-      model: SciModel
+      method: SciO
+    "sci":
       path: "@grnsft/if-models"
-graph:
+      method: Sci
+      global-config:
+        functional-unit: "requests"
+        functional-unit-time: "1 minute"
+    "time-sync":
+      method: TimeSync
+      path: "builtin"
+      global-config:
+        start-time: "2023-12-12T00:00:00.000Z"
+        end-time: "2023-12-12T00:01:00.000Z"
+        interval: 5
+        allow-padding: true
+    'group-by':
+      path: builtin
+      method: GroupBy
+tree:
   children:
-    child:
+    child-1:
       pipeline:
-        - azure-importer
-        - cloud-instance-metadata
         - teads-curve
         - sci-e
-        - sci-o
         - sci-m
+        - sci-o
+        - time-sync
         - sci
       config:
-        sci-o:
-          grid-carbon-intensity: 951
-        sci:
-          functional-unit: ''
-          functional-unit-time: hour
-          functional-unit-duration: 1
+        group-by:
+          group:
+            - region
+            - instance-type
+      defaults:
+        cpu/thermal-design-power: 100
+        grid/carbon-intensity: 800
+        device/emissions-embodied: 1533.120 # gCO2eq
+        time-reserved: 3600 # 1hr in seconds
+        device/expected-lifespan: 94608000 # 3 years in seconds
+        resources-reserved: 1
+        resources-total: 8
+        functional-unit-time: "1 min"
       inputs:
-          - timestamp: '2023-11-02T10:35:31.820Z'
-            duration: 3600
-            azure-observation-window: 5 min # value and unit must be space separated 
-            azure-observation-aggregation: 'average'
-            azure-subscription-id: 9ed7b18c-8a28-5b73-9451-45fc74e7d0d3
-            azure-resource-group: vm1_group
-            azure-vm-name: vm1
-            total-embodied-emissions: 1533.12
-            time-reserved: 300
-            expected-lifespan: 94348800 # 3 yrs in seconds
-            resources-reserved: 1
-            total-resources: 64
-
+        - timestamp: "2023-12-12T00:00:00.000Z"
+          instance-type: A1 
+          region: uk-west
+          duration: 1
+          cpu/utilization: 10
+        - timestamp: "2023-12-12T00:00:01.000Z"
+          duration: 5
+          cpu/utilization: 20
+          instance-type: A1 
+          region: uk-west
+        - timestamp: "2023-12-12T00:00:06.000Z"
+          duration: 7
+          cpu/utilization: 15
+          instance-type: A1 
+          region: uk-west
+        - timestamp: "2023-12-12T00:00:13.000Z"
+          duration: 30
+          instance-type: A1 
+          region: uk-west
+          cpu/utilization: 15
+    child-2:
+      pipeline:
+        - teads-curve
+        - sci-e
+        - sci-m
+        - sci-o
+        - time-sync
+        - sci
+      config:
+        group-by:
+          group:
+            - region
+            - instance-type
+      defaults:
+        cpu/thermal-design-power: 100
+        grid/carbon-intensity: 800
+        device/emissions-embodied: 1533.120 # gCO2eq
+        time-reserved: 3600 # 1hr in seconds
+        device/expected-lifespan: 94608000 # 3 years in seconds
+        resources-reserved: 1
+        resources-total: 8
+        functional-unit-time: "1 min"
+      inputs:
+        - timestamp: "2023-12-12T00:00:00.000Z"
+          duration: 1
+          cpu/utilization: 30
+          instance-type: A1 
+          region: uk-west
+        - timestamp: "2023-12-12T00:00:01.000Z"
+          duration: 5
+          cpu/utilization: 28
+          instance-type: A1 
+          region: uk-west
+        - timestamp: "2023-12-12T00:00:06.000Z"
+          duration: 7
+          cpu/utilization: 40
+          instance-type: A1 
+          region: uk-west
+        - timestamp: "2023-12-12T00:00:13.000Z"
+          duration: 30
+          cpu/utilization: 33
+          instance-type: A1 
+          region: uk-west
 ```
 
 ### Complex applications
 
-The `impl` examples provided so far have only had a single component. However, Impact Framework can handle any number of nested `children`.
-The following example shows you how to nest multiple subcomponents. 
+The manifest examples provided so far have only had a single component. However, Impact Framework can handle any number of nested `children`.
 
-```yaml
-name: nesting-demo
-description:
-tags:
-  kind: web
-  complexity: moderate
-  category: on-premise
-initialize:
-  models:
-    - name: teads-curve
-      model: TeadsCurveModel
-      path: "@grnsft/if-unofficial-models"
-    - name: sci-e
-      model: SciEModel
-      path: "@grnsft/if-models"
-    - name: sci-m
-      path: "@grnsft/if-models"
-      model: SciMModel
-    - name: sci-o
-      model: SciOModel
-      path: "@grnsft/if-models"
-    - name: sci
-      model: SciModel
-      path: "@grnsft/if-models"
-graph:
-  children:
-    server: # an advanced grouping node
-      pipeline:
-        - teads-curve
-        - sci-e
-        - sci-m
-        - sci-o
-        - sci
-      config:
-        sci:
-          functional_unit_duration: 1 
-          functional_duration_time: ''
-          functional_unit: requests # factor to convert per time to per f.unit
-      children:
-        nested-1:
-          inputs:
-            - timestamp: 2023-07-06T00:00
-              duration: 10
-              cpu-util: 50
-              thermal-design-power: 65
-              e-net: 0.000811 #kwh     
-              requests: 380
-              total-embodied-emissions: 251000 # gCO2eq
-              time-reserved: 3600 # 1 hour in s
-              expected-lifespan: 126144000 # 4 years in seconds    
-              resources-reserved: 1 
-              total-resources: 1
-              grid-carbon-intensity: 451
-        nested-2:
-          inputs: 
-            - timestamp: 2023-07-06T00:00
-              duration: 10
-              cpu-util: 33
-              thermal-design-poiwer: 65
-              e-net: 0.000811 #kwh     
-              requests: 380
-              total-embodied-emissions: 251000 # gCO2eq
-              time-reserved: 3600 # 1 hour in s
-              expected-lifespan: 126144000 # 4 years in seconds    
-              resources-reserved: 1 
-              total-resources: 1
-              grid-carbon-intensity: 451
+In this way, you can combine complex plugin pipelines and application architectures to calculate the energy and carbon outputs of complicated systems.
 
-```
+## Choosing which plugins to run
 
-In this way, you can combine complex model pipelines and application architectures to calculate the energy and carbon outputs of complicated systems.
+The plugins are designed to be composable, but they each have specific input requirements that must be met in order for the plugins to run correctly. For example, the `teads-curve` plugin requires `cpu/thermal-design-power` to be available in the manifest. If it is not there, the plugin cannot use it to calculate `cpu/energy`.
 
-## Choosing which models to run
+It is also possible to leapfrog some plugins if you have access to high-level data. For example, perhaps you already know the energy being used by your CPU. In this case, there is no need to run `teads-curve`, you can simply provide `cpu/energy` as an `input` and omit `teads-curve` from the plugin pipeline.
 
-The models are designed to be composable, but they each have specific input requirements that must be met in order for the models to run correctly. For example, the `teads-curve` model requires `tdp` to be available in the `impl`. If it is not there, the model cannot use it to calculate `e-cpu`.
+We have deliberately made the plugins modular and composable so that you can be creative in developing new plugins to replace those provided as part of IF.
 
-It is also possible to leapfrog some models if you have access to high-level data. For example, perhaps you already know the energy being used by your CPU. In this case, there is no need to run `teads-curve`, you can simply provide `e-cpu` as an `input` and omit `teads-curve` from the model pipeline.
+## Running a manifest
 
-We have deliberately made the models modular and composable so that you can be creative in developing new plugins to replace those provided as part of IF.
-
-## Running an `impl`
-
-You run an `impl` by providing its path to our command line tool and a path to save the results file to. You can run an `impl` named `my-impl.yml` using the following command:
+You run a manifest by providing its path to our command line tool and a path to save the results file to. You can run a manifest named `my-manifest.yml` using the following command:
 
 ```sh
-npx ts-node scripts/impact.ts --impl ./examples/impls/my-impl.yml --ompl ./examples/ompls/my-ompl.yml
+if --manifest my-manifest.yml
 ```

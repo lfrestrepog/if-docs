@@ -26,7 +26,7 @@ Impact Framework is the minimal set of features that enable a manifest file to b
 
 Anyone can build a plugin and share them with the world, meaning Impact Framework development can be bottom-up and community driven. It also means that if you are not satisfied with how some calculation was done, you can easily fork it and replace it with your own.
 
-What we provide is a minimal set of rules and guardrails for model builders to conform to to ensure compatibility with Impact Framework.
+What we provide is a minimal set of rules and guardrails for plugin builders to conform to to ensure compatibility with Impact Framework.
 
 
 ## Neutrality

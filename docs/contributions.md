@@ -103,7 +103,7 @@ The commit message should describe what changed and why.
        Examples:
        
        ```
-        util: add getInitializedModel method to models.
+        util: add getInitializedPlugin method to plugin.
         deps: add express package to dependencies.
         service: refactor get user.
        ```

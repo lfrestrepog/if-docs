@@ -8,8 +8,8 @@ This section contains information for Impact Framework developers. You are a dev
 
 The developer documentation includes:
 
-* [How to build models](./how-to-build-plugins.md)
-* [How to make models production-ready](./how-to-refine-plugins.md)
+* [How to build plugins](./how-to-build-plugins.md)
+* [How to make plugins production-ready](./how-to-refine-plugins.md)
 * [How to write unit tests](./how-to-test-if.md)
 * [HOw to visualize results](./how-to-visualize-results.md)
 

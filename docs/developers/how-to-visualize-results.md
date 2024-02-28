@@ -37,7 +37,7 @@ initialize:
     'simple-html-exporter'
       method: SimpleHtmlExporter
       path: "@grnsft/if-plugins"
-graph:
+tree:
   children:
     child:
       pipeline:

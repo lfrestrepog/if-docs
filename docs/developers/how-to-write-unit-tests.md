@@ -53,7 +53,7 @@ describe("init", ()=> {})
 describe("execute", ()=> {})
 ```
 
-For example, here is a describe block checking that the `Sum` model initializes correctly:
+For example, here is a describe block checking that the `Sum` plugin initializes correctly:
 
 ```typescript
 describe('lib/sum: ', () => {

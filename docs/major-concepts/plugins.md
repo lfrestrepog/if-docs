@@ -3,11 +3,11 @@ sidebar-position: 3
 ---
 # Plugins
 
-Calculating outputs for every component in a [Graph](graph.md) (graph) requires the use of an **Impact Model** (model) called through an [Impact Model Plugin](Impact%20Model%20Plugin.md) (model plugin).
+Calculating outputs for every component in a [Graph](graph.md) (graph) requires the use of plugins.
 
-## What are Impact Models?
+## What are plugins?
 
-A model converts an input [input](inputs.md) into some output [Impact Metric](Impact%20Metric), for example, models that convert an input of CPU utilization into an impact of energy.
+A plugin converts an input [input](inputs.md) into some output [Impact Metric](Impact%20Metric), for example, models that convert an input of CPU utilization into an impact of energy.
 
 There are many different **models**, [Boavizta](https://dataviz.boavizta.org/), [Cloud Carbon Footprint](https://github.com/cloud-carbon-footprint/ccf-coefficients), [Climatiq](https://www.climatiq.io/data) are some great examples of open-source IMs, there are **many other** closed source, commercial and private models being built in-house inside organizations.
 

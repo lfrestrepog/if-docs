@@ -89,7 +89,7 @@ export type PluginParams = {
 
 The `PluginParams` type therefore defines an array of key-value pairs.
 
-IF needs to know about all the parameters used in each pipeline. The default behaviour is that it grabs parameters from a local file, `params.ts`. This file defines the standard set of parameter names, their units, a descriptiona nd the method used to aggregate them across time or across a graph.
+IF needs to know about all the parameters used in each pipeline. The default behaviour is that it grabs parameters from a local file, `params.ts`. This file defines the standard set of parameter names, their units, a descriptiona nd the method used to aggregate them across time or across a tree.
 
 If your new plugin uses new parameters that are not included in `params.ts`, you can smanifesty add them to your manifest file in a section named `params`. For example:
 
@@ -264,7 +264,7 @@ initialize:
       kind: plugin
       method: Sum
       path: https://github.com/my-repo/my-plugin
-graph:
+tree:
   children:
     child:
       config:
