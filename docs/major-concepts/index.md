@@ -11,4 +11,3 @@ Here you will find explanations for the fundamnetal Impact Framework concepts. T
 - [IF](./impact-enbgine.md)
 - [Time](./durations.md)
 - [Plugins](./plugins.md)
-- [Glossary](./glossary.md)
