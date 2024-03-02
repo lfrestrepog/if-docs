@@ -40,3 +40,8 @@ Documentation for the specific individual plugins are available in the plugin RE
 * [TEADS-AWS](https://github.com/Green-Software-Foundation/if-unofficial-plugins/blob/main/src/lib/teads-aws/README.md): Calculates the energy in kWh used by the CPU using a model specific to AWS instances.
 * [Boavizta](https://github.com/Green-Software-Foundation/if-unofficial-plugins/blob/main/src/lib/boavizta/README.md): Calculates energy and embodied carbon using the Boavizta APIs.
 * [co2js](https://github.com/Green-Software-Foundation/if-unofficial-plugins/blob/main/src/lib/co2js/README.md): Calculates the carbon emissions of a website.
+
+
+## Exhaust plugins (outputs)
+
+Export plugins designed to implement custom ways of exporting output file. Currenlty supported ones are `csv`, `yaml` and `log` plugins.
