@@ -16,7 +16,7 @@ description:
 tags: 
 initialize:
   plugins:
-    - name: 
+    <PLUGIN-NAME-HERE>: 
       method:
       path: 
 tree:
@@ -45,7 +45,8 @@ The `initialize` fields are where you specify each individual plugin that will b
 
 ```yaml
 initialize:
-    sci-m
+  plugins:
+    sci-m:
       path: ''
       method:
 ```
@@ -107,7 +108,7 @@ Whilst the manifest file we looked at above works perfectly well, it will only r
 - The `sci` plugin also requires `functional-unit` information so it can convert the estimated `carbon` into a useful unit.
 - You may also wish to grab your `input` data by querying a metrics API on a virtual machine. 
 
-The example below gives you the full pipeline implemented in an manifest.There are also several other executable example manifests in `if/examples/impls/functional/` that you can run for yourself.
+The example below gives you the full pipeline implemented in an manifest.There are also several other executable example manifests in `if/examples/manifests` that you can run for yourself.
 
 
 ```yaml
