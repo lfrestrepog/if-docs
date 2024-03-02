@@ -1,0 +1,67 @@
+.section{
+  background: var(--ifm-color-primary);
+  padding: 3rem 0;
+  color: white;
+}
+.title{
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.title span{
+  color: #A8C653;
+}
+.workshopList{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.worshopWrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background-color: #003834;
+  padding: 1rem;
+  border: 0.5rem solid #03817B;
+  border-radius: 1rem;
+}
+.worshopDate{
+  display: flex;
+  gap: 0.5rem;
+  font-weight: bold;
+}
+.worshopDate p{
+  margin: 0;
+}
+.illustrationWrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.illustrationWrapper svg{
+  width: 90%;
+  max-width: 440px;
+}
+.button{
+  background-color: #A8C653;
+  color: white;
+  border: 1px solid #A8C653;
+}
+.button:hover{
+  background-color: #b9d861;
+}
+
+
+@media screen and (max-width: 996px) {
+  .illustrationWrapper {
+    margin-top: 2rem;
+  }
+}
+@media screen and (max-width: 480px) {
+  .worshopDate {
+    flex-direction: column;
+  }
+  
+}
