@@ -15,7 +15,7 @@ If you have globally installed our `if` npm package, you can invoke the CLI usin
 The `--manifest` flag is the only required flag and tells `if` where to find the manifest file that you want to execute. This command expects to receive the path where your manifest file is saved, as shown in the following example:
 
 ```sh
-if --manifest examples/my-manifest.yml
+if --manifest examples/manifests/my-manifest.yml
 ```
 
 ## `--output`
@@ -25,5 +25,5 @@ The `--output` flag is optional and is used for defining a path to save your out
 Here is an example of `--output` being used to define a path:
 
 ```sh
-impact-engine --manifest examples/my-manifest.yml --output examples/my-outdata.yml
+if --manifest examples/manifests/my-manifest.yml --output examples/outputs/my-outdata.yml
 ```
