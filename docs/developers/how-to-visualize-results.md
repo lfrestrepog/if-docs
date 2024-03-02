@@ -34,7 +34,7 @@ description:
 tags:
 initialize:
   plugins:
-    'simple-html-exporter'
+    'simple-html-exporter':
       method: SimpleHtmlExporter
       path: "@grnsft/if-plugins"
 tree:
