@@ -9,18 +9,18 @@ Our [How to build plugins](./how-to-build-plugins.md) guide covered the basics f
 
 We prefer not to use abbreviations of contractions in parameter names. Using fully descriptive names makes the code more readable, which in turn helps reviewers and anyone else aiming to understand how the plugin works. It also helps to avoid ambiguity and naming collisions within and across plugins. Your name should describe what an element does as precisely as practically possible.
 
-For example, we prefer `energy-cpu` to `e-cpu` and we prefer `functionalUnit` to `funcUnit`, `fUnit`, or any other abbreviation.
+For example, we prefer `cpu/energy` to `e-cpu` and we prefer `functionalUnit` to `funcUnit`, `fUnit`, or any other abbreviation.
 
 **In Typescript code** we use lower Camel case (`likeThis`) for variable and function names and Pascal/Upper Camel case for class, type, enum, and interface names (`LikeThis`).
 
 For example:
 
-- `sciPerSecond` is the name for the SCI value normalized per second.
-- `energyMetrics` is the name for the array of energy metrics available to be summed in the `sci-e` plugin
+- `sci` is the name for the SCI value normalized per second.
+- `energy` is the name for the array of energy metrics available to be summed in the `sci-e` plugin
 
 **In yaml files**, we prefer to use kebab-case (`like-this`) for field names. For example:
 
-- `energy-network` is the field name for the energy consumed by networking for an application
+- `network/energy` is the field name for the energy consumed by networking for an application
 - `functional-unit` is the unit in which to express an SCI value.
 
 Global constants can be given capitalized names, such as `TIME_UNITS_IN_SECONDS`.
@@ -35,7 +35,7 @@ We prefer the following ordering of imports in your plugin code:
 2. External modules (e.g. `import {z} from 'zod';`)
 3. Internal modules (e.g. `import config from 'src/config';`)
 4. Interfaces (e.g. `import type {PluginInterface} from 'interfaces'`)
-5. Types (e.g. `import {pluginParams} from '../../types/common'`;)
+5. Types (e.g. `import {PluginParams} from '../../types/common'`;)
 
 ### Comments
 
@@ -45,16 +45,16 @@ Each logical unit in the code should be preceded by an appropriate explanatory c
   /**
    * Calculates the energy consumption for a single input.
    */
-  private calculateEnergy(input: pluginParams) {
+  const calculateEnergy = (input: PluginParams) => {
     const {
-      'total-memoryGB': totalMemory,
-      'mem-util': memoryUtil,
-      coefficient,
+      'memory/capacity': totalMemory,
+      'memory/utilization': memoryUtil,
+      'energy-per-gb': energyPerGB,
     } = input;
 
     // GB * kWh/GB == kWh
-    return totalMemory * (memoryUtil / 100) * coefficient;
-  }
+    return totalMemory * (memoryUtil / 100) * energyPerGB;
+  };
 ```
 
 ### Error handling
@@ -65,7 +65,7 @@ Overall, we aim to provide error messages that are as descriptive and precise as
 Some examples from our Impact Framework code are:
 
 ```yml
-FILE_IS_NOT_YAML: 'Provided impl file is not in yaml format.',
+FILE_IS_NOT_YAML: 'Provided manifest file is not in yaml format.',
 MANIFEST_IS_MISSING: 'Manifest file is missing.',
 MISSING_PATH: "Initalization param 'path' is missing."
 INVALID_MODULE_PATH: (path: string) =>
@@ -84,13 +84,13 @@ We use `zod` to validate data. Here's an example from our codebase:
 /**
  * Checks for required fields in input.
  */
-private validateInput(input: pluginParams) {
+const validateInput = (input: PluginParams) => {
   const schema = z
     .object({
-      'physical-processor': z.string(),
+      'cpu/name': z.string(),
     })
     .refine(allDefined, {
-      message: '`physical-processor` should be present.',
+      message: '`cpu/name` should be present.',
     });
 
   return validate<z.infer<typeof schema>>(schema, input);
