@@ -1,6 +1,6 @@
 ---
 name: Feedback
-about: Submiting feedback on the IEF implementation
+about: Submiting feedback on the IF implementation
 title: "Feedback - "
 labels: feedback
 assignees: ''
@@ -13,7 +13,7 @@ What does your feedback relate to?
 - [] Project aims/objectives
 - [] Repository structure 
 - [] Model plugin
-- [] Rimpl code 
+- [] IF code 
 - [] Documentation
 - [] Tests
 - [] Other

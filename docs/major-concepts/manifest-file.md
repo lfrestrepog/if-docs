@@ -15,7 +15,7 @@ Manifest files are absolutely fundamental to Impact Framework and they serve mul
 The manifest is a [yaml](https://circleci.com/blog/what-is-yaml-a-beginner-s-guide/) file with a particular structure. 
 It can be thought of as an ***executable audit*** because the file itself can be shared with others and re-executed to verify your environmental impact calculations. 
 
-It is a formal report detailing not just the end impact but all the assumptions, inputs, and models used in calculating the impact.
+It is a formal report detailing not just the end impact but all the assumptions, inputs, and plugins used in calculating the impact.
 
 This is possible because *all the configuration and data required to run Impact Framework is contained in the manifest file*. 
 
@@ -25,22 +25,23 @@ Anyone can download Impact Framework and execute a manifest file to verify the r
 
 ### Overview
 
-Manifest files can be simple or very intricate, depending on the model pipeline you want to use and the complexity of your application. However, all manifest files conform to a basic structure that looks as follows:
+Manifest files can be simple or very intricate, depending on the plugin pipeline you want to use and the complexity of your application. However, all manifest files conform to a basic structure that looks as follows:
 
 ```yaml
 name:
 description:
 tags:
 initialize:
-  models:
-    - name: 
-      model: 
+  plugins:
+    <PLUGIN-NAME-HERE>: 
+      method: 
       path: 
-graph:
+tree:
   children:
     child:
       pipeline:
       config:
+      defaults:
       inputs:
         - timestamp: 2023-08-06T00:00
           duration: 3600
@@ -52,26 +53,37 @@ The global metadata includes the `name`, `description` and `tags` that can be us
 
 ### Plugin initialization
 
-The initialize section is where tyou define which plugins will be used in your manifest file and provide the global configuration for them. The required values are:
+The initialize section is where you define which plugins will be used in your manifest file and provide the global configuration for them. Below is sample for initalization: 
 
-- `name`: the name used to refer to this specific mdoel across the manifest file
-- `model`: the name of the model class (identical to the class name defined in the model code). For example, for our `sci-e` model this value is `SciEModel`
-- `path`: the path to the model code. For example, for a model from our standard library installed from npm, this value would be `@grnsft/if-models`
+```yaml
+initialize:
+  plugins:
+    <PLUGIN-NAME-HERE>:
+      method: <METHOD-NAME-HERE>
+  outputs: ['csv', 'yaml', 'log']
+```
 
-There is also an optional `config` field that can be used to set *global* configuration that is common to a plugin wherever it is invoked across the entire manifest file. A plugin reads this `config` as `staticParams` and sets it in its `configure()` method.
+Where required values are:
 
-Impact Framework uses the `initialize` section to instantiate classes for each model. A model cannot be invoked elsewhere in the manifest file unless it is included in this section.
+- `method`: the name of the function exported by the plugin.
+- `path`: the path to the plugin code. For example, for a plugin from our standard library installed from npm, this value would be `@grnsft/if-plugins`
 
-### Graph
+There is also an optional `global-config` field that can be used to set *global* configuration that is common to a plugin wherever it is invoked across the entire manifest file.
 
-The `graph` section of a manifest file for defining the topology of all the components being measured. The shape of the `graph` defines the grouping of components. It describes the architecture of the application being studied and contains all the usage observations for each component. The graph is structured as a tree, with ijdividual components as leaves, intermediate nodes representing groupings, and the top level being the root.
+Impact Framework uses the `initialize` section to instantiate each plugin. A plugin cannot be invoked elsewhere in the manifest file unless it is included in this section.
+
+`outputs` is a list export plugins(currenlty `csv`, `yaml`, `log` plugins are supported).
+
+### Tree
+
+The `tree` section of a manifest file for defining the topology of all the components being measured. The shape of the `tree` defines the grouping of components. It describes the architecture of the application being studied and contains all the usage observations for each component. The tree has individual components as leaves, intermediate nodes representing groupings, and the top level being the root.
 
 ![](../../static/img/3f18767c1a55cee416e3de70314609e3.png)
 
 For example, a web application could be organized as follows:
 
 ```
-graph:
+tree:
   children:
     front-end:
       build-pipeline:
@@ -90,16 +102,17 @@ This example has a relatively straightforward structure with a maximum of 3 leve
 Each component has some configuration, some input data, and a plugin pipeline.
 
 - `pipeline`: a list of plugins that should eb executed for a specific component
-- `config`: contains configuration for each model that applies just inside this specific component.
+- `config`: contains configuration for each plugin that applies just inside this specific component.
+- `defaults`: fallback values that IF defaults to if they are not present in an input observation.
 - `inputs`: an array of `observation` data, with each `observation` containing usage data for a given timestep.
 
 
 If a component *does not* include its own `pipeline`, `config` or `inputs` values, they are inherited from the closest parent.
 
-Here's an example of a moderately complex graph:
+Here's an example of a moderately complex tree:
 
 ```yaml
-graph:
+tree:
   children:
     child-0:
       pipeline:
@@ -109,6 +122,7 @@ graph:
           pipeline:
             - sci-e
           config: null
+          defaults: null
           inputs:
             - timestamp: 2023-07-06T00:00
               duration: 10
@@ -126,6 +140,7 @@ graph:
               pipeline:
                 - sci-e
               config: null
+              defaults: null
               inputs:
                 - timestamp: 2023-07-06T00:00
                   duration: 10
@@ -141,24 +156,24 @@ graph:
 
 ### Inputs
 
-Every component includes an `inputs` field that gets read into models as an array. `inputs` are divided into `observations`, each having a `timestamp` and a `duration`. Every `observation` refers to an element in `inputs` representing some snapshot in time.
+Every component includes an `inputs` field that gets read into plugins as an array. `inputs` are divided into `observations`, each having a `timestamp` and a `duration`. Every `observation` refers to an element in `inputs` representing some snapshot in time.
 
 Each plugin takes the `inputs` array and applies some calculation or transformation to each `observation` in the array.
 
-Observations can inlude any type of data, including human judgment, assumptions, other models, APIs, survey data or telemetry.
+Observations can incude any type of data, including human judgment, assumptions, other plugins, APIs, survey data or telemetry.
 
 The separation of timestamps in the `inputs` array determines the temporal granularity of your impact calculations. The more frequent your observations, the more accurate your imapct assessment.
 
 
 ## Computing a manifest file
 
-Impact Framework computes manifest files. For each component in the graph, the `inputs` array is passed to each plugin in the pipeline in sequence. 
+Impact Framework computes manifest files. For each component in the tree, the `inputs` array is passed to each plugin in the pipeline in sequence. 
 
-Each plugin *enriches* the `inputs` array in some specific way, typically by adding a new `key-value` pair to each observation in the array. For example, the `teads-curve` plugin takes in CPU utilization expressed as a percentage as an input and appends `energy-cpu` expressed in kWh. `energy-cpu` is then available to be passed as an input to the `sci-e` plugin.
+Each plugin *enriches* the `inputs` array in some specific way, typically by adding a new `key-value` pair to each observation in the array. For example, the `teads-curve` plugin takes in CPU utilization expressed as a percentage as an input and appends `cpu/energy` expressed in kWh. `cpu/energy` is then available to be passed as an input to, for example, the `sci-e` plugin.
 
 This implies a sequence of plugins where the inputs for some plugin must either be present in the original manifest file or be outputs of the preceding plugins in the pipeline.
 
-There are also plugins and built-in features that can synchronize time series of `observations` across an entire graph and aggregate data across time or across components.
+There are also plugins and built-in features that can synchronize time series of `observations` across an entire tree and aggregate data across time or across components.
 
 ## Outputs
 
@@ -171,26 +186,26 @@ name: e-mem
 description: null
 tags: null
 initialize:
-  models:
-    - name: e-mem
-      path: "@grnsft/if-models"
-      model: EMemModel
-graph:
+  plugins:
+    e-mem:
+      path: "@grnsft/if-plugins"
+      method: EMem
+tree:
   children:
     child:
       pipeline:
         - e-mem
       config: null
+      defaults:
       inputs:
         - timestamp: 2023-08-06T00:00
           duration: 3600
-          mem-util: 40
-          total-memoryGB: 1
+          memory/utilization: 40
+          memory/capacity: 1
       outputs:
         - timestamp: 2023-08-06T00:00
           duration: 3600
           mem-util: 40
-          total-memoryGB: 1
-          coefficient: 0.38
-          energy-memory: 0.15200000000000002
+          memory/capacity: 1
+          memory/energy: 0.15200000000000002
 ```
