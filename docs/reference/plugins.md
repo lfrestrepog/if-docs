@@ -25,6 +25,9 @@ Documentation for the specific individual plugins are available in the plugin RE
 * [Sum](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/sum): a generic arithmetic plugin that allows you to sum any set of input parameters.
 * [Multiply](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/multiply): a generic arithmetic plugin that allows you to multiply any set of input parameters.
 * [Coefficient](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/coefficient): a generic arithmetic plugin that allows you to multiply any input value by a coefficient.
+* [E-NET](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/e-net): simply multiplies the amount of data transferred (GB) by a coefficient (kWh/GB) to yield network/energy.
+* [Mock Observations Model](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/mock-observations): A model for mocking observations (inputs) for testing and demo purposes.
+* [CSV-Export](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/csv-export): a generic CSV exporter plugin.
 
 
 
@@ -33,6 +36,7 @@ Documentation for the specific individual plugins are available in the plugin RE
 * [Azure importer](https://github.com/Green-Software-Foundation/if-unofficial-plugins/blob/main/src/lib/azure-importer/README.md): Grabs usage metrics from an Azure virtual machine, given user credentials and virtual machine details.
 * [Cloud Carbon Footprint](https://github.com/Green-Software-Foundation/if-unofficial-plugins/blob/main/src/lib/ccf/README.md): Calculates usage metrics using the Cloud Carbon Footprint APIs.
 * [WattTime](https://github.com/Green-Software-Foundation/if-unofficial-plugins/blob/main/src/lib/watt-time/README.md): WattTime is an external service for looking up grid emissions based on location.
-* [TEADS-CPU](https://github.com/Green-Software-Foundation/if-unofficial-plugins/blob/main/src/lib/teads-curve/README.md): Calculates the energy in kWh used by the CPU
+* [TEADS-CURVE](https://github.com/Green-Software-Foundation/if-unofficial-plugins/blob/main/src/lib/teads-curve/README.md): Calculates the energy in kWh used by the CPU
 * [TEADS-AWS](https://github.com/Green-Software-Foundation/if-unofficial-plugins/blob/main/src/lib/teads-aws/README.md): Calculates the energy in kWh used by the CPU using a model specific to AWS instances.
 * [Boavizta](https://github.com/Green-Software-Foundation/if-unofficial-plugins/blob/main/src/lib/boavizta/README.md): Calculates energy and embodied carbon using the Boavizta APIs.
+* [co2js](https://github.com/Green-Software-Foundation/if-unofficial-plugins/blob/main/src/lib/co2js/README.md): Calculates the carbon emissions of a website.
