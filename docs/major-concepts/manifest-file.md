@@ -33,10 +33,10 @@ description:
 tags:
 initialize:
   plugins:
-    - name: 
+    <PLUGIN-NAME-HERE>: 
       method: 
       path: 
-graph:
+tree:
   children:
     child:
       pipeline:
@@ -53,9 +53,17 @@ The global metadata includes the `name`, `description` and `tags` that can be us
 
 ### Plugin initialization
 
-The initialize section is where tyou define which plugins will be used in your manifest file and provide the global configuration for them. The required values are:
+The initialize section is where you define which plugins will be used in your manifest file and provide the global configuration for them. Below is sample for initalization: 
 
-- `name`: the name used to refer to this specific mdoel across the manifest file
+```yaml
+initialize:
+  plugins:
+    <PLUGIN-NAME-HERE>:
+      method: <METHOD-NAME-HERE>
+```
+
+Where required values are:
+
 - `method`: the name of the function exported by the plugin.
 - `path`: the path to the plugin code. For example, for a plugin from our standard library installed from npm, this value would be `@grnsft/if-plugins`
 
@@ -65,14 +73,14 @@ Impact Framework uses the `initialize` section to instantiate each plugin. A plu
 
 ### Tree
 
-The `tree` section of a manifest file for defining the topology of all the components being measured. The shape of the `tree` defines the grouping of components. It describes the architecture of the application being studied and contains all the usage observations for each component. The graph is structured as a tree, with individual components as leaves, intermediate nodes representing groupings, and the top level being the root.
+The `tree` section of a manifest file for defining the topology of all the components being measured. The shape of the `tree` defines the grouping of components. It describes the architecture of the application being studied and contains all the usage observations for each component. The tree has individual components as leaves, intermediate nodes representing groupings, and the top level being the root.
 
 ![](../../static/img/3f18767c1a55cee416e3de70314609e3.png)
 
 For example, a web application could be organized as follows:
 
 ```
-graph:
+tree:
   children:
     front-end:
       build-pipeline:
@@ -98,10 +106,10 @@ Each component has some configuration, some input data, and a plugin pipeline.
 
 If a component *does not* include its own `pipeline`, `config` or `inputs` values, they are inherited from the closest parent.
 
-Here's an example of a moderately complex graph:
+Here's an example of a moderately complex tree:
 
 ```yaml
-graph:
+tree:
   children:
     child-0:
       pipeline:
@@ -149,20 +157,20 @@ Every component includes an `inputs` field that gets read into plugins as an arr
 
 Each plugin takes the `inputs` array and applies some calculation or transformation to each `observation` in the array.
 
-Observations can inlude any type of data, including human judgment, assumptions, other plugins, APIs, survey data or telemetry.
+Observations can incude any type of data, including human judgment, assumptions, other plugins, APIs, survey data or telemetry.
 
 The separation of timestamps in the `inputs` array determines the temporal granularity of your impact calculations. The more frequent your observations, the more accurate your imapct assessment.
 
 
 ## Computing a manifest file
 
-Impact Framework computes manifest files. For each component in the graph, the `inputs` array is passed to each plugin in the pipeline in sequence. 
+Impact Framework computes manifest files. For each component in the tree, the `inputs` array is passed to each plugin in the pipeline in sequence. 
 
 Each plugin *enriches* the `inputs` array in some specific way, typically by adding a new `key-value` pair to each observation in the array. For example, the `teads-curve` plugin takes in CPU utilization expressed as a percentage as an input and appends `cpu/energy` expressed in kWh. `cpu/energy` is then available to be passed as an input to, for example, the `sci-e` plugin.
 
 This implies a sequence of plugins where the inputs for some plugin must either be present in the original manifest file or be outputs of the preceding plugins in the pipeline.
 
-There are also plugins and built-in features that can synchronize time series of `observations` across an entire graph and aggregate data across time or across components.
+There are also plugins and built-in features that can synchronize time series of `observations` across an entire tree and aggregate data across time or across components.
 
 ## Outputs
 
@@ -176,10 +184,10 @@ description: null
 tags: null
 initialize:
   plugins:
-    - name: e-mem
+    e-mem:
       path: "@grnsft/if-plugins"
       method: EMem
-graph:
+tree:
   children:
     child:
       pipeline:
@@ -189,13 +197,12 @@ graph:
       inputs:
         - timestamp: 2023-08-06T00:00
           duration: 3600
-          mem-util: 40
-          total-memoryGB: 1
+          memory/utilization: 40
+          memory/capacity: 1
       outputs:
         - timestamp: 2023-08-06T00:00
           duration: 3600
           mem-util: 40
-          total-memoryGB: 1
-          coefficient: 0.38
-          energy-memory: 0.15200000000000002
+          memory/capacity: 1
+          memory/energy: 0.15200000000000002
 ```
