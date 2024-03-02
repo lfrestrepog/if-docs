@@ -63,7 +63,7 @@ tree:
           cpu/utilization: 20
 ```
 
-Read our detailed guide to [writing manifest files](./how-to-write-impls.md).
+Read our detailed guide to [writing manifest files](./how-to-write-manifests.md).
 
 ## 4: Compute your manifest file
 
@@ -91,4 +91,4 @@ Explore our user documentation for walkthrough guides to common Impact Framework
 
 - [How to install Impact Framework](./how-to-install-if.md)
 - [How to load plugins](./how-to-import-plugins.md)
-- [How to write manifest files](./how-to-write-impls.md)
+- [How to write manifest files](./how-to-write-manifests.md)
