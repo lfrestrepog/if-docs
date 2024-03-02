@@ -13,7 +13,7 @@ npm -i -g @grnsft/if-plugins
 npm -i -g @grnsft/if-unofficial-plugins
 ```
 
-Plugins in these packages can then be invoked in an impl by providing their path in the plugin initialization, as shown in the following example:
+Plugins in these packages can then be invoked in an manifest by providing their path in the plugin initialization, as shown in the following example:
 
 ```yaml
 name: if-demo
@@ -21,10 +21,10 @@ description: demo pipeline
 tags:
 initialize:
   plugins:
-    - name: azure-importer
+    azure-importer:
       method: AzureImporterModel
       path: "@grnsft/if-unofficial-plugins"
-    - name: cloud-instance-metadata
+    cloud-instance-metadata:
       method: CloudInstanceMetadataModel
       path: "@grnsft/if-plugins"
 ```
@@ -38,7 +38,7 @@ npm install https://github.com/Green-Software-Foundation/if-plugins
 
 You'll need to provide the following fields:
 
-- `name`: the same name has to be used to refer to this plugin everywhere across the impl
+- `YOUR-PLUGIN-HERE`: the same name has to be used to refer to this plugin everywhere across the manifest
 - `method`: the class name for your plugin, e.g. `AzureImporter`
 - `path`: the path to the plugin
 
@@ -52,7 +52,7 @@ description: loads plugin
 tags: null
 initialize:
   plugins:
-    - name: my-plugin
+    <YOUR-PLUGIN-HERE:
       method: OutputPlugin
       path: https://github.com/my-repo/my-plugin
 ```
