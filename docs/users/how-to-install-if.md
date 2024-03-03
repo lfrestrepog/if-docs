@@ -10,10 +10,10 @@ You can install Impact Framework either globally or locally. For most users, we 
 npm install -g @grnsft/if
 ```
 
-Then, run the package using the `if` command:
+Then, run the package using the `ie` command:
 
 ```sh
-if --manifest <path to manifest file> 
+ie --manifest <path to manifest file> 
 ```
 
 There is only one plugin that is built in to the core Impact Framework codebase (`time-sync`). If you only want to use Impact Framework with your own, locally-developed plugins or plugins loaded from remote Github repositories, then you have already installed everything you need to get started. However, most likely you will want to install some of our plugins too.

@@ -20,13 +20,13 @@ The only required command is `--manifest`. Without a valid path to a manifest fi
 To use `if`, you must first [write a manifest file](../users/how-to-write-manifests.md). Then, you can simply pass the path to the manifest file to `if` on the command line. 
 
 ```sh
-if --manifest /my-manifest.yml
+ie --manifest /my-manifest.yml
 ```
 
 You can also pass a path where you would like to save the output file to. For example:
 
 ```sh
-if --manifest ./my-manifest.yml --output ./my-results.yml
+ie --manifest ./my-manifest.yml --output ./my-results.yml
 ```
 
 If you omit the `--output` command, your results will be displayed in the console.

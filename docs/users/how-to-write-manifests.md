@@ -261,5 +261,5 @@ We have deliberately made the plugins modular and composable so that you can be 
 You run a manifest by providing its path to our command line tool and a path to save the results file to. You can run a manifest named `my-manifest.yml` using the following command:
 
 ```sh
-if --manifest my-manifest.yml
+ie --manifest my-manifest.yml
 ```

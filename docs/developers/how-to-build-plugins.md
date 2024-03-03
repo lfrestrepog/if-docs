@@ -114,7 +114,7 @@ This will append the new parameter informatrion to the object loaded from `param
 However, if you are an advanced user and you want to use something other than out recommended standard set of parameters, you can provide a replacement `params.ts` file on the command line. This file should be a `json` or `js`/`ts` file with the ame structure as our `params.ts`. You can rename the file. You then pass the path to the file to the `override-params` command.
 
 ```sh
-if --manifest <path-to-manifest> --override-params <path-to-your-params-file>
+ie --manifest <path-to-manifest> --override-params <path-to-your-params-file>
 ```
 
 ## Summary of steps
@@ -215,7 +215,7 @@ carbon:
   aggregation: sum
 ```
 
-This information allows `if` to programmatically make decisions about how to handle values in features such as aggregation, time normalization and visualizations, and also acts as a global reference document for understanding IF data. The example above is for `carbon`.
+This information allows `ie` to programmatically make decisions about how to handle values in features such as aggregation, time normalization and visualizations, and also acts as a global reference document for understanding IF data. The example above is for `carbon`.
 
 You should add your new data, give a name, define a unit and short description. The `aggregation` field determines how the value is treated when some manipulation has to be done to spread the value over time or aggregate it.
 
@@ -225,7 +225,7 @@ For proportional metrics, the right value is `avg`. For example, you would want 
 
 Finally, values that should always be presented identically regardless of any aggregation, such as names or global constants, should be given the `aggregation-method` value `none`.
 
-Now you are ready to run your plugin using the `if` CLI tool!
+Now you are ready to run your plugin using the `ie` CLI tool!
 
 ## Running your plugin
 
@@ -271,16 +271,16 @@ tree:
       inputs:
 ```
 
-Now, when you run the manifest file using the `if`, it will load the plugin automatically.
+Now, when you run the manifest file using the `ie`, it will load the plugin automatically.
 
 For local development we recommend running with `npm run`:
 
 ```sh
-npm run if -- --manifest <path-to-your-manifest> --output <path-to-save-output>
+npm run ie --manifest <path-to-your-impl> --output <path-to-save-output>
 ```
 
 For production use, you should globally install the latest release of the framework and your plugin and use the following command to run it:
 
 ```sh
-if --manifest <path-to-your-manifest>
+ie --manifest <path-to-your-manifest>
 ```

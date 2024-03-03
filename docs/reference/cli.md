@@ -1,21 +1,21 @@
 # Command line tool 
 
-A core feature of the Impact Framework is the `if` command line tool (CLI). This is how you trigger Impact Framework to execute a certain manifest file. 
+A core feature of the Impact Framework is the `ie` command line tool (CLI). This is how you trigger Impact Framework to execute a certain manifest file. 
 
-Let's take a look at the various commands exposed by `if`.
+Let's take a look at the various commands exposed by `ie`.
 
-## `if`
+## `ie`
 
-If you have globally installed our `if` npm package, you can invoke the CLI using the `if` command directly in your terminal. The `if` command is an alias to `npx ts-node src/index.ts`, which executes the Impact Framework's `src/index.ts` script and acts as the entry point for Impact Framework.
+If you have globally installed our `if` npm package, you can invoke the CLI using the `ie` command directly in your terminal. The `ie` command is an alias to `npx ts-node src/index.ts`, which executes the Impact Framework's `src/index.ts` script and acts as the entry point for Impact Framework.
 
-`if <args>`
+`ie <args>`
 
 ## `--manifest`
 
-The `--manifest` flag is the only required flag and tells `if` where to find the manifest file that you want to execute. This command expects to receive the path where your manifest file is saved, as shown in the following example:
+The `--manifest` flag is the only required flag and tells `ie` where to find the manifest file that you want to execute. This command expects to receive the path where your manifest file is saved, as shown in the following example:
 
 ```sh
-if --manifest examples/manifests/my-manifest.yml
+ie --manifest examples/manifests/my-manifest.yml
 ```
 
 ## `--output`
@@ -25,5 +25,5 @@ The `--output` flag is optional and is used for defining a path to save your out
 Here is an example of `--output` being used to define a path:
 
 ```sh
-if --manifest examples/manifests/my-manifest.yml --output examples/outputs/my-outdata.yml
+ie --manifest examples/manifests/my-manifest.yml --output examples/outputs/my-outdata.yml
 ```

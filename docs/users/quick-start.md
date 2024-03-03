@@ -67,24 +67,24 @@ Read our detailed guide to [writing manifest files](./how-to-write-manifests.md)
 
 ## 4: Compute your manifest file
 
-Run the pipeline by passing the path to your manifest file to the `if` command line tool:
+Run the pipeline by passing the path to your manifest file to the `ie` command line tool:
 
 ```sh
-if --manifest <path-to-your-manifest>
+ie --manifest <path-to-your-manifest>
 ```
 
 :tada:**Congratulations** :tada:! You have just used the Impact Framework to compute the energy consumed by an application! 
 
 ## Next steps
 
-Now you know how to use the `if` you can start building more complex pipelines of plugins and more complicated manifest files. Your overall aim is to create a manifest file that accurately represents a real software application, and a plugin pipeline that yields an environmental metric that's important to you (e.g. `carbon`).
+Now you know how to use the `ie` you can start building more complex pipelines of plugins and more complicated manifest files. Your overall aim is to create a manifest file that accurately represents a real software application, and a plugin pipeline that yields an environmental metric that's important to you (e.g. `carbon`).
 
 Experiment by adding more plugins to the pipeline, for example add `sci-o` to convert energy into `operational-carbon`. Your output data will be displayed in your console. 
 
 You can also configure `if` to save your output data to another `yaml` file. To do this, add the `--output` flag and the path to save the file to:
 
 ```sh
-if --manifest <path-to-your-impl> --output <save-path>
+ie --manifest <path-to-your-impl> --output <save-path>
 ```
 
 Explore our user documentation for walkthrough guides to common Impact Framework tasks:
