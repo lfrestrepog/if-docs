@@ -61,53 +61,24 @@ Read our detailed guide to [writing manifest files](./how-to-write-impls.md).
 
 ## 4: Compute your manifest file
 
-Run the pipeline by passing the path to your manifest file to the `impact-engine` command line tool:
+Run the pipeline by passing the path to your manifest file to the `ie` command line tool:
 
 ```sh
-impact-engine --impl <path-to-your-impl>
+ie --manifest <path-to-your-manifest>
 ```
 
 :tada:**Congratulations** :tada:! You have just used the Impact Framework to compute the energy consumed by an application! 
 
 ## Next steps
 
-Now you know how to use the `impact-engine` you can start building more complex pipelines of plugins and more complicated manifest files. Your overall aim is to create a manifest file that accurately represents a real software application, and a plugin pipeline that yields an environmental metric that's important to you (e.g. `carbon`).
+Now you know how to use the `ie` you can start building more complex pipelines of plugins and more complicated manifest files. Your overall aim is to create a manifest file that accurately represents a real software application, and a plugin pipeline that yields an environmental metric that's important to you (e.g. `carbon`).
 
 Experiment by adding more plugins to the pipeline, for example add `sci-o` to convert energy into `operational-carbon`. Your output data will be displayed in your console. 
 
 You can also configure `impact-framework` to save your output data to another `yaml` file. To do this, add the `--ompl` flag and the path to save the file to:
 
 ```sh
-impact-engine --impl <path-to-your-impl> --ompl <save-path>
-```
-
-Your output data will look like this:
-
-```yaml
-name: sci-e-demo
-description: null
-tags: null
-initialize:
-  models:
-    - name: sci-e
-      kind: builtin
-graph:
-  children:
-    child:
-      pipeline:
-        - sci-e
-      config:
-        sci-e: null
-      inputs:
-        - timestamp: 2023-08-06T00:00
-          duration: 3600
-          energy-cpu: 0.001
-      outputs:
-        - timestamp: 2023-08-06T00:00
-          duration: 3600
-          energy-cpu: 0.001
-          energy: 0.00107
-
+ie --manifest <path-to-your-impl> --output <save-path>
 ```
 
 Explore our user documentation for walkthrough guides to common Impact Framework tasks:
