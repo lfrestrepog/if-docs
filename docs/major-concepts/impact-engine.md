@@ -6,7 +6,7 @@ sidebar-position: 4
 
 ## Introduction
 
-`impact-engine` is a command line tool that computes [Manifest files](manifest-file.md).
+`ie` is a command line tool that computes [Manifest files](manifest-file.md).
 It is the portal allowing users to interact with the Impact Framework.
 
 The available commands are:
@@ -17,18 +17,18 @@ The available commands are:
 
 The only required command is `--impl`. Without a valid path to a manifest file, Impact Engine has nothing to execute.
 
-To use `impact-engine`, you must first [write a manifest file](../users/how-to-write-impls.md). Then, you can simply pass the path to the manifest file to `impact-engine` on the command line. 
+To use `ie`, you must first [write a manifest file](../users/how-to-write-impls.md). Then, you can simply pass the path to the manifest file to `ie` on the command line. 
 
 ```sh
-impact-engine --impl /my-manifest.yml
+ie --impl /my-manifest.yml
 ```
 
 You can also pass a path where you would like to save the output file to. For example:
 
 ```sh
-impact-engine --impl ./my-manifest.yml --ompl ./my-results.yml
+ie --impl ./my-manifest.yml --ompl ./my-results.yml
 ```
 
 If you omit the `--ompl` command, your results will be displayed in the console.
 
-For more information on the `impact-engine` commands see the [CLI reference documentation](../reference/cli.md).
+For more information on the `ie` commands see the [CLI reference documentation](../reference/cli.md).
