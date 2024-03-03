@@ -10,19 +10,19 @@ If you have globally installed our `if` npm package, you can invoke the CLI usin
 
 `ie <args>`
 
-## `--impl`
+## `--manifest`
 
-The `--impl` flag is the only required flag and tells `ie` where to find the manifest file that you want to execute. This command expects to receive the path where your manifest file is saved, as shown in the following example:
+The `--manifest` flag is the only required flag and tells `ie` where to find the manifest file that you want to execute. This command expects to receive the path where your manifest file is saved, as shown in the following example:
 
 ```sh
 ie --manifest examples/manifests/my-manifest.yml
 ```
 
-## `--ompl`
+## `--output`
 
-The `--ompl` flag is optional and is used for defining a path to save your output data. If you provide the `--ompl` command with a path, your output data will be saved as a `.yml` file to disk. If you omit this command, your output data will be displayed in the terminal.
+The `--output` flag is optional and is used for defining a path to save your output data. If you provide the `--output` command with a path, your output data will be saved as a `.yml` file to disk. If you omit this command, your output data will be displayed in the terminal.
 
-Here is an example of `--ompl` being used to define a path:
+Here is an example of `--output` being used to define a path:
 
 ```sh
 ie --manifest examples/manifests/my-manifest.yml --output examples/outputs/my-outdata.yml

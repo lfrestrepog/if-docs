@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import styles from './styles.module.css';
 
 type FeatureItem = {
+  idx?: number;
   title: string;
   Svg: React.ComponentType<React.ComponentProps<'svg'>>;
   description: JSX.Element;
@@ -10,38 +11,49 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Measure',
-    Svg: require('@site/static/img/measure.svg').default,
+    title: 'Transform Observations into Impacts',
+    Svg: require('@site/static/img/observations.svg').default,
     description: (
-      <>Measure the energy and carbon impacts of your applications.</>
+      <>Take easily observable metrics like CPU utilization, page views and installs and convert them into environmental impacts such as carbon emissions, water usage, energy consumption, and air quality.</>
     ),
   },
   {
-    title: 'Monitor',
-    Svg: require('@site/static/img/monitor.svg').default,
+    title: 'Buildable Plugin Ecosystem',
+    Svg: require('@site/static/img/plugin.svg').default,
     description: (
-      <>Continuous integration allows you to track your impact over time.</>
+      <>Engage an existing library of plugins or create new plugins within Impact Framework based on your assumptions and observations.</>
     ),
   },
   {
-    title: 'Mitigate',
-    Svg: require('@site/static/img/mitigate.svg').default,
+    title: 'Explore What-If Scenarios',
+    Svg: require('@site/static/img/explore.svg').default,
     description: (
-      <>
-        Scenario testing can support your mitigation strategy and quantify its
-        effect.
-      </>
+      <>Uncover the environmental impact of your software changes in real-time by examining how your software’s environmental performance changes if your application moves to the cloud or experiences shifts in its runtime.</>
+    ),
+  },
+  {
+    title: 'Decentralize Data',
+    Svg: require('@site/static/img/decentralize.svg').default,
+    description: (
+      <>Record your observations, chosen plugins, configurations, and computed environmental impacts in a manifest file. Open the door for others to understand, verify, and challenge the entire process.</>
+    ),
+  },
+  {
+    title: 'Democratize Measurement',
+    Svg: require('@site/static/img/democratize.svg').default,
+    description: (
+      <>Empower others to rerun your manifest file, validate your findings, or question your assumptions. They can tweak configurations, select different plugins, and run the analysis themselves.</>
     ),
   },
 ];
 
-function Feature({ title, Svg, description }: FeatureItem) {
+function Feature({ title, Svg, description, idx }: FeatureItem) {
   return (
-    <div className={clsx('col col--4')}>
-      <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
+    <div className={clsx(styles.featureItem, idx % 2 === 0 ? "" : styles.featureRight)}>
+      <div className={styles.illustration}>
+        <Svg role="img" />
       </div>
-      <div className="text--center padding-horiz--md">
+      <div className={styles.featureContent}>
         <h3>{title}</h3>
         <p>{description}</p>
       </div>
@@ -53,9 +65,9 @@ export default function HomepageFeatures(): JSX.Element {
   return (
     <section className={styles.features}>
       <div className="container">
-        <div className="row">
+        <div className={styles.featureList}>
           {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
+            <Feature key={idx} idx={idx} {...props} />
           ))}
         </div>
       </div>
