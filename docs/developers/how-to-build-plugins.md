@@ -11,106 +11,14 @@ To help developers write Typescript plugins to integrate easily into IF, we prov
 - install the plugin
 - initialize and invoke the plugin in your manifest file
 
-## Shortcut: Use our template repository
+## Step 1: Use our template repository
 
-Instead of building up your plugin repository and all the configuration from scratch, you can simply clone our [plugin template repository](https://github.com/Green-Software-Foundation/if-plugin-template). Inside that repository, all you have to do is write your plugin code inside `index.ts`. All the configuration and setup is taken care of for you. You then just install your plugin and load it into IF as described on this page. If you are using the temnplate repository, you can skip straight to Step 2.
+Instead of building up your plugin repository and all the configuration from scratch, you can use our [plugin template repository](https://github.com/Green-Software-Foundation/if-plugin-template). To use rthe template, visit the Github repository and click the `Use this template` button. You will have the option to `create a new repository` under your own account. Then, you can clone that repository to your local machine.
 
-
-## Step 1: Setup your plugin folder
-
-First, create a new folder for your plugin, install Typescript and initialize npm.
-
-```sh
-mkdir new-plugin
-npm install typescript
-```
-
-Alternatively, you can use our template repository. In this case, simply clone the repository using
-
-```sh
-git clone https://github.com/Green-Software-Foundation/if-plugin-template.git
-```
-
-Then you can rename the repository. Run `npm install typescript` inside the plugin folder.
+Inside that repository, all you have to do is run `npm install typescript` in the template folder, rename the project in `package.json` and write your plugin code inside `index.ts`. All the configuration and setup is taken care of for you. 
 
 
-## Step 2: Project configuration
-
-**Note** You can skip this if you are using our template repository - you just need to update the name and version in `package.json` to match your plugin.**
-
-Next, you need to create some config files so Typescript knows how to build and run your plugin code. First, save the following as `tsconfig.json`.
-
-```json
-{
-  "compilerOptions": {
-    "outDir": "./build",
-    "rootDir": "./",
-    "declarationMap": false,
-    "inlineSourceMap": true,
-    "inlineSources": true,
-    "alwaysStrict": true,
-    "declaration": true,
-    "experimentalDecorators": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "lib": [
-      "ES2021",
-      "DOM"
-    ],
-    "module": "CommonJS",
-    "noEmitOnError": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
-    "stripInternal": false,
-    "target": "ES2020",
-    "composite": false,
-  },
-  "include": [
-    "*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    ".types-compat"
-  ],
-}
-```
-
-Next, save the following as `package.json` (replacing the provided values with your own as appropriate):
-
-```json
-{
-  "name": "new-plugin",
-  "version": "0.0.1",
-  "description": "test",
-  "main": "build/index.js",
-  "scripts": {
-    "test": "npm run test",
-    "build": "rm -rf build && tsc --project tsconfig.json"
-  },
-  "files": [
-    "build"
-  ],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "tsc": "^2.0.4",
-    "typescript": "^5.3.3"
-  }
-}
-
-```
-
-That's all the config you need. Now you can focus on writing your plugin code in and saving it as `index.ts`.
-
-## Step 3: Writing your plugin code
+## Step 2: Writing your plugin code
 
 Now your project is setup, you can focus on your plugin logic. The entry point for your plugin is `index.ts`. In this guide it is assumed that all your plugin logic is in `index.ts` but depending on the copmplexity of your plugin you might want to split the code across multiple files. `index.ts` should always be your entry point, though.
 
@@ -222,7 +130,7 @@ However, if you are an advanced user and you want to use something other than ou
 ie --manifest <path-to-manifest> --override-params <path-to-your-params-file>
 ```
 
-## Step 4: Install your plugin
+## Step 3: Install your plugin
 
 Now your plugin code is written, you can install it to make it available to IF.
 
@@ -238,7 +146,7 @@ Then use `npm link` to create a package that can be installed into IF:
 npm link
 ```
 
-## Step 5: Load your plugin into IF
+## Step 4: Load your plugin into IF
 
 Now your plugin is ready to run in IF. First install your plugin by navigating to the `if` project folder and running:
 
@@ -266,7 +174,7 @@ Run your manifest uisng
 np run ie -- --manifest <path-to-manifest>
 ```
 
-## Step 6: Publishing your plugin
+## Step 5: Publishing your plugin
 
 Now you have run your plugin locally and you are happy with how it works, you can make it public by publishing it to a public Github repository. Now all you have to do to use it in a manifest file is `npm install` it and pass the path to the Github repository in the plugin `initialize` block.
 
@@ -305,8 +213,7 @@ ie --manifest <path-to-my-manifest>
 
 ## Summary of steps
 
-- Start a plugin folder and install Typescript
-- Create `tsconfig.json` and `package.json`
+- Copy our template repository and update `package.json`
 - Add your plugin code to `index.ts`
 - Build and link the plugin using `npm run build && npm link`
 - Load your plugin into `if` using `npm link`
