@@ -7,7 +7,7 @@ sidebar-position: 1
 The IF is designed to be as composable as possible. This means you can develop your own plugins and use them in a pipeline.
 To help developers write Typescript plugins to integrate easily into IF, we provide the `PluginInterface` interface. Here's an overview of the stages you need to follow to integrate your plugin:
 
-- create a Typescript file that manifestements the `PluginInterface`
+- create a Typescript file that implements the `PluginInterface`
 - install the plugin
 - initialize and invoke the plugin in your manifest file
 
@@ -43,7 +43,7 @@ export type PluginInterface = {
 };
 ```
 
-The interface requires an execute function where your plugin logic is manifestemented. It should also return metadata. This can include any relevant metadata you want to include, with a minimum requirement being `kind: execute`. 
+The interface requires an execute function where your plugin logic is implemented. It should also return metadata. This can include any relevant metadata you want to include, with a minimum requirement being `kind: execute`. 
 
 
 ### Global config
@@ -77,7 +77,7 @@ initialize:
 
 #### execute
 
-`execute()` is where the main calculation logic of the plugin is manifestemented. It always takes `inputs` (an array of `PluginParams`) as an argument and returns an updated set of `inputs`.
+`execute()` is where the main calculation logic of the plugin is implemented. It always takes `inputs` (an array of `PluginParams`) as an argument and returns an updated set of `inputs`.
 
 #### Params
 
@@ -234,12 +234,12 @@ You can read our more advanced guide on [how to refine your plugins](./how-to-re
 
 To demonstrate how to build a plugin that conforms to the `pluginInterface`, let's examine the `sum` plugin.
 
-The `sum` plugin manifestements the following logic:
+The `sum` plugin implements the following logic:
 
 - sum whatever is provided in the `input-parameters` field from `globalConfig`.
 - append the result to each element in the output array with the name provided as `output-parameter` in `globalConfig`.
 
-Let's look at how you would manifestement this from scratch:
+Let's look at how you would implement this from scratch:
 
 The plugin must be a function conforming to `PluginInterface`. You can call the function `Sum`, and inside the body you can add the signature for the `execute` method:
 
@@ -265,7 +265,7 @@ export const Sum = (globalConfig: SumConfig): PluginInterface => {
 }
 ```
 
-Your plugin now has the basic structure required for IF integration. Your next task is to add code to the body of `execute` to enable the actual plugin logic to be manifestemented.
+Your plugin now has the basic structure required for IF integration. Your next task is to add code to the body of `execute` to enable the actual plugin logic to be implemented.
 
 The `execute` function should grab the `input-parameters` (the values to sum) from `globalConfig`. it shoudl then iterate over the `inputs` array, get the values for each of the `input-parameters` and append them to the `inputs` array, using the name from the `output-parameter` value in `globalConfig`. Here's what this can look like, with the actual calculation pushed to a separate function, `calculateSum`. 
 
@@ -292,7 +292,7 @@ The `execute` function should grab the `input-parameters` (the values to sum) fr
 }
 ```
 
-Now we just need to define what happens in `calculateSum` - this can be a smanifeste `reduce`:
+Now we just need to define what happens in `calculateSum` - this can be a simple `reduce`:
 
 ```ts
   /**
