@@ -11,7 +11,22 @@ To help developers write Typescript plugins to integrate easily into IF, we prov
 - install the plugin
 - initialize and invoke the plugin in your manifest file
 
-## The plugin interface
+## Step 1: Use our template repository
+
+Instead of building up your plugin repository and all the configuration from scratch, you can use our [plugin template repository](https://github.com/Green-Software-Foundation/if-plugin-template). To use the template, visit the Github repository and click the `Use this template` button. You will have the option to `create a new repository` under your own account. Then, you can clone that repository to your local machine.
+
+![use our template repository](../../static/img/template-repo.png)
+
+Inside that repository, all you have to do is run `npm install typescript` in the template folder, rename the project in `package.json` and write your plugin code inside `index.ts`. All the configuration and setup is taken care of for you. 
+
+
+## Step 2: Writing your plugin code
+
+Now your project is setup, you can focus on your plugin logic. The entry point for your plugin is `index.ts`. In this guide it is assumed that all your plugin logic is in `index.ts` but depending on the copmplexity of your plugin you might want to split the code across multiple files. `index.ts` should always be your entry point, though.
+
+The following sections describe the rules your plugin code should conform to. We also have an [appendix](#appendix-walk-through-of-the-sum-plugin) that deep dives a real plugin.
+
+### The plugin interface
 
 The `PluginInterface` is structured as follows:
 
@@ -31,7 +46,7 @@ export type PluginInterface = {
 The interface requires an execute function where your plugin logic is implemented. It should also return metadata. This can include any relevant metadata you want to include, with a minimum requirement being `kind: execute`. 
 
 
-## Global config
+### Global config
 
 Global config is passed as an argument to the plugin. In your plugin code you can handle it as follows:
 
@@ -58,9 +73,9 @@ initialize:
 ```
 
 
-## Methods
+### Methods
 
-### execute
+#### execute
 
 `execute()` is where the main calculation logic of the plugin is implemented. It always takes `inputs` (an array of `PluginParams`) as an argument and returns an updated set of `inputs`.
 
@@ -75,6 +90,9 @@ initialize:
 | Return value | Type                      | Purpose                                                     |
 | ------------ | ------------------------- | ----------------------------------------------------------- |
 | `outputs`    | `Promise<PluginParams[]>` | `Promise` resolving to an array of updated `PluginParams[]` |
+
+
+### What are `PluginParams`?
 
 
 ## What are `PluginParams`?
@@ -117,24 +135,114 @@ However, if you are an advanced user and you want to use something other than ou
 ie --manifest <path-to-manifest> --override-params <path-to-your-params-file>
 ```
 
+## Step 3: Install your plugin
+
+Now your plugin code is written, you can install it to make it available to IF.
+
+
+```sh
+npm run build
+```
+
+Then use `npm link` to create a package that can be installed into IF:
+
+```sh
+npm link
+```
+
+## Step 4: Load your plugin into IF
+
+Now your plugin is ready to run in IF. First install your plugin by navigating to the `if` project folder and running:
+
+```sh
+npm link new-plugin
+```
+
+replacing `new-plugin` with your plugin name as defined in the plugin's `package.json`. If you are not sure, the name can be checked by running `npm ls -g --depth=0 --link=true`.
+
+Your plugin is now ready to be run in IF. All that remains is to add your plugin to your manifest file. This means adding it to the `initialize block` and adding it to the component pipelines where you want your plugin to be executed. For example, an `initilize` block might look as follows:
+
+```yaml
+initialize:
+  plugins:
+    new-plugin:
+      method: YourFunctionName
+      path: 'new-plugin'
+      global-config:
+        something: true 
+```
+
+Run your manifest uisng
+
+```sh
+np run ie -- --manifest <path-to-manifest>
+```
+
+## Step 5: Publishing your plugin
+
+Now you have run your plugin locally and you are happy with how it works, you can make it public by publishing it to a public Github repository. Now all you have to do to use it in a manifest file is `npm install` it and pass the path to the Github repository in the plugin `initialize` block.
+
+For example, for a plugin saved in `github.com/my-repo/new-plugin` you can do the following:
+
+```
+npm install https://github.com/my-repo/new-plugin
+```
+
+Then, in your manifest file, provide the path in the plugin instantiation. You also need to specify which function the plugin instantiates. Let's say you are using the `Sum` plugin from the example above:
+
+```yaml
+name: plugin-demo
+description: loads plugin
+tags: null
+initialize:
+  plugins:
+    - name: new-plugin
+      kind: plugin
+      method: FunctionName
+      path: https://github.com/my-repo/new-plugin
+tree:
+  children:
+    child:
+      config:
+      inputs:
+```
+
+Now, when you run the manifest file, it will load the plugin automatically.
+
+You can run this using the globally installed IF as follows:
+
+```sh
+ie --manifest <path-to-my-manifest>
+```
+
 ## Summary of steps
 
-- Create a new plugin conforming to the `Plugin` interface
-- Complete the actual plugin logic in the `execute` method, returning an array of `PluginParams`
-- Add any new values to the `params` field in your manifest file.
+- Copy our template repository and update `package.json`
+- Add your plugin code to `index.ts`
+- Build and link the plugin using `npm run build && npm link`
+- Load your plugin into `if` using `npm link`
+- Initialize your plugin and add it to a pipeline in your manifest file.
+- Publish your plugin to Github
+
 
 You should also create unit tests for your plugin to demonstrate correct execution and handling of corner cases.
 
-## Walk-through
 
-To demonstrate how to build a plugin that conforms to this interface, let's examine the simple `sum` plugin.
+## Next steps
+
+You can read our more advanced guide on [how to refine your plugins](./how-to-refine-plugins.md).
+
+
+## Appendix: Walk-through of the Sum plugin
+
+To demonstrate how to build a plugin that conforms to the `pluginInterface`, let's examine the `sum` plugin.
 
 The `sum` plugin implements the following logic:
 
 - sum whatever is provided in the `input-parameters` field from `globalConfig`.
 - append the result to each element in the output array with the name provided as `output-parameter` in `globalConfig`.
 
-Let's look at how you would manifestement this from scratch:
+Let's look at how you would implement this from scratch:
 
 The plugin must be a function conforming to `PluginInterface`. You can call the function `Sum`, and inside the body you can add the signature for the `execute` method:
 
@@ -162,7 +270,7 @@ export const Sum = (globalConfig: SumConfig): PluginInterface => {
 
 Your plugin now has the basic structure required for IF integration. Your next task is to add code to the body of `execute` to enable the actual plugin logic to be implemented.
 
-The `execute` function should grab the `input-parameters` (the values to sum) from `globalConfig`. It should then iterate over the `inputs` array, get the values for each of the `input-parameters` and append them to the `inputs` array, using the name from the `output-parameter` value in `globalConfig`. Here's what this can look like, with the actual calculation pushed to a separate function, `calculateSum`. 
+The `execute` function should grab the `input-parameters` (the values to sum) from `globalConfig`. it should then iterate over the `inputs` array, get the values for each of the `input-parameters` and append them to the `inputs` array, using the name from the `output-parameter` value in `globalConfig`. Here's what this can look like, with the actual calculation pushed to a separate function, `calculateSum`. 
 
 ```ts
   /**
@@ -183,7 +291,6 @@ The `execute` function should grab the `input-parameters` (the values to sum) fr
     metadata,
     execute,
   };
-
 }
 ```
 
@@ -215,7 +322,7 @@ carbon:
   aggregation: sum
 ```
 
-This information allows `ie` to programmatically make decisions about how to handle values in features such as aggregation, time normalization and visualizations, and also acts as a global reference document for understanding IF data. The example above is for `carbon`.
+This information allows IF to programmatically make decisions about how to handle values in features such as aggregation, time normalization and visualizations, and also acts as a global reference document for understanding IF data. The example above is for `carbon`.
 
 You should add your new data, give a name, define a unit and short description. The `aggregation` field determines how the value is treated when some manipulation has to be done to spread the value over time or aggregate it.
 
@@ -227,60 +334,3 @@ Finally, values that should always be presented identically regardless of any ag
 
 Now you are ready to run your plugin using the `ie` CLI tool!
 
-## Running your plugin
-
-### Linking local plugin
-
-For using locally developed plugin in `if` please follow these steps:
-
-1. On the root level of a locally developed plugin run `npm link`, which will create a global package. It uses `package.json` file's `name` field as a package name. Additionally, name can be checked by running `npm ls -g --depth=0 --link=true`.
-
-2. Use the linked plugin in manifest by specifying `name`, `method`, `path` in the `initialize` block in the manifest file.
-
-
-Alternatively you can `npm run build` inside your plugin repository and then `npm install <your-plugin-repository-path>`.
-
-### Using plugin directly from github
-
-You can simply save your plugin in a public Github repository and pass the path to it in your manifest.
-
-For example, for a plugin saved in `github.com/my-repo/my-plugin` you can do the following:
-
-npm install your plugin:
-
-```
-npm install https://github.com/my-repo/my-plugin
-```
-
-Then, in your manifest file, provide the path in the plugin instantiation. You also need to specify which function the plugin instantiates. Let's say you are using the `Sum` plugin from the example above:
-
-```yaml
-name: plugin-demo
-description: loads plugin
-tags: null
-initialize:
-  plugins:
-    my-plugin:
-      kind: plugin
-      method: Sum
-      path: https://github.com/my-repo/my-plugin
-tree:
-  children:
-    child:
-      config:
-      inputs:
-```
-
-Now, when you run the manifest file using the `ie`, it will load the plugin automatically.
-
-For local development we recommend running with `npm run`:
-
-```sh
-npm run ie --manifest <path-to-your-impl> --output <path-to-save-output>
-```
-
-For production use, you should globally install the latest release of the framework and your plugin and use the following command to run it:
-
-```sh
-ie --manifest <path-to-your-manifest>
-```
