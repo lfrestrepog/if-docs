@@ -21,8 +21,8 @@ Read our detailed guide to [installing IF](./how-to-install-if.md).
 Install some of the plugins you want to include in your pipeline. The following commands will install both the official and unofficial IF model packages.
 
 ```sh
-npm install -g @grnsft/if-models
-npm install -g @grnsft/if-unofficial-models
+npm install -g @grnsft/if-plugins
+npm install -g @grnsft/if-unofficial-plugins
 ```
 
 Read our detailed guide to [loading plugins](./how-to-import-plugins.md).
@@ -34,84 +34,61 @@ A manifest file contains all the configuration and input data required to measur
 Open the file, add your data and save the file. The simple example below runs a single snapshot observation through a single plugin.
 
 ```yaml
-name: sci-e-demo
+name: basic-demo
 description:
 tags:
 initialize:
-  models:
-    - name: sci-e
-      kind: plugin
-      verbose: false
-      model: SciEModel
-      path: "@grnsft/if-models"
-graph:
+  plugins:
+    teads-curve: 
+      path: '@grnsft/if-unofficial-plugins'
+      method: TeadsCurve
+      global-config:
+        interpolation: spline
+tree:
   children:
-    child:
+    child-0:
+      defaults:
+        cpu/thermal-design-power: 100
       pipeline:
-        - sci-e
-      config:
-        sci-e:
+        - teads-curve
       inputs:
-        - timestamp: 2023-08-06T00:00
-          duration: 3600
-          energy-cpu: 0.001
+        - timestamp: 2023-07-06T00:00
+          duration: 1
+          cpu/utilization: 20
+        - timestamp: 2023-07-06T00:01
+          duration: 1
+          cpu/utilization: 80
+        - timestamp: 2023-07-06T00:02
+          duration: 1
+          cpu/utilization: 20
 ```
 
-Read our detailed guide to [writing manifest files](./how-to-write-impls.md).
+Read our detailed guide to [writing manifest files](./how-to-write-manifests.md).
 
 ## 4: Compute your manifest file
 
-Run the pipeline by passing the path to your manifest file to the `impact-engine` command line tool:
+Run the pipeline by passing the path to your manifest file to the `ie` command line tool:
 
 ```sh
-impact-engine --impl <path-to-your-impl>
+ie --manifest <path-to-your-manifest>
 ```
 
 :tada:**Congratulations** :tada:! You have just used the Impact Framework to compute the energy consumed by an application! 
 
 ## Next steps
 
-Now you know how to use the `impact-engine` you can start building more complex pipelines of plugins and more complicated manifest files. Your overall aim is to create a manifest file that accurately represents a real software application, and a plugin pipeline that yields an environmental metric that's important to you (e.g. `carbon`).
+Now you know how to use the `ie` you can start building more complex pipelines of plugins and more complicated manifest files. Your overall aim is to create a manifest file that accurately represents a real software application, and a plugin pipeline that yields an environmental metric that's important to you (e.g. `carbon`).
 
 Experiment by adding more plugins to the pipeline, for example add `sci-o` to convert energy into `operational-carbon`. Your output data will be displayed in your console. 
 
-You can also configure `impact-framework` to save your output data to another `yaml` file. To do this, add the `--ompl` flag and the path to save the file to:
+You can also configure `if` to save your output data to another `yaml` file. To do this, add the `--output` flag and the path to save the file to:
 
 ```sh
-impact-engine --impl <path-to-your-impl> --ompl <save-path>
-```
-
-Your output data will look like this:
-
-```yaml
-name: sci-e-demo
-description: null
-tags: null
-initialize:
-  models:
-    - name: sci-e
-      kind: builtin
-graph:
-  children:
-    child:
-      pipeline:
-        - sci-e
-      config:
-        sci-e: null
-      inputs:
-        - timestamp: 2023-08-06T00:00
-          duration: 3600
-          energy-cpu: 0.001
-      outputs:
-        - timestamp: 2023-08-06T00:00
-          duration: 3600
-          energy-cpu: 0.001
-          energy: 0.00107
-
+ie --manifest <path-to-your-impl> --output <save-path>
 ```
 
 Explore our user documentation for walkthrough guides to common Impact Framework tasks:
 
 - [How to install Impact Framework](./how-to-install-if.md)
 - [How to load plugins](./how-to-import-plugins.md)
-- [How to write manifest files](./how-to-write-impls.md)
+- [How to write manifest files](./how-to-write-manifests.md)

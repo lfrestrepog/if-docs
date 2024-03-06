@@ -94,6 +94,9 @@ initialize:
 
 ### What are `PluginParams`?
 
+
+## What are `PluginParams`?
+
 `PluginParams` are a fundamental data type in the Impact Framework. The type is defined as follows:
 
 ```ts
@@ -136,7 +139,6 @@ ie --manifest <path-to-manifest> --override-params <path-to-your-params-file>
 
 Now your plugin code is written, you can install it to make it available to IF.
 
-First build the plugin:
 
 ```sh
 npm run build
@@ -222,6 +224,7 @@ ie --manifest <path-to-my-manifest>
 - Initialize your plugin and add it to a pipeline in your manifest file.
 - Publish your plugin to Github
 
+
 You should also create unit tests for your plugin to demonstrate correct execution and handling of corner cases.
 
 
@@ -288,7 +291,6 @@ The `execute` function should grab the `input-parameters` (the values to sum) fr
     metadata,
     execute,
   };
-
 }
 ```
 
@@ -331,3 +333,4 @@ For proportional metrics, the right value is `avg`. For example, you would want 
 Finally, values that should always be presented identically regardless of any aggregation, such as names or global constants, should be given the `aggregation-method` value `none`.
 
 Now you are ready to run your plugin using the `ie` CLI tool!
+

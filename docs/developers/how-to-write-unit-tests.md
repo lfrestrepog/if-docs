@@ -13,7 +13,7 @@ Both the IF and the project repositories include a `__test__` directory. Inside,
 
 ```sh
 
-if-unofficial-models
+if-unofficial-plugins
  |
  |- src
     |
@@ -32,11 +32,12 @@ if-unofficial-models
 ## Setting up your test file
 
 You will need to import your plugin so that it can be instantiated and tested. You will also need some elements from `jest/globals`:
-For example, these are the improts for our `teads-curve` plugin.
+For example, these are the imports for our `Sum` plugin.
 
 ```ts
-import {describe, expect, jest, test} from '@jest/globals';
-import {TeadsCurveModel} from '../../../../lib';
+import {Sum} from '../../../../lib';
+import {ERRORS} from '../../../../util/errors';
+const {InputValidationError} = ERRORS;
 ```
 
 You may require other imports for your specific set of tests.
@@ -45,65 +46,89 @@ You may require other imports for your specific set of tests.
 
 Each method should have its own dedicated `describe` block. 
 
-For model plugins there are a minimum set of methods defined by the `PluginInterface`: `configure()` and `execute()`. therefore, your unit tests should have *at least* two `describe` blocks for each of those methods:
+Your unit tests should have *at least* two `describe` blocks, one to test the plugin initialization and one for `execute`.
 
 ```ts
-describe("configure", ()=> {})
+describe("init", ()=> {})
 describe("execute", ()=> {})
 ```
 
-There should also be a `describe` blocks for successful plugin initialization.
-
-For example, here is a describe block checking that the `co2js` model initializes correctly:
+For example, here is a describe block checking that the `Sum` plugin initializes correctly:
 
 ```typescript
-describe('init Co2jsModel: ', () => {
-  it('initalizes object with properties.', async () => {
-    expect(outputModel).toHaveProperty('configure');
-    expect(outputModel).toHaveProperty('execute');
-  });
-});
+describe('lib/sum: ', () => {
+  describe('Sum: ', () => {
+    const globalConfig = {
+      'input-parameters': ['cpu/energy', 'network/energy', 'memory/energy'],
+      'output-parameter': 'energy',
+    };
+    const sum = Sum(globalConfig);
+
+    describe('init: ', () => {
+      it('successfully initalized.', () => {
+        expect(sum).toHaveProperty('metadata');
+        expect(sum).toHaveProperty('execute');
+      });
+    });
+  })
+})
 ```
 
 ## It
 
 Within each `describe` block, each effect to be tested should have a dedicated `it` block.
 
-Here's an example of a new `describe` block for the `execute()` method on the `sci` model. The `describe` block indicates that we are testing effects of the `execute()` method. `it` is specific to a single outcome - in this case `it` tests that the plugin throws an exception if the user has provided invalid config data to the `time-sync` plugin, specifically that the user-provided `end-date` is before the user-provided `start-date`:
+Here's an example of a new `describe` block for the `execute()` method on the `Sum` plugin. The `describe` block indicates that we are testing effects of the `execute()` method. `it` is specific to a single outcome - in this case there are two `it` blocks that test that the plugin returns a specific result in the happy path and throws an exception if the user has provided invalid config data, specifically that the user-provided `cpu/energy` parameter is missing:
 
 ```typescript
-describe('execute():', () => {
+    describe('execute(): ', () => {
+      it('successfully applies Sum strategy to given input.', async () => {
+        expect.assertions(1);
 
-  it('throws error if end is before start in global config.', async () => {
-    const basicConfig = {
-      'start-time': '2023-12-12T00:00:10.000Z',
-      'end-time': '2023-12-12T00:00:00.000Z',
-      interval: 5,
-      'allow-padding': true,
-    };
+        const expectedResult = [
+          {
+            duration: 3600,
+            'cpu/energy': 1,
+            'network/energy': 1,
+            'memory/energy': 1,
+            energy: 3,
+            timestamp: '2021-01-01T00:00:00Z',
+          },
+        ];
 
-    const timeModel = await new TimeSyncModel().configure(basicConfig);
+        const result = await sum.execute([
+          {
+            duration: 3600,
+            'cpu/energy': 1,
+            'network/energy': 1,
+            'memory/energy': 1,
+            timestamp: '2021-01-01T00:00:00Z',
+          },
+        ]);
 
-    try {
-      await timeModel.execute([
-        {
-          timestamp: '2023-12-12T00:00:00.000Z',
-          duration: 15,
-          'cpu-util': 10,
-        },
-        {
-          timestamp: '2023-12-12T00:00:10.000Z',
-          duration: 30,
-          'cpu-util': 20,
-        },
-      ]);
-    } catch (error) {
-      expect(error).toStrictEqual(
-        new InputValidationError('Start time or end time is missing.')
-      );
-    }
-  });
-})
+        expect(result).toStrictEqual(expectedResult);
+      });
+
+      it('throws an error on missing params in input.', async () => {
+        const expectedMessage =
+          'Sum: cpu/energy is missing from the input array.';
+
+        expect.assertions(1);
+
+        try {
+          await sum.execute([
+            {
+              duration: 3600,
+              timestamp: '2021-01-01T00:00:00Z',
+            },
+          ]);
+        } catch (error) {
+          expect(error).toStrictEqual(
+            new InputValidationError(expectedMessage)
+          );
+        }
+      });
+    })
 ```
 
 
