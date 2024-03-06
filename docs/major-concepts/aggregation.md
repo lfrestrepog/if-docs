@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 # Aggregation
@@ -52,7 +52,7 @@ The decisions about how to aggregate are made on a case-by-case basis for each i
 
 ## Aggregation outputs
 
-The aggregation process adds new output data to your manifest file. The two types of aggregation add different outputs. The horizontal (time-series) aggregation adds a new field called `aggregate` to each node whose time series has been aggregated. In the `aggregate` block, you will find the aggregated value for each of the aggregation metrics defined in the aggregation config.
+The aggregation process adds new output data to your manifest file. The two types of aggregation add different outputs. The horizontal (time-series) aggregation adds a new field called `aggregated` to each node whose time series has been aggregated. In the `aggregated` block, you will find the aggregated value for each of the aggregation metrics defined in the aggregation config.
 
 The vertical aggregation adds a new array of output observations. These are simply named `outputs` and they always contain a timestamp and duration along with the aggregated metrics for each timestep. 
 
