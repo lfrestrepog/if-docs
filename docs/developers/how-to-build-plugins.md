@@ -109,7 +109,7 @@ The `PluginParams` type therefore defines an array of key-value pairs.
 
 IF needs to know about all the parameters used in each pipeline. The default behaviour is that it grabs parameters from a local file, `params.ts`. This file defines the standard set of parameter names, their units, a descriptiona nd the method used to aggregate them across time or across a tree.
 
-If your new plugin uses new parameters that are not included in `params.ts`, you can smanifesty add them to your manifest file in a section named `params`. For example:
+If your new plugin uses new parameters that are not included in `params.ts`, you can simply add them to your manifest file in a section named `params`. For example:
 
 
 ```yaml
@@ -270,7 +270,7 @@ export const Sum = (globalConfig: SumConfig): PluginInterface => {
 
 Your plugin now has the basic structure required for IF integration. Your next task is to add code to the body of `execute` to enable the actual plugin logic to be implemented.
 
-The `execute` function should grab the `input-parameters` (the values to sum) from `globalConfig`. it shoudl then iterate over the `inputs` array, get the values for each of the `input-parameters` and append them to the `inputs` array, using the name from the `output-parameter` value in `globalConfig`. Here's what this can look like, with the actual calculation pushed to a separate function, `calculateSum`. 
+The `execute` function should grab the `input-parameters` (the values to sum) from `globalConfig`. it should then iterate over the `inputs` array, get the values for each of the `input-parameters` and append them to the `inputs` array, using the name from the `output-parameter` value in `globalConfig`. Here's what this can look like, with the actual calculation pushed to a separate function, `calculateSum`. 
 
 ```ts
   /**
