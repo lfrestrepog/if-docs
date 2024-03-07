@@ -36,6 +36,7 @@ initialize:
     <PLUGIN-NAME-HERE>: 
       method: 
       path: 
+  outputs:
 tree:
   children:
     child:
@@ -72,7 +73,7 @@ There is also an optional `global-config` field that can be used to set *global*
 
 Impact Framework uses the `initialize` section to instantiate each plugin. A plugin cannot be invoked elsewhere in the manifest file unless it is included in this section.
 
-`outputs` is a list export plugins(currenlty `csv`, `yaml`, `log` plugins are supported).
+`outputs` is a list of possible export types (currenlty `csv`, `yaml`, and `log` are supported).
 
 ### Tree
 
