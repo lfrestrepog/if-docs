@@ -4,12 +4,12 @@ sidebar-position: 2
 
 # Manifest File
 
-Manifest files are absolutely fundamental to Impact Framework and they serve multiple important purposes, including:
+Manifest files are fundamental to Impact Framework and they serve multiple important purposes, including:
 
-- They contain all the necessary configuration for Impact Framework
+- They contain all the necessary configurations for Impact Framework
 - They define your application architecture
 - They hold your input data
-- They are shareable, portable and human readable
+- They are shareable, portable and human-readable
 - They can be used as verifiable audits form your application
 
 The manifest is a [yaml](https://circleci.com/blog/what-is-yaml-a-beginner-s-guide/) file with a particular structure. 
@@ -21,7 +21,7 @@ This is possible because *all the configuration and data required to run Impact 
 
 Anyone can download Impact Framework and execute a manifest file to verify the results. 
 
-## Stucture of a manifest file
+## Structure of a manifest file
 
 ### Overview
 
@@ -50,11 +50,11 @@ tree:
 
 ### Global metadata
 
-The global metadata includes the `name`, `description` and `tags` that can be used to describe the nature of the manifest file. For example you might name the file `Carbon Jan 2024` or similar. A short description might briefly outline the scope of the manifest file, e.g. `company x's carbon emissions due to web serves from Jab 24 - July 24`. Tags can be used to group manifest files (we do not explicitly use this field for anything at the current time).
+The global metadata includes the `name`, `description`, and `tags` that can be used to describe the nature of the manifest file. For example, you might name the file `Carbon Jan 2024` or similar. A short description might briefly outline the scope of the manifest file, e.g. `company x's carbon emissions due to web serves from Jab 24 - July 24`. Tags can be used to group manifest files (we do not explicitly use this field for anything currently).
 
 ### Plugin initialization
 
-The initialize section is where you define which plugins will be used in your manifest file and provide the global configuration for them. Below is sample for initalization: 
+The initialize section is where you define which plugins will be used in your manifest file and provide the global configuration for them. Below is sample for initialization: 
 
 ```yaml
 initialize:
@@ -73,11 +73,11 @@ There is also an optional `global-config` field that can be used to set *global*
 
 Impact Framework uses the `initialize` section to instantiate each plugin. A plugin cannot be invoked elsewhere in the manifest file unless it is included in this section.
 
-`outputs` is a list of possible export types (currenlty `csv`, `yaml`, and `log` are supported).
+`outputs` is a list of possible export types (currently `csv`, `yaml`, and `log` are supported).
 
 ### Tree
 
-The `tree` section of a manifest file for defining the topology of all the components being measured. The shape of the `tree` defines the grouping of components. It describes the architecture of the application being studied and contains all the usage observations for each component. The tree has individual components as leaves, intermediate nodes representing groupings, and the top level being the root.
+The `tree` section of a manifest file defines the topology of all the components being measured. The shape of the `tree` defines the grouping of components. It describes the architecture of the application being studied and contains all the usage observations for each component. The tree has individual components such as leaves, intermediate nodes representing groupings, and the top level is the root.
 
 ![](../../static/img/3f18767c1a55cee416e3de70314609e3.png)
 
@@ -102,13 +102,13 @@ This example has a relatively straightforward structure with a maximum of 3 leve
 
 Each component has some configuration, some input data, and a plugin pipeline.
 
-- `pipeline`: a list of plugins that should eb executed for a specific component
+- `pipeline`: a list of plugins that should be executed for a specific component
 - `config`: contains configuration for each plugin that applies just inside this specific component.
 - `defaults`: fallback values that IF defaults to if they are not present in an input observation.
 - `inputs`: an array of `observation` data, with each `observation` containing usage data for a given timestep.
 
 
-If a component *does not* include its own `pipeline`, `config` or `inputs` values, they are inherited from the closest parent.
+If a component *does not* include its own `pipeline`, `config`, or `inputs` values, they are inherited from the closest parent.
 
 Here's an example of a moderately complex tree:
 
@@ -161,9 +161,9 @@ Every component includes an `inputs` field that gets read into plugins as an arr
 
 Each plugin takes the `inputs` array and applies some calculation or transformation to each `observation` in the array.
 
-Observations can incude any type of data, including human judgment, assumptions, other plugins, APIs, survey data or telemetry.
+Observations can include any type of data, including human judgment, assumptions, other plugins, APIs, survey data or telemetry.
 
-The separation of timestamps in the `inputs` array determines the temporal granularity of your impact calculations. The more frequent your observations, the more accurate your imapct assessment.
+The separation of timestamps in the `inputs` array determines the temporal granularity of your impact calculations. The more frequent your observations, the more accurate your impact assessment.
 
 
 ## Computing a manifest file
@@ -172,13 +172,13 @@ Impact Framework computes manifest files. For each component in the tree, the `i
 
 Each plugin *enriches* the `inputs` array in some specific way, typically by adding a new `key-value` pair to each observation in the array. For example, the `teads-curve` plugin takes in CPU utilization expressed as a percentage as an input and appends `cpu/energy` expressed in kWh. `cpu/energy` is then available to be passed as an input to, for example, the `sci-e` plugin.
 
-This implies a sequence of plugins where the inputs for some plugin must either be present in the original manifest file or be outputs of the preceding plugins in the pipeline.
+This implies a sequence of plugins where the inputs for some plugins must either be present in the original manifest file or be outputs of the preceding plugins in the pipeline.
 
 There are also plugins and built-in features that can synchronize time series of `observations` across an entire tree and aggregate data across time or across components.
 
 ## Outputs
 
-When Impact Framework computes a manifest file, it appends new data to the manifest file and the final result is an enriched manifest that includes all the configuration and contextual data, the input data and the results of executing each plugin. This means the output file is compeltely auditable - the manifest file can be recovered simply by deleting the `outputs` section of the output file.
+When Impact Framework computes a manifest file, it appends new data to the manifest file and the final result is an enriched manifest that includes all the configuration and contextual data, the input data, and the results of executing each plugin. This means the output file is completely auditable - the manifest file can be recovered simply by deleting the `outputs` section of the output file.
 
 Here's an example output file:
 
