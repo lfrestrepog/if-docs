@@ -27,3 +27,16 @@ Here is an example of `--output` being used to define a path:
 ```sh
 ie --manifest examples/manifests/my-manifest.yml --output examples/outputs/my-outdata.yml
 ```
+
+
+## `--override-params`
+
+The `override-params` command is used when you want to discard our recommended set of parameters and associated units and aggregation methods and instead provide your own. We do not recommend this, and if you use this feature you take full responsibility for any errors you introduce downstream, including unit or aggregation errors. This is why we hide the ability to override the parameters behind a CLI command - it is an advanced feature that you should only use if you really know what you are doing. 
+
+You pass the path to your new parameter file as an argument. The file is expected to conform to the same structure as our `src/config/params.ts` file.
+
+For example:
+
+```sh
+ie --manifest <your manifest> --override-params <path-to-your-params-file>
+```
