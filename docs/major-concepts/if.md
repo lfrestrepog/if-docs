@@ -2,7 +2,7 @@
 sidebar-position: 4
 ---
 
-# IF (command line interface)
+# Impact Engine (CLI)
 
 ## Introduction
 
@@ -28,6 +28,15 @@ You can also pass a path where you would like to save the output file to. For ex
 ```sh
 ie --manifest ./my-manifest.yml --output ./my-results.yml
 ```
+
+> Note that you also need to add some config to your manifest file to enable exporting to a file. The config is as follows:
+```
+initialize:
+  outputs:
+    - yaml
+```
+
+
 
 If you omit the `--output` command, your results will be displayed in the console.
 
