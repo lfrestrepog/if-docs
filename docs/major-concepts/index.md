@@ -10,5 +10,6 @@ Here you will find explanations for the fundamnetal Impact Framework concepts. T
 - [Manifest files](./manifest-file.md)
 - [IF](./impact-enbgine.md)
 - [Time](./durations.md)
+- [Aggregation](./aggregation.md)
 - [Plugins](./plugins.md)
 - [Group-by](./groupby.md)
