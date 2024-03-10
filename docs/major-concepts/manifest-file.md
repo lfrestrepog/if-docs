@@ -87,13 +87,16 @@ For example, a web application could be organized as follows:
 tree:
   children:
     front-end:
-      build-pipeline:
-        vercel:
-        github-pages:
+      children:
+        build-pipeline:
+          children:
+            vercel:
+            github-pages:
     backend-database:
-      server1:
-      server2:
-      server3:
+      children:
+        server1:
+        server2:
+        server3:
     front-end:
     networking:
 ```
