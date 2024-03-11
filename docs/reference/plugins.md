@@ -14,7 +14,7 @@ Documentation for the specific individual plugins are available in the plugin RE
 ### `if-plugins`
 
 
-* [Cloud instance metadata](https://github.com/Green-Software-Foundation/if-plugins/blob/main/src/lib/cloud-instance-metadata/README.md): Looks up detailed metadata about a given cloud instance type, including the physical processor being used.
+* [Cloud metadata](https://github.com/Green-Software-Foundation/if-plugins/blob/main/src/lib/cloud-metadata/README.md): Looks up detailed metadata about a given cloud instance type and region, including the physical processor being used.
 * [E-MEM](https://github.com/Green-Software-Foundation/if-plugins/blob/main/src/lib/e-mem/README.md): Calculate the energy expended due to memroy usage, by multiplying the energy used in GB by a coefficient.
 * [SCI-E](https://github.com/Green-Software-Foundation/if-plugins/blob/main/src/lib/sci-e/README.md): Calculates the sum of all energy components.
 * [SCI-M](https://github.com/Green-Software-Foundation/if-plugins/blob/main/src/lib/sci-m/README.md) - Calculates the embodied carbon for a component.
@@ -26,9 +26,10 @@ Documentation for the specific individual plugins are available in the plugin RE
 * [Multiply](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/multiply): a generic arithmetic plugin that allows you to multiply any set of input parameters.
 * [Coefficient](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/coefficient): a generic arithmetic plugin that allows you to multiply any input value by a coefficient.
 * [E-NET](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/e-net): simply multiplies the amount of data transferred (GB) by a coefficient (kWh/GB) to yield network/energy.
-* [Mock Observations Model](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/mock-observations): A model for mocking observations (inputs) for testing and demo purposes.
+* [Mock Observations](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/mock-observations): A plugin for mocking observations (inputs) for testing and demo purposes.
 * [CSV-Export](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/csv-export): a generic CSV exporter plugin.
-
+* [Divide](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/divide): A generic plugin for doing arithmetic division of two values.
+* [Regex](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/regex): A generic plugin to match part of one string and extract it into another.
 
 
 ### `if-unofficial-plugins`

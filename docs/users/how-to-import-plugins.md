@@ -22,10 +22,10 @@ tags:
 initialize:
   plugins:
     azure-importer:
-      method: AzureImporterModel
+      method: AzureImporter
       path: "@grnsft/if-unofficial-plugins"
-    cloud-instance-metadata:
-      method: CloudInstanceMetadataModel
+    cloud-metadata:
+      method: CloudMetadata
       path: "@grnsft/if-plugins"
 ```
 
