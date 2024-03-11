@@ -176,7 +176,7 @@ Please use `jest --coverage` to see a coverage report for your plugin - your uni
 | All files                   | 100     | 100      | 100     | 100     |
 | lib                         | 100     | 100      | 100     | 100     |
 | index.ts                    | 100     | 100      | 100     | 100     |
-| lib/cloud-instance-metadata | 100     | 100      | 100     | 100     |
+| lib/cloud-metadata          | 100     | 100      | 100     | 100     |
 | index.ts                    | 100     | 100      | 100     | 100     |
 | lib/e-mem                   | 100     | 100      | 100     | 100     |
 | index.ts                    | 100     | 100      | 100     | 100     |
