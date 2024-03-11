@@ -178,6 +178,14 @@ Run your manifest uisng
 np run ie -- --manifest <path-to-manifest>
 ```
 
+If you have to link more than one local plugin, for example to test your plugin in a pipeline, you can do so with
+
+```sh
+npm link new-plugin --save
+```
+
+This will create an entry like `"new-plugin": "file:path/to/your/plugin"` in the `package.json` which links to your local plugin. This way, multiple plugins can be linked at once. Of course, these changes should not be committed, but they can be helpful for local testing.
+
 ## Step 5: Publishing your plugin
 
 Now you have run your plugin locally and you are happy with how it works, you can make it public by publishing it to a public Github repository. Now all you have to do to use it in a manifest file is `npm install` it and pass the path to the Github repository in the plugin `initialize` block.
