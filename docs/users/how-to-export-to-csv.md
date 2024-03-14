@@ -4,11 +4,11 @@ sidebar_position: 5
 
 # How to export to CSV
 
-IF supports exporting data to CSV files. This provides users with a data format that enables visualization and data anlysis using standard data analysis tools.
+IF supports exporting data to CSV files. This provides users with a data format that enables visualization and data analysis using standard data analysis tools.
 
 ## Manifest config
 
-To export your data to a CSV file, you have to provide a small pieve of config data to your manifest file:
+To export your data to a CSV file, you have to provide a small piece of config data to your manifest file:
 
 ```yaml
 initialize:
@@ -20,7 +20,7 @@ You can also add `- yaml` if you want to export to both `yaml` and `csv` simulta
 
 ## CLI command
 
-Then, you must select the metric you want to export to CSV. The name of that metric must be added top the savepath provided to the `--output` command in the CLI, after a hashtag.
+Then, you must select the metric you want to export to CSV. The name of that metric must be added to the savepath provided to the `--output` command in the CLI, after a hashtag.
 
 For example, to export the `carbon` data from your tree to a CSV file:
 
