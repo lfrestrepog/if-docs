@@ -15,7 +15,7 @@ unit:
 aggregation:
 }
 ```
-The `name` is the accepted name for a particular parameter. For example, IF has a parameter, `carbon` that represents carbon in gCO2eq. Anywhere `carbon` exists as a parameter anywhere across the iF and its plugins, the name `carbon` is reserved for carbon with this specific unit. 
+The `name` is the accepted name for a particular parameter. For example, IF has a parameter, `carbon` that represents carbon in gCO2eq. Anywhere `carbon` exists as a parameter anywhere across the IF and its plugins, the name `carbon` is reserved for carbon with this specific unit. 
 
 The `description` is a short sentence describing the parameter. 
 
