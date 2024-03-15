@@ -385,7 +385,7 @@ name: pipeline-demo
 description:
 tags:
 initialize:
-  output:
+  outputs:
     - csv
   plugins:
     boavizta-cpu:
