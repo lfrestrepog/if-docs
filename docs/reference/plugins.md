@@ -1,6 +1,6 @@
 # Plugins
 
-The Impact Framework includes just one builtin plugin (`time-sync`). All other plugins are external plugins that have to be installed before they can be run in an IF pipeline. Anyone can create and install a new plugin. As long as the plugin conforms to the expected interface, IF can run it.
+The Impact Framework includes several builtin plugins (e.g. `time-sync`, `groupby` and `csv-exporter`). All other plugins are external plugins that have to be installed before they can be run in an IF pipeline. Anyone can create and install a new plugin. As long as the plugin conforms to the expected interface, IF can run it.
 
 There are two repositories that were created by the IF core team. The `if-plugins` repository contains the "core" set of plugins that IF developers will maintain and support. We also provide a second repository of `if-unofficial` plugins that are mainly re-implementations of existing third party plugins or code that we expect community members to maintain independently of the IF core team.
 
@@ -8,7 +8,11 @@ Documentation for the specific individual plugins are available in the plugin RE
 
 ### `built-in`
 
-* [Time Sync](https://github.com/Green-Software-Foundation/if/tree/dev/src/models#time-sync): Takes a heterogeneous set of time series data that might be offset, discontinuous or irregularly spaces and returns time series conforming to a user defined time grid. E.g. a user can define that all sets of observations should start at sopme global start time, end at some global end time and have a specific temporal resolution. 
+* [Time Sync](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins#readme): Takes a heterogeneous set of time series data that might be offset, discontinuous or irregularly spaces and returns time series conforming to a user defined time grid. E.g. a user can define that all sets of observations should start at sopme global start time, end at some global end time and have a specific temporal resolution. 
+
+* [CSV Exporter](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins#readme): Exports data for a given metric to a CSV file.
+
+* [Groupby](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins#readme): Allows a user to regroup their output data according to given keys.
 
 
 ### `if-plugins`
@@ -46,3 +50,4 @@ Documentation for the specific individual plugins are available in the plugin RE
 ## Exhaust plugins (outputs)
 
 Export plugins designed to implement custom ways of exporting output file. Currenlty supported ones are `csv`, `yaml` and `log` plugins.
+These are currently built in to the IF, but migrating to dynamically loading export functions as plugins is part of our near-term roadmap.
