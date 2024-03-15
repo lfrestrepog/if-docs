@@ -50,3 +50,4 @@ Documentation for the specific individual plugins are available in the plugin RE
 ## Exhaust plugins (outputs)
 
 Export plugins designed to implement custom ways of exporting output file. Currenlty supported ones are `csv`, `yaml` and `log` plugins.
+These are currently builtin to the IF, but migrating to dynamically loading export functions as plugins is part of our near-term roadmap.
