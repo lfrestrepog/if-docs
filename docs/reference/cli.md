@@ -28,6 +28,15 @@ Here is an example of `--output` being used to define a path:
 ie --manifest examples/manifests/my-manifest.yml --output examples/outputs/my-outdata.yml
 ```
 
+### CSV export identifiers
+
+If you want to save data to CSV, you have to select a specific metric to export. You do this by adding a hashtag and the metric name after the savepath provided to the output command. For example, you could save the `carbon` data to a CSV file called `demo.csv` as follows:
+
+
+```sh
+ie --manifest demo.yml --output demo#carbon
+```
+
 
 ## `--override-params`
 
