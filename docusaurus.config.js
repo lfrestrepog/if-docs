@@ -33,7 +33,7 @@ const config = {
           sidebarPath: require.resolve("./sidebars.js"),
           routeBasePath: "/",
           // Change this to your repo.
-          editUrl: "https://github.com/Green-Software-Foundation/ief/",
+          editUrl: "https://github.com/Green-Software-Foundation/if-docs/edit/master",
         },
         blog: false,
         theme: {
