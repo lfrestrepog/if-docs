@@ -61,14 +61,14 @@ export default function Hackathon(): JSX.Element {
       <div className="container">
         <div className='row'>
           <div className='col col--6'>
-            <h1 className={styles.title}>Join an upcoming <br />
-              <span>1hr live training</span> for Impact Framework</h1>
-            <p>Sign up for a 1-hour Impact Framework demo to improve how you measure software to reduce its environmental impact.</p>
-            <div className={styles.workshopList}>
+            {/* <h1 className={styles.title}>Join an upcoming <br />
+              <span>1hr live training</span> for Impact Framework</h1> */}
+            {/* <p>Sign up for a 1-hour Impact Framework demo to improve how you measure software to reduce its environmental impact.</p> */}
+            {/* <div className={styles.workshopList}>
               {WorkshopList.map((props, idx) => (
                 <Workshop key={idx} {...props} />
               ))}
-            </div>
+            </div> */}
           </div>
           <div className={clsx('col', styles.illustrationWrapper)}>
             <Illustration />
