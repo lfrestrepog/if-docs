@@ -49,7 +49,7 @@ export default function Home(): JSX.Element {
     >
       <HomepageHeader />
       <main>
-        <Hackathon />
+        <!-- <Hackathon /> -->
         <HomepageFeatures />
       </main>
     </Layout>
