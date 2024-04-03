@@ -7,56 +7,10 @@ sidebar-position: 4
 _(for any questions / help needed on IF visualization please raise an issue here: [IF issues](https://github.com/Green-Software-Foundation/if/issues))_
 
 There are currently 2 ways to visualize Impact Framework outputs:
-1. Using the **Simple HTML Exporter plugin**.
+1. Using the **Simple HTML Exporter plugin**. (NOT CURRENTLY WORKING! This plugin was broken bvy an IF refactor and is not yet fixed.)
 2. Using **Grafana**.
 
 **Grafana** is the more standardized method for visualization. It also provides much more control over what's being visualized and how. Nevertheless, it requires some setting up.
-
-Using the **Simple HTML Exporter plugin** is much simpler as it only requires a single configuration in the manifest yml file. However, it only supports visualization of Energy and Carbon values over time. 
-If you need to visualize other output parameters you can either use **Grafana** or alternatively enhance the **Simple HTML Exporter plugin** to be a bit less simple...
-
-## Simple HTML Exporter plugin
-
-
-### Input
-
-`energy` (kWh), `carbon` (gCO2) and `timestamp` should be included in the input array items.
-
-### Output
-
-This plugin acts as a relay, returning the input as-is, with the generated HTML acting as a "side effect".
-
-### Example manifest
-
-```yaml
-name: simple-html-exporter-demo
-description:
-tags:
-initialize:
-  plugins:
-    'simple-html-exporter':
-      method: SimpleHtmlExporter
-      path: "@grnsft/if-plugins"
-tree:
-  children:
-    child:
-      pipeline:
-        - simple-html-exporter
-      config:
-        simple-html-exporter:
-          html-path: /usr/local/data/html-export.html
-      inputs:
-        - timestamp: '2021-01-01T00:00:00Z',
-          energy: 0.00001841,
-          carbon: 0.0104062,
-```
-
-### Visualization example
-
-The resulting HTML file can then be viewed using a web-browser
-
-![img.png](simple-html-exporter-sample.png)
-
 
 
 ## Grafana
