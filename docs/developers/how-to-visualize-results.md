@@ -7,7 +7,7 @@ sidebar-position: 4
 _(for any questions / help needed on IF visualization please raise an issue here: [IF issues](https://github.com/Green-Software-Foundation/if/issues))_
 
 There are currently 2 ways to visualize Impact Framework outputs:
-1. Using the **Simple HTML Exporter plugin**. (NOT CURRENTLY WORKING! This plugin was broken bvy an IF refactor and is not yet fixed.)
+1. Using the **Simple HTML Exporter plugin**. (NOT CURRENTLY WORKING! This plugin was broken by an IF refactor and is not yet fixed.)
 2. Using **Grafana**.
 
 **Grafana** is the more standardized method for visualization. It also provides much more control over what's being visualized and how. Nevertheless, it requires some setting up.
