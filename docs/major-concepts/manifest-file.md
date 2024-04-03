@@ -48,11 +48,15 @@ tree:
           duration: 3600
 ```
 
-### Global metadata
+Everything above the `tree` is collectively referred to as the `context`. The `tree` contains the input data and is structured according to the architecture of the application being examined, with individual components being nodes in the tree. Individual components can be grouped under parent nodes. 
+
+### Context
+
+#### Metadata
 
 The global metadata includes the `name`, `description`, and `tags` that can be used to describe the nature of the manifest file. For example, you might name the file `Carbon Jan 2024` or similar. A short description might briefly outline the scope of the manifest file, e.g. `company x's carbon emissions due to web serves from Jab 24 - July 24`. Tags can be used to group manifest files (we do not explicitly use this field for anything currently).
 
-### Plugin initialization
+#### Initialize
 
 The initialize section is where you define which plugins will be used in your manifest file and provide the global configuration for them. Below is sample for initialization: 
 
@@ -74,6 +78,7 @@ There is also an optional `global-config` field that can be used to set *global*
 Impact Framework uses the `initialize` section to instantiate each plugin. A plugin cannot be invoked elsewhere in the manifest file unless it is included in this section.
 
 `outputs` is a list of possible export types (currently `csv`, `yaml`, and `log` are supported).
+
 
 ### Tree
 
@@ -158,7 +163,19 @@ tree:
                   energy: 0.000811
 ```
 
-### Inputs
+#### Node config
+
+Node level configuration is intended to include any configuration data that is constant from timestep to timestep, but varies across components in the tree. Values that are constant both within *and* across components should go in global config instead. 
+
+The plugin must be written such that it *expects* these values to exist in node level config and explicitly reads them in. The values expected in node level config should be defined in the plugin README.
+
+#### Defaults
+
+Defaults are fallback values that are only used if a given value is missing in the inputs array. For example, if you have a value that could feasibly be missing in a given timestep, perhaps because your plugin relies on a third party API that can fail, you can provide a value in `defaults` that can be used as a fallback value. 
+
+The values in defaults are applied to every timestep where the given value is missing. This means that as well as acting as a fallback `defaults` can be used as a convenience tool for efficiently adding a constant value to every timestep in your inputs array.
+
+#### Inputs
 
 Every component includes an `inputs` field that gets read into plugins as an array. `inputs` are divided into `observations`, each having a `timestamp` and a `duration`. Every `observation` refers to an element in `inputs` representing some snapshot in time.
 
