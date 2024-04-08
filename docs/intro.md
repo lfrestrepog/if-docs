@@ -16,7 +16,7 @@ Carbon Hack is a dynamic competition that combines healthy rivalry with collabor
 CarbonHack is open to all, including software practitioners and those with a passion for Green Software.
 Find out more about CarbonHack 2024 on the [CarbonHack website](https://grnsft.org/hack/github)
 
-**Attend the the [Closing & Award Ceremony Livestream](https://hack.greensoftware.foundation/awards/) on April 18th!**
+**Attend the [Closing & Award Ceremony Livestream](https://hack.greensoftware.foundation/awards/) on April 18th!**
 
 ----------------------------
 
