@@ -1,6 +1,5 @@
 # Contribution Guidelines
 
-
 First off, thanks for taking the time to contribute! 🎉
 
 The following document is a rule set of guidelines for contributing.
@@ -8,150 +7,193 @@ The following document is a rule set of guidelines for contributing.
 ## Table of Contents <!-- omit from toc -->
 
 - [Contribution Guidelines](#contribution-guidelines)
+  - [What and when to contribute](#what-and-when-to-contribute)
+  - [Reporting bugs](#reporting-bugs)
   - [Code Contributions](#code-contributions)
-      - [Step 1: Fork](#step-1-fork)
-      - [Step 2: Branch](#step-2-branch)
-      - [Step 3: Commit](#step-3-commit)
-      - [Step 4: Sync](#step-4-sync)
-      - [Step 5: Push](#step-5-push)
-      - [Step 6: Pull Request](#step-6-pull-request)
-  - [Commit message guidelines](#commit-message-guidelines)
+    - [Step 1: Fork](#step-1-fork)
+    - [Step 2: Branch](#step-2-branch)
+    - [Step 3: Commit](#step-3-commit)
+    - [Step 5: Push](#step-5-push)
+    - [Step 6: Pull Request](#step-6-pull-request)
   - [Coding guidelines](#coding-guidelines)
-      - [Code structuring patterns](#code-structuring-patterns)
-          - [Object Oriented Programming](#object-oriented-programming)
-          - [Functional Programming](#functional-programming)
-      - [Naming patterns](#naming-patterns)
+    - [Code structuring patterns](#code-structuring-patterns)
+    - [Functional Programming](#functional-programming)
+    - [Naming conventions](#naming-conventions)
       - [Documentation](#documentation)
-      - [Writing tests](#writing-tests)
+    - [Writing tests](#writing-tests)
+
+## What and when to contribute
+
+You can contribute anything to the IF, but we are likely to close out unsolicited PRs without merging them. Our issue board is completely open and we have tags (`help-wanted`, `good-first-issue`) to help contributors to choose tasks to work on. We recommend speaking to the core team on Github before starting working on an issue. You can do this by raising an issue or commenting on an existing issue. This helps us to direct your energy is directions that are aligned with our roadmap, prevent multiple people working on the same task, and better manage our board. This all makes it much more likely that your work will get merged.
+
+## Reporting bugs
+
+We appreciate bug reports! If you experience an issue with IF or one of our plugins, you can report it using our bug reporting template. To do this:
+
+1. Go to the [IF repository](https://github.com/Green-Software-Foundation/if) (or [plugin repository](https://github.com/Green-Software-Foundation/if) if you bug relates to a specific plugin)
+2. Click on the `Issues` tab
+3. Click on `Create New Issue` and select the `Bug Report` template.
+4. Fill out the requested information.
+
+The more detailed information you provide int hen bug report, the easier it will be for us to diagnose, triage and resolve your issue. We ask for some simple information about your issue, including a description of the error, the expected behaviour, the actual behaviour and the stepos we cna take to reproduce the error in our local environments. We also then prompt you to provide a link to [Stackblitz](https://stackblitz.com/) or a similar online environemnt where we can run your mnaifest and observe the error. If you prefer *not* to send a link, we would appreciate a copy of the manifest file that you ran to produce the error, information about your runtime environment and any additional code that's required to reproduce the error. This is all designed to enable us to reproduce the same error and debug it for you as quickly as possible.
+
+Once a suitably detailed bug report exists, we will triage it. We hold weekly triage calls on Tuesdays. In most cases, the triage call will be the core team's first interaction with the bug, although in some cases we may engage asynchronously in advance of the call. Triage means that the core team will examine the issue and assign an urgency label - either Low, Medium or High. 
+
+The assessment rubric is as follows:
+
+|                                                                                                                        | Consequence                                                                              | Severity |
+| ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | -------- |
+| Bugs in IF core                                                                                                        | unusable framework, incorrect calculations                                               | 5        |
+| Bugs in if-plugins                                                                                                     | core pathways fail, IF very limited in functionality                                     | 5        |
+| Bugs in if-unofficial                                                                                                  | Third party plugins harder to use, limits IF to standard lib                             | 3        |
+| Bugs in template                                                                                                       | Harder to build plugins, ecosystem growth is impacted                                    | 2        |
+| Bugs in docs                                                                                                           | product does not match expectation, hard to debug, frustration, loss of adoption         | 2        |
+| Security flaw: privacy related                                                                                         | leak user data, unlikely to achieve adoption in serious orgs                             | 5        |
+| Security flaw: permissions escalation                                                                                  | expose user to malware                                                                   | 5        |
+| Code not addressing user needs                                                                                         | no product market fit, loss of adoption                                                  | 5        |
+| Communication failures within team                                                                                     | Conflicting or duplicating work, frustration, morale damage                              | 4        |
+| Communication failures with community                                                                                  | we lose product market fit, we do not have good community retention, reputational damage | 3        |
+| Communication failures with leadership                                                                                 | product does not meet business goals                                                     | 3        |
+| License compliance failures, including in supply chain (e.g. exposing privileged api responses for free via  a plugin) | 4                                                                                        |
+| Bugs affecting releases                                                                                                | users stuck on old versions                                                              | 2        |
+| Strategy failures                                                                                                      | no product market fit                                                                    | 2        |
+
+The mapping of severity to label is as follows:
+
+| Severity | Label |
+| -------- | ----- |
+| 1        | L     |
+| 2        | M     |
+| 3        | M     |
+| 4        | H     |
+| 5        | H     |
+
+During the bug triage we will also discuss a remediation plan for the bug. This will be communicated in the comments on the bug report. For high urgency bugs, the fix will be implemented as soon as possible, maybe reorganizing our current work to accommodate it. For medium priority bugs, we will schedule the fix in the next available sprint. Low priority bugs will be backlogged and addressed when there is developer time available. Low priority bugs will also be tagged `help-wanted` so that they can be addressed by community members.
+
+Not every bug will be fixed. We may decide *not* to fix a bug in cases such as:
+
+- fixing the bug has some detrimental side effect elsewhere in the product
+- the bug has a fix coming soon as part of another upgrade
+- the bug is only problematic for a single specific use casea nd fixing it would break features relied upon by other users
+- the bug is contentious for some reason and there is reputational or community risks associated with the fix
+
+The bug will be labelled `fix-now`, `fix-later` or `wont-fix` to reflect our remediation plan and details will be provided in issue comments.
+
 
 ## Code Contributions
 
-#### Step 1: Fork
+### Step 1: Fork
 
-Fork the project on [GitHub](git@github.com:Green-Software-Foundation/if.git)
+Fork the project on [GitHub](https://github.com/Green-Software-Foundation/if)
 
 You then have your own copy of the repository that you can change. 
 
-#### Step 2: Branch
+### Step 2: Branch
 
 Create new branch in your forked copy of the `if` repository, which will contain your new feature, fix or change. 
 
-    ```bash
-    $ git checkout -b <topic-branch-name>
-    ```
+```bash
+$ git checkout -b <topic-branch-name>
+```
 
-#### Step 3: Commit
+### Step 3: Commit
 
 Make sure git knows your name and email address:
 
-   ```bash
-   $ git config --global user.name "Example User"
-   $ git config --global user.email "user@example.com"
-   ```
+```bash
+$ git config --global user.name "Example User"
+$ git config --global user.email "user@example.com"
+```
 
-Commiting multiple files with changes on multiple resources is not allowed.
+Each commit should cover one change to one resource. You should not add multiple changes to a single commit.
 Commit message should clearly describe on which resource changes are made.
+For the commit message, we adhere to the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
+Conventional commits are organized with a type, a scope and a description. The type can be one of: 
 
-Add and commit:
+- 'feat',
+- 'fix',
+- 'docs',
+- 'chore',
+- 'style',
+- 'refactor',
+- 'ci',
+- 'test',
+- 'revert',
+- 'package',
 
-   ```bash
-   $ git add my/changed/files
-   $ git commit
-   ```  
-    
-Commit your changes in logical chunks. Please do not push all changes in one commit.
+The scope is optional but should refer to the part of the codebase you are amending in the commit, e.g. `lib`, `types` etc.
 
-> Run `npm run fix` before commiting for not having conflict with CI linter.
+Here's an example of a valid commit message:
 
-Please adhere to these [Commit message guidelines](#commit-message-guidelines)
-   or your code is unlikely be merged into the main project.
+```
+feat(lib): initial commit for time-sync logic
+```
 
-#### Step 4: Sync
+or 
 
-Use git pull/merge to synchronize your work with the IF repository.
+```
+test(lib): in teads-curve add unit test to check that error is raised on missing tdp param 
+```
 
-   ```bash
-   $ git pull upstream dev
-   ```
-   
-#### Step 5: Push
+Run `npm run fix` before commiting. If your commit message does not conform to the conventional commit specification or if you have not run `npm run fix` your commit will not satisfy the commitlint check.
+
+Add and commit with your commit message:
+
+```bash
+$ git add my/changed/files
+$ git commit -m "<type-of-commit>(<my-optional-scope>): <my-commit-message>"
+```  
+
+### Step 5: Push
 
 Push your topic branch to your fork:
 
-   ```bash
-   $ git push origin <topic-branch-name>
-   ```
+```bash
+$ git push origin <topic-branch-name>
+```
 
-#### Step 6: Pull Request
+### Step 6: Pull Request
 
 Open a Pull Request from your fork of the repository to the `dev` branch of the IF repository with a clear title and description according to [template](.github/PULL_REQUEST_TEMPLATE.md).
 
-Pull request should pass all CI which are defined, should have at least one approve. It should adher to the specification for getting approved.
+Pull requests will not be reviewed unless they pass all CI. This includes a lint check and running our unit tests.
 
-CI included lint checks, running tests, and etc.
-
-## Commit message guidelines
-
-The commit message should describe what changed and why.
-
-   1. The first line should:
-       * contain a short description of the change
-       * be 60 characters or less
-       * be prefixed with the name of the changed subsystem
-       * be entirely in lowercase with the exception of proper nouns, acronyms, and the words that refer to code,
-         like function/variable names
-        
-       Examples:
-       
-       ```
-        util: add getInitializedPlugin method to plugin.
-        deps: add express package to dependencies.
-        service: refactor get user.
-       ```
-   2. Keep the second line blank. 
-          
-   3. Wrap all other lines at 72 columns:
-      * describe each line in logical chunks
-      * start each line with: space hyphen space ( - ...)
-      * be entirely in lowercase with the exception of proper nouns, acronyms, and the words that refer to code,
-        like function/variable names
-      
-      Examples:
-      
-      ```    
-        - remove deprecated logger
-        - refactor some method
-        - add JSDoc on existing function
-      ```
 ## Coding guidelines
 
-#### Code structuring patterns
+### Code structuring patterns
 
 Avoid having functions which are responsible to do multiple things at the same time. Make sure one function/method does one thing, and does it well. 
 
-###### Object Oriented Programming
+### Functional Programming
 
-While following `Object Oriented Programming` paradigm, it's important to follow [SOLID](https://en.wikipedia.org/wiki/SOLID) principles.
+We have a preference towards functional programming styles in the IF. This is because it makes it easier for different functions to be developed in isolation, composed in complex ways and executed in parallel.
 
-###### Functional Programming
+We recommend starting with these [basic principles and guidelines](https://dev.to/jamesrweb/principles-of-functional-programming-4b7c) for functional programming.
 
-When designing module of the application in `Functional Programming` paradigm, the key to follow [basic](https://dev.to/jamesrweb/principles-of-functional-programming-4b7c) principles.
 
-#### Naming patterns
+### Naming conventions
 
-Make sure your `class/function/variable` describes exactly what it does. Avoid using shortened words like txt, arr while doing naming decision. As a naming pattern `camel case` should be used.
+We prefer not to use abbreviations of contractions in parameter names. 
 
-```ts
-❌ const a = "<MOCK_VALUE_HERE>"
-✅ const mockValue = "<MOCK_VALUE_HERE>"
+Using fully descriptive names makes the code more readable, which in turn helps reviewers and anyone else aiming to understand how the plugin works. 
 
-❌ const a = (txt: string) => console.log(txt)
-✅ const logMessage = (message: string) => console.log(message)
-```
+It also helps to avoid ambiguity and naming collisions within and across plugins. Your name should describe what an element does as precisely as practically possible.
+
+For example, we prefer `functionalUnit` to `funcUnit`, `fUnit`, or any other abbreviation.
+
+In Typescript code we use lower Camel case (`likeThis`) for variable and function names and Pascal/Upper Camel case for class, type, enum, and interface names (`LikeThis`).
+
+In yaml files, we prefer to use kebab-case (`like-this`) for field names. For example:
+
+`energy-network` is the field name for the energy consumed by networking for an application
+`functional-unit` is the unit in which to express an SCI value.
+
+Global constants can be given capitalized names, such as `TIME_UNITS_IN_SECONDS`.
+
 
 #### Documentation
 
-Every logical unit (`Class, function, method`) should be covered with appropriate documentation. For documenting such, multi-line comment style is used.
+Every logical unit (`function, method`) should be covered with appropriate documentation. For documenting such, multi-line comment style is used.
 
 ```ts
 ❌ const a = (message: string) => console.log(message)
@@ -163,19 +205,9 @@ Every logical unit (`Class, function, method`) should be covered with appropriat
 const logMessage = (message: string) => console.log(message)
 ```
 
-For documenting variable, expression, single line comments can be used after declaration.
+### Writing tests
 
-```ts
-class MockClass {
-     // this is a mock field
-  ❌ private mockField: string = "mock-field"
-  ✅ private mockField: string = "mock-field" // Single line documenting style is used.
-}
-```
-
-#### Writing tests
-
-One test file should be responsible for one module. `describe` blocks should be used for module and function/method description. First `describe` should follow `resource/module: ` pattern. Second describe title should follow  `method(): ` pattern. Test units can use either `test` or `it`, title should exactly describe behaviour and input argument. Make sure each test case covers one branch.
+One test file should be responsible for one module. `describe` blocks should be used for module and function/method description. First `describe` should follow `resource/module: ` pattern. Second describe title should follow  `method(): ` pattern. Test units can use `it` blocks whose title should exactly describe behaviour and input argument.
 
 See example: 
 ```ts
