@@ -3,6 +3,12 @@ sidebar-position: 7
 ---
 # FAQs
 
+## How can I contribute to Impact framework?
+
+We welcome all kinds of contributions to Impact Framework, from bug reports to work on core features or documentation. For detailed instructions for how to start and what to expect when you contribute, please visit our [contributions guidelines](https://github.com/Green-Software-Foundation/if/blob/main/CONTRIBUTING.md). There you will find guidance on how to raise bug reports, how to contribute code and what processes we have in place for handling your issues and PRs.
+
+For contributing to these docs, you can riase pull requests against our [Github repository](https://github.com/Green-Software-Foundation/if-docs).
+
 
 ## Is there any way to auto-generate manifest files? 
 
