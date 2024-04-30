@@ -23,7 +23,7 @@ One of its main features is the ability to create dashboards with various types 
 
 Please follow these instructions [here](https://github.com/Green-Software-Foundation/if/blob/dev/grafana/IF_GRAFANA_SETUP.md) to set up a **Grafana** dashboard.
 
-This method requires converting the resulting output yml into a CSV. The standard way to do so would be to use the [CSV export](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/csv-export) plugin.
+This method requires converting the resulting output yml into a CSV. The standard way to do so would be to use the [Grafana export](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/grafana-export) plugin.
 
 ### Visualization example
 
