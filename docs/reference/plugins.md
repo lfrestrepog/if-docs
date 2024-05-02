@@ -31,7 +31,7 @@ Documentation for the specific individual plugins are available in the plugin RE
 * [Coefficient](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/coefficient): a generic arithmetic plugin that allows you to multiply any input value by a coefficient.
 * [E-NET](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/e-net): simply multiplies the amount of data transferred (GB) by a coefficient (kWh/GB) to yield network/energy.
 * [Mock Observations](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/mock-observations): A plugin for mocking observations (inputs) for testing and demo purposes.
-* [CSV-Export](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/csv-export): a generic CSV exporter plugin.
+* [Grafana-Export](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/grafana-export): a generic CSV exporter plugin.
 * [Divide](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/divide): A generic plugin for doing arithmetic division of two values.
 * [Regex](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/regex): A generic plugin to match part of one string and extract it into another.
 
