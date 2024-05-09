@@ -20,15 +20,21 @@ ie --manifest examples/manifests/my-manifest.yml
 
 ##  `--output` , `-0`
 
-The `--output` flag is optional and is used for defining a path to save your output data. If you provide the `--output` command with a path, your output data will be saved as a `.yml` file to disk. 
+The `--output` flag is optional and is used for defining a path to save your output data. If you provide the `--output` command with a path, you also need to specify the file type in the `initialize.outputs` block in your manifest file. With both pieces of information, IF will save your output data to file.  
 
 Here is an example of `--output` being used to define a path:
 
 ```sh
-ie --manifest examples/manifests/my-manifest.yml --output examples/outputs/my-outdata.yml
+ie --manifest examples/manifests/my-manifest.yml --output examples/outputs/my-outdata
 ## or using aliases
-ie -m examples/manifests/my-manifest.yml -o examples/outputs/my-outdata.yml
-```
+ie -m examples/manifests/my-manifest.yml -o examples/outputs/my-outdata
+If `my-manifest.yml` contains the following config, then a `yaml` file named `my-outdata.yml` will be created, containing the results from your IF run.
+
+```yaml
+
+initialize:
+  output:
+    - yaml
 
 ### CSV export identifiers
 

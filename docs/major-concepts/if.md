@@ -44,6 +44,6 @@ initialize:
 ```
 
 
-If you omit the `--output` command, your results won't be displayed in the console. You should use `--stdoutput` command for that.
+If you omit the `--output` command, your results won't be displayed in the console. You should use `--stdout` command for that.
 
 For more information on the `ie` commands see the [CLI reference documentation](../reference/cli.md).
