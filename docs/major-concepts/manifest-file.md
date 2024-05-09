@@ -65,7 +65,7 @@ initialize:
   plugins:
     <PLUGIN-NAME-HERE>:
       method: <METHOD-NAME-HERE>
-  outputs: ['csv', 'yaml', 'log']
+  outputs: ['csv', 'yaml']
 ```
 
 Where required values are:
@@ -77,8 +77,32 @@ There is also an optional `global-config` field that can be used to set *global*
 
 Impact Framework uses the `initialize` section to instantiate each plugin. A plugin cannot be invoked elsewhere in the manifest file unless it is included in this section.
 
-`outputs` is a list of possible export types (currently `csv`, `yaml`, and `log` are supported).
+`outputs` is a list of possible export types (currently `csv`, `csv-raw` and `yaml` are supported).
 
+#### Execution (auto-generated)
+
+This section is auto generated so you don't have to include it in your manifest. Execution has all the necessary information which can help to rebuild the environment. 
+
+```yaml
+execution:
+  status: success
+  command: ie --manifest examples/basic.yml
+  environment:
+    if-version: v0.3.2
+    os: ubuntu
+    os-version: 22.04.6
+    node-version: v21.4.0
+    date-time: 2023-12-12T00:00:00.000Z (UTC)
+    dependencies: 
+      - '@babel/core@7.22.10'
+      - ...
+  error: 'InputValidationError:   "duration" parameter is required. Error code: invalid_type'. ## appears when execution failed
+```
+
+ - **status**: execution state: `success` or `fail`
+ - **command**: exact command which is used to run the framework (it may include full path to tools)
+ - **environment**: necessary information about operating system, Node.js version, time, dependencies
+ - **error**: appears in case if execution failed, includes the reason
 
 ### Tree
 
