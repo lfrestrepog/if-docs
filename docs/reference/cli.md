@@ -10,7 +10,7 @@ If you have globally installed our `if` npm package, you can invoke the CLI usin
 
 `ie <args>`
 
-## `--manifest`
+## `--manifest` , `-m`
 
 The `--manifest` flag is the only required flag and tells `ie` where to find the manifest file that you want to execute. This command expects to receive the path where your manifest file is saved, as shown in the following example:
 
@@ -18,14 +18,24 @@ The `--manifest` flag is the only required flag and tells `ie` where to find the
 ie --manifest examples/manifests/my-manifest.yml
 ```
 
-## `--output`
+##  `--output` , `-0`
 
-The `--output` flag is optional and is used for defining a path to save your output data. If you provide the `--output` command with a path, your output data will be saved as a `.yml` file to disk. If you omit this command, your output data will be displayed in the terminal.
+The `--output` flag is optional and is used for defining a path to save your output data. If you provide the `--output` command with a path, you also need to specify the file type in the `initialize.outputs` block in your manifest file. With both pieces of information, IF will save your output data to file.  
 
 Here is an example of `--output` being used to define a path:
 
 ```sh
-ie --manifest examples/manifests/my-manifest.yml --output examples/outputs/my-outdata.yml
+ie --manifest examples/manifests/my-manifest.yml --output examples/outputs/my-outdata
+## or using aliases
+ie -m examples/manifests/my-manifest.yml -o examples/outputs/my-outdata
+```
+
+If `my-manifest.yml` contains the following config, then a `yaml` file named `my-outdata.yml` will be created, containing the results from your IF run.
+
+```yaml
+initialize:
+  output:
+    - yaml
 ```
 
 ### CSV export identifiers
@@ -35,10 +45,12 @@ If you want to save data to CSV, you have to select a specific metric to export.
 
 ```sh
 ie --manifest demo.yml --output demo#carbon
+## or
+ie -m demo.yml -o demo#carbon
 ```
 
 
-## `--override-params`
+## `--override-params` , `-p`
 
 The `override-params` command is used when you want to discard our recommended set of parameters and associated units and aggregation methods and instead provide your own. We do not recommend this, and if you use this feature you take full responsibility for any errors you introduce downstream, including unit or aggregation errors. This is why we hide the ability to override the parameters behind a CLI command - it is an advanced feature that you should only use if you really know what you are doing. 
 
@@ -48,4 +60,18 @@ For example:
 
 ```sh
 ie --manifest <your manifest> --override-params <path-to-your-params-file>
+## or using aliases
+ie -m <your manifest> -p <path-to-your-params-file>
+```
+
+
+## `--help` , `-h`
+
+The `--help` command provides information about all available commands in order to help you easily find the command you need.
+
+Example:
+```sh
+ie --help
+## or using alias
+ie -h
 ```
