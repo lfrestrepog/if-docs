@@ -96,6 +96,17 @@ The `if-diff` command line tool allows you to determine whether two manifest or 
 if-diff --source file-1.yml --target file2.yml
 ```
 
+You can also pipe the oputputs from `ie` directly into `if-diff`. This means you only provide *one* file to `if-diff` and the other comes from a new `ie` run configured to send its output data to the console via `stdout`. This is an important feature because it allows you to receive an output file and verify that it was computed correctly and not tampered with post-execution. For example, if someone provides you with an output file, you can strip out the `outputs` section and re-run it with `ie`, piping the outputs straight to `if-diff` to compare against the original you received. 
+
+If the original was correctly and honestly reported, `if-diff` will return a success response.
+
+e.g.
+
+```
+ie -m my-manifest --stdout | if-diff --target my-output-file.yml
+```
+
+
 ### `if-diff` matching rules
 
 `if-diff` looks for differences between the `source` and `target`. However, `if-diff` applies its own IF-specific matching rules, ensuring that the outputs are functionally identical even if they are not precisely identical. For example, `if-diff` allows the order of nodes in a  tree to vary between files as long as identically named components contain identical data.
