@@ -256,6 +256,21 @@ It is also possible to leapfrog some plugins if you have access to high-level da
 
 We have deliberately made the plugins modular and composable so that you can be creative in developing new plugins to replace those provided as part of IF.
 
+## Adding real-life inputs
+
+The examples above already include inputs for the components. However, you may want to input real-life data into the manifest file.
+
+There is no one-size-fits-all solution for getting data into the manifest file because the services you are trying to retrieve data from are too specific.
+
+The recommended method for integrating data is to use the plugin system of the Impact Framework. You can either use an existing specific importer plugin or write your own.
+
+There are already some community plugins available, including plugins for fetching data from Kubernetes, GCP, and third-party data aggregators like Datadog.
+
+If there is no fitting plugin available yet, we encourage you to write and add one for your specific use case. See [developer documentation](./developers/) for more information on how to build a plugin. There is a [Azure-Importer](https://github.com/Green-Software-Foundation/if-unofficial-plugins/blob/main/src/lib/azure-importer/README.md) you can as a prototype and starting point for your own development.
+If you already have external scripts you might have a look at the [shell plugin](https://github.com/Green-Software-Foundation/if-plugins/blob/main/src/lib/shell/README.md) to integrate them with the Impact Framework.
+
+If you just need random data for testing purposes, you can use the [mock-observation](https://github.com/Green-Software-Foundation/if-plugins/blob/main/src/lib/mock-observations/README.md) plugin.
+
 ## Running a manifest
 
 You run a manifest by providing its path to our command line tool and a path to save the results file to. You can run a manifest named `my-manifest.yml` using the following command:
