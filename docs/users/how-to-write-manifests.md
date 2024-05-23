@@ -31,7 +31,7 @@ tree:
 ```
 ### Project metadata
 
-The file starts with some metadata about the project. There are no strict specfications for what to put in these fields, they are for you to keep track of your manifest files and to help other users to understand your use case.
+The file starts with some metadata about the project. There are no strict specifications for what to put in these fields, they are for you to keep track of your manifest files and to help other users to understand your use case.
 
 ```yaml
 name:
