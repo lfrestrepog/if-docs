@@ -40,7 +40,7 @@ Errors of the `ModuleInitializationError` class arise when a plugin cannot be in
 
 | message                                               | cause                                                                                                | remedy                                                                                                                                         |
 | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Provided module: '${path}' is invalid or not found.` | The `path` parameter is incorrect or missing                                                         | Provide a valid import path to your plugin. This should be the path to the installed plugin in your `node_modules`, e.g., `@grnsft/if-plugins` |
+| `Provided module: '${path}' is invalid or not found.` | The `path` parameter is incorrect or missing                                                         | Provide a valid import path to your plugin. This should be the path to the installed plugin in your `node_modules` |
 | `Invalid exhaust plugin: ${pluginName}.`              | The configured exhaust plugin does not exist (**Note**: exhaust plugins are not currently supported) | Check your output configuration. YExhaust plugins are not yet fully supported                                                                  |
 
 
