@@ -66,7 +66,7 @@ initialize:
   plugins:
     sum:
       method: Sum
-      path: '@grnsft/if-plugins'
+      path: 'builtin'
       global-config:
         input-parameters: ['cpu/energy', 'network/energy']
         output-parameter: 'energy'
@@ -341,4 +341,3 @@ For proportional metrics, the right value is `avg`. For example, you would want 
 Finally, values that should always be presented identically regardless of any aggregation, such as names or global constants, should be given the `aggregation-method` value `none`.
 
 Now you are ready to run your plugin using the `ie` CLI tool!
-
