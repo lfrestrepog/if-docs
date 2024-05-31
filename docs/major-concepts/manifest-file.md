@@ -71,7 +71,7 @@ initialize:
 Where required values are:
 
 - `method`: the name of the function exported by the plugin.
-- `path`: the path to the plugin code. For example, for a plugin from our standard library installed from npm, this value would be `@grnsft/if-plugins`
+- `path`: the path to the plugin code. For example, for a plugin from our standard library, this value would be `builtin`
 
 There is also an optional `global-config` field that can be used to set *global* configuration that is common to a plugin wherever it is invoked across the entire manifest file.
 
@@ -227,30 +227,73 @@ When Impact Framework computes a manifest file, it appends new data to the manif
 Here's an example output file:
 
 ```yaml
-name: e-mem
-description: null
+name: sum
+description: successful path
 tags: null
 initialize:
   plugins:
-    e-mem:
-      path: "@grnsft/if-plugins"
-      method: EMem
+    sum:
+      path: builtin
+      method: Sum
+      global-config:
+        input-parameters:
+          - cpu/energy
+          - network/energy
+        output-parameter: energy
+execution:
+  command: >-
+    /home/user/.npm/_npx/1bf7c3c15bf47d04/node_modules/.bin/ts-node
+    /home/user/Code/if/src/index.ts -m
+    /home/user/Code/if/manifests/plugins/sum/success.yml --stdout
+  environment:
+    if-version: 0.3.3-beta.0
+    os: linux
+    os-version: 5.15.0-105-generic
+    node-version: 21.4.0
+    date-time: 2024-05-31T09:18:48.895Z (UTC)
+    dependencies:
+      - '@babel/core@7.22.10'
+      - '@babel/preset-typescript@7.23.3'
+      - '@commitlint/cli@18.6.0'
+      - '@commitlint/config-conventional@18.6.0'
+      - '@jest/globals@29.7.0'
+      - '@types/jest@29.5.8'
+      - '@types/js-yaml@4.0.9'
+      - '@types/luxon@3.4.2'
+      - '@types/node@20.9.0'
+      - csv-stringify@6.4.6
+      - fixpack@4.0.0
+      - gts@5.2.0
+      - husky@8.0.3
+      - jest@29.7.0
+      - js-yaml@4.1.0
+      - lint-staged@15.2.2
+      - luxon@3.4.4
+      - release-it@16.3.0
+      - rimraf@5.0.5
+      - ts-command-line-args@2.5.1
+      - ts-jest@29.1.1
+      - typescript-cubic-spline@1.0.1
+      - typescript@5.2.2
+      - winston@3.11.0
+      - zod@3.22.4
+  status: success
 tree:
   children:
     child:
       pipeline:
-        - e-mem
-      config: null
-      defaults:
+        - sum
+      config:
+        sum: null
       inputs:
         - timestamp: 2023-08-06T00:00
           duration: 3600
-          memory/utilization: 40
-          memory/capacity: 1
+          cpu/energy: 0.001
+          network/energy: 0.001
       outputs:
         - timestamp: 2023-08-06T00:00
           duration: 3600
-          mem-util: 40
-          memory/capacity: 1
-          memory/energy: 0.15200000000000002
+          cpu/energy: 0.001
+          network/energy: 0.001
+          energy: 0.002
 ```

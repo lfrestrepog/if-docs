@@ -395,7 +395,7 @@ initialize:
         allocation: LINEAR
         verbose: true
     "sum":
-      path: "@grnsft/if-plugins"
+      path: "builtin"
       method: Sum
       global-config:
         input-parameters:
