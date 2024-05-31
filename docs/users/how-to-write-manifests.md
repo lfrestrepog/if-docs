@@ -53,7 +53,7 @@ initialize:
 
 
 - The `name` is the name you want this plugin instance to be recognized as by Impact Framework.
-- The `path` defines where IF should look for the installed plugin. For example, for our standard library of plugins you would specify `"@grnsft/if-plugins"`, as this is the name of the directory they are installed into in `node_modules`.
+- The `path` defines where IF should look for the installed plugin. For example, for our standard library of plugins you would specify `builtins`, for other installed plugins you use the name of the directory they are installed into in `node_modules`.
 - For the `method` field, you should provide the name of the function exported by your plugin. For example, for the `sci-e` plugin, the correct value is `SciE`.
 
 ### Tree
