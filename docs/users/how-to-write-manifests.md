@@ -260,7 +260,7 @@ We have deliberately made the plugins modular and composable so that you can be 
 
 The examples above already include inputs for the components. However, you may want to input real-life data into the manifest file.
 
-There is no one-size-fits-all solution for getting data into the manifest file because the services you are trying to retrieve data from are too specific.
+There is no one-size-fits-all solution for getting data into the manifest file. This is because there are so many possible sources for your input data, all of which have their own particular requirements related to authorization, API request syntax and return types. Therefore, the approach taken by IF is to have specific plugins for specific services.
 
 The recommended method for integrating data is to use the plugin system of the Impact Framework. You can either use an existing specific importer plugin or write your own.
 
