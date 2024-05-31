@@ -1,6 +1,5 @@
 # Command line tool 
 
-# Command line tool 
 
 A core feature of the Impact Framework is the `ie` command line tool (CLI). This is how you trigger Impact Framework to execute a certain manifest file. 
 
