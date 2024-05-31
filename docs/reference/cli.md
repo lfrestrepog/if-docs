@@ -115,7 +115,7 @@ ie -m my-manifest --stdout | if-diff --target my-output-file.yml
 | trees contain different number of nodes                  | report            | works the same regardless whether `source` or `target` has more nodes                      |
 | nodes in tree have different names                       | report            | There should be no named nodes existing in one file that aren't also in the other          |
 | nodes in tree contain non-identical fields and/or values | report            | the data inside each tree component should contain identical keys/values                   |
-| keys and values in context field are non- identical      | report            | the same fields should exist in the `context` sectiona dn their values should be identical |
+| keys and values in context field are non- identical      | report            | the same fields should exist in the `context` section and their values should be identical |
 | `status` and `error` fields in `execution` block         | report            | Only these two fields in `execution` are considered                                        |
 | order of nodes in tree are different                     | ignore            | if data is identical, position of node in tree is ignored                                  |
 | order of fields in context                               | ignore            | if data is identical, position of field in context is ignored                              |
