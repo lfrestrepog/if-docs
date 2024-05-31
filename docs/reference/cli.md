@@ -5,7 +5,7 @@ A core feature of the Impact Framework is the `ie` command line tool (CLI). This
 
 We also provide several other command line tools that work in concert with `ie` to enable flows such as comparing, re-executing and verifying IF output files.
 
-This page includes rfeerence documentation for the CLI tools, including the various commands and flags each tool exposes. 
+This page includes reference documentation for the CLI tools, including the various commands and flags each tool exposes. 
 
 We also provide tutorial-style user documentation for these tools in the [`Users`](../users/) section.
 
