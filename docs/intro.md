@@ -49,9 +49,9 @@ But now we are in the next evolution, to have software measurement be a mainstre
 
 The **IF source code** can be found in the [IF Github repository](https://github.com/Green-Software-Foundation/if). The code there covers the framework, which includes all the infrastructure for reading and writing input and output yamls, invoking plugins, running the command line tool and associated helper functions. However, it does not include the actual plugins themselves. Part of the IF design philosophy is that all plugins should be plugins, so that the IF is as composable and configurable as possible. Therefore, to use IF, you have to either create your own plugins or find some prebuilt ones and install them yourself. This also implies that you take responsibility for the plugins you choose to install.
 
-We do provide a **standard library of plugins** built and maintained by the IF core team. These can be found in the [`if-plugins` Github repository](https://github.com/Green-Software-Foundation/if-plugins). You can install these into `if` by running `npm install https://github.com/Green-Software-Foundation/if-plugins` from the `if` project directory.
+We do provide a **standard library of plugins** built and maintained by the IF core team. These come bundled with IF. Their source code and README documentation and can be found in `if/src/builtins`.
 
-There is also a second repository for **plugins we expect community members to maintain**. These can be found in the [`if-unofficial-plugins` Github repository](https://github.com/Green-Software-Foundation/if-unofficial-plugins). You can install these into `if` by running `npm install https://github.com/Green-Software-Foundation/if-unofficial-plugins` from the `if` project directory.
+There are also a wide range of community-owned plugins that we make discoverable on our [Explorer website](https://explorer.if.greensoftware.foundation)
 
 Finally, the **source code for this documentation** website is available at the [`if-docs` Github repository](https://github.com/Green-Software-Foundation/if-docs).
 

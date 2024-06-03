@@ -16,22 +16,6 @@ Then, run the package using the `ie` command:
 ie --manifest <path to manifest file> 
 ```
 
-There is only one plugin that is built in to the core Impact Framework codebase (`time-sync`). If you only want to use Impact Framework with your own, locally-developed plugins or plugins loaded from remote Github repositories, then you have already installed everything you need to get started. However, most likely you will want to install some of our plugins too.
-
-There are two plugin packages you will probably want to install: `if-plugins` and `if-unofficial-plugins`. 
-- `if-plugins` is our standard library of plugins that we maintain. Generally, these are used for calculating a Software Carbon Intensity score.
-- `if-unofficial-plugins` is a collection of plugins that rely on some third party API or that reimplement a pre-existing plugin originally developed by another group. For example, our Azure data importer and Co2js.
-
-You can install the latest releases of these plugin packages using npm:
-
-```sh
-npm install -g @grnsft/if-plugins
-npm install -g @grnsft/if-unofficial-plugins
-```
-
-Now you have globally installed the framework and a set of plugins and can start using IF for calculating the impact of your applications.
-
-
 ## Installing locally
 
 You can also clone the Impact Framework repositories and install them locally, useful for developers who want to make changes or build new plugins. Use the following command for local installation:

@@ -163,3 +163,9 @@ tree.children.child1
 source: missing
 target:  exists
 ```
+
+Use the `debug` command if you want to diagnose and fix errors in your plugin:
+
+```sh
+ie --manifest <path-to-your-manifest-file> --debug
+```

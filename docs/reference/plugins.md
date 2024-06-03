@@ -1,53 +1,45 @@
 # Plugins
 
-The Impact Framework includes several builtin plugins (e.g. `time-sync`, `groupby` and `csv-exporter`). All other plugins are external plugins that have to be installed before they can be run in an IF pipeline. Anyone can create and install a new plugin. As long as the plugin conforms to the expected interface, IF can run it.
+Impact Framework works by executing pipelines of plugins over input data. Those plugins are re-useable units of code that can be thought of as Lego bricks - simple blocks of code that can be assembled into complex workflows. 
 
-There are two repositories that were created by the IF core team. The `if-plugins` repository contains the "core" set of plugins that IF developers will maintain and support. We also provide a second repository of `if-unofficial` plugins that are mainly re-implementations of existing third party plugins or code that we expect community members to maintain independently of the IF core team.
+IF comes bundled with a standard library of `builtins` that allow you to do basic and/or generic operations over your data. These include simple arithmetic, regrouping data, calculating SCI scores, and running processes in a spawned shell.
 
-Documentation for the specific individual plugins are available in the plugin READMEs. Below you will find a brief description of each plugin and a link to its documentation:
+Most IF plugins are created and maintained by the community. Anyone can create a plugin and share it so that other iF users can install it and use it in their pipelines.
+
+We provide a website where you can search for plugins:
+
+[IF Explorer](https://explorer.if.greensoftware.foundation)
+
+
 
 ### `built-in`
 
-* [Time Sync](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins#readme): Takes a heterogeneous set of time series data that might be offset, discontinuous or irregularly spaces and returns time series conforming to a user defined time grid. E.g. a user can define that all sets of observations should start at sopme global start time, end at some global end time and have a specific temporal resolution. 
+IF builtins all come bundled with IF. Below you will find a list of each builtin along with a brief description of its purpoise and a link to its README documentation.
 
-* [CSV Exporter](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins#readme): Exports data for a given metric to a CSV file.
+* [Time Sync](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins#readme): Takes a heterogeneous set of time series data that might be offset, discontinuous or irregularly spaces and returns time series conforming to a user defined time grid. E.g. a user can define that all sets of observations should start at sopme global start time, end at some global end time and have a specific temporal resolution. 
 
 * [Groupby](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins#readme): Allows a user to regroup their output data according to given keys.
 
+* [SCI-embodied](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins/sci-embodied) - Calculates the embodied carbon for a component.
 
-### `if-plugins`
+* [SCI](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins/sci): Calculates the software carbon intensity.
+  
+* [Shell](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins/shell) - A plugin that enables external code in any language to be run in a child process
 
+* [Sum](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins/sum): a generic arithmetic plugin that allows you to sum any set of input parameters.
+  
+* [Multiply](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins/multiply): a generic arithmetic plugin that allows you to multiply any set of input parameters.
+  
+* [Coefficient](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins/coefficient): a generic arithmetic plugin that allows you to multiply any input value by a coefficient.
 
-* [Cloud metadata](https://github.com/Green-Software-Foundation/if-plugins/blob/main/src/lib/cloud-metadata/README.md): Looks up detailed metadata about a given cloud instance type and region, including the physical processor being used.
-* [E-MEM](https://github.com/Green-Software-Foundation/if-plugins/blob/main/src/lib/e-mem/README.md): Calculate the energy expended due to memroy usage, by multiplying the energy used in GB by a coefficient.
-* [SCI-E](https://github.com/Green-Software-Foundation/if-plugins/blob/main/src/lib/sci-e/README.md): Calculates the sum of all energy components.
-* [SCI-M](https://github.com/Green-Software-Foundation/if-plugins/blob/main/src/lib/sci-m/README.md) - Calculates the embodied carbon for a component.
-* [SCI-O](https://github.com/Green-Software-Foundation/if-plugins/blob/main/src/lib/sci-o/index.ts) - Calculates the operational carbon from the total energy and grid carbon intensity.
-* [SCI](https://github.com/Green-Software-Foundation/if-plugins/blob/main/src/lib/sci/README.md): Calculates the software carbon intensity.
-* [SHELL](https://github.com/Green-Software-Foundation/if-plugins/blob/main/src/lib/shell/README.md) - A plugin that enables external code in any language to be run in a child process
-* [TDP-FINDER](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/tdp-finder): Looks up the thermnal desig power for a given processor in a local database.
-* [Sum](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/sum): a generic arithmetic plugin that allows you to sum any set of input parameters.
-* [Multiply](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/multiply): a generic arithmetic plugin that allows you to multiply any set of input parameters.
-* [Coefficient](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/coefficient): a generic arithmetic plugin that allows you to multiply any input value by a coefficient.
-* [E-NET](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/e-net): simply multiplies the amount of data transferred (GB) by a coefficient (kWh/GB) to yield network/energy.
-* [Mock Observations](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/mock-observations): A plugin for mocking observations (inputs) for testing and demo purposes.
-* [Grafana-Export](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/grafana-export): a generic CSV exporter plugin.
-* [Divide](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/divide): A generic plugin for doing arithmetic division of two values.
-* [Regex](https://github.com/Green-Software-Foundation/if-plugins/tree/main/src/lib/regex): A generic plugin to match part of one string and extract it into another.
+* [Mock Observations](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins/mock-observations): A plugin for mocking observations (inputs) for testing and demo purposes.
+  
+* [Subtract](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins/subtract): a generic plugin for subtracting one value from another
 
+* [Divide](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins/divide): A generic plugin for doing arithmetic division of two values.
+  
+* [Regex](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins/regex): A generic plugin to match part of one string and extract it into another.
 
-### `if-unofficial-plugins`
+* [Exponent](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins/exponent): A generic plugin for raising a value to a power
 
-* [Azure importer](https://github.com/Green-Software-Foundation/if-unofficial-plugins/blob/main/src/lib/azure-importer/README.md): Grabs usage metrics from an Azure virtual machine, given user credentials and virtual machine details.
-* [Cloud Carbon Footprint](https://github.com/Green-Software-Foundation/if-unofficial-plugins/blob/main/src/lib/ccf/README.md): Calculates usage metrics using the Cloud Carbon Footprint APIs.
-* [WattTime](https://github.com/Green-Software-Foundation/if-unofficial-plugins/blob/main/src/lib/watt-time/README.md): WattTime is an external service for looking up grid emissions based on location.
-* [TEADS-CURVE](https://github.com/Green-Software-Foundation/if-unofficial-plugins/blob/main/src/lib/teads-curve/README.md): Calculates the energy in kWh used by the CPU
-* [TEADS-AWS](https://github.com/Green-Software-Foundation/if-unofficial-plugins/blob/main/src/lib/teads-aws/README.md): Calculates the energy in kWh used by the CPU using a model specific to AWS instances.
-* [Boavizta](https://github.com/Green-Software-Foundation/if-unofficial-plugins/blob/main/src/lib/boavizta/README.md): Calculates energy and embodied carbon using the Boavizta APIs.
-* [co2js](https://github.com/Green-Software-Foundation/if-unofficial-plugins/blob/main/src/lib/co2js/README.md): Calculates the carbon emissions of a website.
-
-
-## Exhaust plugins (outputs)
-
-Export plugins designed to implement custom ways of exporting output file. Currenlty supported ones are `csv`, `yaml` and `log` plugins.
-These are currently built in to the IF, but migrating to dynamically loading export functions as plugins is part of our near-term roadmap.
+* [Interpolation](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins/interpolation): A generic plugin for interpolating between known points.
