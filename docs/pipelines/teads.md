@@ -1,3 +1,7 @@
+---
+sidebar_position: 3
+---
+
 # Teads CPU pipeline
 
 The Teads CPU power curve CPU utilization (as a percentage) against a scaling factor that can be applied to the CPUs thermal design power to estimate the power drawn by the CPU in Watts. 
