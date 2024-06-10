@@ -212,7 +212,7 @@ correct-cpu-energy-for-vcpu-ratio:
     output: cpu-energy-kwh
 ```
 
-### Step 7: define your pipeline
+### Step 7: Define your pipeline
 
 Now you have configured all your plugins, covering all the stages of the calculation, you can simple define them in order in the `pipeline` section of your manifest, as follows:
 
@@ -228,6 +228,10 @@ tree:
         - calculate-vcpu-ratio
         - correct-cpu-energy-for-vcpu-ratio
 ```
+
+You also need to add some input data that your pipeline can operate over.
+
+You can see the full manifest in the [IF repository](https://github.com/Green-Software-Foundation/if/blob/main/manifests/examples/teads-curve.yml).
 
 That's it! Your manifest is ready to run!
 
