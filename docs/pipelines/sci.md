@@ -6,11 +6,11 @@ sidebar-position: 3
 
 The [software carbon intensity (SCI)](https://greensoftware.foundation/articles/software-carbon-intensity-sci-specification-project) score is perhaps the most important value that can be generated using Impact Framework. 
 
-SCI is an ISO recognized standard for reporting the carbon costs of running software. This tutorial demonstrates how to organize a pipeline of Impact framework plugins to calculate SCI scores from some simple observations of the CPU utilization of a software application running in the cloud.
+SCI is an ISO-recognized standard for reporting the carbon costs of running software. This tutorial demonstrates how to organize a pipeline of Impact framework plugins to calculate SCI scores from some simple observations of the CPU utilization of a software application running in the cloud.
 
 ## Prerequisites
 
-This tutorial builds on top of the [Teads curve](./teads.md) pipeline tutorial. That tutorial demoinstrates how to organize a pipeline that converts CPOU utilization observations into CPU energy. This tutorial uses the same pipeline but goes several steps further, including converting the CPU energy estimates into carbopn, adding the embodied carbon associated with the hardware being used and calculating the SCI score.
+This tutorial builds on top of the [Teads curve](./teads.md) pipeline tutorial. That tutorial demonstrates how to organize a pipeline that converts CPOU utilization observations into CPU energy. This tutorial uses the same pipeline but goes several steps further, including converting the CPU energy estimates into carbon, adding the embodied carbon associated with the hardware being used and calculating the SCI score.
 
 ## Step 1: Pasting in the Teads pipeline
 
@@ -100,7 +100,7 @@ tree:
 
 ## Step 2: Adding a network/energy component
 
-Your Teads curve manifest only accounted for CPU energy, but this SCI maniofest will also consider the energy consumed during data ingress and egress, collectively known as "network energy". This can be calculated from data ingress and egress observatiuons, but in this example we will shortcut it by adding the `network/energy` value, measured in kWh, directly to the input data. You can do this by adding `network/energy` and a value to each element in the `inputs` array. This is just an example, so you can create dummy values. In a real example, these data would come from observations of a real system.
+Your Teads curve manifest only accounted for CPU energy, but this SCI manifest will also consider the energy consumed during data ingress and egress, collectively known as "network energy". This can be calculated from data ingress and egress observations, but in this example, we will shortcut it by adding the `network/energy` value, measured in kWh, directly to the input data. You can do this by adding `network/energy` and a value to each element in the `inputs` array. This is just an example, so you can create dummy values. In a real example, these data would come from observations of a real system.
 
 The SCI score will take into account all the energy used by the application, which in this case includes CPU energy and network energy. Therefore, you need to add a plugin that sums these components of energy together and adds the result to the `inputs` array. The `Sum` plugin exists for precisely this purpose. There are going to be multiple instances of the `Sum` plugin in your SCI pipeline, so you should choose a descriptive name for it so that you can easily invoke it in the right position in your pipeline.
 
@@ -121,9 +121,9 @@ This will create an instance of `Sum` called `sum-energy-components`, and it wil
 
 
 
-## Step 3: Account for emboidied carbon
+## Step 3: Account for embodied carbon
 
-Embodied carbon is the carbon emitted during the production and disposal of the hardware used to run an application. The total embodied carbon for a unit of hardware is scaled down by the proportion of its expected lifespan used up by an application. This is all handled by another IF `builtin` called `SciEmbodied`. The result id `embodied-carbon` in units of `gCO2eq`. You can simply create an instance of it and add it to your pipeline. It requires no global configuration.
+Embodied carbon is the carbon emitted during the production and disposal of the hardware used to run an application. The total embodied carbon for a unit of hardware is scaled down by the proportion of its expected lifespan used up by an application. This is all handled by another IF `builtin` called `SciEmbodied`. The result is `embodied-carbon` in units of `gCO2eq`. You can simply create an instance of it and add it to your pipeline. It requires no global configuration.
 
 ```yaml
 embodied-carbon:
@@ -131,7 +131,8 @@ embodied-carbon:
   method: SciEmbodied
 ```
 
-`embodied-carbon` does expect some specific values tobe available in the `inputs` array. These include:
+
+`embodied-carbon` does expect some specific values to be available in the `inputs` array. These include:
 
 ```yaml
 device/emissions-embodied: # the embodied emissions for the entire component
@@ -140,7 +141,7 @@ device/expected-lifespan: # lifespan of the component in seconds
 resources-reserved: # proportion of the total component being allocated
 resources-total: # size of the component
 ```
-Most of these values can be found in manufacturer documentation for specific processors and other hardware. In the present case, you can again provide some default values for a hypothetiocal system. You can assume the resource is a processor being used in a cloud virtual machine. In this case, the `resources-total` can be the total number of VCPUs for the processor and the `resources-allocated` can be the number of VCPUs actually being used by your application. Remembering back to the Teads curve example, you already have that information available to you in the form of the `vcpus-total` and `vcpus-allocated` fields, which you can pass by name as values to `resources-total and `resources-reserved`.
+Most of these values can be found in manufacturer documentation for specific processors and other hardware. In the present case, you can again provide some default values for a hypothetical system. You can assume the resource is a processor being used in a cloud virtual machine. In this case, the `resources-total` can be the total number of VCPUs for the processor and the `resources-allocated` can be the number of VCPUs actually being used by your application. Remembering back to the Teads curve example, you already have that information available to you in the form of the `vcpus-total` and `vcpus-allocated` fields, which you can pass by name as values to `resources-total and ` resources-reserved`.
 
 Add the following to your `defaults` section:
 
@@ -176,7 +177,7 @@ Now create an instance of `Multiply` that will calculate the product of `energy`
 
 At this stage you have two separate sources of carbon emissions treated separately in your `inputs`: `embodied-carbon` anf `operational-carbon`. To account for the total carbon emissions for your application, you need to add these two sources together.
 
-Add the followijng instance of the `Sum` plugin to your `initialize: plugins:` block. It will sum `carbon-operational` and `carbon-embodied` and append the result to `inputs` as `carbon`.
+Add the following instance of the `Sum` plugin to your `initialize: plugins:` block. It will sum `carbon-operational` and `carbon-embodied` and append the result to `inputs` as `carbon`.
 
 ```yaml
 sum-carbon:
@@ -191,9 +192,9 @@ sum-carbon:
 
 ## Step 6: Calculate SCI
 
-Now you have calculatyed the total carbon emissions due to your application, you can move to the final step which is calculating your SCI score. This is simply the total carbon expressed in terms of some functional unit. Functional units can be measured values such as `requests`, `visits`, `users` or whatever else you want to express your carbon emissions in terms of. In this case, you will simply express your SCI in terms of the entire application, in which case you can just set the functional unit to 1.
+Now you have calculated the total carbon emissions due to your application, you can move to the final step which is calculating your SCI score. This is simply the total carbon expressed in terms of some functional unit. Functional units can be measured values such as `requests`, `visits`, `users` or whatever else you want to express your carbon emissions in terms of. In this case, you will simply express your SCI in terms of the entire application, in which case you can just set the functional unit to 1.
 
-Add an iunstance of the SCI plugin to your `intiialize: plugins:` block as follows:
+Add an instance of the SCI plugin to your `initialize: plugins:` block as follows:
 
 
 ```yaml
@@ -204,17 +205,17 @@ Add an iunstance of the SCI plugin to your `intiialize: plugins:` block as follo
     functional-unit: "component"
 ```
 
-SCI will look in each element int he `inputs` array for the `component` key. To ensure it is there, we can add it to `defaults` as follows:
+SCI will look in each element in the `inputs` array for the `component` key. To ensure it is there, we can add it to `defaults` as follows:
 
 ```yaml
 component: 1
 ```
 
-Note that in a real system you probably don't want to use `defaults` to define your functional unit unless you are sure it is constant over time. More likely, you'll have observations of some system metric in eachg timestep to use as a functional unit.
+Note that in a real system, you probably don't want to use `defaults` to define your functional unit unless you are sure it is constant over time. More likely, you'll have observations of some system metric in eachg timestep to use as a functional unit.
 
 ## Step 7: Create the pipeline
 
-Now you have initialzied all the plugins you will need to compute the SCI score, add them in sequence to your execution pipeline, as follows:
+Now you have initialized all the plugins you will need to compute the SCI score, add them in sequence to your execution pipeline, as follows:
 
 ```yaml
 pipeline:
@@ -559,5 +560,5 @@ Now you have a basic SCI pipeline, you can use it as a base for more advanced IF
 
 - aggregating the individual SCI scores over time using our [aggregate](../major-concepts/aggregation.md) feature
 - using [mock observations](../reference/plugins.md#built-in) to generate dummy input data
-- using a third party plugin to grab real grid carbon intensity data
+- using a third-party plugin to grab real grid carbon intensity data
 - grabbing real metadata for your processor using [csv-lookup](./instance-metadata.md)
