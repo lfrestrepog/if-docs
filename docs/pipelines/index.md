@@ -14,5 +14,6 @@ The pipeline guides include:
 
 - [Teads CPU energy](./teads.md)
 - [Cloud instance metadata](./instance-metadata.md)
+- [Software Carbon Intensity](./sci.md)
 
 You can find the manifests themselves in your copy of IF in `manifests/examples` or find them on our [Github](https://github.com/Green-Software-Foundation/if/tree/main/manifests/examples).
