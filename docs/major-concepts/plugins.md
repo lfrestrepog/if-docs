@@ -31,4 +31,4 @@ You can explore more in the [plugins reference docs](../reference/plugins.md) or
 
 Anyone can build IF plugins. To make them discoverable, we host the [IF Explorer](https://explorer.if.greensoftware.foundation) website. There you can search for plugins that you need for your specific use-case.
 
-You cna also add your own plugins to the explorer. Simply fill in the [submission form](https://wiki.greensoftware.foundation/how-to-add-plugins).
+You can also add your own plugins to the explorer. Simply fill in the [submission form](https://wiki.greensoftware.foundation/how-to-add-plugins).
