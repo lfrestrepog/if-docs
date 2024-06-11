@@ -10,6 +10,7 @@ We provide a website where you can search for plugins:
 
 [IF Explorer](https://explorer.if.greensoftware.foundation)
 
+You can also add your own plugins to the Explorer using this [form](https://wiki.greensoftware.foundation/how-to-add-plugins).
 
 
 ### `built-in`
