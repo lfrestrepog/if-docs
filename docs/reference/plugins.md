@@ -15,9 +15,9 @@ You can also add your own plugins to the Explorer using this [form](https://wiki
 
 ### `built-in`
 
-IF builtins all come bundled with IF. Below you will find a list of each builtin along with a brief description of its purpoise and a link to its README documentation.
+IF builtins all come bundled with IF. Below you will find a list of each builtin along with a brief description of its purpose and a link to its README documentation.
 
-* [Time Sync](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins#readme): Takes a heterogeneous set of time series data that might be offset, discontinuous or irregularly spaces and returns time series conforming to a user defined time grid. E.g. a user can define that all sets of observations should start at sopme global start time, end at some global end time and have a specific temporal resolution. 
+* [Time Sync](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins#readme): Takes a heterogeneous set of time series data that might be offset, discontinuous or irregularly spaces and returns time series conforming to a user defined time grid. E.g. a user can define that all sets of observations should start at some global start time, end at some global end time and have a specific temporal resolution. 
 
 * [Groupby](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins#readme): Allows a user to regroup their output data according to given keys.
 
