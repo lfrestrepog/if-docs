@@ -31,7 +31,7 @@ tree:
 ```
 ### Project metadata
 
-The file starts with some metadata about the project. There are no strict specfications for what to put in these fields, they are for you to keep track of your manifest files and to help other users to understand your use case.
+The file starts with some metadata about the project. There are no strict specifications for what to put in these fields, they are for you to keep track of your manifest files and to help other users to understand your use case.
 
 ```yaml
 name:
@@ -255,6 +255,21 @@ The plugins are designed to be composable, but they each have specific input req
 It is also possible to leapfrog some plugins if you have access to high-level data. For example, perhaps you already know the energy being used by your CPU. In this case, there is no need to run `teads-curve`, you can simply provide `cpu/energy` as an `input` and omit `teads-curve` from the plugin pipeline.
 
 We have deliberately made the plugins modular and composable so that you can be creative in developing new plugins to replace those provided as part of IF.
+
+## Adding real-life inputs
+
+The examples above already include inputs for the components. However, you may want to input real-life data into the manifest file.
+
+There is no one-size-fits-all solution for getting data into the manifest file. This is because there are so many possible sources for your input data, all of which have their own particular requirements related to authorization, API request syntax and return types. Therefore, the approach taken by IF is to have specific plugins for specific services.
+
+The recommended method for integrating data is to use the plugin system of the Impact Framework. You can either use an existing specific importer plugin or write your own.
+
+There are already some community plugins available, including plugins for fetching data from Kubernetes, GCP, and third-party data aggregators like Datadog.
+
+If there is no fitting plugin available yet, we encourage you to write and add one for your specific use case. See [developer documentation](./developers/) for more information on how to build a plugin. There is a [Azure-Importer](https://github.com/Green-Software-Foundation/if-unofficial-plugins/blob/main/src/lib/azure-importer/README.md) you can as a prototype and starting point for your own development.
+If you already have external scripts you might have a look at the [shell plugin](https://github.com/Green-Software-Foundation/if-plugins/blob/main/src/lib/shell/README.md) to integrate them with the Impact Framework.
+
+If you just need data for testing purposes, you can use the [mock-observation](https://github.com/Green-Software-Foundation/if-plugins/blob/main/src/lib/mock-observations/README.md) plugin.
 
 ## Running a manifest
 
