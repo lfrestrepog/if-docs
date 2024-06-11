@@ -22,4 +22,4 @@ We also have a set of pipeline walkthroughs on this website, including:
 - [Cloud-instance metadata](../pipelines/instance-metadata.md): lookup information about your cloud instance froma  CSV file
 - [SCI](../pipelines/sci.md): calculate a software carbon intensiy score
 
-These pipelines can be modified or chained together with other pipelines to make larger pipelines. Just as each plugin is a building block, pipelines themselves cna be building blocks too. 
+These pipelines can be modified or chained together with other pipelines to make larger pipelines. Just as each plugin is a building block, pipelines themselves can be building blocks too. 
