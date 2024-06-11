@@ -57,4 +57,4 @@ initialize:
       path: https://github.com/my-repo/my-plugin
 ```
 
-**Anyone can develop plugins**. As long as you conform to our plugin specification, you can load your plugin into the Impact Framework and run it as part of a pipeline. We provide a guide to [building plugins](./how-to-build-plugins.md) and a [template](https://github.com/Green-Software-Foundation/if-model-template) to help you structure them correctly.
+**Anyone can develop plugins**. As long as you conform to our plugin specification, you can load your plugin into the Impact Framework and run it as part of a pipeline. We provide a guide to [building plugins](../developers/how-to-build-plugins.md) and a [template](https://github.com/Green-Software-Foundation/if-model-template) to help you structure them correctly.

@@ -60,7 +60,7 @@ Finally, the **source code for this documentation** website is available at the 
 
 The lefthand sidebar contains links to all the information you need to understand Impact Framework. 
 
-You can explore the key ideas underpinning Impact Framework in the [Major Concepts section](./major-concepts/).
+You can explore the key ideas underpinning Impact Framework in the [Major Concepts section](./major-concepts/index.md).
 
 Users can read our [guides](./users/) explaining how to use IF, including installation, using the CLI and loading plugins.
 
