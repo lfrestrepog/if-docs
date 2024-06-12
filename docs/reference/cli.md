@@ -82,6 +82,49 @@ ie --help
 ie -h
 ```
 
+### `--debug`
+
+You can provide the `--debug` flag to `ie` in order to display execution logs to the console. These logs show messages for each operation IF and its plugins are executing. For example, your `debug` logs will look similar to the following:
+
+```sh
+INFO: 2024-06-12T08:48:02.918Z: Starting IF
+DEBUG: 2024-06-12T08:48:02.919Z: Loading manifest
+DEBUG: 2024-06-12T08:48:02.924Z: Capturing runtime environment data
+DEBUG: 2024-06-12T08:48:03.978Z: Validating manifest
+DEBUG: 2024-06-12T08:48:03.980Z: Syncing parameters
+DEBUG: 2024-06-12T08:48:03.980Z: Initializing plugins
+DEBUG: 2024-06-12T08:48:03.981Z: Initializing Sum
+DEBUG: 2024-06-12T08:48:03.981Z: Loading Sum from builtin
+DEBUG: 2024-06-12T08:48:04.859Z: Initializing Coefficient
+DEBUG: 2024-06-12T08:48:04.859Z: Loading Coefficient from builtin
+DEBUG: 2024-06-12T08:48:04.860Z: Initializing Multiply
+DEBUG: 2024-06-12T08:48:04.860Z: Loading Multiply from builtin
+DEBUG: 2024-06-12T08:48:04.860Z: Computing pipeline for `sum`
+DEBUG: 2024-06-12T08:48:04.861Z: Computing pipeline for `coefficient`
+DEBUG: 2024-06-12T08:48:04.861Z: Computing pipeline for `multiply`
+DEBUG: 2024-06-12T08:48:04.862Z: Aggregating outputs
+DEBUG: 2024-06-12T08:48:04.862Z: Preparing output data
+```
+
+You can use the `--debug` flag to help debug failing IF runs. You will see exactly where in the execution pipeline an error arose. If the error arose froma  plugin, this will be clear from the execution logs, for example:
+
+```sh
+INFO: 2024-06-12T08:53:21.376Z: Starting IF
+DEBUG: 2024-06-12T08:53:21.376Z: Loading manifest
+DEBUG: 2024-06-12T08:53:21.381Z: Capturing runtime environment data
+DEBUG: 2024-06-12T08:53:22.367Z: Validating manifest
+DEBUG: 2024-06-12T08:53:22.369Z: Syncing parameters
+DEBUG: 2024-06-12T08:53:22.369Z: Initializing plugins
+DEBUG: 2024-06-12T08:53:22.369Z: Initializing Sum
+DEBUG: 2024-06-12T08:53:22.370Z: Loading Sum from builtin
+DEBUG: 2024-06-12T08:53:23.165Z: Initializing Coefficient
+DEBUG: 2024-06-12T08:53:23.165Z: Loading Coefficient from builtin
+DEBUG: 2024-06-12T08:53:23.165Z: Initializing Multiply
+DEBUG: 2024-06-12T08:53:23.165Z: Loading Multiply from builtin
+DEBUG: 2024-06-12T08:53:23.165Z: Computing pipeline for `sum`
+[2024-06-12 09:53:23.166 AM] error:     cpu/energy is missing from the input array.
+```
+
 
 ## `if-diff`
 
