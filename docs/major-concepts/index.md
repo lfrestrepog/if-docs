@@ -14,3 +14,4 @@ Here you will find explanations for the fundamnetal Impact Framework concepts. T
 - [Plugins](./plugins.md)
 - [Group-by](./groupby.md)
 - [Parameters](./parameters.md)
+- [Pipelines](./pipelines.md)
