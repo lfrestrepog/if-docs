@@ -26,3 +26,9 @@ If every plugin **exposes the same interface**, then those plugins can easily be
 > Ecosystems grow and thrive through standards.
 
 You can explore more in the [plugins reference docs](../reference/plugins.md) or our [plugin building tutorial](../developers/how-to-build-plugins.md).
+
+## Finding community plugins
+
+Anyone can build IF plugins. To make them discoverable, we host the [IF Explorer](https://explorer.if.greensoftware.foundation) website. There you can search for plugins that you need for your specific use-case.
+
+You can also add your own plugins to the explorer. Simply fill in the [submission form](https://wiki.greensoftware.foundation/how-to-add-plugins).
