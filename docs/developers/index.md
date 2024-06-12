@@ -10,7 +10,7 @@ The developer documentation includes:
 
 * [How to build plugins](./how-to-build-plugins.md)
 * [How to make plugins production-ready](./how-to-refine-plugins.md)
-* [How to write unit tests](./how-to-test-if.md)
+* [How to write unit tests](./how-to-write-unit-tests.md)
 * [How to visualize results](./how-to-visualize-results.md)
 
 
