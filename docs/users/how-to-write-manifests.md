@@ -276,5 +276,5 @@ If you just need data for testing purposes, you can use the [mock-observation](h
 You run a manifest by providing its path to our command line tool and a path to save the results file to. You can run a manifest named `my-manifest.yml` using the following command:
 
 ```sh
-ie --manifest my-manifest.yml
+if-run --manifest my-manifest.yml
 ```
