@@ -8,7 +8,7 @@ In this section you will find reference documentation for the core data structur
 
 This includes:
 
-- [CLI (`ie`)](cli.md)
+- [CLI](cli.md)
 - [Errors](errors.md)
 - [Plugins](plugins.md)
 
