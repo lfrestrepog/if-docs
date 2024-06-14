@@ -402,8 +402,8 @@ initialize:
           - cpu/energy
           - network/energy
         output-parameter: energy
-    "sci-m":
-      path: "@grnsft/if-plugins"
+    "sci-embodied":
+      path: "builtin"
       method: SciM
     "sci-o":
       path: "@grnsft/if-plugins"

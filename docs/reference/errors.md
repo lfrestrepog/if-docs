@@ -102,7 +102,7 @@ Those classes are listed in this section.
 
 ### `AuthorizationError`
 
-Errors of the `AuthorizationError` class are caused by incorrect credentials being passed to an external API. This is only currently used in the `if-unofficial-plugins` because this is the only place third-party APIs are called.
+Errors of the `AuthorizationError` class are caused by incorrect credentials being passed to an external API.
 
 `AuthorizationError` messages should have the following form:
 
@@ -117,7 +117,7 @@ The remedy to messages of this type is to provide correct access credentials as 
 
 ### `APIRequestError`
 
-Errors of the `APIRequestError` class are caused by a failing API request for any reason other than invalid credentials. This is only currently used in the `if-unofficial-plugins` because this is the only place third-party APIs are called.
+Errors of the `APIRequestError` class are caused by a failing API request for any reason other than invalid credentials.
 
 The error message should have the following form:
 
@@ -127,7 +127,7 @@ For example, here is a message emitted from our Watt-time plugin:
 
 `WattTimeGridEmissions: WattTime API supports up to 32 days. Duration of 31537200 seconds is too long.`
 
-The remedy depends on the specific error message received. In general we recommned visiting the API documentation for the specific service you are trying to use and ensuring your request is built to their specification.
+The remedy depends on the specific error message received. In general, we recommend visiting the API documentation for the specific service you are trying to use and ensuring your request is built to their specification.
 
 
 ### `InputValidationError`
@@ -153,7 +153,7 @@ The example below is raised by the `Boavizta` plugin when the given `provider` i
 
 Errors of the `ConfigValidationError` are used when part of the config data provided to a plugin is invalid or missing.
 
-For example the `Divide` plugin throws a `ConfigValidationError` when it receives a denominator equal to zero. 
+For example, the `Divide` plugin throws a `ConfigValidationError` when it receives a denominator equal to zero. 
 
 The message should name the config element that was invalid and describe the reason why. For example:
 

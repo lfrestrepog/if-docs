@@ -47,7 +47,7 @@ But now we are in the next evolution, to have software measurement be a mainstre
 
 ## Project Structure
 
-The **IF source code** can be found in the [IF Github repository](https://github.com/Green-Software-Foundation/if). The code there covers the framework, which includes all the infrastructure for reading and writing input and output yamls, invoking plugins, running the command line tool and associated helper functions. However, it does not include the actual plugins themselves. Part of the IF design philosophy is that all plugins should be plugins, so that the IF is as composable and configurable as possible. Therefore, to use IF, you have to either create your own plugins or find some prebuilt ones and install them yourself. This also implies that you take responsibility for the plugins you choose to install.
+The **IF source code** can be found in the [IF Github repository](https://github.com/Green-Software-Foundation/if). The code there covers the framework, which includes all the infrastructure for reading and writing input and output yamls, invoking plugins, running the command line tool and associated helper functions. However, it does not include the actual plugins themselves. Part of the IF design philosophy is that plugins should aim to do one thing as simply as possible, so that the IF is as composable and configurable as possible. Therefore, to use IF, you have to either create your own plugins or find some prebuilt ones and install them yourself. This also implies that you take responsibility for the plugins you choose to install.
 
 We do provide a **standard library of plugins** built and maintained by the IF core team. These come bundled with IF. Their source code and README documentation and can be found in `if/src/builtins`.
 
