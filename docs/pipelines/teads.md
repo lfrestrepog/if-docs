@@ -240,7 +240,7 @@ That's it! Your manifest is ready to run!
 Having saved your manifest as `teads-curve.yaml` you can run it using IF:
 
 ```sh
-ie -m teads-curve.yml -o teads-output.yml
+if-run -m teads-curve.yml -o teads-output.yml
 ```
 
 This will yield the following output file:

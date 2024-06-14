@@ -1,27 +1,27 @@
 # Command line tool 
 
 
-A core feature of the Impact Framework is the `ie` command line tool (CLI). This is how you trigger Impact Framework to execute a certain manifest file. 
+A core feature of the Impact Framework is the `if-run` command line tool (CLI). This is how you trigger Impact Framework to execute a certain manifest file. 
 
-We also provide several other command line tools that work in concert with `ie` to enable flows such as comparing, re-executing and verifying IF output files.
+We also provide several other command line tools that work in concert with `if-run` to enable flows such as comparing, re-executing and verifying IF output files.
 
 This page includes reference documentation for the CLI tools, including the various commands and flags each tool exposes. 
 
 We also provide tutorial-style user documentation for these tools in the [`Users`](../users/) section.
 
 
-## `ie`
+## `if-run`
 
-If you have globally installed our `if` npm package, you can invoke the CLI using the `ie` command directly in your terminal. The `ie` command is an alias to `npx ts-node src/index.ts`, which executes the Impact Framework's `src/index.ts` script and acts as the entry point for Impact Framework.
+If you have globally installed our `if` npm package, you can invoke the CLI using the `if-run` command directly in your terminal. The `if-run` command is an alias to `npx ts-node src/index.ts`, which executes the Impact Framework's `src/index.ts` script and acts as the entry point for Impact Framework.
 
-`ie <args>`
+`if-run <args>`
 
 ### `--manifest` , `-m`
 
-The `--manifest` flag is the only required flag and tells `ie` where to find the manifest file that you want to execute. This command expects to receive the path where your manifest file is saved, as shown in the following example:
+The `--manifest` flag is the only required flag and tells `if-run` where to find the manifest file that you want to execute. This command expects to receive the path where your manifest file is saved, as shown in the following example:
 
 ```sh
-ie --manifest examples/manifests/my-manifest.yml
+if-run --manifest examples/manifests/my-manifest.yml
 ```
 
 ###  `--output` , `-0`
@@ -31,9 +31,9 @@ The `--output` flag is optional and is used for defining a path to save your out
 Here is an example of `--output` being used to define a path:
 
 ```sh
-ie --manifest examples/manifests/my-manifest.yml --output examples/outputs/my-outdata
+if-run --manifest examples/manifests/my-manifest.yml --output examples/outputs/my-outdata
 ## or using aliases
-ie -m examples/manifests/my-manifest.yml -o examples/outputs/my-outdata
+if-run -m examples/manifests/my-manifest.yml -o examples/outputs/my-outdata
 ```
 
 If `my-manifest.yml` contains the following config, then a `yaml` file named `my-outdata.yml` will be created, containing the results from your IF run.
@@ -50,9 +50,9 @@ If you want to save data to CSV, you have to select a specific metric to export.
 
 
 ```sh
-ie --manifest demo.yml --output demo#carbon
+if-run --manifest demo.yml --output demo#carbon
 ## or
-ie -m demo.yml -o demo#carbon
+if-run -m demo.yml -o demo#carbon
 ```
 
 
@@ -65,9 +65,9 @@ You pass the path to your new parameter file as an argument. The file is expecte
 For example:
 
 ```sh
-ie --manifest <your manifest> --override-params <path-to-your-params-file>
+if-run --manifest <your manifest> --override-params <path-to-your-params-file>
 ## or using aliases
-ie -m <your manifest> -p <path-to-your-params-file>
+if-run -m <your manifest> -p <path-to-your-params-file>
 ```
 
 
@@ -77,9 +77,9 @@ The `--help` command provides information about all available commands in order 
 
 Example:
 ```sh
-ie --help
+if-run --help
 ## or using alias
-ie -h
+if-run -h
 ```
 
 ### `--debug`
@@ -138,14 +138,14 @@ The `if-diff` command line tool allows you to determine whether two manifest or 
 if-diff --source file-1.yml --target file2.yml
 ```
 
-You can also pipe the outputs from `ie` directly into `if-diff`. This means you only provide *one* file to `if-diff` and the other comes from a new `ie` run configured to send its output data to the console via `stdout`. This is an important feature because it allows you to receive an output file and verify that it was computed correctly and not tampered with post-execution. For example, if someone provides you with an output file, you can strip out the `outputs` section and re-run it with `ie`, piping the outputs straight to `if-diff` to compare against the original you received. 
+You can also pipe the outputs from `if-run` directly into `if-diff`. This means you only provide *one* file to `if-diff` and the other comes from a new `if-run` run configured to send its output data to the console via `stdout`. This is an important feature because it allows you to receive an output file and verify that it was computed correctly and not tampered with post-execution. For example, if someone provides you with an output file, you can strip out the `outputs` section and re-run it with `if-run`, piping the outputs straight to `if-diff` to compare against the original you received. 
 
 If the original was correctly and honestly reported, `if-diff` will return a success response.
 
 e.g.
 
 ```
-ie -m my-manifest --stdout | if-diff --target my-output-file.yml
+if-run -m my-manifest --stdout | if-diff --target my-output-file.yml
 ```
 
 
@@ -205,10 +205,4 @@ Files do not match!
 tree.children.child1
 source: missing
 target:  exists
-```
-
-Use the `debug` command if you want to diagnose and fix errors in your plugin:
-
-```sh
-ie --manifest <path-to-your-manifest-file> --debug
 ```

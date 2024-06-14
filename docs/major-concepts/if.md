@@ -6,7 +6,7 @@ sidebar-position: 3
 
 ## Introduction
 
-`ie` is a command line tool that computes [Manifest files](manifest-file.md).
+`if-run` is a command line tool that computes [Manifest files](manifest-file.md).
 It is the portal allowing users to interact with the Impact Framework.
 
 The available options and their shortcuts are:
@@ -18,22 +18,22 @@ The available options and their shortcuts are:
 - `--help` or `-h`: prints out help instruction
 
 
-The only required command is `--manifest`. Without a valid path to a manifest file, `ie` has nothing to execute.
+The only required command is `--manifest`. Without a valid path to a manifest file, `if-run` has nothing to execute.
 
-To use `ie`, you must first [write a manifest file](../users/how-to-write-manifests.md). Then, you can simply pass the path to the manifest file to `ie` on the command line. 
+To use `if-run`, you must first [write a manifest file](../users/how-to-write-manifests.md). Then, you can simply pass the path to the manifest file to `if-run` on the command line. 
 
 ```sh
-ie --manifest /my-manifest.yml 
+if-run --manifest /my-manifest.yml 
 ## or using aliases
-ie -m /my-manifest.yml
+if-run -m /my-manifest.yml
 ```
 
 You can also pass a path where you would like to save the output file to. For example:
 
 ```sh
-ie --manifest ./my-manifest.yml --output ./my-results.yml
+if-run --manifest ./my-manifest.yml --output ./my-results.yml
 ## or using aliases
-ie -m ./my-manifest.yml -o ./my-results.yml
+if-run -m ./my-manifest.yml -o ./my-results.yml
 ```
 
 > Note that you also need to add some config to your manifest file to enable exporting to a file. The config is as follows:
@@ -46,4 +46,4 @@ initialize:
 
 If you omit the `--output` command, your results won't be displayed in the console. You should use `--stdout` command for that.
 
-For more information on the `ie` commands see the [CLI reference documentation](../reference/cli.md).
+For more information on the `if-run` commands see the [CLI reference documentation](../reference/cli.md).

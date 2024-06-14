@@ -45,7 +45,7 @@ Later, you could raise a pull request to IF to add your parameters to the canoni
 If you want to, you can also reject our canonical set of parameters and use your own instead. We do not recommend this, but we do make it possible via a CLI command, `override-params`. In this case, you can provide the path to a new file, structured the same way as `params.ts` that will be used instead of ours. For example:
 
 ```sh
-ie --manifest <manifest> --override-params my-params.ts
+if-run --manifest <manifest> --override-params my-params.ts
 ```
 
 The file must parse as JSON or a Javascript object.

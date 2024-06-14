@@ -132,7 +132,7 @@ This will append the new parameter informatrion to the object loaded from `param
 However, if you are an advanced user and you want to use something other than out recommended standard set of parameters, you can provide a replacement `params.ts` file on the command line. This file should be a `json` or `js`/`ts` file with the ame structure as our `params.ts`. You can rename the file. You then pass the path to the file to the `override-params` command.
 
 ```sh
-ie --manifest <path-to-manifest> --override-params <path-to-your-params-file>
+if-run --manifest <path-to-manifest> --override-params <path-to-your-params-file>
 ```
 
 ## Step 3: Install your plugin
@@ -175,7 +175,7 @@ initialize:
 Run your manifest uisng
 
 ```sh
-np run ie -- --manifest <path-to-manifest>
+np run if-run -- --manifest <path-to-manifest>
 ```
 
 If you have to link more than one local plugin, for example to test your plugin in a pipeline, you can do so with
@@ -220,7 +220,7 @@ Now, when you run the manifest file, it will load the plugin automatically.
 You can run this using the globally installed IF as follows:
 
 ```sh
-ie --manifest <path-to-my-manifest>
+if-run --manifest <path-to-my-manifest>
 ```
 
 ## Summary of steps
@@ -340,4 +340,4 @@ For proportional metrics, the right value is `avg`. For example, you would want 
 
 Finally, values that should always be presented identically regardless of any aggregation, such as names or global constants, should be given the `aggregation-method` value `none`.
 
-Now you are ready to run your plugin using the `ie` CLI tool!
+Now you are ready to run your plugin using the `if-run` CLI tool!

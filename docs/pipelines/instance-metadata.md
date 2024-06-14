@@ -120,7 +120,7 @@ tree:
 Now you can run this manifest using:
 
 ```sh
-ie -m instance-metadata.yml -o output.yml
+if-run -m instance-metadata.yml -o output.yml
 ```
 
 Your new `output.yml` file will contain the following:
