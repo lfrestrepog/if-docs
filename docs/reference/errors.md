@@ -7,17 +7,16 @@ This page enumerates the error classes. For each error class, we list the messag
 
 ## IF errors
 
-### `CliInputError`
+### `ParseCliParamsError`
 
 Errors of this class are caused by invalid input arguments being passed to the [CLI](./cli.md).
 
 #### Messages
 
-| message                                            | cause                                                                                                                                                   | remedy                                                                                                                      |
-| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `Output path is required.`                         | Your manifest defines an output file type (e.g. `yaml`) but no savepath was provided to the CLI                                                         | add `-o <savepath>` to yor run command                                                                                      |
-| `CSV export criteria is not found in output path.` | Your manifest defines the output type to be CSV, but you have not provided the [metrics to export](./cli.md#csv-export-identifiers) in your run command | Choose a metric to export to CSV (e.g. `carbon`) and append it to your output path with a hashtag, e.g. `-o my-file#carbon` |
-|                                                    |
+| message                | cause                                              | remedy                                       |
+| ---------------------- | -------------------------------------------------- | -------------------------------------------- |
+| `Unknown option: -<x>` | Your cli command is not supported by the framework | add supported `-<x>` flag to yor run command |
+
 
 ### `ManifestValidationError`
 
@@ -32,28 +31,17 @@ The message itself indicates that the problematic element is `initialize` and th
 
 The remedy for this issue is to add an `initialize` block into the manifest.
 
-### `ModuleInitializationError`
 
-Errors of the `ModuleInitializationError` class arise when a plugin cannot be initialized, usually because of mistakes in the plugin configuration in the `initialize` block in the manifest file. Typically, this could be an incorrect `path` or `method`.
+### `InputValidationError`
 
-#### Messages
+Errors of the `InputValidationError` class arise because your plugin is not receiving the data it expects in `input` data, global config or node-level config.
+The specific messages depend on the plugin. It is expected that the messages emitted by each plugin are listed in their own documentation.
 
-| message                                               | cause                                                                                                | remedy                                                                                                                                         |
-| ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Provided module: '${path}' is invalid or not found.` | The `path` parameter is incorrect or missing                                                         | Provide a valid import path to your plugin. This should be the path to the installed plugin in your `node_modules` |
-| `Invalid exhaust plugin: ${pluginName}.`              | The configured exhaust plugin does not exist (**Note**: exhaust plugins are not currently supported) | Check your output configuration. YExhaust plugins are not yet fully supported                                                                  |
+The example below is a message emitted by the `interpolation` plugin when the `method` given in global config is *not* one of the expected enum variants:
 
+`InputValidationError:   "interpolation" parameter is invalid enum value. expected 'spline' | 'linear', received 'dummy'. Error code: invalid_enum_value.`
+                                                                   |
 
-### `InvalidAggregationParamError`
-
-Errors of the `InvalidAggregationParamError` are caused by problems in the configuration of the `aggregation` feature. Typically, the aggregation method may be undefined or you have tried to aggregate a metric that IF cannot find in the input data.
-
-#### Messages
-
-| message                                                                   | cause                                                                    | remedy                                                                                                                                                                                                         |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Aggregation is not possible for given ${metric} since method is 'none'.` | You are trying to aggregate a metric whose method is set to `none`       | the aggregation method is defined either in `if/src/config/params.ts` or you defined it in a `params` block in your manifest. Either update the aggregation method, or choose a different metric to aggregate. |
-| `Aggregation metric ${metric} is not found in inputs[${index}].`          | You are trying to aggegate a metric that doesn't exist in the input data | Check that your chosen metric is spelled correctly and that it exists in the input data by the time the `aggregate` feature executes.                                                                          |
 
 ### `InvalidGroupingError`
 
@@ -62,26 +50,6 @@ Errors of the `InvalidGroupingError` are only emitted by the `group-by` plugin. 
 | message                  | cause                                                                           | remedy                                                                                       |
 | ------------------------ | ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | `Invalid group ${type}.` | you are requested groupby to regroup the tree based on fields that do not exist | Check the spelling of the values passed to `groupby` and ensure the values exist in the tree |
-
-### `PluginCredentialError`
-
-Errors of the `PluginCredentialError` arise when the `path` or `method` fields are missing from a plugin's `initialize` block.
-
-#### Messages
-
-| message                                    | cause                                                                                  | remedy                                                                                                                                                          |
-| ------------------------------------------ | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Initalization param 'method' is missing.` | The required `method` field is missing from the `initialize` block for a given plugin. | Ensure the `method` field is added to the `initialize` block for each plugin. The value should be the name of the function exported by the plugin.              |
-| `Initalization param 'path' is missing.`   | The required `path` field is missing from the `initialize` block for a given plugin    | Ensure the `path` field is added to the `initialize` block for each plugin. The value should be the path to the directory in `if/node_modules` for your plugin. |
-
-### `PluginInitalizationError`
-
-Errors of the `PluginInitializationError` arise when a plugin is invoked in a pipeline without having been initialized in the `initialize` block of the manifest being executed.
-
-
-| message                                                                                | cause                                             | remedy                                                                                                                  |
-| -------------------------------------------------------------------------------------- | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `Not initalized plugin: ${name}. Check if ${name} is in 'manifest.initalize.plugins'.` | a plugin invoked in a pipeline is not initialized | ensure all plugins that exist in pipelines across your manifest have been included in the manifest's `initialize` block |
 
 
 ### `WriteFileError`
@@ -93,6 +61,85 @@ Errors of the `WriteFileError` class are caused by problems writing output data 
 | message                                          | cause                                    | remedy                                                                                                         |
 | ------------------------------------------------ | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | `Failed to write CSV to ${outputPath}: ${error}` | There was a problem writing data to file | check that you have provided a valid output path and that you have valid permissions to write to that location |
+
+
+### `CliSourceFileError`
+
+Errors of the `CliSourceFileError` class are caused by problems with source manifest.
+
+#### Messages
+
+| message                                    | cause                                                    | remedy                                                 |
+| ------------------------------------------ | -------------------------------------------------------- | ------------------------------------------------------ |
+| `Manifest is missing.`                     | Source manifest is not provided                          | check that you have provided a path to source manifest |
+| `Given source file is not in yaml format.` | Source file is provided, but format is not a yaml format | check that you have provided valid yaml manifest       |
+
+
+### `CliTargetFileError`
+
+Errors of the `CliTargetFileError` class are caused by problems with target manifest.
+
+| message                                    | cause                                                    | remedy                                           |
+| ------------------------------------------ | -------------------------------------------------------- | ------------------------------------------------ |
+| `Given target file is not in yaml format.` | Target file is provided, but format is not a yaml format | check that you have provided valid yaml manifest |
+
+
+### `PluginInitializationError`
+
+Errors of the `PluginInitializationError` arise when a plugin is invoked in a pipeline without having been initialized in the `initialize` block of the manifest being executed.
+
+
+| message                                                                                | cause                                             | remedy                                                                                                                  |
+| -------------------------------------------------------------------------------------- | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `Not initalized plugin: ${name}. Check if ${name} is in 'manifest.initalize.plugins'.` | a plugin invoked in a pipeline is not initialized | ensure all plugins that exist in pipelines across your manifest have been included in the manifest's `initialize` block |
+| `Provided module ${path} is invalid or not found. ${error ?? ''}`                      | a plugin invoked in a pipeline is not initialized | ensure all plugins that exist in pipelines across your manifest have been included in the manifest's `initialize` block |
+
+
+### `InvalidAggregationMethodError`
+
+Errors of the `InvalidAggregationMethodError` class are caused by problems in the configuration of the `aggregation` feature. 
+
+| message                                                                   | cause                                                              | remedy                                                                                                                                                                                                         |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Aggregation is not possible for given ${metric} since method is 'none'.` | You are trying to aggregate a metric whose method is set to `none` | the aggregation method is defined either in `if/src/config/params.ts` or you defined it in a `params` block in your manifest. Either update the aggregation method, or choose a different metric to aggregate. |
+
+
+### `MissingAggregationParamError`
+
+Errors of the `MissingAggregationParamError` class are caused by problems in the configuration of the `aggregation` feature. Typically, the aggregation method may be undefined or you have tried to aggregate a metric that IF cannot find in the input data.
+
+#### Messages
+
+| message                                                          | cause                                                                    | remedy                                                                                                                                |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `Aggregation metric ${metric} is not found in inputs[${index}].` | You are trying to aggegate a metric that doesn't exist in the input data | Check that your chosen metric is spelled correctly and that it exists in the input data by the time the `aggregate` feature executes. |
+
+
+## `MissingPluginMethodError`
+
+Errors of the `MissingPluginMethodError` class are caused by missing information in manifest's `initalize.plugins` section.
+
+| message                                    | cause                                                                                  | remedy                                                                                                                                             |
+| ------------------------------------------ | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Initalization param 'method' is missing.` | The required `method` field is missing from the `initialize` block for a given plugin. | Ensure the `method` field is added to the `initialize` block for each plugin. The value should be the name of the function exported by the plugin. |
+
+
+## `MissingPluginPathError`
+
+Errors of the `MissingPluginPathError` class are caused by missing information in manifest's `initalize.plugins` section.
+
+| message                                  | cause                                                                               | remedy                                                                                                                                                          |
+| ---------------------------------------- | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Initalization param 'path' is missing.` | The required `path` field is missing from the `initialize` block for a given plugin | Ensure the `path` field is added to the `initialize` block for each plugin. The value should be the path to the directory in `if/node_modules` for your plugin. |
+
+
+## `InvalidExhaustPluginError`
+
+Errors of the `InvalidExhaustPluginError` class are caused by using unsupported exhaust plugin.
+
+| message                                  | cause                                                      | remedy                                                    |
+| ---------------------------------------- | ---------------------------------------------------------- | --------------------------------------------------------- |
+| `Invalid exhaust plugin: ${pluginName}.` | Unsupported or misspelled plugin was used as output method | Ensure the `pluginName` corresponds to supported plugins. |
 
 
 ## Plugin Errors
@@ -130,14 +177,7 @@ For example, here is a message emitted from our Watt-time plugin:
 The remedy depends on the specific error message received. In general we recommned visiting the API documentation for the specific service you are trying to use and ensuring your request is built to their specification.
 
 
-### `InputValidationError`
 
-Errors of the `InputValidationError` class arise because your plugin is not receiving the data it expects in `input` data, global config or node-level config.
-The specific messages depend on the plugin. It is expected that the messages emitted by each plugin are listed in their own documentation.
-
-The example below is a message emitted by the `interpolation` plugin when the `method` given in global config is *not* one of the expected enum variants:
-
-`InputValidationError:   "interpolation" parameter is invalid enum value. expected 'spline' | 'linear', received 'dummy'. Error code: invalid_enum_value.`
 
 
 ### `UnsupportedValueError`
@@ -188,7 +228,16 @@ For example, the following error arises when IF's `csv-export` plugin attempts t
 
 `MakeDirectoryError: CsvExport: Failed to create directory for CSV at path: /nope. Error: Permission denied.`
 
+### `PluginInitializationError`
 
+Errors of the `PluginInitializationError` class arise when a plugin cannot be initialized, usually because of mistakes in the plugin configuration in the `initialize` block in the manifest file. Typically, this could be an incorrect `path` or `method`.
+
+#### Messages
+
+| message                                               | cause                                                                                                | remedy                                                                                                             |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `Provided module: '${path}' is invalid or not found.` | The `path` parameter is incorrect or missing                                                         | Provide a valid import path to your plugin. This should be the path to the installed plugin in your `node_modules` |
+| `Invalid exhaust plugin: ${pluginName}.`              | The configured exhaust plugin does not exist (**Note**: exhaust plugins are not currently supported) | Check your output configuration. Exhaust plugins are not yet fully supported                                       |
 
 ## Capturing errors in manifests
 
