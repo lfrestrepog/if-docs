@@ -102,7 +102,7 @@ DEBUG: 2024-06-12T08:48:04.862Z: Aggregating outputs
 DEBUG: 2024-06-12T08:48:04.862Z: Preparing output data
 ```
 
-You can use the `--debug` flag to help debug failing IF runs. You will see exactly where in the execution pipeline an error arose. If the error arose froma plugin, this will be clear from the execution logs, for example:
+You can use the `--debug` flag to help debug failing IF runs. You will see exactly where in the execution pipeline an error arose. If the error arose from a plugin, this will be clear from the execution logs, for example:
 
 ```sh
 INFO: 2024-06-12T08:53:21.376Z: Starting IF
@@ -199,18 +199,60 @@ target:  exists
 
 ## `if-env`
 
-The `if-env` command line tool allows you to create the environment in which the manifest can run.
+`if-env` is a command line tool that helps you to create local development environments where you can run manifests.
 
-`if-env` can be run without any arguments, it will create a template manifest file and a relevant package.json in the same directory where the command is run. By providing `--install` option, it will install the package.json.
+There are two use cases for this:
 
-`if-env` can be run as follows:
+1) setting up a new development environment for plugin building
+2) replicating a runtime environment for a given manifest, so you can re-execute it
+
+### commands
+
+- `--manifest` or `-m`: the path to a manifest whose dependencies you want to install
+- `--install` or `-i`: instructs `if-env` to automatically install the dependencies in the local `package.json`
+- `--cwd` or `-c`: forces `if-env` to create or update the package.json in the current working directory. This is already default behaviour when no arguments are passed to `if-env`, but when a manifest is passed to `-m`, `if-env` defaults to saving a package.json in the same folder as the manifest. using `-cwd` overrides that behaviour and uses the current working directory as the `package.json` target path.
+
+### Setting up new development environments using `if-env`
+
+If you are creating a new manifest from scratch and want to bootstrap your way in, you can use `if-env` with no arguments to generate a template manifest and package.json in your current working directory. Then, all you need to do is tweak the templates for your specific use case. 
+
+For example:
 
 ```sh
-if-env --install
+mkdir my-manifest && cd my-manifest
+if-env
 ```
 
-`if-env` will also define the environment for the specified executed manifest by providing the path with the `--manifest` argument in the same directory where the manifest exists. It runs as follows:
+After running these commands, you will see the following files in `my-manifest`:
+
+```
+ls my-manifest
+
+> package.json manifest.yaml
+```
+
+Now, you can use these files as templates for your manifest development.
+
+
+### Replicating runtime environments using `if-env`
+
+If you are given an IF output file and you want to re-run it, you can use `if-env` to install that output file's dependencies so that all the plugins in its execution pipeline can be executed.
+
+For example, if you are given a file, `output-file.yml`, you can save the file to `if` and run
+
+```
+cd if
+if-env -m output-file.yml
+```
+
+`if-env` will compare the installed dependencies in the `package.json` it sees in `if` with the dependencies listed in `output-file.yaml`. Any dependencies that are in `output-file.yaml` and not in `if/package.json` will be added to `if-package.json`. Then, you can run:
 
 ```sh
-if-env --manifest executed-manifest-path.yml --install
+npm i
+```
+
+and you are ready to re-execute `output-file.yaml` in your local environment. We also provide the `--install` flag to instruct `if-env` to automatically run `npm i` after merging the dependencies, so you could craft a single command to install all the relevant dependencies and then run the manifest, as follows:
+
+```sh
+if-env -m output-file.yml -i && if-run -m output-file.yml -s
 ```

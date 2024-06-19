@@ -16,6 +16,7 @@ The available options and their shortcuts are:
 - `--stdout` or `-s` (optional): prints the output to stdout (console)
 - `--override-params` or `-p` (optional): if you are an advanced user and you want to override our standard set of parameters and their definitions, you can provide the path to an alternative file as an argument to this command.
 - `--help` or `-h`: prints out help instruction
+- `--debug`: enables IF execution logs
 
 
 The only required command is `--manifest`. Without a valid path to a manifest file, `if-run` has nothing to execute.
