@@ -254,5 +254,5 @@ npm i
 and you are ready to re-execute `output-file.yaml` in your local environment. We also provide the `--install` flag to instruct `if-env` to automatically run `npm i` after merging the dependencies, so you could craft a single command to install all the relevant dependencies and then run the manifest, as follows:
 
 ```sh
-if-env -m output-file.yml --install && if-run -m output-file.yml -s
+if-env -m output-file.yml -i && if-run -m output-file.yml -s
 ```
