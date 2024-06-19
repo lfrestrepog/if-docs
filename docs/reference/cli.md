@@ -199,26 +199,8 @@ target:  exists
 
 ## `if-env`
 
-The `if-env` command line tool allows you to create the environment in which the manifest can run.
-
-`if-env` can be run without any arguments, it will create a template manifest file and a relevant package.json in the same directory where the command is run. By providing `--install` option, it will install the package.json.
-
-`if-env` can be run as follows:
-
-```sh
-if-env --install
-```
-
-`if-env` will also define the environment for the specified executed manifest by providing the path with the `--manifest` argument in the same directory where the manifest exists. It runs as follows:
-
-```sh
-if-env --manifest executed-manifest-path.yml --install
-```
-
-
-## `if-env`
-
 `if-env` is a command line tool that helps you to create local development environments where you can run manifests.
+
 There are two use cases for this:
 
 1) setting up a new development environment for plugin building
