@@ -340,4 +340,9 @@ For proportional metrics, the right value is `avg`. For example, you would want 
 
 Finally, values that should always be presented identically regardless of any aggregation, such as names or global constants, should be given the `aggregation-method` value `none`.
 
+## Managing errors
+
+If framework provides it's own set of error classes which will make user's live much more easier!
+[If Core](https://github.com/Green-Software-Foundation/if-core) plugin has a set of error classes which can be used for having full integration with the IF framework. More details about each error class can be found at [Errors Reference](../reference//errors.md)
+
 Now you are ready to run your plugin using the `if-run` CLI tool!

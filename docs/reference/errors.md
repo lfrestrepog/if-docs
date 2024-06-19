@@ -7,17 +7,16 @@ This page enumerates the error classes. For each error class, we list the messag
 
 ## IF errors
 
-### `CliInputError`
+### `ParseCliParamsError`
 
 Errors of this class are caused by invalid input arguments being passed to the [CLI](./cli.md).
 
 #### Messages
 
-| message                                            | cause                                                                                                                                                   | remedy                                                                                                                      |
-| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `Output path is required.`                         | Your manifest defines an output file type (e.g. `yaml`) but no savepath was provided to the CLI                                                         | add `-o <savepath>` to yor run command                                                                                      |
-| `CSV export criteria is not found in output path.` | Your manifest defines the output type to be CSV, but you have not provided the [metrics to export](./cli.md#csv-export-identifiers) in your run command | Choose a metric to export to CSV (e.g. `carbon`) and append it to your output path with a hashtag, e.g. `-o my-file#carbon` |
-|                                                    |
+| message                | cause                                              | remedy                                       |
+| ---------------------- | -------------------------------------------------- | -------------------------------------------- |
+| `Unknown option: -<x>` | Your cli command is not supported by the framework | add supported `-<x>` flag to yor run command |
+
 
 ### `ManifestValidationError`
 
@@ -32,28 +31,6 @@ The message itself indicates that the problematic element is `initialize` and th
 
 The remedy for this issue is to add an `initialize` block into the manifest.
 
-### `ModuleInitializationError`
-
-Errors of the `ModuleInitializationError` class arise when a plugin cannot be initialized, usually because of mistakes in the plugin configuration in the `initialize` block in the manifest file. Typically, this could be an incorrect `path` or `method`.
-
-#### Messages
-
-| message                                               | cause                                                                                                | remedy                                                                                                                                         |
-| ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Provided module: '${path}' is invalid or not found.` | The `path` parameter is incorrect or missing                                                         | Provide a valid import path to your plugin. This should be the path to the installed plugin in your `node_modules` |
-| `Invalid exhaust plugin: ${pluginName}.`              | The configured exhaust plugin does not exist (**Note**: exhaust plugins are not currently supported) | Check your output configuration. YExhaust plugins are not yet fully supported                                                                  |
-
-
-### `InvalidAggregationParamError`
-
-Errors of the `InvalidAggregationParamError` are caused by problems in the configuration of the `aggregation` feature. Typically, the aggregation method may be undefined or you have tried to aggregate a metric that IF cannot find in the input data.
-
-#### Messages
-
-| message                                                                   | cause                                                                    | remedy                                                                                                                                                                                                         |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Aggregation is not possible for given ${metric} since method is 'none'.` | You are trying to aggregate a metric whose method is set to `none`       | the aggregation method is defined either in `if/src/config/params.ts` or you defined it in a `params` block in your manifest. Either update the aggregation method, or choose a different metric to aggregate. |
-| `Aggregation metric ${metric} is not found in inputs[${index}].`          | You are trying to aggegate a metric that doesn't exist in the input data | Check that your chosen metric is spelled correctly and that it exists in the input data by the time the `aggregate` feature executes.                                                                          |
 
 ### `InvalidGroupingError`
 
@@ -63,30 +40,10 @@ Errors of the `InvalidGroupingError` are only emitted by the `group-by` plugin. 
 | ------------------------ | ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | `Invalid group ${type}.` | you are requested groupby to regroup the tree based on fields that do not exist | Check the spelling of the values passed to `groupby` and ensure the values exist in the tree |
 
-### `PluginCredentialError`
-
-Errors of the `PluginCredentialError` arise when the `path` or `method` fields are missing from a plugin's `initialize` block.
-
-#### Messages
-
-| message                                    | cause                                                                                  | remedy                                                                                                                                                          |
-| ------------------------------------------ | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Initalization param 'method' is missing.` | The required `method` field is missing from the `initialize` block for a given plugin. | Ensure the `method` field is added to the `initialize` block for each plugin. The value should be the name of the function exported by the plugin.              |
-| `Initalization param 'path' is missing.`   | The required `path` field is missing from the `initialize` block for a given plugin    | Ensure the `path` field is added to the `initialize` block for each plugin. The value should be the path to the directory in `if/node_modules` for your plugin. |
-
-### `PluginInitalizationError`
-
-Errors of the `PluginInitializationError` arise when a plugin is invoked in a pipeline without having been initialized in the `initialize` block of the manifest being executed.
-
-
-| message                                                                                | cause                                             | remedy                                                                                                                  |
-| -------------------------------------------------------------------------------------- | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `Not initalized plugin: ${name}. Check if ${name} is in 'manifest.initalize.plugins'.` | a plugin invoked in a pipeline is not initialized | ensure all plugins that exist in pipelines across your manifest have been included in the manifest's `initialize` block |
-
 
 ### `WriteFileError`
 
-Errors of the `WriteFileError` class are caused by problems writing output data to files.
+Errors of the `WriteFileError` class are caused by problems writing output data to files. Typically, this can occur when the user does not have sufficient permissions to write to a given file.
 
 #### Messages
 
@@ -95,99 +52,204 @@ Errors of the `WriteFileError` class are caused by problems writing output data 
 | `Failed to write CSV to ${outputPath}: ${error}` | There was a problem writing data to file | check that you have provided a valid output path and that you have valid permissions to write to that location |
 
 
+### `CliSourceFileError`
+
+Errors of the `CliSourceFileError` class are caused by problems with source manifest.
+
+#### Messages
+
+| message                                    | cause                                                    | remedy                                                 |
+| ------------------------------------------ | -------------------------------------------------------- | ------------------------------------------------------ |
+| `Manifest is missing.`                     | Source manifest is not provided                          | check that you have provided a path to source manifest |
+| `Given source file is not in yaml format.` | Source file is provided, but format is not a yaml format | check that you have provided valid yaml manifest       |
+
+
+### `CliTargetFileError`
+
+Errors of the `CliTargetFileError` class are caused by problems with target manifest.
+
+| message                                    | cause                                                    | remedy                                           |
+| ------------------------------------------ | -------------------------------------------------------- | ------------------------------------------------ |
+| `Given target file is not in yaml format.` | Target file is provided, but format is not a yaml format | check that you have provided valid yaml manifest |
+
+
+### `PluginInitializationError`
+
+Errors of the `PluginInitializationError` arise when a plugin is invoked in a pipeline without having been initialized in the `initialize` block of the manifest being executed.
+
+
+| message                                                                                | cause                                             | remedy                                                                                                                  |
+| -------------------------------------------------------------------------------------- | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `Not initalized plugin: ${name}. Check if ${name} is in 'manifest.initalize.plugins'.` | a plugin invoked in a pipeline is not initialized | ensure all plugins that exist in pipelines across your manifest have been included in the manifest's `initialize` block |
+| `Provided module ${path} is invalid or not found. ${error ?? ''}`                      | a plugin invoked in a pipeline is not initialized | ensure all plugins that exist in pipelines across your manifest have been included in the manifest's `initialize` block |
+
+
+### `InvalidAggregationMethodError`
+
+Errors of the `InvalidAggregationMethodError` class are caused by problems in the configuration of the `aggregation` feature. 
+
+| message                                                                   | cause                                                              | remedy                                                                                                                                                                                                         |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Aggregation is not possible for given ${metric} since method is 'none'.` | You are trying to aggregate a metric whose method is set to `none` | the aggregation method is defined either in `if/src/config/params.ts` or you defined it in a `params` block in your manifest. Either update the aggregation method, or choose a different metric to aggregate. |
+
+
+### `MissingAggregationParamError`
+
+Errors of the `MissingAggregationParamError` class are caused by problems in the configuration of the `aggregation` feature. Typically, the aggregation method may be undefined or you have tried to aggregate a metric that IF cannot find in the input data.
+
+#### Messages
+
+| message                                                          | cause                                                                    | remedy                                                                                                                                |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `Aggregation metric ${metric} is not found in inputs[${index}].` | You are trying to aggegate a metric that doesn't exist in the input data | Check that your chosen metric is spelled correctly and that it exists in the input data by the time the `aggregate` feature executes. |
+
+
+## `MissingPluginMethodError`
+
+Errors of the `MissingPluginMethodError` class are caused by missing information in manifest's `initalize.plugins` section.
+
+| message                                    | cause                                                                                  | remedy                                                                                                                                             |
+| ------------------------------------------ | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Initalization param 'method' is missing.` | The required `method` field is missing from the `initialize` block for a given plugin. | Ensure the `method` field is added to the `initialize` block for each plugin. The value should be the name of the function exported by the plugin. |
+
+
+## `MissingPluginPathError`
+
+Errors of the `MissingPluginPathError` class are caused by missing information in manifest's `initalize.plugins` section.
+
+| message                                  | cause                                                                               | remedy                                                                                                                                                          |
+| ---------------------------------------- | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Initalization param 'path' is missing.` | The required `path` field is missing from the `initialize` block for a given plugin | Ensure the `path` field is added to the `initialize` block for each plugin. The value should be the path to the directory in `if/node_modules` for your plugin. |
+
+
+## `InvalidExhaustPluginError`
+
+Errors of the `InvalidExhaustPluginError` class are caused by using unsupported exhaust plugin.
+
+| message                                  | cause                                                      | remedy                                                    |
+| ---------------------------------------- | ---------------------------------------------------------- | --------------------------------------------------------- |
+| `Invalid exhaust plugin: ${pluginName}.` | Unsupported or misspelled plugin was used as output method | Ensure the `pluginName` corresponds to supported plugins. |
+
+
 ## Plugin Errors
 
 Plugins can emit their own custom error messages, but we still prefer those messages to be attached to one of a finite set of predefined error classes.
 Those classes are listed in this section.
 
-### `AuthorizationError`
 
-Errors of the `AuthorizationError` class are caused by incorrect credentials being passed to an external API.
+### `GlobalConfigError`
 
-`AuthorizationError` messages should have the following form:
+Errors of the `GlobalConfigError` are used when part of the config data provided to a plugin is invalid or missing.
 
-`API name :: Problem description`
+For example the `Divide` plugin throws a `GlobalConfigError` when it receives a denominator equal to zero. 
 
-For example, here is a message emitted from the Watt-time plugin:
+The message should name the config element that was invalid and describe the reason why. For example:
 
-`WattTimeAPI: Missing token in response. Invalid credentials provided.'`
-
-The remedy to messages of this type is to provide correct access credentials as defined by the API you are hitting.
+`GlobalConfigError: "denominator" parameter is number must be greater than 0. Error code: too_small.`
 
 
-### `APIRequestError`
+### `MissingInputDataError`
 
-Errors of the `APIRequestError` class are caused by a failing API request for any reason other than invalid credentials.
-
-The error message should have the following form:
-
-`API name:: Problem description :: API error message`
-
-For example, here is a message emitted from our Watt-time plugin:
-
-`WattTimeGridEmissions: WattTime API supports up to 32 days. Duration of 31537200 seconds is too long.`
-
-The remedy depends on the specific error message received. In general, we recommend visiting the API documentation for the specific service you are trying to use and ensuring your request is built to their specification.
-
-
-### `InputValidationError`
-
-Errors of the `InputValidationError` class arise because your plugin is not receiving the data it expects in `input` data, global config or node-level config.
+Errors of the `MissingInputDataError` class arise because your plugin is not receiving the data it expects in `input` data, global config or node-level config.
 The specific messages depend on the plugin. It is expected that the messages emitted by each plugin are listed in their own documentation.
 
 The example below is a message emitted by the `interpolation` plugin when the `method` given in global config is *not* one of the expected enum variants:
 
-`InputValidationError:   "interpolation" parameter is invalid enum value. expected 'spline' | 'linear', received 'dummy'. Error code: invalid_enum_value.`
+`MissingInputDataError:   "interpolation" parameter is invalid enum value. expected 'spline' | 'linear', received 'dummy'. Error code: invalid_enum_value.`
 
 
-### `UnsupportedValueError`
+### `ProcessExecutionError`
 
-Errors of the `UnsupportedValueError` class are emitted when a given API query parameter is not one from an expected set. It is typically used when we do not know in advance that a value is invalid, but we can tell from the API response that the value caused the request to fail. For example, providing a server name to the Cloud Carbon Footprint API that is not found in their database.
-
-The example below is raised by the `Boavizta` plugin when the given `provider` is not recognized by the service.
-
-`UnsupportedValidationError: "BoaviztaCloudOutput: Invalid 'provider' parameter 'aws1'. Valid values are aws.`
+Errors of the `ProcessExecutionError` class arise because `shell` plugin have faced problems while executing the script you have provided.
 
 
-### `ConfigValidationError`
+### `RegexMismatchError`
 
-Errors of the `ConfigValidationError` are used when part of the config data provided to a plugin is invalid or missing.
+Errors of the `RegexMismatchError` class arise because `regex` plugin have faced problems while parsing given string with specified `regex`.
 
-For example, the `Divide` plugin throws a `ConfigValidationError` when it receives a denominator equal to zero. 
+| message                                                 | cause                                                        | remedy                                                                  |
+| ------------------------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------------- |
+| `${input} does not match the ${match} regex expression` | Given string doesn't contain anything matching given `regex` | Ensure that input contains string which can be matched by your `regex`. |
 
-The message should name the config element that was invalid and describe the reason why. For example:
 
-`ConfigValidationError: "denominator" parameter is number must be greater than 0. Error code: too_small.`
+### `FetchingFileError`
+
+Errors of the `FetchingFileError` class arise because `csv-lookup` plugin have faced problems fetching given `url`.
+
+| message                                  | cause                                   | remedy                               |
+| ---------------------------------------- | --------------------------------------- | ------------------------------------ |
+| `Failed fetching the file: ${filepath}.` | Fetching the file with given URL failed | Ensure that file's url is accessible |
 
 
 ### `ReadFileError`
 
-Errors of the `ReadFileError` occur due to a problem reading data from a file. The error should include the file path and the system error that was encountered when IF attempted to read data from the file:
+Errors of the `ReadFileError` class arise because `csv-lookup` plugin have faced problems reading given file `path`. The error should include the file path and the system error that was encountered when IF attempted to read data from the file:
 
-`ReadFileError: Error reading file ${filePath}: ${error}`
-
-For example, the following error arises when IF attempts to open a file, `missing-data.csv`, that does not exist:
-
-`ReadFileError: Error reading file missing-data.csv: missing-data.csv: No such file or directory`
+| message                                 | cause                                   | remedy                             |
+| --------------------------------------- | --------------------------------------- | ---------------------------------- |
+| `Failed reading the file: ${filepath}.` | Reading the file with given path failed | Ensure that file's path is correct |
 
 
-### `WriteFileError`
+### `MissingCSVColumnError`
 
-Errors of the `WriteFileError` occur due to a problem writing data to a file. Typically, this can occur when the user does not have sufficient permissions to write to a given file.
+Errors of the `MissingCSVColumnError` class arise because `csv-lookup` plugin can't access given csv file column.
 
-For example, the following error arises when IF's `csv-export` plugin attempts to write to a file (`no-entry.csv`) without the correct permissions:
+| message                                            | cause                                | remedy                                                                      |
+| -------------------------------------------------- | ------------------------------------ | --------------------------------------------------------------------------- |
+| `There is no column with the name: ${columnName}.` | CSV file doens't contain such column | Ensure that specified `query` is correct and contains existing column name. |
 
-`WriteFileError: CsvExport: Failed to write CSV to no-entry.csv Error: Permission denied.`
+
+### `QueryDataNotFoundError`
+
+Errors of the `QueryDataNotFoundError` class arise because `csv-lookup` plugin can't find `query` related data in given CSV file.
+
+| message                                                                                          | cause                                              | remedy                                                                                   |
+| ------------------------------------------------------------------------------------------------ | -------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `One or more of the given query parameters are not found in the target CSV file column headers.` | CSV file doens't contain data with given criteria. | Ensure that specified `query` and `input` values have intersection with CSV file's data. |
 
 
-## `MakeDirectoryError`
+### `InvalidDateInInputError`
 
-Errors of the `MakeDirectoryError` occur due to a problem creating a new directory in the local filesystem. Typically, this can occur when the user does not have sufficient permissions.
+Errors of the `InvalidDateInInputError` class arise because `time-sync` plugin can't parse date from inputs.
 
-For example, the following error arises when IF's `csv-export` plugin attempts to create a directory (`/nope`) without the correct permissions:
+| message                                             | cause                      | remedy                                              |
+| --------------------------------------------------- | -------------------------- | --------------------------------------------------- |
+| `Unexpected date datatype: ${typeof date}: ${date}` | Unsupported type for date. | Ensure that dates in inputs are correct timestamps. |
 
-`MakeDirectoryError: CsvExport: Failed to create directory for CSV at path: /nope. Error: Permission denied.`
 
+### `InvalidPaddingError`
+
+Errors of the `InvalidPaddingError` class arise when there is misconfiguration of `time-sync` plugin.
+
+
+| message                               | cause                                                                    | remedy                                     |
+| ------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------ |
+| `Avoiding padding at ${start or end}` | Error on padding is enabled and config is missing padding configuration. | Make sure padding is correctly configured. |
+
+
+### `InvalidInputError`
+
+Errors of the `InvalidInputError` class arise when there is input timestamps incompatibility while using `time-sync` plugin.
+
+
+| message                                                | cause                          | remedy                                          |
+| ------------------------------------------------------ | ------------------------------ | ----------------------------------------------- |
+| `Observation timestamps overlap, please check inputs.` | Input timestamps have overlap. | Make sure that input timestamps are continuous. |
+
+
+## `ExhaustOutputArgError`
+
+Errors of the `ExhaustOutputArgError` class arise when there is output path issues while exporting file or exporting criteria misconfiguration.
+
+| message                                                                                     | cause                        | remedy                                                     |
+| ------------------------------------------------------------------------------------------- | ---------------------------- | ---------------------------------------------------------- |
+| `Output path is required, please make sure output is configured properly.`                  | Missed output path.          | Make sure that output path is present in your cli command. |
+| `CSV export criteria is not found in output path. Please append it after --output <path>#.` | Missing CSV export criteria. | Please specify export field.                               |
+
+
+## `CSVParseError`
+
+Errors of the `CSVParseError` occur due to a problem reading CSV file. Typically, this can occur when provided file is not a CSV.
 
 
 ## Capturing errors in manifests
