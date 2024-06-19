@@ -136,6 +136,7 @@ Errors of the `InvalidExhaustPluginError` class are caused by using unsupported 
 Plugins can emit their own custom error messages, but we still prefer those messages to be attached to one of a finite set of predefined error classes.
 Those classes are listed in this section.
 
+
 ### `GlobalConfigError`
 
 Errors of the `GlobalConfigError` are used when part of the config data provided to a plugin is invalid or missing.

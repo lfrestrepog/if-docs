@@ -7,11 +7,9 @@ Plugins are self-contained units of code that do one thing. They can be loaded i
 
 ## What are plugins?
 
-A plugin converts an input into some output, for example, some plugins convert an input of CPU utilization into an output of energy.
+A plugin is a small, reuseable unit of code that can either observe some usage metric, grab some data from a file or API, or execute some transformation or calculation over some existing input data, for example, some plugins convert an input of CPU utilization into an output of energy.
 
-There are many different **plugins**: [Boavizta](https://dataviz.boavizta.org/), [Cloud Carbon Footprint](https://github.com/cloud-carbon-footprint/ccf-coefficients), [Climatiq](https://www.climatiq.io/data) are some great examples of open-source IMs, there are **many other** closed source, commercial and private plugins being built in-house inside organizations.
-
-The set of plugins is increasing; however, no single plugin can cover all impacts, scenarios, environments, contexts, and use cases. To calculate the end-to-end impact of a software application, you need to stitch together many different plugins. Plugins differ in fundamental ways in the inputs inputs they accept, their interface, their calculation methodology, their outputs, their granularity, and their coverage. 
+The set of available plugins is growing; however, no single plugin can cover all impacts, scenarios, environments, contexts, and use cases. To calculate the end-to-end impact of a software application, you need to stitch together many different plugins. Plugins differ in fundamental ways in the inputs inputs they accept, their interface, their calculation methodology, their outputs, their granularity, and their coverage. 
 	
 We expect the choice of which plugin to use for which software component to come down to an expert decision by a green software professional.
 

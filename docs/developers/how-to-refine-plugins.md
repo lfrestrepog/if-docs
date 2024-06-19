@@ -60,24 +60,27 @@ Each logical unit in the code should be preceded by an appropriate explanatory c
 ### Error handling
 
 We use custom errors across our codebase to make it as easy as possible to understand the root cause of a problem.
-Overall, we aim to provide error messages that are as descriptive and precise as possible.
+You can use our error handlers by importing `if-core` as a dependency of your plugin. This provides you with our error handling code and predefined list of error classes that you can invoke. This gives you tight integration with IF, because the framework can recognize those error classes and automatically incorporate them into the framework's error handling routines.
 
-Some examples from our Impact Framework code are:
+Just import `ERRORS` from `if-core` and use the error classes that are appropriate for your use-case.
 
-```yml
-FILE_IS_NOT_YAML: 'Provided manifest file is not in yaml format.',
-MANIFEST_IS_MISSING: 'Manifest file is missing.',
-MISSING_PATH: "Initalization param 'path' is missing."
-INVALID_MODULE_PATH: (path: string) =>
-    `Provided module path: '${path}' is invalid.`,
+e.g.
+
+```typescript
+import {ERRORS} from '@grnsft/if-core/util';
+
+const {MissingInputDataError} = ERRORS;
+
+... 
+
+throw new MissingInputDataError("my-plugin is missing my-parameter from inputs[0]");
 ```
 
-Please try to use similarly precise error messages throughout your plugin.
 
 ### Validation
 
-Utilize validation techniques to ensure the integrity of input data.
-Validate input parameters against expected types, ranges, or constraints to prevent runtime errors and ensure data consistency.
+We recommend using validation techniques to ensure the integrity of input data. Validate input parameters against expected types, ranges, or constraints to prevent runtime errors and ensure data consistency.
+
 We use `zod` to validate data. Here's an example from our codebase:
 
 ```ts
@@ -112,7 +115,7 @@ Here's an example that covers plugin initialization and the happy path for the `
 ```ts
 import {Sum} from '../../../../lib';
 
-import {ERRORS} from '../../../../util/errors';
+import {ERRORS} from '@grnsft/if-core/util/';
 
 const {InputValidationError} = ERRORS;
 
