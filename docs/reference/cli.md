@@ -236,7 +236,7 @@ Now, you can use these files as templates for your manifest development.
 
 ### Replicating runtime environments using `if-env`
 
-If you are given an IF output file and you want to return it, you can use `if-env` to install that output file's dependencies so that all the plugins in its execution pipeline can be executed.
+If you are given an IF output file and you want to re-run it, you can use `if-env` to install that output file's dependencies so that all the plugins in its execution pipeline can be executed.
 
 For example, if you are given a file, `output-file.yml`, you can save the file to `if` and run
 
