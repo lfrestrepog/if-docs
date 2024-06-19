@@ -214,7 +214,7 @@ There are two use cases for this:
 
 ### Setting up new development environments using `if-env`
 
-If you are creating a new manifest from scratch and want to bootstrap your way in, you can use `if-env` with no arguments to generate a template manifest and packag.json in your current working directory. Then, all you need to do is tweak the templates for your specific use case. 
+If you are creating a new manifest from scratch and want to bootstrap your way in, you can use `if-env` with no arguments to generate a template manifest and package.json in your current working directory. Then, all you need to do is tweak the templates for your specific use case. 
 
 For example:
 
