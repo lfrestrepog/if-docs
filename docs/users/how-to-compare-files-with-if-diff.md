@@ -4,13 +4,13 @@ sidebar_position: 5
 
 # How to compare files with `if-diff`
 
-`if-diff` is a command line tool that allows you to compare two `ie` output files. They either match according to `if-diff`'s matching rules, or they don't. If they match, then `if-diff` returns a simple success response. If the differ, then `if-diff` returns a report of the differences it finds. 
+`if-diff` is a command line tool that allows you to compare two `if-run` output files. They either match according to `if-diff`'s matching rules, or they don't. If they match, then `if-diff` returns a simple success response. If the differ, then `if-diff` returns a report of the differences it finds. 
 
 ## Why is this useful?
 
-`if-diff` can be used to verify that a given output file was correctly executed and that it was not tampered with after it was computed. Imagine you received an output file from someone, reporting their carbon expenditure. It is better to verify than trust this person's report, so you simply delete the `outputs` block from the file (creating a manifest), run it through `ie` and compare the output to the original file you received. All being well, the two files are identical. if not, you can see exactly where the differences are.
+`if-diff` can be used to verify that a given output file was correctly executed and that it was not tampered with after it was computed. Imagine you received an output file from someone, reporting their carbon expenditure. It is better to verify than trust this person's report, so you simply delete the `outputs` block from the file (creating a manifest), run it through `if-run` and compare the output to the original file you received. All being well, the two files are identical. if not, you can see exactly where the differences are.
 
-`if-diff` can also be used for debugging your own files. Maybe you have some large manifest files in development and have accidentally introduced some changes that you are now struggling to identify, but are leading to different `ie` outcomes. `if-diff` can quickly scan your two files and tell you where the differences are so you can get back in sync.
+`if-diff` can also be used for debugging your own files. Maybe you have some large manifest files in development and have accidentally introduced some changes that you are now struggling to identify, but are leading to different `if-run` outcomes. `if-diff` can quickly scan your two files and tell you where the differences are so you can get back in sync.
 
 ## Example: output verification
 
@@ -80,10 +80,10 @@ tree:
 ```
 
 
-Now you want to *run* the manifest through `ie` and compare the result to the given output file. You can do this by piping the result of `ie` directly into `if-diff` as follows:
+Now you want to *run* the manifest through `if-run` and compare the result to the given output file. You can do this by piping the result of `if-run` directly into `if-diff` as follows:
 
 ```bash
-ie -m test-manifest.yml --stdout | if-diff --target given-output-file.yml
+if-run -m test-manifest.yml --stdout | if-diff --target given-output-file.yml
 ```
 
 The result is:

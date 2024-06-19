@@ -1,39 +1,37 @@
-# Command line tool 
+# Command line tool
 
+A core feature of the Impact Framework is the `if-run` command line tool (CLI). This is how you trigger Impact Framework to execute a certain manifest file.
 
-A core feature of the Impact Framework is the `ie` command line tool (CLI). This is how you trigger Impact Framework to execute a certain manifest file. 
+We also provide several other command line tools that work in concert with `if-run` to enable flows such as comparing, re-executing and verifying IF output files.
 
-We also provide several other command line tools that work in concert with `ie` to enable flows such as comparing, re-executing and verifying IF output files.
-
-This page includes reference documentation for the CLI tools, including the various commands and flags each tool exposes. 
+This page includes reference documentation for the CLI tools, including the various commands and flags each tool exposes.
 
 We also provide tutorial-style user documentation for these tools in the [`Users`](../users/) section.
 
+## `if-run`
 
-## `ie`
+If you have globally installed our `if` npm package, you can invoke the CLI using the `if-run` command directly in your terminal. The `if-run` command is an alias to `npx ts-node src/index.ts`, which executes the Impact Framework's `src/index.ts` script and acts as the entry point for Impact Framework.
 
-If you have globally installed our `if` npm package, you can invoke the CLI using the `ie` command directly in your terminal. The `ie` command is an alias to `npx ts-node src/index.ts`, which executes the Impact Framework's `src/index.ts` script and acts as the entry point for Impact Framework.
-
-`ie <args>`
+`if-run <args>`
 
 ### `--manifest` , `-m`
 
-The `--manifest` flag is the only required flag and tells `ie` where to find the manifest file that you want to execute. This command expects to receive the path where your manifest file is saved, as shown in the following example:
+The `--manifest` flag is the only required flag and tells `if-run` where to find the manifest file that you want to execute. This command expects to receive the path where your manifest file is saved, as shown in the following example:
 
 ```sh
-ie --manifest examples/manifests/my-manifest.yml
+if-run --manifest examples/manifests/my-manifest.yml
 ```
 
-###  `--output` , `-0`
+### `--output` , `-0`
 
-The `--output` flag is optional and is used for defining a path to save your output data. If you provide the `--output` command with a path, you also need to specify the file type in the `initialize.outputs` block in your manifest file. With both pieces of information, IF will save your output data to file.  
+The `--output` flag is optional and is used for defining a path to save your output data. If you provide the `--output` command with a path, you also need to specify the file type in the `initialize.outputs` block in your manifest file. With both pieces of information, IF will save your output data to file.
 
 Here is an example of `--output` being used to define a path:
 
 ```sh
-ie --manifest examples/manifests/my-manifest.yml --output examples/outputs/my-outdata
+if-run --manifest examples/manifests/my-manifest.yml --output examples/outputs/my-outdata
 ## or using aliases
-ie -m examples/manifests/my-manifest.yml -o examples/outputs/my-outdata
+if-run -m examples/manifests/my-manifest.yml -o examples/outputs/my-outdata
 ```
 
 If `my-manifest.yml` contains the following config, then a `yaml` file named `my-outdata.yml` will be created, containing the results from your IF run.
@@ -48,40 +46,80 @@ initialize:
 
 If you want to save data to CSV, you have to select a specific metric to export. You do this by adding a hashtag and the metric name after the savepath provided to the output command. For example, you could save the `carbon` data to a CSV file called `demo.csv` as follows:
 
-
 ```sh
-ie --manifest demo.yml --output demo#carbon
+if-run --manifest demo.yml --output demo#carbon
 ## or
-ie -m demo.yml -o demo#carbon
+if-run -m demo.yml -o demo#carbon
 ```
-
 
 ### `--override-params` , `-p`
 
-The `override-params` command is used when you want to discard our recommended set of parameters and associated units and aggregation methods and instead provide your own. We do not recommend this, and if you use this feature you take full responsibility for any errors you introduce downstream, including unit or aggregation errors. This is why we hide the ability to override the parameters behind a CLI command - it is an advanced feature that you should only use if you really know what you are doing. 
+The `override-params` command is used when you want to discard our recommended set of parameters and associated units and aggregation methods and instead provide your own. We do not recommend this, and if you use this feature you take full responsibility for any errors you introduce downstream, including unit or aggregation errors. This is why we hide the ability to override the parameters behind a CLI command - it is an advanced feature that you should only use if you really know what you are doing.
 
 You pass the path to your new parameter file as an argument. The file is expected to conform to the same structure as our `src/config/params.ts` file.
 
 For example:
 
 ```sh
-ie --manifest <your manifest> --override-params <path-to-your-params-file>
+if-run --manifest <your manifest> --override-params <path-to-your-params-file>
 ## or using aliases
-ie -m <your manifest> -p <path-to-your-params-file>
+if-run -m <your manifest> -p <path-to-your-params-file>
 ```
-
 
 ### `--help` , `-h`
 
 The `--help` command provides information about all available commands in order to help you easily find the command you need.
 
 Example:
+
 ```sh
-ie --help
+if-run --help
 ## or using alias
-ie -h
+if-run -h
 ```
 
+### `--debug`
+
+You can provide the `--debug` flag to `ie` in order to display execution logs to the console. These logs show messages for each operation IF and its plugins are executing. For example, your `debug` logs will look similar to the following:
+
+```sh
+INFO: 2024-06-12T08:48:02.918Z: Starting IF
+DEBUG: 2024-06-12T08:48:02.919Z: Loading manifest
+DEBUG: 2024-06-12T08:48:02.924Z: Capturing runtime environment data
+DEBUG: 2024-06-12T08:48:03.978Z: Validating manifest
+DEBUG: 2024-06-12T08:48:03.980Z: Syncing parameters
+DEBUG: 2024-06-12T08:48:03.980Z: Initializing plugins
+DEBUG: 2024-06-12T08:48:03.981Z: Initializing Sum
+DEBUG: 2024-06-12T08:48:03.981Z: Loading Sum from builtin
+DEBUG: 2024-06-12T08:48:04.859Z: Initializing Coefficient
+DEBUG: 2024-06-12T08:48:04.859Z: Loading Coefficient from builtin
+DEBUG: 2024-06-12T08:48:04.860Z: Initializing Multiply
+DEBUG: 2024-06-12T08:48:04.860Z: Loading Multiply from builtin
+DEBUG: 2024-06-12T08:48:04.860Z: Computing pipeline for `sum`
+DEBUG: 2024-06-12T08:48:04.861Z: Computing pipeline for `coefficient`
+DEBUG: 2024-06-12T08:48:04.861Z: Computing pipeline for `multiply`
+DEBUG: 2024-06-12T08:48:04.862Z: Aggregating outputs
+DEBUG: 2024-06-12T08:48:04.862Z: Preparing output data
+```
+
+You can use the `--debug` flag to help debug failing IF runs. You will see exactly where in the execution pipeline an error arose. If the error arose froma plugin, this will be clear from the execution logs, for example:
+
+```sh
+INFO: 2024-06-12T08:53:21.376Z: Starting IF
+DEBUG: 2024-06-12T08:53:21.376Z: Loading manifest
+DEBUG: 2024-06-12T08:53:21.381Z: Capturing runtime environment data
+DEBUG: 2024-06-12T08:53:22.367Z: Validating manifest
+DEBUG: 2024-06-12T08:53:22.369Z: Syncing parameters
+DEBUG: 2024-06-12T08:53:22.369Z: Initializing plugins
+DEBUG: 2024-06-12T08:53:22.369Z: Initializing Sum
+DEBUG: 2024-06-12T08:53:22.370Z: Loading Sum from builtin
+DEBUG: 2024-06-12T08:53:23.165Z: Initializing Coefficient
+DEBUG: 2024-06-12T08:53:23.165Z: Loading Coefficient from builtin
+DEBUG: 2024-06-12T08:53:23.165Z: Initializing Multiply
+DEBUG: 2024-06-12T08:53:23.165Z: Loading Multiply from builtin
+DEBUG: 2024-06-12T08:53:23.165Z: Computing pipeline for `sum`
+[2024-06-12 09:53:23.166 AM] error:     cpu/energy is missing from the input array.
+```
 
 ## `if-diff`
 
@@ -95,20 +133,19 @@ The `if-diff` command line tool allows you to determine whether two manifest or 
 if-diff --source file-1.yml --target file2.yml
 ```
 
-You can also pipe the outputs from `ie` directly into `if-diff`. This means you only provide *one* file to `if-diff` and the other comes from a new `ie` run configured to send its output data to the console via `stdout`. This is an important feature because it allows you to receive an output file and verify that it was computed correctly and not tampered with post-execution. For example, if someone provides you with an output file, you can strip out the `outputs` section and re-run it with `ie`, piping the outputs straight to `if-diff` to compare against the original you received. 
+You can also pipe the outputs from `if-run` directly into `if-diff`. This means you only provide _one_ file to `if-diff` and the other comes from a new `if-run` run configured to send its output data to the console via `stdout`. This is an important feature because it allows you to receive an output file and verify that it was computed correctly and not tampered with post-execution. For example, if someone provides you with an output file, you can strip out the `outputs` section and re-run it with `if-run`, piping the outputs straight to `if-diff` to compare against the original you received.
 
 If the original was correctly and honestly reported, `if-diff` will return a success response.
 
 e.g.
 
 ```
-ie -m my-manifest --stdout | if-diff --target my-output-file.yml
+if-run -m my-manifest --stdout | if-diff --target my-output-file.yml
 ```
-
 
 ### `if-diff` matching rules
 
-`if-diff` looks for differences between the `source` and `target`. However, `if-diff` applies its own IF-specific matching rules, ensuring that the outputs are functionally identical even if they are not precisely identical. For example, `if-diff` allows the order of nodes in a  tree to vary between files as long as identically named components contain identical data.
+`if-diff` looks for differences between the `source` and `target`. However, `if-diff` applies its own IF-specific matching rules, ensuring that the outputs are functionally identical even if they are not precisely identical. For example, `if-diff` allows the order of nodes in a tree to vary between files as long as identically named components contain identical data.
 
 | Difference identified                                    | Report or ignore? | Note                                                                                       |
 | -------------------------------------------------------- | ----------------- | ------------------------------------------------------------------------------------------ |
@@ -121,18 +158,15 @@ ie -m my-manifest --stdout | if-diff --target my-output-file.yml
 | order of fields in context                               | ignore            | if data is identical, position of field in context is ignored                              |
 | content of execution block EXCEPT `status` and `error`   | ignore            | environment information is ignored                                                         |
 
-
-
 ### `if-diff` outputs
 
-
-If `if-diff` finds no in-scope differences between the `source` and `target` then it returns a success message and exit code `0`: 
+If `if-diff` finds no in-scope differences between the `source` and `target` then it returns a success message and exit code `0`:
 
 ```sh
 FILES MATCH and exit code 0.
 ```
 
-If `if-diff` detects an in-scope difference between the files, it halts execution, returns exit code `1` and reports the difference to the command line. 
+If `if-diff` detects an in-scope difference between the files, it halts execution, returns exit code `1` and reports the difference to the command line.
 
 The report includes the yaml path to the differing element in the tree, the value in the `source` and the value in the `target`, using the following schema:
 
@@ -154,7 +188,6 @@ source: 45
 target:  43
 ```
 
-
 e.g. different components in `tree` in `source` and `target`:
 
 ```sh
@@ -164,10 +197,22 @@ source: missing
 target:  exists
 ```
 
-Use the `debug` command if you want to diagnose and fix errors in your plugin:
+## `if-env`
+
+The `if-env` command line tool allows you to create the environment in which the manifest can run.
+
+`if-env` can be run without any arguments, it will create a template manifest file and a relevant package.json in the same directory where the command is run. By providing `--install` option, it will install the package.json.
+
+`if-env` can be run as follows:
 
 ```sh
-ie --manifest <path-to-your-manifest-file> --debug
+if-env --install
+```
+
+`if-env` will also define the environment for the specified executed manifest by providing the path with the `--manifest` argument in the same directory where the manifest exists. It runs as follows:
+
+```sh
+if-env --manifest executed-manifest-path.yml --install
 ```
 
 

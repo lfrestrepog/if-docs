@@ -10,10 +10,10 @@ You can install Impact Framework either globally or locally. For most users, we 
 npm install -g @grnsft/if
 ```
 
-Then, run the package using the `ie` command:
+Then, run the package using the `if-run` command:
 
 ```sh
-ie --manifest <path to manifest file> 
+if-run --manifest <path to manifest file> 
 ```
 
 ## Installing locally
@@ -28,7 +28,7 @@ npm install
 Then, use the following command to run Impact Framework:
 
 ```sh
-npm run ie -- --manifest <path to your manifest file>
+npm run if-run -- --manifest <path to your manifest file>
 ```
 
 Next, install local plugin repositories using `npm link`. You can do this by entering the plugin folder and running the following command:
