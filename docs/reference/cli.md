@@ -102,7 +102,7 @@ DEBUG: 2024-06-12T08:48:04.862Z: Aggregating outputs
 DEBUG: 2024-06-12T08:48:04.862Z: Preparing output data
 ```
 
-You can use the `--debug` flag to help debug failing IF runs. You will see exactly where in the execution pipeline an error arose. If the error arose froma plugin, this will be clear from the execution logs, for example:
+You can use the `--debug` flag to help debug failing IF runs. You will see exactly where in the execution pipeline an error arose. If the error arose from a plugin, this will be clear from the execution logs, for example:
 
 ```sh
 INFO: 2024-06-12T08:53:21.376Z: Starting IF
@@ -219,10 +219,10 @@ if-env --manifest executed-manifest-path.yml --install
 ## `if-env`
 
 `if-env` is a command line tool that helps you to create local development environments where you can run manifests.
-There are two use-cases for this:
+There are two use cases for this:
 
 1) setting up a new development environment for plugin building
-2) replicating a runtime environment for a given maniofets, so you can re-execute it
+2) replicating a runtime environment for a given manifest, so you can re-execute it
 
 ### commands
 
@@ -249,12 +249,12 @@ ls my-manifest
 > package.json manifest.yaml
 ```
 
-Now, you can use these files as template for your manifest development.
+Now, you can use these files as templates for your manifest development.
 
 
 ### Replicating runtime environments using `if-env`
 
-If you are given an IF output fiule and ytou want to rerun it, you can use `if-env` to install that output file's dependencies so that all the plugins in it's execution pipeline can be executed.
+If you are given an IF output file and you want to rerun it, you can use `if-env` to install that output file's dependencies so that all the plugins in its execution pipeline can be executed.
 
 For example, if you are given a file, `output-file.yml`, you can save the file to `if` and run
 
