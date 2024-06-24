@@ -28,9 +28,9 @@ function HomepageHeader() {
             </Link>
             <Link
               className="button button--primary button--md"
-              to="https://grnsft.org/hack/github"
+              to="https://explorer.if.greensoftware.foundation/"
             >
-              Join the IF Hackathon
+              Explore IF Plugins
             </Link>
           </div>
 
