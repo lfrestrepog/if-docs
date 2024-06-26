@@ -45,4 +45,4 @@ IF builtins all come bundled with IF. Below you will find a list of each builtin
 
 * [Interpolation](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins/interpolation): A generic plugin for interpolating between known points.
 
-* [Copy Param](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins/interpolation): A generic plugin for copying a parameter to a new element in the input array, optionally deleting the original. Useful as a way to rename parameters.
+* [Copy Param](https://github.com/Green-Software-Foundation/if/tree/main/src/builtins/copy-param): A generic plugin for copying a parameter to a new element in the input array, optionally deleting the original. Useful as a way to rename parameters.
