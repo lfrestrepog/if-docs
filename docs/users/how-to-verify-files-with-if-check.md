@@ -5,15 +5,15 @@ sidebar_position: 6
 
 ## Verifying IF outputs with `if-check`
 
-IF includes a comman dline tool called `if-check` that can be used to verify the results in a manifest file.
+IF includes a command line tool called `if-check` that can be used to verify the results in a manifest file.
 
 Imagine that someone provides you with a computed manifest file that they claim demonstrates the environmental impact of their software application.
 
-You could trust themn and take their results at face value, but there are probably cases where you think smeone might have made a mistake or might be massaging their data in a dishonest way. Maybe you just need to demonstrate due diligence in the quality of the data you receive and use. In these cases, you can make use of `if-check`.
+You could trust them and take their results at face value, but there are probably cases where you think someone might have made a mistake or might be massaging their data in a dishonest way. Maybe you just need to demonstrate due diligence in the quality of the data you receive and use. In these cases, you can make use of `if-check`.
 
 `if-check` is a single command that takes a given manifest file, sets up an environment where it can be executed, executes it, and compares the newly generated results to those in the original file. This means you can independently verify the results in the file using your own local copy of IF.
 
-Under the hood, `if-check` is wrapping calls to `if-env` and `if-diff`, so if you need granular control over the information flow for some reaosn, you could achieve the same result using separate calls to those commands.
+Under the hood, `if-check` is wrapping calls to `if-env` and `if-diff`, so if you need granular control over the information flow for some reason, you could achieve the same result using separate calls to those commands.
 
 ## Example
 
@@ -151,8 +151,8 @@ initialize:
         functional-unit: requests
 execution:
   command: >-
-    /home/bob/.npm/_npx/1bf7c3c15bf47d04/node_modules/.bin/ts-node
-    /home/bob/Code/if/src/index.ts -m manifests/plugins/sci/success.yml -s
+    /home/charlie/.npm/_npx/1bf7c3c15bf47d04/node_modules/.bin/ts-node
+    /home/charlie/Code/if/src/index.ts -m manifests/plugins/sci/success.yml -s
   environment:
     if-version: 0.4.0
     os: linux
