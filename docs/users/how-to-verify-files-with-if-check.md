@@ -248,7 +248,17 @@ source: 0.050199999999999995
 target: 0.020199999999999995
 ```
 
-Not ony can Alice see that the files do not match, she can see which values Charlie manipulated.
+Not only can Alice see that the files do not match, she can see which values Charlie manipulated.
+
+## Running IF over multiple manifests
+
+Alice could also run `if-check` over any number of manifests in a single command, using the `-d` subcommand. For a folder containing `n` manifests, pass the folder path:
+
+```sh
+if-check -d /my-folder-of-manifests
+```
+
+Each manifest will be run through `if-check` in sequence.
 
 
 ## `if-check` limitations
