@@ -282,3 +282,13 @@ If `if-check` was not able to verify the file because there were differences in 
 ```
 if-check: could not verify <filename>. The re-executed file does not match the original.
 ```
+
+### Running IF over multiple manifests with `--d`
+
+Alice could also run `if-check` over any number of manifests in a single command, using the `--directory` or `-d` subcommand. For a folder containing multiple manifests, pass the folder path:
+
+```sh
+if-check -d /my-folder-of-manifests
+```
+
+Each manifest will be run through `if-check` in sequence.
