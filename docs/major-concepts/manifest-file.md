@@ -36,7 +36,6 @@ initialize:
     <PLUGIN-NAME-HERE>:
       method:
       path:
-  outputs:
 tree:
   children:
     child:
@@ -65,7 +64,6 @@ initialize:
   plugins:
     <PLUGIN-NAME-HERE>:
       method: <METHOD-NAME-HERE>
-  outputs: ['csv', 'yaml']
 ```
 
 Where required values are:
@@ -76,8 +74,6 @@ Where required values are:
 There is also an optional `global-config` field that can be used to set _global_ configuration that is common to a plugin wherever it is invoked across the entire manifest file.
 
 Impact Framework uses the `initialize` section to instantiate each plugin. A plugin cannot be invoked elsewhere in the manifest file unless it is included in this section.
-
-`outputs` is a list of possible export types (currently `csv`, `csv-raw` and `yaml` are supported).
 
 #### Execution (auto-generated)
 

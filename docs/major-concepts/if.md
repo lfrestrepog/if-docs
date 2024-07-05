@@ -36,14 +36,6 @@ if-run --manifest ./my-manifest.yml --output ./my-results.yml
 if-run -m ./my-manifest.yml -o ./my-results.yml
 ```
 
-> Note that you also need to add some config to your manifest file to enable exporting to a file. The config is as follows:
-
-```
-initialize:
-  outputs:
-    - yaml
-```
-
 If you omit the `--output` command, your results will only be displayed in the console.
 
 For more information on the `if-run` commands see the [CLI reference documentation](../reference/cli.md).

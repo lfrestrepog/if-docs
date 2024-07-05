@@ -269,8 +269,6 @@ initialize:
       method: TeadsCurve
       global-config:
         interpolation: spline
-  outputs:
-    - yaml
 execution:
   status: fail
   error: 'InputValidationError: "duration" parameter is required. Error code: invalid_type'.

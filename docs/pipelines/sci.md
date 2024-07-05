@@ -346,8 +346,6 @@ initialize:
         end-time: '2023-12-12T00:01:00.000Z'
         interval: 5
         allow-padding: true
-  outputs:
-    - yaml
 execution:
   command: >-
     /home/user/.npm/_npx/1bf7c3c15bf47d04/node_modules/.bin/ts-node

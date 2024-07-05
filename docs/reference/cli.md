@@ -22,9 +22,9 @@ The `--manifest` flag is the only required flag and tells `if-run` where to find
 if-run --manifest examples/manifests/my-manifest.yml
 ```
 
-### `--output` , `-0`
+### `--output` , `-o`
 
-The `--output` flag is optional and is used for defining a path to save your output data. If you provide the `--output` command with a path, you also need to specify the file type in the `initialize.outputs` block in your manifest file. With both pieces of information, IF will save your output data to file.
+The `--output` flag is optional and is used for defining a path to save your output data.
 
 Here is an example of `--output` being used to define a path:
 

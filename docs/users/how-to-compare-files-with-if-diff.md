@@ -21,7 +21,6 @@ name: sum
 description: successful path
 tags:
 initialize:
-  outputs: ['yaml']
   plugins:
     sum:
       method: Sum
@@ -56,7 +55,6 @@ name: sum
 description: successful path
 tags:
 initialize:
-  outputs: ['yaml']
   plugins:
     sum:
       method: Sum
