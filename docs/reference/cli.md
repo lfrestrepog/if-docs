@@ -255,3 +255,39 @@ and you are ready to re-execute `output-file.yaml` in your local environment. We
 ```sh
 if-env -m output-file.yml -i && if-run -m output-file.yml
 ```
+
+
+
+## `if-check`
+
+`if-check` is a manifest verification tool that is equivalent to running `if-env` and `if-diff` on a given manifest file. The manifest file must have `outputs` and an `execution` section for `if-check` to run.
+
+The intended use case is to verify that a manifest's outputs are correct and honest. Say someone handed you a manifest as evidence of their environmental impact. You could choose to trust them, or you could run `if-check` to verify that their calculations are correct. Under the hood, IF is creating a development environment using the dependencies listed in the given file's `execution` section and then executing the file locally, then comparing the newly generated results to those in the given file.
+
+To check a file:
+
+```
+if-check -m <path-to-file>
+```
+
+If the `if-check` is successful you will receive the following response:
+
+```
+if-check: successfully verified <filename>
+```
+
+If `if-check` was not able to verify the file because there were differences in the given and re-executed files, then you will receive the following response which includes the details of how the files differ, as per `if-diff`.
+
+```
+if-check: could not verify <filename>. The re-executed file does not match the original.
+```
+
+### Running IF over multiple manifests with `--d`
+
+Alice could also run `if-check` over any number of manifests in a single command, using the `--directory` or `-d` subcommand. For a folder containing multiple manifests, pass the folder path:
+
+```sh
+if-check -d /my-folder-of-manifests
+```
+
+Each manifest will be run through `if-check` in sequence.
