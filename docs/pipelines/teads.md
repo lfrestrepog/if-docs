@@ -309,7 +309,6 @@ execution:
   command: >-
     /home/user/.npm/_npx/1bf7c3c15bf47d04/node_modules/.bin/ts-node
     /home/user/if/src/index.ts -m manifests/examples/teads-curve.yml
-    --stdout
   environment:
     if-version: 0.3.3-beta.0
     os: linux

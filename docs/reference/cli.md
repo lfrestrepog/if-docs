@@ -133,14 +133,14 @@ The `if-diff` command line tool allows you to determine whether two manifest or 
 if-diff --source file-1.yml --target file2.yml
 ```
 
-You can also pipe the outputs from `if-run` directly into `if-diff`. This means you only provide _one_ file to `if-diff` and the other comes from a new `if-run` run configured to send its output data to the console via `stdout`. This is an important feature because it allows you to receive an output file and verify that it was computed correctly and not tampered with post-execution. For example, if someone provides you with an output file, you can strip out the `outputs` section and re-run it with `if-run`, piping the outputs straight to `if-diff` to compare against the original you received.
+You can also pipe the outputs from `if-run` directly into `if-diff`. This means you only provide _one_ file to `if-diff` and the other comes from a new `if-run` run configured to send its output data to the console. This is an important feature because it allows you to receive an output file and verify that it was computed correctly and not tampered with post-execution. For example, if someone provides you with an output file, you can strip out the `outputs` section and re-run it with `if-run`, piping the outputs straight to `if-diff` to compare against the original you received.
 
 If the original was correctly and honestly reported, `if-diff` will return a success response.
 
 e.g.
 
 ```
-if-run -m my-manifest --stdout | if-diff --target my-output-file.yml
+if-run -m my-manifest | if-diff --target my-output-file.yml
 ```
 
 ### `if-diff` matching rules
@@ -203,8 +203,8 @@ target:  exists
 
 There are two use cases for this:
 
-1) setting up a new development environment for plugin building
-2) replicating a runtime environment for a given manifest, so you can re-execute it
+1. setting up a new development environment for plugin building
+2. replicating a runtime environment for a given manifest, so you can re-execute it
 
 ### commands
 
@@ -214,7 +214,7 @@ There are two use cases for this:
 
 ### Setting up new development environments using `if-env`
 
-If you are creating a new manifest from scratch and want to bootstrap your way in, you can use `if-env` with no arguments to generate a template manifest and package.json in your current working directory. Then, all you need to do is tweak the templates for your specific use case. 
+If you are creating a new manifest from scratch and want to bootstrap your way in, you can use `if-env` with no arguments to generate a template manifest and package.json in your current working directory. Then, all you need to do is tweak the templates for your specific use case.
 
 For example:
 
@@ -232,7 +232,6 @@ ls my-manifest
 ```
 
 Now, you can use these files as templates for your manifest development.
-
 
 ### Replicating runtime environments using `if-env`
 
@@ -254,7 +253,7 @@ npm i
 and you are ready to re-execute `output-file.yaml` in your local environment. We also provide the `--install` flag to instruct `if-env` to automatically run `npm i` after merging the dependencies, so you could craft a single command to install all the relevant dependencies and then run the manifest, as follows:
 
 ```sh
-if-env -m output-file.yml -i && if-run -m output-file.yml -s
+if-env -m output-file.yml -i && if-run -m output-file.yml
 ```
 
 

@@ -239,7 +239,7 @@ Congratulations, now you have completed your manifest and can calculate your SCI
 Assuming your manifest is saved as `sci/yml` you can run it using the following command:
 
 ```sh
-if-run -m sci.yml --stdout
+if-run -m sci.yml
 ```
 
 You will see the following data displayed in the console:
