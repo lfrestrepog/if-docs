@@ -244,7 +244,7 @@ Errors of the `ExhaustOutputArgError` class arise when there is output path issu
 | message                                                                                     | cause                        | remedy                                                     |
 | ------------------------------------------------------------------------------------------- | ---------------------------- | ---------------------------------------------------------- |
 | `Output path is required, please make sure output is configured properly.`                  | Missed output path.          | Make sure that output path is present in your cli command. |
-| `CSV export criteria is not found in output path. Please append it after --output <path>#.` | Missing CSV export criteria. | Please specify export field.                               |
+
 
 
 ## `CSVParseError`
