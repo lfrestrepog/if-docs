@@ -34,24 +34,6 @@ if-run --manifest examples/manifests/my-manifest.yml --output examples/outputs/m
 if-run -m examples/manifests/my-manifest.yml -o examples/outputs/my-outdata
 ```
 
-If `my-manifest.yml` contains the following config, then a `yaml` file named `my-outdata.yml` will be created, containing the results from your IF run.
-
-```yaml
-initialize:
-  output:
-    - yaml
-```
-
-#### CSV export identifiers
-
-If you want to save data to CSV, you have to select a specific metric to export. You do this by adding a hashtag and the metric name after the savepath provided to the output command. For example, you could save the `carbon` data to a CSV file called `demo.csv` as follows:
-
-```sh
-if-run --manifest demo.yml --output demo#carbon
-## or
-if-run -m demo.yml -o demo#carbon
-```
-
 ### `--override-params` , `-p`
 
 The `override-params` command is used when you want to discard our recommended set of parameters and associated units and aggregation methods and instead provide your own. We do not recommend this, and if you use this feature you take full responsibility for any errors you introduce downstream, including unit or aggregation errors. This is why we hide the ability to override the parameters behind a CLI command - it is an advanced feature that you should only use if you really know what you are doing.
@@ -257,7 +239,6 @@ if-env -m output-file.yml -i && if-run -m output-file.yml
 ```
 
 
-
 ## `if-check`
 
 `if-check` is a manifest verification tool that is equivalent to running `if-env` and `if-diff` on a given manifest file. The manifest file must have `outputs` and an `execution` section for `if-check` to run.
@@ -291,3 +272,34 @@ if-check -d /my-folder-of-manifests
 ```
 
 Each manifest will be run through `if-check` in sequence.
+
+
+## `if-csv`
+
+`if-csv` is a command line tool that helps to save data to CSV file.
+
+### commands
+
+- `--manifest` or `-m`: the flas is optional and it shows the path to a manifest that you want to execute
+- `--output` or `-o`: the flas is optional and is used for defining a path to save your output data in `csv` format
+- `--params` or `-p`: the flas is required and it shows the metric to export the data
+
+There are three use cases for this:
+
+1. Exporting CSV with the `--output` flag: When the `--output` flag is provided, `if-csv` exports the data to a CSV file at the specified path. This is useful for saving data for later use or sharing with others.
+
+```sh
+if-csv -m ./my-manifest.yml -p carbon -o ./my-outdata
+```
+
+2. Printing CSV to the console without the `--output` flag: If the `--output` flag is omitted, `if-csv` will print the CSV data directly to the console. This is useful for quick checks.
+
+```sh
+if-csv -m ./my-manifest.yml -p carbon
+```
+
+3. Piping output from `if-run` to `if-csv`. By piping the output from `if-run`, you can chain commands to execute a manifest and then immediately export the data to a CSV file.
+
+```sh
+if-run -m ./my-manifest.yml | if-csv -p carbon -o ./my-outdata
+```
