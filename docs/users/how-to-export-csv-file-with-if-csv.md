@@ -52,8 +52,8 @@ if-csv -m ./manifest.yaml -p energy
 
 The output will be:
 ```sh
-Path,2023-07-06T00:00
-tree.children.child.cpu-cores-utilized,
+Path,2023-08-06T00:00
+tree.children.child.energy,0.002
 ```
 
 Alternatively, you can pipe the result from `if-run`. 
