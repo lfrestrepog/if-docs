@@ -12,7 +12,7 @@ The user documentation includes:
 - [How to install and run IF](./how-to-install-if.md)
 - [How to load plugins](./how-to-import-plugins.md)
 - [How to write manifest files](./how-to-write-manifests.md)
-- [How to export to CSV files](./how-to-export-to-csv.md)
+- [How to export CSV file with `if-csv`](./how-to-export-csv-file-with-if-csv.md)
 - [How to compare files with `if-diff`](./how-to-compare-files-with-if-diff.md)
 - [How to verify manifest files with `if-check`](./how-to-verify-files-with-if-check.md)
 
