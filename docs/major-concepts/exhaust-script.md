@@ -4,11 +4,11 @@ sidebar_position: 10
 
 # Exhaust scripts
 
-Exhaust script is the major concept of the `if`, which provides two types of exhaust scripts: `if-run` and `if-csv`.
+Exhaust scripts are scripts that can run independently of IF itself that take an executed manifest file (one with `outputs`) as an input, parse the yaml data and reformat it into some other representation. We provide `if-csv` bundled with IF, but if you want other data formats, you'll have to create an exhaust script yourself.
 
 ## if-run
 
-The main script for exhaust operations is [`if-run`](./if.md). This script allows users to execute `yaml` and `yml` files.
+`if-run` isn't really an exhaust script, because it also grabs input data, regroups data, computes the pipeline and aggregates. However, we're mentioning it here because it does have some built-in exhaust functionality. Specifically, `if-run` outputs yaml data. `if-run` can *only* output yaml data. This yaml data can be dumped to the console or saved to a yaml file.
 
 ### How to Use if-run
 
@@ -52,7 +52,7 @@ You will get the executed manifest in the `output-sum.yaml` file.
 
 ## if-csv
 
-The [`if-csv`](../users/how-to-export-csv-file-with-if-csv.md) script allows users to execute `yaml` and `yml` files and save the output in `csv` format.
+The [`if-csv`](../users/how-to-export-csv-file-with-if-csv.md) script allows users to pass in `yaml` and `yml` files created using `if-run` and save the output in `csv` format. Yopu have to define the parameters you want to export from the yaml file, e.g. `energy` or `carbon`.
 
 For the above example, you can get the following result:
 
