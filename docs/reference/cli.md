@@ -238,7 +238,6 @@ and you are ready to re-execute `output-file.yaml` in your local environment. We
 if-env -m output-file.yml -i && if-run -m output-file.yml
 ```
 
-
 ## `if-check`
 
 `if-check` is a manifest verification tool that is equivalent to running `if-env` and `if-diff` on a given manifest file. The manifest file must have `outputs` and an `execution` section for `if-check` to run.
@@ -273,16 +272,15 @@ if-check -d /my-folder-of-manifests
 
 Each manifest will be run through `if-check` in sequence.
 
-
 ## `if-csv`
 
 `if-csv` is a command line tool that helps to save data to CSV file.
 
 ### commands
 
-- `--manifest` or `-m`: the flas is optional and it shows the path to a manifest that you want to execute
-- `--output` or `-o`: the flas is optional and is used for defining a path to save your output data in `csv` format
-- `--params` or `-p`: the flas is required and it shows the metric to export the data
+- `--manifest` or `-m`: (optional) the path to an executed manifest
+- `--output` or `-o`: (optional) the path to save your output data in `csv` format
+- `--params` or `-p`: (required) the metric to export the data
 
 There are three use cases for this:
 

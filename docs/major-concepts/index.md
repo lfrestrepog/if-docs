@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Major Concepts
 
-Here you will find explanations for the fundamental Impact Framework concepts. This includes: 
+Here you will find explanations for the fundamental Impact Framework concepts. This includes:
 
 - [Design philosophy](./design-philosophy.md)
 - [Manifest files](./manifest-file.md)
@@ -15,3 +15,4 @@ Here you will find explanations for the fundamental Impact Framework concepts. T
 - [Group-by](./groupby.md)
 - [Parameters](./parameters.md)
 - [Pipelines](./pipelines.md)
+- [Exhaust scripts](./exhaust-script.md)
