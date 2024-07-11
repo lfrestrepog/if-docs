@@ -108,7 +108,7 @@ Whilst the manifest file we looked at above works perfectly well, it will only r
 - The `sci` plugin also requires `functional-unit` information so it can convert the estimated `carbon` into a useful unit.
 - You may also wish to grab your `input` data by querying a metrics API on a virtual machine. 
 
-The example below gives you the full pipeline implemented in an manifest. There are also several other executable example manifests in `if/examples/manifests` that you can run for yourself.
+The example below gives you the full pipeline implemented in a manifest. There are also several other executable example manifests in `if/manifests/examples` that you can run for yourself.
 
 
 ```yaml
