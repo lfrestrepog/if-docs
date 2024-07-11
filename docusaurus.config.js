@@ -33,7 +33,8 @@ const config = {
           sidebarPath: require.resolve("./sidebars.js"),
           routeBasePath: "/",
           // Change this to your repo.
-          editUrl: "https://github.com/Green-Software-Foundation/if-docs/edit/master",
+          editUrl:
+            "https://github.com/Green-Software-Foundation/if-docs/edit/master",
         },
         blog: false,
         theme: {
@@ -65,10 +66,21 @@ const config = {
         },
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
-            label: 'Docs',
+            type: "docSidebar",
+            sidebarId: "tutorialSidebar",
+            position: "left",
+            label: "Documentation",
+          },
+          {
+            href: "https://explorer.if.greensoftware.foundation/",
+            position: "left",
+            label: "Plugins",
+          },
+          {
+            href: "https://github.com/Green-Software-Foundation/if",
+            position: "right",
+            className: 'header-github-link',
+            'aria-label': 'GitHub repository',
           },
           {
             href: "https://greensoftware.foundation/",

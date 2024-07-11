@@ -1,10 +1,10 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 # How to compare files with `if-diff`
 
-`if-diff` is a command line tool that allows you to compare two `if-run` output files. They either match according to `if-diff`'s matching rules, or they don't. If they match, then `if-diff` returns a simple success response. If the differ, then `if-diff` returns a report of the differences it finds. 
+`if-diff` is a command line tool that allows you to compare two `if-run` output files. They either match according to `if-diff`'s matching rules, or they don't. If they match, then `if-diff` returns a simple success response. If the differ, then `if-diff` returns a report of the differences it finds.
 
 ## Why is this useful?
 
@@ -21,14 +21,13 @@ name: sum
 description: successful path
 tags:
 initialize:
-  outputs: ['yaml']
   plugins:
     sum:
       method: Sum
-      path: "builtin"
+      path: 'builtin'
       global-config:
-        input-parameters: ["cpu/energy", "network/energy"]
-        output-parameter: "energy"
+        input-parameters: ['cpu/energy', 'network/energy']
+        output-parameter: 'energy'
 tree:
   children:
     child:
@@ -47,7 +46,6 @@ tree:
           cpu/energy: 0.001
           network/energy: 0.001
           energy: 0.0005
-
 ```
 
 This manifest simply sums two components, `cpu/energy` and `network/energy` and assigns the result to `energy` in the outputs array. You receive this file and feel like something's not quite right. So you delete the outputs block to create `test-manifest.yml`:
@@ -57,14 +55,13 @@ name: sum
 description: successful path
 tags:
 initialize:
-  outputs: ['yaml']
   plugins:
     sum:
       method: Sum
       path: "builtin"
       global-config:
-        input-parameters: ["cpu/energy", "network/energy"]
-        output-parameter: "energy"
+        input-parameters: ['cpu/energy', 'network/energy']
+        output-parameter: 'energy'
 tree:
   children:
     child:
@@ -79,11 +76,10 @@ tree:
           network/energy: 0.001
 ```
 
-
-Now you want to *run* the manifest through `if-run` and compare the result to the given output file. You can do this by piping the result of `if-run` directly into `if-diff` as follows:
+Now you want to _run_ the manifest through `if-run` and compare the result to the given output file. You can do this by piping the result of `if-run` directly into `if-diff` as follows:
 
 ```bash
-if-run -m test-manifest.yml --stdout | if-diff --target given-output-file.yml
+if-run -m test-manifest.yml | if-diff --target given-output-file.yml
 ```
 
 The result is:
@@ -97,13 +93,11 @@ target:  0.0005
 
 Uh oh. It seems there has been some mistake or tampering with the outputs in `given-output-file.yml`. The right result of summing `cpu/energy` and `network/energy` is 0.002, but they reported 0.0005. You can now query that result with the sender and ask them to fix it.
 
-
 Obviously, this is an arbitrary, simplified example, but `if-diff` enables you to do this kind of output verification on very complex manifests where errors are harder to spot by eye and to do it programmatically over large numbers of files.
-
 
 ## Example: debugging
 
-Imagine you developed a manifest that was giving you a consistent result, but now when you run it your result is different and you are not sure why. Maybe one of your colleagues changed something and forgot to tell you, maybe you accidentally inserted or removed something while you were working. 
+Imagine you developed a manifest that was giving you a consistent result, but now when you run it your result is different and you are not sure why. Maybe one of your colleagues changed something and forgot to tell you, maybe you accidentally inserted or removed something while you were working.
 
 You could revert to an archived version, but you moved all the components around into a structure you prefer! `if-diff` has you covered. It will step through the files identifying all the functional differences between the files to help you identify the problematic one(s).
 

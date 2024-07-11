@@ -22,9 +22,9 @@ The `--manifest` flag is the only required flag and tells `if-run` where to find
 if-run --manifest examples/manifests/my-manifest.yml
 ```
 
-### `--output` , `-0`
+### `--output` , `-o`
 
-The `--output` flag is optional and is used for defining a path to save your output data. If you provide the `--output` command with a path, you also need to specify the file type in the `initialize.outputs` block in your manifest file. With both pieces of information, IF will save your output data to file.
+The `--output` flag is optional and is used for defining a path to save your output data.
 
 Here is an example of `--output` being used to define a path:
 
@@ -32,24 +32,6 @@ Here is an example of `--output` being used to define a path:
 if-run --manifest examples/manifests/my-manifest.yml --output examples/outputs/my-outdata
 ## or using aliases
 if-run -m examples/manifests/my-manifest.yml -o examples/outputs/my-outdata
-```
-
-If `my-manifest.yml` contains the following config, then a `yaml` file named `my-outdata.yml` will be created, containing the results from your IF run.
-
-```yaml
-initialize:
-  output:
-    - yaml
-```
-
-#### CSV export identifiers
-
-If you want to save data to CSV, you have to select a specific metric to export. You do this by adding a hashtag and the metric name after the savepath provided to the output command. For example, you could save the `carbon` data to a CSV file called `demo.csv` as follows:
-
-```sh
-if-run --manifest demo.yml --output demo#carbon
-## or
-if-run -m demo.yml -o demo#carbon
 ```
 
 ### `--override-params` , `-p`
@@ -133,14 +115,14 @@ The `if-diff` command line tool allows you to determine whether two manifest or 
 if-diff --source file-1.yml --target file2.yml
 ```
 
-You can also pipe the outputs from `if-run` directly into `if-diff`. This means you only provide _one_ file to `if-diff` and the other comes from a new `if-run` run configured to send its output data to the console via `stdout`. This is an important feature because it allows you to receive an output file and verify that it was computed correctly and not tampered with post-execution. For example, if someone provides you with an output file, you can strip out the `outputs` section and re-run it with `if-run`, piping the outputs straight to `if-diff` to compare against the original you received.
+You can also pipe the outputs from `if-run` directly into `if-diff`. This means you only provide _one_ file to `if-diff` and the other comes from a new `if-run` run configured to send its output data to the console. This is an important feature because it allows you to receive an output file and verify that it was computed correctly and not tampered with post-execution. For example, if someone provides you with an output file, you can strip out the `outputs` section and re-run it with `if-run`, piping the outputs straight to `if-diff` to compare against the original you received.
 
 If the original was correctly and honestly reported, `if-diff` will return a success response.
 
 e.g.
 
 ```
-if-run -m my-manifest --stdout | if-diff --target my-output-file.yml
+if-run -m my-manifest | if-diff --target my-output-file.yml
 ```
 
 ### `if-diff` matching rules
@@ -203,8 +185,8 @@ target:  exists
 
 There are two use cases for this:
 
-1) setting up a new development environment for plugin building
-2) replicating a runtime environment for a given manifest, so you can re-execute it
+1. setting up a new development environment for plugin building
+2. replicating a runtime environment for a given manifest, so you can re-execute it
 
 ### commands
 
@@ -214,7 +196,7 @@ There are two use cases for this:
 
 ### Setting up new development environments using `if-env`
 
-If you are creating a new manifest from scratch and want to bootstrap your way in, you can use `if-env` with no arguments to generate a template manifest and package.json in your current working directory. Then, all you need to do is tweak the templates for your specific use case. 
+If you are creating a new manifest from scratch and want to bootstrap your way in, you can use `if-env` with no arguments to generate a template manifest and package.json in your current working directory. Then, all you need to do is tweak the templates for your specific use case.
 
 For example:
 
@@ -232,7 +214,6 @@ ls my-manifest
 ```
 
 Now, you can use these files as templates for your manifest development.
-
 
 ### Replicating runtime environments using `if-env`
 
@@ -254,5 +235,69 @@ npm i
 and you are ready to re-execute `output-file.yaml` in your local environment. We also provide the `--install` flag to instruct `if-env` to automatically run `npm i` after merging the dependencies, so you could craft a single command to install all the relevant dependencies and then run the manifest, as follows:
 
 ```sh
-if-env -m output-file.yml -i && if-run -m output-file.yml -s
+if-env -m output-file.yml -i && if-run -m output-file.yml
+```
+
+## `if-check`
+
+`if-check` is a manifest verification tool that is equivalent to running `if-env` and `if-diff` on a given manifest file. The manifest file must have `outputs` and an `execution` section for `if-check` to run.
+
+The intended use case is to verify that a manifest's outputs are correct and honest. Say someone handed you a manifest as evidence of their environmental impact. You could choose to trust them, or you could run `if-check` to verify that their calculations are correct. Under the hood, IF is creating a development environment using the dependencies listed in the given file's `execution` section and then executing the file locally, then comparing the newly generated results to those in the given file.
+
+To check a file:
+
+```
+if-check -m <path-to-file>
+```
+
+If the `if-check` is successful you will receive the following response:
+
+```
+if-check: successfully verified <filename>
+```
+
+If `if-check` was not able to verify the file because there were differences in the given and re-executed files, then you will receive the following response which includes the details of how the files differ, as per `if-diff`.
+
+```
+if-check: could not verify <filename>. The re-executed file does not match the original.
+```
+
+### Running IF over multiple manifests with `--d`
+
+Alice could also run `if-check` over any number of manifests in a single command, using the `--directory` or `-d` subcommand. For a folder containing multiple manifests, pass the folder path:
+
+```sh
+if-check -d /my-folder-of-manifests
+```
+
+Each manifest will be run through `if-check` in sequence.
+
+## `if-csv`
+
+`if-csv` is a command line tool that helps to save data to CSV file.
+
+### commands
+
+- `--manifest` or `-m`: (optional) the path to an executed manifest
+- `--output` or `-o`: (optional) the path to save your output data in `csv` format
+- `--params` or `-p`: (required) the metric to export the data
+
+There are three use cases for this:
+
+1. Exporting CSV with the `--output` flag: When the `--output` flag is provided, `if-csv` exports the data to a CSV file at the specified path. This is useful for saving data for later use or sharing with others.
+
+```sh
+if-csv -m ./my-manifest.yml -p carbon -o ./my-outdata
+```
+
+2. Printing CSV to the console without the `--output` flag: If the `--output` flag is omitted, `if-csv` will print the CSV data directly to the console. This is useful for quick checks.
+
+```sh
+if-csv -m ./my-manifest.yml -p carbon
+```
+
+3. Piping output from `if-run` to `if-csv`. By piping the output from `if-run`, you can chain commands to execute a manifest and then immediately export the data to a CSV file.
+
+```sh
+if-run -m ./my-manifest.yml | if-csv -p carbon -o ./my-outdata
 ```

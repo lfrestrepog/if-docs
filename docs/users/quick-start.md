@@ -81,12 +81,7 @@ Now you know how to use the `if-run` you can start building more complex pipelin
 
 Experiment by adding more plugins to the pipeline, for example add `sci-o` to convert energy into `operational-carbon`. Your output data will be displayed in your console. 
 
-You can also configure `if` to save your output data to another `yaml` file. To do this, add the `--output` flag and the path to the output file where the results are saved. You will also need to add the following config to the `initialize` block in your manifest file:
-
-```yaml
-outputs:
-  - yaml
-```
+You can also configure `if` to save your output data to another `yaml` file. To do this, add the `--output` flag and the path to the output file where the results are saved.
 
 The command is then as follows:
 
