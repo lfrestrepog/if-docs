@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-## Exporting CSV file with `if-csv`
+# Exporting CSV file with `if-csv`
 
 IF includes a command line tool called `if-csv` which is designed to export CSV files based on a specified manifest file and metric.
 
