@@ -1,9 +1,9 @@
 ---
-sidebar_position: 7
+sidebar_position: 6
 ---
 
 
-## Verifying IF outputs with `if-check`
+# Verifying IF outputs with `if-check`
 
 IF includes a command line tool called `if-check` that can be used to verify the results in a manifest file.
 

@@ -54,7 +54,7 @@ initialize:
 
 - The `name` is the name you want this plugin instance to be recognized as by Impact Framework.
 - The `path` defines where IF should look for the installed plugin. For example, for our standard library of plugins you would specify `builtin`, for other installed plugins you use the name of the directory they are installed into in `node_modules`.
-- For the `method` field, you should provide the name of the function exported by your plugin. For example, for the `sci-e` plugin, the correct value is `SciE`.
+- For the `method` field, you should provide the name of the function exported by your plugin. For example, for the `sum` plugin, the correct value is `Sum`.
 
 ### Tree
 
@@ -108,39 +108,84 @@ Whilst the manifest file we looked at above works perfectly well, it will only r
 - The `sci` plugin also requires `functional-unit` information so it can convert the estimated `carbon` into a useful unit.
 - You may also wish to grab your `input` data by querying a metrics API on a virtual machine. 
 
-The example below gives you the full pipeline implemented in an manifest.There are also several other executable example manifests in `if/examples/manifests` that you can run for yourself.
+The example below gives you the full pipeline implemented in a manifest. There are also several other executable example manifests in `if/manifests/examples` that you can run for yourself.
 
 
 ```yaml
-name: pipeline-demo
-description:
+name: pipeline-with-aggregate
+description: a full pipeline with the aggregate feature enabled
 tags:
 aggregation:
   metrics:
-    - 'carbon'
-  type: 'both'
+    - "carbon"
+  type: "both"
 initialize:
   plugins:
-    "teads-curve":
-      path: "@grnsft/if-unofficial-plugins"
-      method: TeadsCurve
+    "interpolate":
+      method: Interpolation
+      path: 'builtin'
       global-config:
-        interpolation: spline
-    "sci-e":
-      path: "@grnsft/if-plugins"
-      method: SciE
-    "sci-m":
-      path: "@grnsft/if-plugins"
-      method: SciM
-    "sci-o":
-      path: "@grnsft/if-plugins"
-      method: SciO
+        method: linear
+        x: [0, 10, 50, 100]
+        y: [0.12, 0.32, 0.75, 1.02]
+        input-parameter: 'cpu/utilization'
+        output-parameter: 'cpu-factor'
+    "cpu-factor-to-wattage":
+      method: Multiply
+      path: builtin
+      global-config:
+        input-parameters: ["cpu-factor", "cpu/thermal-design-power"]
+        output-parameter: "cpu-wattage"
+    "wattage-times-duration":
+      method: Multiply
+      path: builtin
+      global-config:
+        input-parameters: ["cpu-wattage", "duration"]
+        output-parameter: "cpu-wattage-times-duration"
+    "wattage-to-energy-kwh":
+      method: Divide
+      path: "builtin"
+      global-config:
+        numerator: cpu-wattage-times-duration
+        denominator: 3600000
+        output: cpu-energy-raw
+    "calculate-vcpu-ratio":
+      method: Divide
+      path: "builtin"
+      global-config:
+        numerator: vcpus-total
+        denominator: vcpus-allocated
+        output: vcpu-ratio
+    "correct-cpu-energy-for-vcpu-ratio":
+      method: Divide
+      path: "builtin"
+      global-config:
+        numerator: cpu-energy-raw
+        denominator: vcpu-ratio
+        output: cpu-energy-kwh
+    "sci-embodied":
+      path: "builtin"
+      method: SciEmbodied
+    "operational-carbon":
+      method: Multiply
+      path: builtin
+      global-config:
+        input-parameters: ["cpu-energy-kwh", "grid/carbon-intensity"]
+        output-parameter: "carbon-operational"
     "sci":
-      path: "@grnsft/if-plugins"
+      path: "builtin"
       method: Sci
       global-config:
-        functional-unit: "requests"
-        functional-unit-time: "1 minute"
+        functional-unit-time: 1 sec
+        functional-unit: requests # factor to convert per time to per f.unit
+    "sum-carbon":
+      path: "builtin"
+      method: Sum
+      global-config:
+        input-parameters:
+          - carbon-operational
+          - carbon-embodied
+        output-parameter: carbon
     "time-sync":
       method: TimeSync
       path: "builtin"
@@ -149,97 +194,60 @@ initialize:
         end-time: "2023-12-12T00:01:00.000Z"
         interval: 5
         allow-padding: true
-    'group-by':
-      path: builtin
-      method: GroupBy
 tree:
   children:
     child-1:
       pipeline:
-        - teads-curve
-        - sci-e
-        - sci-m
-        - sci-o
+        - interpolate
+        - cpu-factor-to-wattage
+        - wattage-times-duration
+        - wattage-to-energy-kwh
+        - calculate-vcpu-ratio
+        - correct-cpu-energy-for-vcpu-ratio
+        - sci-embodied
+        - operational-carbon
+        - sum-carbon
         - time-sync
-        - sci
+        # - sci
       config:
         group-by:
           group:
-            - region
-            - instance-type
+            - cloud/region
+            - cloud/instance-type
       defaults:
         cpu/thermal-design-power: 100
         grid/carbon-intensity: 800
         device/emissions-embodied: 1533.120 # gCO2eq
         time-reserved: 3600 # 1hr in seconds
         device/expected-lifespan: 94608000 # 3 years in seconds
-        resources-reserved: 1
-        resources-total: 8
-        functional-unit-time: "1 min"
+        vcpus-total: 8
+        vcpus-allocated: 1
       inputs:
         - timestamp: "2023-12-12T00:00:00.000Z"
-          instance-type: A1 
-          region: uk-west
+          cloud/instance-type: A1
+          cloud/region: uk-west
           duration: 1
           cpu/utilization: 10
+          requests: 10
         - timestamp: "2023-12-12T00:00:01.000Z"
           duration: 5
           cpu/utilization: 20
-          instance-type: A1 
-          region: uk-west
+          cloud/instance-type: A1
+          cloud/region: uk-west
+          requests: 5
         - timestamp: "2023-12-12T00:00:06.000Z"
           duration: 7
           cpu/utilization: 15
-          instance-type: A1 
-          region: uk-west
+          cloud/instance-type: A1
+          cloud/region: uk-west
+          requests: 15
         - timestamp: "2023-12-12T00:00:13.000Z"
           duration: 30
-          instance-type: A1 
-          region: uk-west
+          cloud/instance-type: A1
+          cloud/region: uk-west
           cpu/utilization: 15
-    child-2:
-      pipeline:
-        - teads-curve
-        - sci-e
-        - sci-m
-        - sci-o
-        - time-sync
-        - sci
-      config:
-        group-by:
-          group:
-            - region
-            - instance-type
-      defaults:
-        cpu/thermal-design-power: 100
-        grid/carbon-intensity: 800
-        device/emissions-embodied: 1533.120 # gCO2eq
-        time-reserved: 3600 # 1hr in seconds
-        device/expected-lifespan: 94608000 # 3 years in seconds
-        resources-reserved: 1
-        resources-total: 8
-        functional-unit-time: "1 min"
-      inputs:
-        - timestamp: "2023-12-12T00:00:00.000Z"
-          duration: 1
-          cpu/utilization: 30
-          instance-type: A1 
-          region: uk-west
-        - timestamp: "2023-12-12T00:00:01.000Z"
-          duration: 5
-          cpu/utilization: 28
-          instance-type: A1 
-          region: uk-west
-        - timestamp: "2023-12-12T00:00:06.000Z"
-          duration: 7
-          cpu/utilization: 40
-          instance-type: A1 
-          region: uk-west
-        - timestamp: "2023-12-12T00:00:13.000Z"
-          duration: 30
-          cpu/utilization: 33
-          instance-type: A1 
-          region: uk-west
+          requests: 30
+
 ```
 
 ### Complex applications
