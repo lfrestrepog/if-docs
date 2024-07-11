@@ -4,16 +4,9 @@ sidebar_position: 3
 
 # How to load plugins
 
-Plugins are developed separately to the Impact Framework core. However, the IF core developers maintain a standard library of plugins that can be found in this [Github repository](https://github.com/Green-Software-Foundation/if-plugins). We also provide some implementations of popular community plugins, although we rely on other members of the community to maintain them.
+Plugins are developed separately to the Impact Framework core. However, the IF core developers maintain a standard library of plugins come bundled with IF. These are known as `builtins`. 
 
-Use the following commands to install the `if-plugins` and `if-unofficial-plugins` repositories:
-
-```
-npm -i -g @grnsft/if-plugins
-npm -i -g @grnsft/if-unofficial-plugins
-```
-
-Plugins in these packages can then be invoked in an manifest by providing their path in the plugin initialization, as shown in the following example:
+Builtins have to be initialized in a manifest file using the path `builtin`. Then they can be invoked in pipelines.
 
 ```yaml
 name: if-demo
@@ -21,30 +14,34 @@ description: demo pipeline
 tags:
 initialize:
   plugins:
-    azure-importer:
-      method: AzureImporter
-      path: "@grnsft/if-unofficial-plugins"
-    cloud-metadata:
-      method: CloudMetadata
-      path: "@grnsft/if-plugins"
+    "sum":
+      path: "builtin"
+      method: Sum
+      global-config:
+        input-parameters:
+          - cpu/energy
+          - network/energy
+        output-parameter: energy-sum
 ```
 
 
-Load your plugin directly from your Github repository, or from `npm` if you have published your plugin there. First, you'll need to install it by providing the path to the repository to `npm install` as follows:
+Other plugins are hosted externally to the IF. Anyone can build a plugin and provide it as an npm package or a public code repository (such as Github) and share it using our [Explorer](https://explorer.if.greensoftware.foundation).
+
+These external plugins are loaded into IF by installing locally and initializing in a manifest.
+
+First, install the plugin by providing the path to the repository to `npm install` as follows:
 
 ```sh
-npm install https://github.com/Green-Software-Foundation/if-plugins
+npm install https://github.com/some-account/some-repo
 ```
 
-You'll need to provide the following fields:
+Then, in the manifest's `initialize` section, you'll need to provide the following fields:
 
-- `YOUR-PLUGIN-HERE`: the same name has to be used to refer to this plugin everywhere across the manifest
-- `method`: the class name for your plugin, e.g. `AzureImporter`
+- `YOUR-PLUGIN-HERE`: a name to reference this specific instance of the plugin. The same name has to be used to refer to this plugin instance everywhere across the manifest
+- `method`: the function name exported by your plugin, e.g. `AzureImporter`
 - `path`: the path to the plugin
 
-And, if your plugin requires it, add `global-config` too.
-
-Then, in your manifest, initialize the plugin as follows:
+And, if your plugin requires it, add its `global-config` too.
 
 ```yaml
 name: plugin-demo

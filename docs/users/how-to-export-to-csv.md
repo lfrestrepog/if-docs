@@ -381,19 +381,11 @@ The CSV representation of the output data is helpful for intuiting how the aggre
 You can start with a demo yaml, such as the following (save this as `pipeline-demo.yml`):
 
 ```yaml
-name: pipeline-demo
-description:
+name: generics
+description: a pipeline that does arbitrary calculations using our generic arithmetic builtins
 tags:
 initialize:
-  outputs:
-    - csv
   plugins:
-    boavizta-cpu:
-      method: BoaviztaCpuOutput
-      path: "@grnsft/if-unofficial-plugins"
-      global-config:
-        allocation: LINEAR
-        verbose: true
     "sum":
       path: "builtin"
       method: Sum
@@ -402,56 +394,48 @@ initialize:
           - cpu/energy
           - network/energy
         output-parameter: energy
-    "sci-embodied":
+    "coefficient":
       path: "builtin"
-      method: SciM
-    "sci-o":
-      path: "@grnsft/if-plugins"
-      method: SciO
+      method: Coefficient
+      global-config:
+        input-parameter: energy
+        coefficient: 2
+        output-parameter: energy-doubled
+    "multiply":
+      path: "builtin"
+      method: Multiply
+      global-config:
+        input-parameters: ["cpu/utilization", "duration"]
+        output-parameter: "cpu-times-duration"
 tree:
   children:
     child-1:
       pipeline:
-        - boavizta-cpu
         - sum
-        - sci-m
-        - sci-o
+        - coefficient
+        - multiply
       config:
       defaults:
         cpu/thermal-design-power: 100
-        grid/carbon-intensity: 800
-        device/emissions-embodied: 1533.120 # gCO2eq
-        time-reserved: 3600 # 1hr in seconds
-        device/expected-lifespan: 94608000 # 3 years in seconds
-        resources-reserved: 1
-        resources-total: 8
-        cpu/number-cores: 24
-        cpu/name: Intel® Core™ i7-1185G7
       inputs:
         - timestamp: "2023-12-12T00:00:00.000Z"
-          cloud/instance-type: A1
-          region: uk-west
           duration: 1
-          cpu/utilization: 50
-          network/energy: 0.000001
+          cpu/energy: 10
+          network/energy: 1
+          energy: 5
         - timestamp: "2023-12-12T00:00:01.000Z"
           duration: 5
-          cpu/utilization: 20
-          cloud/instance-type: A1
-          region: uk-west
-          network/energy: 0.000001
+          cpu/energy: 12
+          network/energy: 2
         - timestamp: "2023-12-12T00:00:06.000Z"
           duration: 7
-          cpu/utilization: 15
-          cloud/instance-type: A1
-          region: uk-west
-          network/energy: 0.000001
+          cpu/energy: 20
+          network/energy: 5
         - timestamp: "2023-12-12T00:00:13.000Z"
           duration: 30
-          cloud/instance-type: A1
-          region: uk-west
-          cpu/utilization: 15
-          network/energy: 0.000001
+          cpu/energy: 15
+          network/energy: 2
+
 ```
 
 Run this using:
