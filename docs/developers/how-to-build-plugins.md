@@ -5,9 +5,9 @@ sidebar-position: 1
 # How to build plugins
 
 The IF is designed to be as composable as possible. This means you can develop your own plugins and use them in a pipeline.
-To help developers write Typescript plugins to integrate easily into IF, we provide the `PluginInterface` interface. Here's an overview of the stages you need to follow to integrate your plugin:
+To help developers write Typescript plugins to integrate easily into IF, we provide the `ExecutePlugin` interface. Here's an overview of the stages you need to follow to integrate your plugin:
 
-- create a Typescript file that implements the `PluginInterface`
+- create a Typescript file that implements the `ExecutePlugin`
 - install the plugin
 - initialize and invoke the plugin in your manifest file
 
@@ -17,8 +17,7 @@ Instead of building up your plugin repository and all the configuration from scr
 
 ![use our template repository](../../static/img/template-repo.png)
 
-Inside that repository, all you have to do is run `npm install typescript` in the template folder, rename the project in `package.json` and write your plugin code inside `index.ts`. All the configuration and setup is taken care of for you. 
-
+Inside that repository, all you have to do is run `npm install typescript` in the template folder, rename the project in `package.json` and write your plugin code inside `index.ts`. All the configuration and setup is taken care of for you.
 
 ## Step 2: Writing your plugin code
 
@@ -28,23 +27,24 @@ The following sections describe the rules your plugin code should conform to. We
 
 ### The plugin interface
 
-The `PluginInterface` is structured as follows:
+The `ExecutePlugin` is structured as follows:
 
 ```ts
-export type PluginInterface = {
+export type ExecutePlugin = {
   execute: (
     inputs: PluginParams[],
     config?: Record<string, any>
   ) => PluginParams[];
   metadata: {
     kind: string;
+    inputs?: ParameterMetadata;
+    outputs?: ParameterMetadata;
   };
   [key: string]: any;
 };
 ```
 
-The interface requires an execute function where your plugin logic is implemented. It should also return metadata. This can include any relevant metadata you want to include, with a minimum requirement being `kind: execute`. 
-
+The interface requires an execute function where your plugin logic is implemented. It should also return metadata. This can include any relevant metadata you want to include, with a minimum requirement being `kind: execute`.
 
 ### Global config
 
@@ -52,11 +52,12 @@ Global config is passed as an argument to the plugin. In your plugin code you ca
 
 ```ts
 // Here's the function definition - notice that global config is passed in here!
-export const Plugin = (globalConfig: YourConfig): PluginInterface => {
-
-// in here you have access to globalConfig[your-params]
-
-}
+export const Plugin = (
+  globalConfig: YourConfig,
+  parametersMetadata: PluginParametersMetadata
+): ExecutePlugin => {
+  // in here you have access to globalConfig[your-params]
+};
 ```
 
 The parameters available to you in `globalConfig` depends upon the parameters you pass in the manifest file. For example, the `Sum` plugin has access to `input-parameters` and `output-parameter` in its global config, and it is defined in the `Initialize` block in the manifest file as follows:
@@ -72,6 +73,32 @@ initialize:
         output-parameter: 'energy'
 ```
 
+### Parameter metadata
+
+The `parameter-metadata` is passed as an argument to the plugin as the global config. It contains information about the `description` and `unit` of the parameters of the inputs and outputs that defined in the manifest.
+
+```yaml
+initialize:
+  plugins:
+    sum:
+      method: Sum
+      path: 'builtin'
+      global-config:
+        input-parameters: ['cpu/energy', 'network/energy']
+        output-parameter: 'energy-sum'
+      parameter-metadata:
+        inputs:
+          cpu/energy:
+            description: energy consumed by the cpu
+            unit: kWh
+          network/energy:
+            description: energy consumed by data ingress and egress
+            unit: kWh
+        outputs:
+          energy-sum:
+            description: sum of energy components
+            unit: kWh
+```
 
 ### Methods
 
@@ -91,9 +118,7 @@ initialize:
 | ------------ | ------------------------- | ----------------------------------------------------------- |
 | `outputs`    | `Promise<PluginParams[]>` | `Promise` resolving to an array of updated `PluginParams[]` |
 
-
 ### What are `PluginParams`?
-
 
 ## What are `PluginParams`?
 
@@ -107,38 +132,9 @@ export type PluginParams = {
 
 The `PluginParams` type therefore defines an array of key-value pairs.
 
-IF needs to know about all the parameters used in each pipeline. The default behaviour is that it grabs parameters from a local file, `params.ts`. This file defines the standard set of parameter names, their units, a descriptiona nd the method used to aggregate them across time or across a tree.
-
-If your new plugin uses new parameters that are not included in `params.ts`, you can simply add them to your manifest file in a section named `params`. For example:
-
-
-```yaml
-name: params-demo
-description: null
-tags:
-params: 
-  - name: new-param-1
-    description: dummy
-    aggregation: sum
-    unit: MT
-  - name: new-param-2
-    description: dummy
-    aggregation: sum
-    unit: s
-```
-
-This will append the new parameter informatrion to the object loaded from `params.ts` and you can use your plugin as normal. In effect, you have append-only access to `params.ts` via your manifest file without ever having to change any IF source code.
-
-However, if you are an advanced user and you want to use something other than out recommended standard set of parameters, you can provide a replacement `params.ts` file on the command line. This file should be a `json` or `js`/`ts` file with the ame structure as our `params.ts`. You can rename the file. You then pass the path to the file to the `override-params` command.
-
-```sh
-if-run --manifest <path-to-manifest> --override-params <path-to-your-params-file>
-```
-
 ## Step 3: Install your plugin
 
 Now your plugin code is written, you can install it to make it available to IF.
-
 
 ```sh
 npm run build
@@ -169,13 +165,13 @@ initialize:
       method: YourFunctionName
       path: 'new-plugin'
       global-config:
-        something: true 
+        something: true
 ```
 
 Run your manifest uisng
 
 ```sh
-np run if-run -- --manifest <path-to-manifest>
+npm run if-run -- --manifest <path-to-manifest>
 ```
 
 If you have to link more than one local plugin, for example to test your plugin in a pipeline, you can do so with
@@ -232,18 +228,15 @@ if-run --manifest <path-to-my-manifest>
 - Initialize your plugin and add it to a pipeline in your manifest file.
 - Publish your plugin to Github
 
-
 You should also create unit tests for your plugin to demonstrate correct execution and handling of corner cases.
-
 
 ## Next steps
 
 You can read our more advanced guide on [how to refine your plugins](./how-to-refine-plugins.md).
 
-
 ## Appendix: Walk-through of the Sum plugin
 
-To demonstrate how to build a plugin that conforms to the `pluginInterface`, let's examine the `sum` plugin.
+To demonstrate how to build a plugin that conforms to the `ExecutePlugin`, let's examine the `sum` plugin.
 
 The `sum` plugin implements the following logic:
 
@@ -252,93 +245,72 @@ The `sum` plugin implements the following logic:
 
 Let's look at how you would implement this from scratch:
 
-The plugin must be a function conforming to `PluginInterface`. You can call the function `Sum`, and inside the body you can add the signature for the `execute` method:
+The plugin must be a function conforming to `ExecutePlugin`. You can call the function `Sum`, and inside the body you can add the signature for the `execute` method:
 
 ```typescript
-export const Sum = (globalConfig: SumConfig): PluginInterface => {
+export const Sum = (
+  globalConfig: SumConfig,
+  parametersMetadata: PluginParametersMetadata
+): ExecutePlugin => {
   const errorBuilder = buildErrorMessage(Sum.name);
   const metadata = {
     kind: 'execute',
+    inputs: parametersMetadata?.inputs,
+    outputs: parametersMetadata?.outputs,
   };
 
   /**
    * Calculate the sum of each input.
    */
-  const execute = async (inputs: PluginParams[]): Promise<PluginParams[]> => {
-
-  };
+  const execute = async (inputs: PluginParams[]): Promise<PluginParams[]> => {};
 
   return {
     metadata,
     execute,
   };
-
-}
+};
 ```
 
 Your plugin now has the basic structure required for IF integration. Your next task is to add code to the body of `execute` to enable the actual plugin logic to be implemented.
 
-The `execute` function should grab the `input-parameters` (the values to sum) from `globalConfig`. it should then iterate over the `inputs` array, get the values for each of the `input-parameters` and append them to the `inputs` array, using the name from the `output-parameter` value in `globalConfig`. Here's what this can look like, with the actual calculation pushed to a separate function, `calculateSum`. 
+The `execute` function should grab the `input-parameters` (the values to sum) from `globalConfig`. it should then iterate over the `inputs` array, get the values for each of the `input-parameters` and append them to the `inputs` array, using the name from the `output-parameter` value in `globalConfig`. Here's what this can look like, with the actual calculation pushed to a separate function, `calculateSum`.
 
 ```ts
-  /**
-   * Calculate the sum of each input.
-   */
-  const execute = async (inputs: PluginParams[]): Promise<PluginParams[]> => {
-    const inputParameters = globalConfig['input-parameters'];
-    const outputParameter = globalConfig['output-parameter'];
+/**
+ * Calculate the sum of each input.
+ */
+const execute = async (inputs: PluginParams[]): Promise<PluginParams[]> => {
+  const inputParameters = globalConfig['input-parameters'];
+  const outputParameter = globalConfig['output-parameter'];
 
-    return inputs.map(input => {
-      return {
-        ...input,
-        [outputParameter]: calculateSum(input, inputParameters),
-      };
-    });
+  return inputs.map((input) => {
+    return {
+      ...input,
+      [outputParameter]: calculateSum(input, inputParameters),
+    };
+  });
 
   return {
     metadata,
     execute,
   };
-}
+};
 ```
 
 Now we just need to define what happens in `calculateSum` - this can be a simple `reduce`:
 
 ```ts
-  /**
-   * Calculates the sum of the energy components.
-   */
-  const calculateSum = (input: PluginParams, inputParameters: string[]) =>
-    inputParameters.reduce(
-      (accumulator, metricToSum) => accumulator + input[metricToSum],
-      0
-    );
+/**
+ * Calculates the sum of the energy components.
+ */
+const calculateSum = (input: PluginParams, inputParameters: string[]) =>
+  inputParameters.reduce(
+    (accumulator, metricToSum) => accumulator + input[metricToSum],
+    0
+  );
 ```
 
 Note that this example did not include any validation or error handling - you will likely want to add some for a real plugin.
-
-Finally, if your plugin used any fields in `inputs` or created new `outputs` that have not been used in the Impact Framework before, then you should add them to `params.ts`.
-
-`params.ts` can be found in the path `src/config`.
-
-Each entry in `params.ts` looks as follows:
-
-```yaml
-carbon:
-  description: an amount of carbon emitted into the atmosphere
-  unit: gCO2e
-  aggregation: sum
-```
-
-This information allows IF to programmatically make decisions about how to handle values in features such as aggregation, time normalization and visualizations, and also acts as a global reference document for understanding IF data. The example above is for `carbon`.
-
-You should add your new data, give a name, define a unit and short description. The `aggregation` field determines how the value is treated when some manipulation has to be done to spread the value over time or aggregate it.
-
-For absolute metrics like carbon, the right value is `sum` because you would want to add carbon emissions from each timestep when you aggregate over time.
-
-For proportional metrics, the right value is `avg`. For example, you would want to calculate the average `cpu/utilization` - it would not make sense to sum it when aggregating over multiple timesteps.
-
-Finally, values that should always be presented identically regardless of any aggregation, such as names or global constants, should be given the `aggregation-method` value `none`.
 
 ## Managing errors
 
