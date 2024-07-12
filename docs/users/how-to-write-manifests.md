@@ -8,27 +8,27 @@ The Impact Framework receives all its configuration and input data in the form o
 
 ## Structure of a manifest
 
-The basic structure of a manifest is as follows: 
+The basic structure of a manifest is as follows:
 
 ```yaml
-name: 
-description: 
-tags: 
+name:
+description:
+tags:
 initialize:
   plugins:
-    <PLUGIN-NAME-HERE>: 
+    <PLUGIN-NAME-HERE>:
       method:
-      path: 
+      path:
 tree:
   children:
     child:
       pipeline:
-        - 
+        -
       config:
       defaults:
       inputs:
-
 ```
+
 ### Project metadata
 
 The file starts with some metadata about the project. There are no strict specifications for what to put in these fields, they are for you to keep track of your manifest files and to help other users to understand your use case.
@@ -50,7 +50,6 @@ initialize:
       path: ''
       method:
 ```
-
 
 - The `name` is the name you want this plugin instance to be recognized as by Impact Framework.
 - The `path` defines where IF should look for the installed plugin. For example, for our standard library of plugins you would specify `builtin`, for other installed plugins you use the name of the directory they are installed into in `node_modules`.
@@ -79,7 +78,6 @@ tree:
           expected-lifespan: 3
           resources-reserved: 1
           total-resources: 8
-
 ```
 
 ### Inputs
@@ -106,10 +104,9 @@ Whilst the manifest file we looked at above works perfectly well, it will only r
 - In most cases, `sci-o` will have to be preceded by `sci-e` to ensure `energy` is available to be piped to `sci-o`.
 - The inputs to `sci-e` will most likely be coming from a plugin such as `teads-curve` or `boavizta`.
 - The `sci` plugin also requires `functional-unit` information so it can convert the estimated `carbon` into a useful unit.
-- You may also wish to grab your `input` data by querying a metrics API on a virtual machine. 
+- You may also wish to grab your `input` data by querying a metrics API on a virtual machine.
 
 The example below gives you the full pipeline implemented in a manifest. There are also several other executable example manifests in `if/manifests/examples` that you can run for yourself.
-
 
 ```yaml
 name: pipeline-with-aggregate
@@ -117,11 +114,11 @@ description: a full pipeline with the aggregate feature enabled
 tags:
 aggregation:
   metrics:
-    - "carbon"
-  type: "both"
+    - 'carbon'
+  type: 'both'
 initialize:
   plugins:
-    "interpolate":
+    'interpolate':
       method: Interpolation
       path: 'builtin'
       global-config:
@@ -130,68 +127,101 @@ initialize:
         y: [0.12, 0.32, 0.75, 1.02]
         input-parameter: 'cpu/utilization'
         output-parameter: 'cpu-factor'
-    "cpu-factor-to-wattage":
+      parameter-metadata:
+        inputs:
+          cpu/utilization:
+            description: refers to CPU utilization
+            unit: percentage
+        outputs:
+          cpu-factor:
+            description: the factor of cpu
+            unit: kWh
+    'cpu-factor-to-wattage':
       method: Multiply
       path: builtin
       global-config:
-        input-parameters: ["cpu-factor", "cpu/thermal-design-power"]
-        output-parameter: "cpu-wattage"
-    "wattage-times-duration":
+        input-parameters: ['cpu-factor', 'cpu/thermal-design-power']
+        output-parameter: 'cpu-wattage'
+      parameter-metadata:
+        inputs:
+          cpu-factor:
+            description: the factor of cpu
+            unit: kWh
+          cpu/thermal-design-power:
+            description: thermal design power for a processor
+            unit: kwh
+        outputs:
+          cpu-wattage:
+            description: cpu in Wattage
+            unit: wattage
+    'wattage-times-duration':
       method: Multiply
       path: builtin
       global-config:
-        input-parameters: ["cpu-wattage", "duration"]
-        output-parameter: "cpu-wattage-times-duration"
-    "wattage-to-energy-kwh":
+        input-parameters: ['cpu-wattage', 'duration']
+        output-parameter: 'cpu-wattage-times-duration'
+    'wattage-to-energy-kwh':
       method: Divide
-      path: "builtin"
+      path: 'builtin'
       global-config:
         numerator: cpu-wattage-times-duration
         denominator: 3600000
         output: cpu-energy-raw
-    "calculate-vcpu-ratio":
+    'calculate-vcpu-ratio':
       method: Divide
-      path: "builtin"
+      path: 'builtin'
       global-config:
         numerator: vcpus-total
         denominator: vcpus-allocated
         output: vcpu-ratio
-    "correct-cpu-energy-for-vcpu-ratio":
+    'correct-cpu-energy-for-vcpu-ratio':
       method: Divide
-      path: "builtin"
+      path: 'builtin'
       global-config:
         numerator: cpu-energy-raw
         denominator: vcpu-ratio
         output: cpu-energy-kwh
-    "sci-embodied":
-      path: "builtin"
+    'sci-embodied':
+      path: 'builtin'
       method: SciEmbodied
-    "operational-carbon":
+    'operational-carbon':
       method: Multiply
       path: builtin
       global-config:
-        input-parameters: ["cpu-energy-kwh", "grid/carbon-intensity"]
-        output-parameter: "carbon-operational"
-    "sci":
-      path: "builtin"
+        input-parameters: ['cpu-energy-kwh', 'grid/carbon-intensity']
+        output-parameter: 'carbon-operational'
+    'sci':
+      path: 'builtin'
       method: Sci
       global-config:
         functional-unit-time: 1 sec
         functional-unit: requests # factor to convert per time to per f.unit
-    "sum-carbon":
-      path: "builtin"
+      parameter-metadata:
+        inputs:
+          carbon:
+            description: an amount of carbon emitted into the atmosphere
+            unit: gCO2e
+          requests:
+            description: factor to convert per time to per f.unit
+            unit: number
+        outputs:
+          sci:
+            description: carbon expressed in terms of the given functional unit
+            unit: gCO2e
+    'sum-carbon':
+      path: 'builtin'
       method: Sum
       global-config:
         input-parameters:
           - carbon-operational
           - carbon-embodied
         output-parameter: carbon
-    "time-sync":
+    'time-sync':
       method: TimeSync
-      path: "builtin"
+      path: 'builtin'
       global-config:
-        start-time: "2023-12-12T00:00:00.000Z"
-        end-time: "2023-12-12T00:01:00.000Z"
+        start-time: '2023-12-12T00:00:00.000Z'
+        end-time: '2023-12-12T00:01:00.000Z'
         interval: 5
         allow-padding: true
 tree:
@@ -223,31 +253,30 @@ tree:
         vcpus-total: 8
         vcpus-allocated: 1
       inputs:
-        - timestamp: "2023-12-12T00:00:00.000Z"
+        - timestamp: '2023-12-12T00:00:00.000Z'
           cloud/instance-type: A1
           cloud/region: uk-west
           duration: 1
           cpu/utilization: 10
           requests: 10
-        - timestamp: "2023-12-12T00:00:01.000Z"
+        - timestamp: '2023-12-12T00:00:01.000Z'
           duration: 5
           cpu/utilization: 20
           cloud/instance-type: A1
           cloud/region: uk-west
           requests: 5
-        - timestamp: "2023-12-12T00:00:06.000Z"
+        - timestamp: '2023-12-12T00:00:06.000Z'
           duration: 7
           cpu/utilization: 15
           cloud/instance-type: A1
           cloud/region: uk-west
           requests: 15
-        - timestamp: "2023-12-12T00:00:13.000Z"
+        - timestamp: '2023-12-12T00:00:13.000Z'
           duration: 30
           cloud/instance-type: A1
           cloud/region: uk-west
           cpu/utilization: 15
           requests: 30
-
 ```
 
 ### Complex applications
