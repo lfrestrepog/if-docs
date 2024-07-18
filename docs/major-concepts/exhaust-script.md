@@ -1,5 +1,5 @@
 ---
-sidebar_position: 10
+sidebar_position: 9
 ---
 
 # Exhaust scripts
@@ -8,7 +8,7 @@ Exhaust scripts are scripts that can run independently of IF itself that take an
 
 ## if-run
 
-`if-run` isn't really an exhaust script, because it also grabs input data, regroups data, computes the pipeline and aggregates. However, we're mentioning it here because it does have some built-in exhaust functionality. Specifically, `if-run` outputs yaml data. `if-run` can *only* output yaml data. This yaml data can be dumped to the console or saved to a yaml file.
+`if-run` isn't really an exhaust script, because it also grabs input data, regroups data, computes the pipeline and aggregates. However, we're mentioning it here because it does have some built-in exhaust functionality. Specifically, `if-run` outputs yaml data. `if-run` can _only_ output yaml data. This yaml data can be dumped to the console or saved to a yaml file.
 
 ### How to Use if-run
 

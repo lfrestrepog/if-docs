@@ -14,7 +14,6 @@ The available options and their shortcuts are:
 - `--manifest` or `-m`: path to an input manifest file
 - `--output` or `-o` (optional): path to the output file where the results as saved
 - `--no-output` or `-n` (optional): suppress the output to console
-- `--override-params` or `-p` (optional): if you are an advanced user and you want to override our standard set of parameters and their definitions, you can provide the path to an alternative file as an argument to this command.
 - `--help` or `-h`: prints out help instruction
 - `--debug`: enables IF execution logs
 
