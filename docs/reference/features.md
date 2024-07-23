@@ -19,6 +19,7 @@ aggregation:
   type: both
 ```
 
+[Read more on aggregate](../major-concepts/aggregation.md)
 
 
 ## Explainer
@@ -56,3 +57,5 @@ plugins:
           unit: "gCO2eq"
           aggregation-method: 'sum'
 ```
+
+Read more on [explainer](../users/how-to-use-the-explain-feature.md)
