@@ -247,7 +247,10 @@ tree:
       defaults:
         cpu/thermal-design-power: 100
       pipeline:
-        - teads-curve
+        observe:
+        regroup:
+        compute:
+          - teads-curve
       inputs:
         - timestamp: 2023-07-06T00:00
           cpu/utilization: 20

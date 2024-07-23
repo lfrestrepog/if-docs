@@ -77,7 +77,10 @@ tree:
   children:
     child:
       pipeline:
-        - sum
+        observe:
+        regroup:
+        compute:
+          - sum
       config:
         sum: null
       inputs:

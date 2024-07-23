@@ -225,7 +225,10 @@ tree:
           children:
             child-0-2-1:
               pipeline:
-                - sci-e
+               observe:
+               regroup:
+               compute:
+                  - sum
               config: null
               defaults: null
               inputs:

@@ -44,6 +44,9 @@ tree:
   children:
     child:
       pipeline:
+        observe:
+        regroup:
+        compute:
       defaults:
       inputs:
 ```
@@ -65,6 +68,9 @@ tree:
   children:
     child:
       pipeline:
+        observe:
+        regroup:
+        compute:
       defaults:
       inputs:
         - timestamp: 2023-08-06T00:00
@@ -221,12 +227,15 @@ tree:
   children:
     child:
       pipeline:
-        - interpolate
-        - cpu-factor-to-wattage
-        - wattage-times-duration
-        - wattage-to-energy-kwh
-        - calculate-vcpu-ratio
-        - correct-cpu-energy-for-vcpu-ratio
+        observe:
+        regroup:
+        compute:
+          - interpolate
+          - cpu-factor-to-wattage
+          - wattage-times-duration
+          - wattage-to-energy-kwh
+          - calculate-vcpu-ratio
+          - correct-cpu-energy-for-vcpu-ratio
 ```
 
 You also need to add some input data that your pipeline can operate over.
@@ -350,12 +359,15 @@ tree:
   children:
     child:
       pipeline:
-        - interpolate
-        - cpu-factor-to-wattage
-        - wattage-times-duration
-        - wattage-to-energy-kwh
-        - calculate-vcpu-ratio
-        - correct-cpu-energy-for-vcpu-ratio
+        observe:
+        regroup:
+        compute:
+          - interpolate
+          - cpu-factor-to-wattage
+          - wattage-times-duration
+          - wattage-to-energy-kwh
+          - calculate-vcpu-ratio
+          - correct-cpu-energy-for-vcpu-ratio
       defaults:
         thermal-design-power: 100
         vcpus-total: 8

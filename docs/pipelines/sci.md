@@ -68,12 +68,15 @@ tree:
   children:
     child:
       pipeline:
-        - interpolate
-        - cpu-factor-to-wattage
-        - wattage-times-duration
-        - wattage-to-energy-kwh
-        - calculate-vcpu-ratio
-        - correct-cpu-energy-for-vcpu-ratio
+        observe:
+        regroup:
+        compute:
+          - interpolate
+          - cpu-factor-to-wattage
+          - wattage-times-duration
+          - wattage-to-energy-kwh
+          - calculate-vcpu-ratio
+          - correct-cpu-energy-for-vcpu-ratio
       defaults:
         cpu/thermal-design-power: 100
         vcpus-total: 8
@@ -219,17 +222,20 @@ Now you have initialized all the plugins you will need to compute the SCI score,
 
 ```yaml
 pipeline:
-  - interpolate
-  - cpu-factor-to-wattage
-  - wattage-times-duration
-  - wattage-to-energy-kwh
-  - calculate-vcpu-ratio
-  - correct-cpu-energy-for-vcpu-ratio
-  - sum-energy-components
-  - embodied-carbon
-  - operational-carbon
-  - sum-carbon
-  - sci
+ observe:
+ regroup:
+ compute:
+   - interpolate
+   - cpu-factor-to-wattage
+   - wattage-times-duration
+   - wattage-to-energy-kwh
+   - calculate-vcpu-ratio
+   - correct-cpu-energy-for-vcpu-ratio
+   - sum-energy-components
+   - embodied-carbon
+   - operational-carbon
+   - sum-carbon
+   - sci
 ```
 
 Congratulations, now you have completed your manifest and can calculate your SCI score!
@@ -391,17 +397,20 @@ tree:
   children:
     child-1:
       pipeline:
-        - interpolate
-        - cpu-factor-to-wattage
-        - wattage-times-duration
-        - wattage-to-energy-kwh
-        - calculate-vcpu-ratio
-        - correct-cpu-energy-for-vcpu-ratio
-        - sum-energy-components
-        - embodied-carbon
-        - operational-carbon
-        - sum-carbon
-        - sci
+        observe:
+        regroup:
+        compute:
+          - interpolate
+          - cpu-factor-to-wattage
+          - wattage-times-duration
+          - wattage-to-energy-kwh
+          - calculate-vcpu-ratio
+          - correct-cpu-energy-for-vcpu-ratio
+          - sum-energy-components
+          - embodied-carbon
+          - operational-carbon
+          - sum-carbon
+          - sci
       config: null
       defaults:
         cpu/thermal-design-power: 100

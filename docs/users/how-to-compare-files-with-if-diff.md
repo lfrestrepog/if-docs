@@ -32,7 +32,10 @@ tree:
   children:
     child:
       pipeline:
-        - sum
+        observe:
+        regroup:
+        compute:
+          - sum
       config:
         sum:
       inputs:
@@ -66,7 +69,10 @@ tree:
   children:
     child:
       pipeline:
-        - sum
+        observe:
+        regroup:
+        compute:
+          - sum
       config:
         sum:
       inputs:
