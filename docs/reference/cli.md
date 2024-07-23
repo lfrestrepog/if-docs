@@ -14,6 +14,9 @@ If you have globally installed our `if` npm package, you can invoke the CLI usin
 
 `if-run <args>`
 
+`if-run` runs the full execution cycle of a manifest file, including `observe`, `regroup` and `compute` phases along with `aggregation` and `explain` if they are configured in the manifest.
+
+
 ### `--manifest` , `-m`
 
 The `--manifest` flag is the only required flag and tells `if-run` where to find the manifest file that you want to execute. This command expects to receive the path where your manifest file is saved, as shown in the following example:
@@ -45,6 +48,57 @@ if-run --help
 ## or using alias
 if-run -h
 ```
+
+### `--observe`
+
+`if-run --observe` runs *only* the observe phase of the manifest execution. This means only those plugins that generate `input` data are run. These are defined in the `observe` section of the pipeline for each component in the manifest.
+
+An example of an observe pipeline that invokes a plugin called "azure-importer" could look as follows:
+```yaml
+tree:
+  children:
+    child:
+      pipeline:
+        observe:
+          - azure-importer
+```
+
+### `--regroup`
+
+`if run --regroup` runs *only* the regrouping phase of the manifest's execution. There has to be `input` data available in the manifest to regroup (or `--observe` has to be invoked too) and the regrouping configuration has to be included in the manifest. This config defines which parameters `if-run --regroup` should regroup the data by.
+
+For example, to regroup on `cloud/region` and `cloud/instance-type`:
+
+```yaml
+tree:
+  children:
+    child:
+      pipeline:
+        observe:
+        regroup:
+          - cloud/region
+          - cloud/instance-type
+```
+
+
+### `--compute`
+
+`if run --compute` runs *only* the compute phase of the manifest's execution. The manifest passed to `if-run --compute` should already have input data, appropriately grouped (or you have to pass `--observe --regroup` too). This includes the plugins that do operations over the input data to generate output data.
+
+For example, in a manifest that executes `sum`, `coefficient` and `multiply` in its compute phase:
+
+```yaml
+tree:
+  children:
+    child-1:
+      pipeline:
+        observe:
+        compute: 
+          - sum
+          - coefficient
+          - multiply
+```
+
 
 ### `--debug`
 
