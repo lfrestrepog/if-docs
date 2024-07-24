@@ -65,7 +65,7 @@ tree:
 
 ### `--regroup`
 
-`if run --regroup` runs *only* the regrouping phase of the manifest's execution. There has to be `input` data available in the manifest to regroup (or `--observe` has to be invoked too) and the regrouping configuration has to be included in the manifest. This config defines which parameters `if-run --regroup` should regroup the data by.
+`if-run --regroup` runs *only* the regrouping phase of the manifest's execution. There has to be `input` data available in the manifest to regroup (or `--observe` has to be invoked too) and the regrouping configuration has to be included in the manifest. This config defines which parameters `if-run --regroup` should regroup the data by.
 
 For example, to regroup on `cloud/region` and `cloud/instance-type`:
 
@@ -83,7 +83,7 @@ tree:
 
 ### `--compute`
 
-`if run --compute` runs *only* the compute phase of the manifest's execution. The manifest passed to `if-run --compute` should already have input data, appropriately grouped (or you have to pass `--observe --regroup` too). This includes the plugins that do operations over the input data to generate output data.
+`if-run --compute` runs *only* the compute phase of the manifest's execution. The manifest passed to `if-run --compute` should already have input data, appropriately grouped (or you have to pass `--observe --regroup` too). This includes the plugins that do operations over the input data to generate output data.
 
 For example, in a manifest that executes `sum`, `coefficient` and `multiply` in its compute phase:
 
@@ -102,7 +102,7 @@ tree:
 
 ### `--debug`
 
-You can provide the `--debug` flag to `ie` in order to display execution logs to the console. These logs show messages for each operation IF and its plugins are executing. For example, your `debug` logs will look similar to the following:
+You can provide the `--debug` flag to `if-run` in order to display execution logs to the console. These logs show messages for each operation IF and its plugins are executing. For example, your `debug` logs will look similar to the following:
 
 ```sh
 INFO: 2024-06-12T08:48:02.918Z: Starting IF

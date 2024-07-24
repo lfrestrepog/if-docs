@@ -187,9 +187,9 @@ This example has a relatively straightforward structure with a maximum of 3 leve
 Each component has some configuration, some input data, and a plugin pipeline.
 
 - `pipeline`: a list of plugins that should be executed for a specific component. This is broken down into three subsections representing distinct phases of execution that can be triggered independently using command line flags. These subsections are:
-  - observe: the plugins that generate input data
-  - regroup: configuration for regrouping input data by given keys
-  - compute: the plugins that operate over input data and generate output data
+  - `observe`: the plugins that generate input data
+  - `regroup`: configuration for regrouping input data by given keys
+  - `compute`: the plugins that operate over input data and generate output data
 - `defaults`: fallback values that IF defaults to if they are not present in an input observation.
 - `inputs`: an array of `observation` data, with each `observation` containing usage data for a given timestep.
 
