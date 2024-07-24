@@ -262,11 +262,11 @@ The separation of timestamps in the `inputs` array determines the temporal granu
 
 ## Creating input data
 
-The plugins in the `observe` part of the pipeline generate `input` data. The manifest file should not have `input` data when the `observe` phase is executed. Plugins in this phase *only* generate input data, they can never generate output data. If you run the opbserve phase on its own (by runnin `if-run --observe`) then your manifest will be returned populated with input data according t the plugins you included in your `observe` pipeline.
+The plugins in the `observe` part of the pipeline generate `input` data. The manifest file should not have `input` data when the `observe` phase is executed. Plugins in this phase *only* generate input data, they can never generate output data. If you run the observe phase on its own (by running `if-run --observe`) then your manifest will be returned populated with input data according to the plugins you included in your `observe` pipeline.
 
 ## Regrouping a manifest file
 
-The second phase of manifest execution is `regroup`. This reorganizes existing `input` data into a new structure using keys provided in the `regroup` config in the manifest. For example, a mnaifest with the following `tree`:
+The second phase of manifest execution is `regroup`. This reorganizes existing `input` data into a new structure using keys provided in the `regroup` config in the manifest. For example, a manifest with the following `tree`:
 
 ```yaml
 tree:
@@ -434,7 +434,7 @@ tree:
 
 Impact Framework computes manifest files. For each component in the tree, the `inputs` array is passed to each plugin in the `compute` pipeline in sequence.
 
-In order for the `compute` pahse to execute correctly, the manifest nmeeds to have `input` data available. 
+In order for the `compute` phase to execute correctly, the manifest needs to have `input` data available. 
 
 Each plugin _enriches_ the `inputs` array in some specific way, typically by adding a new `key-value` pair to each observation in the array. For example, the `teads-curve` plugin takes in CPU utilization expressed as a percentage as an input and appends `cpu/energy` expressed in kWh. `cpu/energy` is then available to be passed as an input to, for example, the `sci-e` plugin.
 
@@ -444,7 +444,7 @@ There are also plugins and built-in features that can synchronize time series of
 
 ## Running combinations of phases
 
-It is possible to run each phase of the execution individually, or together. You can choose to *only* run the `observe`, `regroup` ro `compute` phases of the manifest execution. This saves you from having to re-execute entire manifests every time you want to tweak something, making it a greener way to use IF.
+It is possible to run each phase of the execution individually, or together. You can choose to *only* run the `observe`, `regroup` or `compute` phases of the manifest execution. This saves you from having to re-execute entire manifests every time you want to tweak something, making it a greener way to use IF.
 
 `if-run` executes all the phases together, including `observe`, `regroup` and `compute`. It generates yaml output data. However, you can run individual phases by passing `--observe`, `--regroup` or `--compute` flags on the command line. For example, to run *only* the compute phase:
 
