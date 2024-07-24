@@ -23,8 +23,9 @@ tree:
   children:
     child:
       pipeline:
-        -
-      config:
+        observe:
+        regroup:
+        compute:
       defaults:
       inputs:
 ```
@@ -66,9 +67,11 @@ tree:
   children:
     child:
       pipeline:
-        - teads-curve
-        - sci-m
-      config:
+        observe:
+        regroup:
+        compute:
+          - teads-curve
+          - sci-m
       defaults:
       inputs:
         - timestamp: '2023-11-02T10:35:31.820Z'
@@ -228,17 +231,20 @@ tree:
   children:
     child-1:
       pipeline:
-        - interpolate
-        - cpu-factor-to-wattage
-        - wattage-times-duration
-        - wattage-to-energy-kwh
-        - calculate-vcpu-ratio
-        - correct-cpu-energy-for-vcpu-ratio
-        - sci-embodied
-        - operational-carbon
-        - sum-carbon
-        - time-sync
-        # - sci
+        observe:
+        regroup:
+        compute:
+          - interpolate
+          - cpu-factor-to-wattage
+          - wattage-times-duration
+          - wattage-to-energy-kwh
+          - calculate-vcpu-ratio
+          - correct-cpu-energy-for-vcpu-ratio
+          - sci-embodied
+          - operational-carbon
+          - sum-carbon
+          - time-sync
+          # - sci
       config:
         group-by:
           group:

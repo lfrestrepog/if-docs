@@ -20,6 +20,9 @@ tree:
   children:
     child:
       pipeline:
+        observe:
+        regroup:
+        compute:
       inputs:
 ```
 
@@ -106,8 +109,11 @@ tree:
   children:
     child:
       pipeline:
-        - cloud-instance-metadata
-        - extract-processor-name
+        observe:
+        regroup:
+        compute:
+          - cloud-instance-metadata
+          - extract-processor-name
       inputs:
         - timestamp: 2023-08-06T00:00
           duration: 3600
@@ -193,8 +199,11 @@ tree:
   children:
     child:
       pipeline:
-        - cloud-instance-metadata
-        - extract-processor-name
+        observe:
+        regroup:
+        compute:
+          - cloud-instance-metadata
+          - extract-processor-name
       inputs:
         - timestamp: 2023-08-06T00:00
           duration: 3600

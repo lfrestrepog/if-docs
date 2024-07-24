@@ -12,6 +12,6 @@ Here you will find explanations for the fundamental Impact Framework concepts. T
 - [Time](./time.md)
 - [Aggregation](./aggregation.md)
 - [Plugins](./plugins.md)
-- [Group-by](./groupby.md)
+- [Regrouping](./regroup.md)
 - [Pipelines](./pipelines.md)
 - [Exhaust scripts](./exhaust-script.md)

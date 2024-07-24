@@ -78,7 +78,10 @@ tree:
   children:
     child-1:
       pipeline:
-        - sci
+        observe:
+        regroup:
+        compute:
+          - sci
       config: null
       inputs:
         - timestamp: 2023-07-06T00:00
@@ -99,7 +102,10 @@ tree:
           sci: 0.050199999999999995
     child-2:
       pipeline:
-        - sci
+        observe:
+        regroup:
+        compute:
+          - sci
       config: null
       inputs:
         - timestamp: 2023-07-06T00:00
@@ -195,7 +201,10 @@ tree:
   children:
     child-1:
       pipeline:
-        - sci
+        observe:
+        regroup:
+        compute:
+          - sci
       config: null
       inputs:
         - timestamp: 2023-07-06T00:00
@@ -216,7 +225,10 @@ tree:
           sci: 0.020199999999999995
     child-2:
       pipeline:
-        - sci
+        observe:
+        regroup:
+        compute:
+          - sci
       config: null
       inputs:
         - timestamp: 2023-07-06T00:00

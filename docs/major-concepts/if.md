@@ -38,3 +38,23 @@ if-run -m ./my-manifest.yml -o ./my-results.yml
 If you omit the `--output` command, your results will only be displayed in the console.
 
 For more information on the `if-run` commands see the [CLI reference documentation](../reference/cli.md).
+
+## Phased execution
+
+To enable greener and more flexible use of IF, we separate the manifest execution into distinct phases: `observe`, `regroup` and `compute`. This is invisible to you when you run `if-run` but behind the scenes all three of these phases are being run. However, you can instruct IF to run these phases individually, to avoid recomputing parts of the manifest unnecessarily. To do this, you simply pass `--observe`, `--regroup`, and `--compute` flags to IF in the combination you need. For example, to run *only* the observe phase (to generate input data):
+
+```
+if-run -m <manifest> --observe
+```
+
+to run the compute phase on its own:
+
+```
+if-run -m <manifest> --compute
+```
+
+To run the observe and compute phases without regrouping:
+
+```
+if-run -m <mnaifest> --observe --compute
+```
