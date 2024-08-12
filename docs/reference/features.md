@@ -15,7 +15,7 @@ Add the following config to your manifest (this example is for aggregating "cpu/
 ```yaml
 aggregation:
   metrics:
-    "cpu/utilization":
+    - "cpu/utilization"
   type: both
 ```
 
