@@ -16,8 +16,8 @@ Manifest files can get complicated, especially when there are many plugin instan
 Each element in `inputs` and `outputs` contains the following information about each specific parameter:
 
 - **description:** a plain-language summary of the parameter
-- **units:**: The unit the parameter is expressed in
-- **aggregation method:**: The appropriate method to use when aggregating the parameter across time or components (e.g. should it be summed, averaged, or held constant)
+- **unit:**: The unit the parameter is expressed in
+- **aggregation-method:**: The appropriate method to use when aggregating the parameter across time or components (e.g. should it be summed, averaged, or held constant)
 
 This information allows you to check that the units output by one plugin are consistent with those expected as inputs to another, in one clear itemized list in your output manifest.
 
@@ -46,7 +46,7 @@ export const SciEmbodied = (
       'device/emissions-embodied': {
         description: 'total embodied emissions of some component',
         unit: 'gCO2e',
-        aggregation-method: 'sum',
+        aggregationMethod: 'sum',
       },
       'device/expected-lifespan': {
         description: 'Total Expected Lifespan of the Component in Seconds',
@@ -107,17 +107,19 @@ initialize:
           cpu/utilization:
             description: "portion of the total CPU capacity being used by an application"
             unit: "percentage"
+            aggregation-method: "avg"
         outputs:
           cpu-factor:
             description: "a dimensionless intermediate used to scale a processor's thermal design power by CPU usage"
             unit: "dimensionless"
+            aggregation-method: "avg"
 ```
 
 ## Example manifest
 
 The following manifest uses three plugins: `sci`, `sci-embodied` and `sum-carbon`. Of these, only `sci-embodied` has defaults hardcoded into the plugin code. The other two do not because they are "generic" arithmetic plugins for whom the values cannot be known in advance. Therefore, we set new parameter metadata in the `initialize` block for `sci` and `sum-carbon` but use the hardcoded defaults for `sci-embodied`.
 
-We toggle the `explain` feature by adding `explain: true` in the manifest context.
+We toggle the `explainer` feature by adding `explainer: true` in the manifest context.
 
 ```yaml
 name: sci

@@ -37,6 +37,7 @@ explainer: true
 You can override the parameter metadata provided in a plugin's source code by adding it to the plugin's `initialize` block, as follows:
 
 ```yaml
+explainer: true
 plugins:
   "sum-carbon":
       path: "builtin"
