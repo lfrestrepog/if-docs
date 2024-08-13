@@ -122,22 +122,22 @@ Errors of the `InvalidExhaustPluginError` class are caused by using unsupported 
 Plugins can emit their own custom error messages, but we still prefer those messages to be attached to one of a finite set of predefined error classes.
 Those classes are listed in this section.
 
-### `GlobalConfigError`
+### `ConfigError`
 
-Errors of the `GlobalConfigError` are used when part of the config data provided to a plugin is invalid or missing.
+Errors of the `ConfigError` are used when part of the config data provided to a plugin is invalid or missing.
 
-For example the `Divide` plugin throws a `GlobalConfigError` when it receives a denominator equal to zero.
+For example the `Divide` plugin throws a `ConfigError` when it receives a denominator equal to zero.
 
 The message should name the config element that was invalid and describe the reason why. For example:
 
-`GlobalConfigError: "denominator" parameter is number must be greater than 0. Error code: too_small.`
+`ConfigError: "denominator" parameter is number must be greater than 0. Error code: too_small.`
 
 ### `MissingInputDataError`
 
-Errors of the `MissingInputDataError` class arise because your plugin is not receiving the data it expects in `input` data, global config or node-level config.
+Errors of the `MissingInputDataError` class arise because your plugin is not receiving the data it expects in `input` data or config.
 The specific messages depend on the plugin. It is expected that the messages emitted by each plugin are listed in their own documentation.
 
-The example below is a message emitted by the `interpolation` plugin when the `method` given in global config is _not_ one of the expected enum variants:
+The example below is a message emitted by the `interpolation` plugin when the `method` given in config is _not_ one of the expected enum variants:
 
 `MissingInputDataError:   "interpolation" parameter is invalid enum value. expected 'spline' | 'linear', received 'dummy'. Error code: invalid_enum_value.`
 
@@ -236,7 +236,7 @@ initialize:
     teads-curve:
       path: '@grnsft/if-unofficial-plugins'
       method: TeadsCurve
-      global-config:
+      config:
         interpolation: spline
 execution:
   status: fail
