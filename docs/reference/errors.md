@@ -31,11 +31,11 @@ The remedy for this issue is to add an `initialize` block into the manifest.
 
 ### `InvalidGroupingError`
 
-Errors of the `InvalidGroupingError` are only emitted by the `group-by` plugin. There is only one associated message; it is emitted when the requested groups do not exist in the tree.
+Errors of the `InvalidGroupingError` are only emitted by the `regroup` feature. There is only one associated message; it is emitted when the requested groups do not exist in the tree.
 
-| message                  | cause                                                                           | remedy                                                                                       |
-| ------------------------ | ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `Invalid group ${type}.` | you are requested groupby to regroup the tree based on fields that do not exist | Check the spelling of the values passed to `groupby` and ensure the values exist in the tree |
+| message                  | cause                                                                               | remedy                                                                                       |
+| ------------------------ | ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `Invalid group ${type}.` | you are requested the feature to regroup the tree based on fields that do not exist | Check the spelling of the values passed to `regroup` and ensure the values exist in the tree |
 
 ### `WriteFileError`
 
