@@ -2,7 +2,6 @@
 sidebar_position: 6
 ---
 
-
 # Verifying IF outputs with `if-check`
 
 IF includes a command line tool called `if-check` that can be used to verify the results in a manifest file.
@@ -30,7 +29,7 @@ initialize:
     sci:
       path: builtin
       method: Sci
-      global-config:
+      config:
         functional-unit: requests
 execution:
   command: >-
@@ -126,7 +125,6 @@ tree:
           sci: 0.0802
 ```
 
-
 Alice runs :
 
 ```
@@ -139,9 +137,7 @@ And receives the response:
 if-check: successfully verified bobs-manifest
 ```
 
-
 Charlie also has a copy of Bob's manifest. He wants to trick Alice into thinking his SCI score is lower, so he overwrites the values in the manifest file, making them lower. Charlie's manifest looks like this:
-
 
 ```yaml
 # start
@@ -153,7 +149,7 @@ initialize:
     sci:
       path: builtin
       method: Sci
-      global-config:
+      config:
         functional-unit: requests
 execution:
   command: >-
@@ -272,7 +268,6 @@ if-check -d /my-folder-of-manifests
 
 Each manifest will be run through `if-check` in sequence.
 
-
 ## `if-check` limitations
 
-`if-check` can verify that a manifest is correctly calculated. However, if someone really wanted to use a fraudulent manifest, they could provide fraudulent *input* data not *output* data. There's little we can really do about this - if someone provides fake input data it is out of IF's remit. This means that although the examples above are good for demonstrating how `if-check` works, it's more likely to be used to check for bugs and configuration errors than it is to be used to detect fraud.
+`if-check` can verify that a manifest is correctly calculated. However, if someone really wanted to use a fraudulent manifest, they could provide fraudulent _input_ data not _output_ data. There's little we can really do about this - if someone provides fake input data it is out of IF's remit. This means that although the examples above are good for demonstrating how `if-check` works, it's more likely to be used to check for bugs and configuration errors than it is to be used to detect fraud.

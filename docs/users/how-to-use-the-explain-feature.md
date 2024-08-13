@@ -35,7 +35,6 @@ If you set `explainer` to `false` or omit the line altogether, the `explainer` f
 
 Plugins are expected to ship with default values for their parameter metadata in their source code. For example, our plugin for calculating embodied carbon, `SciEmbodied`, includes the following metadata definition:
 
-
 ```Typescript
 export const SciEmbodied = (
   parametersMetadata: PluginParametersMetadata
@@ -85,7 +84,6 @@ export const SciEmbodied = (
 }
 ```
 
-
 However, there are cases where a plugin might not have parameter metadata in its source code, either because it was omitted, it was not knowable in advance, or the plugin was built before we shipped the `explain` feature. Sometimes, you might want to override the hard-coded defaults and use alternative metadata. In these cases, you can define new plugin metadata in the manifest file. It is considered best-practice to ensure all plugin instances have a complete set of plugin metadata.
 
 Setting parameter metadata from the manifest file is done in the plugin instance's `initialize` block, as follows:
@@ -93,26 +91,26 @@ Setting parameter metadata from the manifest file is done in the plugin instance
 ```yaml
 initialize:
   plugins:
-    "interpolate":
+    'interpolate':
       method: Interpolation
-      path: "builtin"
-      global-config:
+      path: 'builtin'
+      config:
         method: linear
         x: [0, 10, 50, 100]
         y: [0.12, 0.32, 0.75, 1.02]
-        input-parameter: "cpu/utilization"
-        output-parameter: "cpu-factor"
+        input-parameter: 'cpu/utilization'
+        output-parameter: 'cpu-factor'
       parameter-metadata:
         inputs:
           cpu/utilization:
-            description: "portion of the total CPU capacity being used by an application"
-            unit: "percentage"
-            aggregation-method: "avg"
+            description: 'portion of the total CPU capacity being used by an application'
+            unit: 'percentage'
+            aggregation-method: 'avg'
         outputs:
           cpu-factor:
             description: "a dimensionless intermediate used to scale a processor's thermal design power by CPU usage"
-            unit: "dimensionless"
-            aggregation-method: "avg"
+            unit: 'dimensionless'
+            aggregation-method: 'avg'
 ```
 
 ## Example manifest
@@ -134,7 +132,7 @@ initialize:
     "sum-carbon":
       path: "builtin"
       method: Sum
-      global-config:
+      config:
         input-parameters:
           - carbon-operational
           - carbon-embodied
@@ -158,7 +156,7 @@ initialize:
       kind: plugin
       method: Sci
       path: "builtin"
-      global-config:
+      config:
         functional-unit: requests
       parameter-metadata:
         inputs:
@@ -279,6 +277,6 @@ explain:
         aggregation-method: 'sum'
 ```
 
-## When *not* to use `explainer`
+## When _not_ to use `explainer`
 
 In manifests where you are only using generic plugins, or override all the metadata loaded in from the plugin source code, `explainer` will simply echo back information from your `initialize` block since all the parameter metadata is set there. In these cases, the `explain` block is probably redundant information as you could just read the same information in your manifest's `plugins` section. The point of `explain` is to confirm what units and parameters are being passed through a pipeline when you have a mixture of plugins from many sources whose parameter metadata is defined in-code and in-manifest.

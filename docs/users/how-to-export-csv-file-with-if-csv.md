@@ -19,7 +19,7 @@ initialize:
     sum:
       path: builtin
       method: Sum
-      global-config:
+      config:
         input-parameters:
           - cpu/energy
           - network/energy

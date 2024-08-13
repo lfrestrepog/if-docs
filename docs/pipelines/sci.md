@@ -4,7 +4,7 @@ sidebar-position: 3
 
 # Software Carbon Intensity (SCI)
 
-The [software carbon intensity (SCI)](https://greensoftware.foundation/articles/software-carbon-intensity-sci-specification-project) score is perhaps the most important value that can be generated using Impact Framework. 
+The [software carbon intensity (SCI)](https://greensoftware.foundation/articles/software-carbon-intensity-sci-specification-project) score is perhaps the most important value that can be generated using Impact Framework.
 
 SCI is an ISO-recognized standard for reporting the carbon costs of running software. This tutorial demonstrates how to organize a pipeline of Impact framework plugins to calculate SCI scores from some simple observations of the CPU utilization of a software application running in the cloud.
 
@@ -18,14 +18,14 @@ You can start by copying the manifest you created in the Teads curve tutorial in
 
 ```yaml
 name: carbon-intensity plugin demo
-description: 
+description:
 tags:
 initialize:
   plugins:
     interpolate:
       method: Interpolation
       path: 'builtin'
-      global-config:
+      config:
         method: linear
         x: [0, 10, 50, 100]
         y: [0.12, 0.32, 0.75, 1.02]
@@ -34,33 +34,33 @@ initialize:
     cpu-factor-to-wattage:
       method: Multiply
       path: builtin
-      global-config:
-        input-parameters: ["cpu-factor", "cpu/thermal-design-power"]
-        output-parameter: "cpu-wattage"
+      config:
+        input-parameters: ['cpu-factor', 'cpu/thermal-design-power']
+        output-parameter: 'cpu-wattage'
     wattage-times-duration:
       method: Multiply
       path: builtin
-      global-config:
-        input-parameters: ["cpu-wattage", "duration"]
-        output-parameter: "cpu-wattage-times-duration"
+      config:
+        input-parameters: ['cpu-wattage', 'duration']
+        output-parameter: 'cpu-wattage-times-duration'
     wattage-to-energy-kwh:
       method: Divide
-      path: "builtin"
-      global-config:
+      path: 'builtin'
+      config:
         numerator: cpu-wattage-times-duration
         denominator: 3600000
         output: cpu-energy-raw
     calculate-vcpu-ratio:
       method: Divide
-      path: "builtin"
-      global-config:
+      path: 'builtin'
+      config:
         numerator: vcpus-total
         denominator: vcpus-allocated
         output: vcpu-ratio
     correct-cpu-energy-for-vcpu-ratio:
       method: Divide
-      path: "builtin"
-      global-config:
+      path: 'builtin'
+      config:
         numerator: cpu-energy-raw
         denominator: vcpu-ratio
         output: cpu-energy-kwh
@@ -100,7 +100,6 @@ tree:
           cpu/utilization: 100
 ```
 
-
 ## Step 2: Adding a network/energy component
 
 Your Teads curve manifest only accounted for CPU energy, but this SCI manifest will also consider the energy consumed during data ingress and egress, collectively known as "network energy". This can be calculated from data ingress and egress observations, but in this example, we will shortcut it by adding the `network/energy` value, measured in kWh, directly to the input data. You can do this by adding `network/energy` and a value to each element in the `inputs` array. This is just an example, so you can create dummy values. In a real example, these data would come from observations of a real system.
@@ -110,30 +109,27 @@ The SCI score will take into account all the energy used by the application, whi
 Add the following to your `initialize: plugins: ` block:
 
 ```yaml
-    sum-energy-components:
-      path: "builtin"
-      method: Sum
-      global-config:
-        input-parameters:
-          - cpu/energy
-          - network/energy
-        output-parameter: energy
+sum-energy-components:
+  path: 'builtin'
+  method: Sum
+  config:
+    input-parameters:
+      - cpu/energy
+      - network/energy
+    output-parameter: energy
 ```
 
 This will create an instance of `Sum` called `sum-energy-components`, and it will sum `cpu/energy` and `network/energy` and append the result to `inputs` as `energy`.
 
-
-
 ## Step 3: Account for embodied carbon
 
-Embodied carbon is the carbon emitted during the production and disposal of the hardware used to run an application. The total embodied carbon for a unit of hardware is scaled down by the proportion of its expected lifespan used up by an application. This is all handled by another IF `builtin` called `SciEmbodied`. The result is `embodied-carbon` in units of `gCO2eq`. You can simply create an instance of it and add it to your pipeline. It requires no global configuration.
+Embodied carbon is the carbon emitted during the production and disposal of the hardware used to run an application. The total embodied carbon for a unit of hardware is scaled down by the proportion of its expected lifespan used up by an application. This is all handled by another IF `builtin` called `SciEmbodied`. The result is `embodied-carbon` in units of `gCO2eq`. You can simply create an instance of it and add it to your pipeline. It requires no configuration.
 
 ```yaml
 embodied-carbon:
-  path: "builtin"
+  path: 'builtin'
   method: SciEmbodied
 ```
-
 
 `embodied-carbon` does expect some specific values to be available in the `inputs` array. These include:
 
@@ -144,6 +140,7 @@ device/expected-lifespan: # lifespan of the component in seconds
 resources-reserved: # proportion of the total component being allocated
 resources-total: # size of the component
 ```
+
 Most of these values can be found in manufacturer documentation for specific processors and other hardware. In the present case, you can again provide some default values for a hypothetical system. You can assume the resource is a processor being used in a cloud virtual machine. In this case, the `resources-total` can be the total number of VCPUs for the processor and the `resources-allocated` can be the number of VCPUs actually being used by your application. Remembering back to the Teads curve example, you already have that information available to you in the form of the `vcpus-total` and `vcpus-allocated` fields, which you can pass by name as values to `resources-total and ` resources-reserved`.
 
 Add the following to your `defaults` section:
@@ -158,7 +155,7 @@ resources-total: vcpus-total
 
 ## Step 4: Calculate operational carbon
 
-So far, you have calculated the *embodied* carbon for your application, but your usage values are still expressed as units of energy. To calculate the `carbon` emissions that result from that energy consumption, you need to multiply your total energy by the carbon intensity of the electricity you consume. This value is known as the `operational-carbon`. In a real example, the grid carbon intensity could be a time-varying value that also depends on your physical location. However, here you will hardcode it for simplicity.
+So far, you have calculated the _embodied_ carbon for your application, but your usage values are still expressed as units of energy. To calculate the `carbon` emissions that result from that energy consumption, you need to multiply your total energy by the carbon intensity of the electricity you consume. This value is known as the `operational-carbon`. In a real example, the grid carbon intensity could be a time-varying value that also depends on your physical location. However, here you will hardcode it for simplicity.
 
 ```yaml
 grid/carbon-intensity
@@ -167,14 +164,13 @@ grid/carbon-intensity
 Now create an instance of `Multiply` that will calculate the product of `energy` and `grid/carbon-intensity`:
 
 ```yaml
-    "operational-carbon":
-      method: Multiply
-      path: builtin
-      global-config:
-        input-parameters: ["energy", "grid/carbon-intensity"]
-        output-parameter: "carbon-operational"
+'operational-carbon':
+  method: Multiply
+  path: builtin
+  config:
+    input-parameters: ['energy', 'grid/carbon-intensity']
+    output-parameter: 'carbon-operational'
 ```
-
 
 ## Step 5: Sum carbon components
 
@@ -184,13 +180,13 @@ Add the following instance of the `Sum` plugin to your `initialize: plugins:` bl
 
 ```yaml
 sum-carbon:
-    path: "builtin"
-    method: Sum
-    global-config:
-    input-parameters:
-        - carbon-operational
-        - carbon-embodied
-    output-parameter: carbon
+  path: 'builtin'
+  method: Sum
+  config:
+  input-parameters:
+    - carbon-operational
+    - carbon-embodied
+  output-parameter: carbon
 ```
 
 ## Step 6: Calculate SCI
@@ -199,13 +195,12 @@ Now you have calculated the total carbon emissions due to your application, you 
 
 Add an instance of the SCI plugin to your `initialize: plugins:` block as follows:
 
-
 ```yaml
-"sci":
-    path: "builtin"
-    method: Sci
-    global-config:
-    functional-unit: "component"
+'sci':
+  path: 'builtin'
+  method: Sci
+  config:
+  functional-unit: 'component'
 ```
 
 SCI will look in each element in the `inputs` array for the `component` key. To ensure it is there, we can add it to `defaults` as follows:
@@ -222,20 +217,20 @@ Now you have initialized all the plugins you will need to compute the SCI score,
 
 ```yaml
 pipeline:
- observe:
- regroup:
- compute:
-   - interpolate
-   - cpu-factor-to-wattage
-   - wattage-times-duration
-   - wattage-to-energy-kwh
-   - calculate-vcpu-ratio
-   - correct-cpu-energy-for-vcpu-ratio
-   - sum-energy-components
-   - embodied-carbon
-   - operational-carbon
-   - sum-carbon
-   - sci
+  observe:
+  regroup:
+  compute:
+    - interpolate
+    - cpu-factor-to-wattage
+    - wattage-times-duration
+    - wattage-to-energy-kwh
+    - calculate-vcpu-ratio
+    - correct-cpu-energy-for-vcpu-ratio
+    - sum-energy-components
+    - embodied-carbon
+    - operational-carbon
+    - sum-carbon
+    - sci
 ```
 
 Congratulations, now you have completed your manifest and can calculate your SCI score!
@@ -261,7 +256,7 @@ initialize:
     interpolate:
       path: builtin
       method: Interpolation
-      global-config:
+      config:
         method: linear
         x:
           - 0
@@ -278,7 +273,7 @@ initialize:
     cpu-factor-to-wattage:
       path: builtin
       method: Multiply
-      global-config:
+      config:
         input-parameters:
           - cpu-factor
           - cpu/thermal-design-power
@@ -286,7 +281,7 @@ initialize:
     wattage-times-duration:
       path: builtin
       method: Multiply
-      global-config:
+      config:
         input-parameters:
           - cpu-wattage
           - duration
@@ -294,28 +289,28 @@ initialize:
     wattage-to-energy-kwh:
       path: builtin
       method: Divide
-      global-config:
+      config:
         numerator: cpu-wattage-times-duration
         denominator: 3600000
         output: cpu-energy-raw
     calculate-vcpu-ratio:
       path: builtin
       method: Divide
-      global-config:
+      config:
         numerator: vcpus-total
         denominator: vcpus-allocated
         output: vcpu-ratio
     correct-cpu-energy-for-vcpu-ratio:
       path: builtin
       method: Divide
-      global-config:
+      config:
         numerator: cpu-energy-raw
         denominator: vcpu-ratio
         output: cpu/energy
     sum-energy-components:
       path: builtin
       method: Sum
-      global-config:
+      config:
         input-parameters:
           - cpu/energy
           - network/energy
@@ -326,7 +321,7 @@ initialize:
     operational-carbon:
       path: builtin
       method: Multiply
-      global-config:
+      config:
         input-parameters:
           - energy
           - grid/carbon-intensity
@@ -334,7 +329,7 @@ initialize:
     sum-carbon:
       path: builtin
       method: Sum
-      global-config:
+      config:
         input-parameters:
           - carbon-operational
           - carbon-embodied
@@ -342,12 +337,12 @@ initialize:
     sci:
       path: builtin
       method: Sci
-      global-config:
+      config:
         functional-unit: component
     time-sync:
       path: builtin
       method: TimeSync
-      global-config:
+      config:
         start-time: '2023-12-12T00:00:00.000Z'
         end-time: '2023-12-12T00:01:00.000Z'
         interval: 5
@@ -557,9 +552,7 @@ tree:
           carbon-operational: 0.06309166666666667
           carbon: 0.06321320395738204
           sci: 0.06321320395738204
-
 ```
-
 
 ## What next?
 

@@ -25,7 +25,7 @@ initialize:
     sum:
       method: Sum
       path: 'builtin'
-      global-config:
+      config:
         input-parameters: ['cpu/energy', 'network/energy']
         output-parameter: 'energy'
 tree:
@@ -61,8 +61,8 @@ initialize:
   plugins:
     sum:
       method: Sum
-      path: "builtin"
-      global-config:
+      path: 'builtin'
+      config:
         input-parameters: ['cpu/energy', 'network/energy']
         output-parameter: 'energy'
 tree:

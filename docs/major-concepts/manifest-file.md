@@ -60,7 +60,7 @@ The global metadata includes the `name`, `description`, and `tags` that can be u
 
 #### Initialize
 
-The initialize section is where you define which plugins will be used in your manifest file and provide the global configuration for them. Below is sample for initialization:
+The initialize section is where you define which plugins will be used in your manifest file and provide the configuration for them. Below is sample for initialization:
 
 ```yaml
 initialize:
@@ -74,7 +74,7 @@ Where required values are:
 - `method`: the name of the function exported by the plugin.
 - `path`: the path to the plugin code. For example, for a plugin from our standard library, this value would be `builtin`
 
-There is also an optional `global-config` field that can be used to set _global_ configuration that is common to a plugin wherever it is invoked across the entire manifest file.
+There is also an optional `config` field that can be used to set _config_ that is common to a plugin wherever it is invoked across the entire manifest file.
 
 Impact Framework uses the `initialize` section to instantiate each plugin. A plugin cannot be invoked elsewhere in the manifest file unless it is included in this section.
 
@@ -82,15 +82,21 @@ You can also add information here about parameter metadata if you wish to add or
 
 ```yaml
 plugins:
-  "sum-carbon":
-      path: "builtin"
-      method: Sum
-      global-config:
+  sum-carbon:
+    path: "builtin"
+    method: Sum
+    config:
       input-parameters:
           - carbon-operational
           - carbon-embodied
       output-parameter: carbon
-      parameter-metadata:
+    parameter-metadata:
+tree:
+  children:
+    child:
+      pipeline:
+        compute:
+          - sum-carbon
       inputs:
           carbon-operational:
           description: "carbon emitted due to an application's execution"
@@ -225,9 +231,9 @@ tree:
           children:
             child-0-2-1:
               pipeline:
-               observe:
-               regroup:
-               compute:
+                observe:
+                regroup:
+                compute:
                   - sum
               config: null
               defaults: null
@@ -262,7 +268,7 @@ The separation of timestamps in the `inputs` array determines the temporal granu
 
 ## Creating input data
 
-The plugins in the `observe` part of the pipeline generate `input` data. The manifest file should not have `input` data when the `observe` phase is executed. Plugins in this phase *only* generate input data, they can never generate output data. If you run the observe phase on its own (by running `if-run --observe`) then your manifest will be returned populated with input data according to the plugins you included in your `observe` pipeline.
+The plugins in the `observe` part of the pipeline generate `input` data. The manifest file should not have `input` data when the `observe` phase is executed. Plugins in this phase _only_ generate input data, they can never generate output data. If you run the observe phase on its own (by running `if-run --observe`) then your manifest will be returned populated with input data according to the plugins you included in your `observe` pipeline.
 
 ## Regrouping a manifest file
 
@@ -340,7 +346,6 @@ tree:
             cloud/instance-type: B1
             cloud/region: uk-east
             cpu/utilization: 1
-
 ```
 
 generates the following output when `if-run --regroup` is executed:
@@ -434,7 +439,7 @@ tree:
 
 Impact Framework computes manifest files. For each component in the tree, the `inputs` array is passed to each plugin in the `compute` pipeline in sequence.
 
-In order for the `compute` phase to execute correctly, the manifest needs to have `input` data available. 
+In order for the `compute` phase to execute correctly, the manifest needs to have `input` data available.
 
 Each plugin _enriches_ the `inputs` array in some specific way, typically by adding a new `key-value` pair to each observation in the array. For example, the `teads-curve` plugin takes in CPU utilization expressed as a percentage as an input and appends `cpu/energy` expressed in kWh. `cpu/energy` is then available to be passed as an input to, for example, the `sci-e` plugin.
 
@@ -444,9 +449,9 @@ There are also plugins and built-in features that can synchronize time series of
 
 ## Running combinations of phases
 
-It is possible to run each phase of the execution individually, or together. You can choose to *only* run the `observe`, `regroup` or `compute` phases of the manifest execution. This saves you from having to re-execute entire manifests every time you want to tweak something, making it a greener way to use IF.
+It is possible to run each phase of the execution individually, or together. You can choose to _only_ run the `observe`, `regroup` or `compute` phases of the manifest execution. This saves you from having to re-execute entire manifests every time you want to tweak something, making it a greener way to use IF.
 
-`if-run` executes all the phases together, including `observe`, `regroup` and `compute`. It generates yaml output data. However, you can run individual phases by passing `--observe`, `--regroup` or `--compute` flags on the command line. For example, to run *only* the compute phase:
+`if-run` executes all the phases together, including `observe`, `regroup` and `compute`. It generates yaml output data. However, you can run individual phases by passing `--observe`, `--regroup` or `--compute` flags on the command line. For example, to run _only_ the compute phase:
 
 ```
 if-run -m <manifest> --compute
@@ -481,7 +486,7 @@ initialize:
     sum:
       path: builtin
       method: Sum
-      global-config:
+      config:
         input-parameters:
           - cpu/energy
           - network/energy

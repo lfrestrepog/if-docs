@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # How to load plugins
 
-Plugins are developed separately to the Impact Framework core. However, the IF core developers maintain a standard library of plugins come bundled with IF. These are known as `builtins`. 
+Plugins are developed separately to the Impact Framework core. However, the IF core developers maintain a standard library of plugins come bundled with IF. These are known as `builtins`.
 
 Builtins have to be initialized in a manifest file using the path `builtin`. Then they can be invoked in pipelines.
 
@@ -14,16 +14,15 @@ description: demo pipeline
 tags:
 initialize:
   plugins:
-    "sum":
-      path: "builtin"
+    'sum':
+      path: 'builtin'
       method: Sum
-      global-config:
+      config:
         input-parameters:
           - cpu/energy
           - network/energy
         output-parameter: energy-sum
 ```
-
 
 Other plugins are hosted externally to the IF. Anyone can build a plugin and provide it as an npm package or a public code repository (such as Github) and share it using our [Explorer](https://explorer.if.greensoftware.foundation).
 
@@ -41,7 +40,7 @@ Then, in the manifest's `initialize` section, you'll need to provide the followi
 - `method`: the function name exported by your plugin, e.g. `AzureImporter`
 - `path`: the path to the plugin
 
-And, if your plugin requires it, add its `global-config` too.
+And, if your plugin requires it, add its `config` too.
 
 ```yaml
 name: plugin-demo

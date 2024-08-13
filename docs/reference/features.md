@@ -15,12 +15,11 @@ Add the following config to your manifest (this example is for aggregating "cpu/
 ```yaml
 aggregation:
   metrics:
-    - "cpu/utilization"
+    - 'cpu/utilization'
   type: both
 ```
 
 [Read more on aggregate](../major-concepts/aggregation.md)
-
 
 ## Explainer
 
@@ -42,7 +41,7 @@ plugins:
   "sum-carbon":
       path: "builtin"
       method: Sum
-      global-config:
+      config:
       input-parameters:
           - carbon-operational
           - carbon-embodied

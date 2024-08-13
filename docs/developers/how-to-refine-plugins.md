@@ -1,6 +1,7 @@
 ---
 sidebar-position: 2
 ---
+
 # How to make plugins production ready
 
 Our [How to build plugins](./how-to-build-plugins.md) guide covered the basics for how to construct an Impact Framework plugin. This guide will help you to refine your plugin to make it production-ready. These are best practice guidelines - if you intend to contribute your plugin to one of our repositories, following these guidelines will help your PR to get merged. Even if you are not aiming to have a plugin merged into one of our repositories, consistency with our norms is useful for debugging and maintaining and for making your plugin as useful as possible for other Impact Framework developers.
@@ -42,19 +43,19 @@ We prefer the following ordering of imports in your plugin code:
 Each logical unit in the code should be preceded by an appropriate explanatory comment. Sometimes it is useful to include short comments inside a function that clarifies the purpose of a particular statement. Here's an example from our codebase:
 
 ```ts
-  /**
-   * Calculates the energy consumption for a single input.
-   */
-  const calculateEnergy = (input: PluginParams) => {
-    const {
-      'memory/capacity': totalMemory,
-      'memory/utilization': memoryUtil,
-      'energy-per-gb': energyPerGB,
-    } = input;
+/**
+ * Calculates the energy consumption for a single input.
+ */
+const calculateEnergy = (input: PluginParams) => {
+  const {
+    'memory/capacity': totalMemory,
+    'memory/utilization': memoryUtil,
+    'energy-per-gb': energyPerGB,
+  } = input;
 
-    // GB * kWh/GB == kWh
-    return totalMemory * (memoryUtil / 100) * energyPerGB;
-  };
+  // GB * kWh/GB == kWh
+  return totalMemory * (memoryUtil / 100) * energyPerGB;
+};
 ```
 
 ### Error handling
@@ -71,11 +72,10 @@ import {ERRORS} from '@grnsft/if-core/util';
 
 const {MissingInputDataError} = ERRORS;
 
-... 
+...
 
 throw new MissingInputDataError("my-plugin is missing my-parameter from inputs[0]");
 ```
-
 
 ### Validation
 
@@ -97,14 +97,13 @@ const validateInput = (input: PluginParams) => {
     });
 
   return validate<z.infer<typeof schema>>(schema, input);
-}
+};
 ```
 
 ### Code Modularity
 
 Break down complex functionality into smaller, manageable methods with well-defined responsibilities.
 Encapsulate related functionality into private methods to promote code reusability and maintainability.
-
 
 ## 3. Unit tests
 
@@ -121,11 +120,11 @@ const {InputValidationError} = ERRORS;
 
 describe('lib/sum: ', () => {
   describe('Sum: ', () => {
-    const globalConfig = {
+    const config = {
       'input-parameters': ['cpu/energy', 'network/energy', 'memory/energy'],
       'output-parameter': 'energy',
     };
-    const sum = Sum(globalConfig);
+    const sum = Sum(config);
 
     describe('init: ', () => {
       it('successfully initalized.', () => {

@@ -29,7 +29,7 @@ Read our detailed guide to [loading plugins](./how-to-import-plugins.md).
 
 ## 3: Create a manifest file
 
-A manifest file contains all the configuration and input data required to measure your application's energy and carbon impacts and should have a `.yml` extension. 
+A manifest file contains all the configuration and input data required to measure your application's energy and carbon impacts and should have a `.yml` extension.
 
 Open the file, add your data and save the file. The simple example below runs a single snapshot observation through a single plugin.
 
@@ -39,10 +39,10 @@ description:
 tags:
 initialize:
   plugins:
-    teads-curve: 
+    teads-curve:
       path: '@grnsft/if-unofficial-plugins'
       method: TeadsCurve
-      global-config:
+      config:
         interpolation: spline
 tree:
   children:
@@ -76,13 +76,13 @@ Run the pipeline by passing the path to your manifest file to the `if-run` comma
 if-run --manifest <path-to-your-manifest>
 ```
 
-:tada:**Congratulations** :tada:! You have just used the Impact Framework to compute the energy consumed by an application! 
+:tada:**Congratulations** :tada:! You have just used the Impact Framework to compute the energy consumed by an application!
 
 ## Next steps
 
 Now you know how to use the `if-run` you can start building more complex pipelines of plugins and more complicated manifest files. Your overall aim is to create a manifest file that accurately represents a real software application, and a plugin pipeline that yields an environmental metric that's important to you (e.g. `carbon`).
 
-Experiment by adding more plugins to the pipeline, for example add `sci-o` to convert energy into `operational-carbon`. Your output data will be displayed in your console. 
+Experiment by adding more plugins to the pipeline, for example add `sci-o` to convert energy into `operational-carbon`. Your output data will be displayed in your console.
 
 You can also configure `if` to save your output data to another `yaml` file. To do this, add the `--output` flag and the path to the output file where the results are saved.
 

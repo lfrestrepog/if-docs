@@ -32,7 +32,7 @@ There is a cloud instance metadata file in the `if-data` Github repository. You 
 
 You can create an instance of `CSVLookup` and name it `cloud-instance-metadata` and add it to the `initialize` block in your manifest file. 
 
-The lookup query is configured in `global-config`. You provide the parameters you want to use as selectors, and the selector value is a field from your `inputs` array. You also provide the target columns you want to return data from (we'll use a wildcard and grab everything).
+The lookup query is configured in `config`. You provide the parameters you want to use as selectors, and the selector value is a field from your `inputs` array. You also provide the target columns you want to return data from (we'll use a wildcard and grab everything).
 
 You want to retrieve all available data where `instance-class` is equal to `Standard_A1_v2`. So you need to make sure that `Standard_A1_v2` is available in your `inputs` array - we'll put it there with the key `cloud/instance-type`.
 
@@ -57,7 +57,7 @@ initialize:
     cloud-instance-metadata:
       method: CSVLookup
       path: "builtin"
-      global-config:
+      config:
         filepath: https://raw.githubusercontent.com/Green-Software-Foundation/if-data/main/cloud-metdata-azure-instances.csv
         query:
           instance-class: "cloud/instance-type"
@@ -72,7 +72,7 @@ Create an instance of your `regex` plugin, and select all characters up to the f
 extract-processor-name:
     method: Regex
     path: "builtin"
-    global-config:
+    config:
     parameter: cpu-model-name
     match: /^([^,])+/g
     output: cpu/name
@@ -93,7 +93,7 @@ initialize:
     cloud-instance-metadata:
       method: CSVLookup
       path: "builtin"
-      global-config:
+      config:
         filepath: https://raw.githubusercontent.com/Green-Software-Foundation/if-data/main/cloud-metdata-azure-instances.csv
         query:
           instance-class: "cloud/instance-type"
@@ -101,7 +101,7 @@ initialize:
     extract-processor-name:
       method: Regex
       path: "builtin"
-      global-config:
+      config:
         parameter: cpu-model-name
         match: /^([^,])+/g
         output: cpu/name
@@ -141,7 +141,7 @@ initialize:
     cloud-instance-metadata:
       path: builtin
       method: CSVLookup
-      global-config:
+      config:
         filepath: >-
           https://raw.githubusercontent.com/Green-Software-Foundation/if-data/main/cloud-metdata-azure-instances.csv
         query:
@@ -150,7 +150,7 @@ initialize:
     extract-processor-name:
       path: builtin
       method: Regex
-      global-config:
+      config:
         parameter: cpu-model-name
         match: /^([^,])+/g
         output: cpu/name

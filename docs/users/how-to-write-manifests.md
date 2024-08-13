@@ -42,7 +42,7 @@ tags:
 
 ### Initialize
 
-The `initialize` fields are where you specify each individual plugin that will be initialized in your pipeline. The plugins can be initialized in any order, but can only be invoked elsewhere in the manifest if they have been initialized first here. In each case, you will need to provide the `name`, `path` and `method` (and `global-config` if your plugin requires it):
+The `initialize` fields are where you specify each individual plugin that will be initialized in your pipeline. The plugins can be initialized in any order, but can only be invoked elsewhere in the manifest if they have been initialized first here. In each case, you will need to provide the `name`, `path` and `method` (and `config` if your plugin requires it):
 
 ```yaml
 initialize:
@@ -124,7 +124,7 @@ initialize:
     'interpolate':
       method: Interpolation
       path: 'builtin'
-      global-config:
+      config:
         method: linear
         x: [0, 10, 50, 100]
         y: [0.12, 0.32, 0.75, 1.02]
@@ -142,7 +142,7 @@ initialize:
     'cpu-factor-to-wattage':
       method: Multiply
       path: builtin
-      global-config:
+      config:
         input-parameters: ['cpu-factor', 'cpu/thermal-design-power']
         output-parameter: 'cpu-wattage'
       parameter-metadata:
@@ -160,27 +160,27 @@ initialize:
     'wattage-times-duration':
       method: Multiply
       path: builtin
-      global-config:
+      config:
         input-parameters: ['cpu-wattage', 'duration']
         output-parameter: 'cpu-wattage-times-duration'
     'wattage-to-energy-kwh':
       method: Divide
       path: 'builtin'
-      global-config:
+      config:
         numerator: cpu-wattage-times-duration
         denominator: 3600000
         output: cpu-energy-raw
     'calculate-vcpu-ratio':
       method: Divide
       path: 'builtin'
-      global-config:
+      config:
         numerator: vcpus-total
         denominator: vcpus-allocated
         output: vcpu-ratio
     'correct-cpu-energy-for-vcpu-ratio':
       method: Divide
       path: 'builtin'
-      global-config:
+      config:
         numerator: cpu-energy-raw
         denominator: vcpu-ratio
         output: cpu-energy-kwh
@@ -190,13 +190,13 @@ initialize:
     'operational-carbon':
       method: Multiply
       path: builtin
-      global-config:
+      config:
         input-parameters: ['cpu-energy-kwh', 'grid/carbon-intensity']
         output-parameter: 'carbon-operational'
     'sci':
       path: 'builtin'
       method: Sci
-      global-config:
+      config:
         functional-unit-time: 1 sec
         functional-unit: requests # factor to convert per time to per f.unit
       parameter-metadata:
@@ -214,7 +214,7 @@ initialize:
     'sum-carbon':
       path: 'builtin'
       method: Sum
-      global-config:
+      config:
         input-parameters:
           - carbon-operational
           - carbon-embodied
@@ -222,7 +222,7 @@ initialize:
     'time-sync':
       method: TimeSync
       path: 'builtin'
-      global-config:
+      config:
         start-time: '2023-12-12T00:00:00.000Z'
         end-time: '2023-12-12T00:01:00.000Z'
         interval: 5
