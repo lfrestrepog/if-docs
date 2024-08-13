@@ -39,20 +39,20 @@ You can override the parameter metadata provided in a plugin's source code by ad
 explainer: true
 plugins:
   "sum-carbon":
-      path: "builtin"
-      method: Sum
-      config:
+    path: "builtin"
+    method: Sum
+    config:
       input-parameters:
-          - carbon-operational
-          - carbon-embodied
+        - carbon-operational
+        - carbon-embodied
       output-parameter: carbon
-      parameter-metadata:
+    parameter-metadata:
       inputs:
-          carbon-operational:
+        carbon-operational:
           description: "carbon emitted due to an application's execution"
           unit: "gCO2eq"
           aggregation-method: 'sum',
-          carbon-embodied:
+        carbon-embodied:
           description: "carbon emitted during the production, distribution and disposal of a hardware component, scaled by the fraction of the component's lifespan being allocated to the application under investigation"
           unit: "gCO2eq"
           aggregation-method: 'sum'

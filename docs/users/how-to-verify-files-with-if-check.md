@@ -81,7 +81,6 @@ tree:
         regroup:
         compute:
           - sci
-      config: null
       inputs:
         - timestamp: 2023-07-06T00:00
           duration: 3600
@@ -105,7 +104,6 @@ tree:
         regroup:
         compute:
           - sci
-      config: null
       inputs:
         - timestamp: 2023-07-06T00:00
           duration: 3600
@@ -201,7 +199,6 @@ tree:
         regroup:
         compute:
           - sci
-      config: null
       inputs:
         - timestamp: 2023-07-06T00:00
           duration: 3600
@@ -225,7 +222,6 @@ tree:
         regroup:
         compute:
           - sci
-      config: null
       inputs:
         - timestamp: 2023-07-06T00:00
           duration: 3600

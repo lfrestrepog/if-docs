@@ -233,6 +233,8 @@ tree:
       pipeline:
         observe:
         regroup:
+          - cloud/region
+          - cloud/instance-type
         compute:
           - interpolate
           - cpu-factor-to-wattage
@@ -245,11 +247,6 @@ tree:
           - sum-carbon
           - time-sync
           # - sci
-      config:
-        group-by:
-          group:
-            - cloud/region
-            - cloud/instance-type
       defaults:
         cpu/thermal-design-power: 100
         grid/carbon-intensity: 800

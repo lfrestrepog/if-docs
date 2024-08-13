@@ -30,7 +30,7 @@ tree:
 
 There is a cloud instance metadata file in the `if-data` Github repository. You can use the `csv-lookup` plugin to grab data from that file. You do not need to have a local copy of the file, you can simply provide the URL of the remote file.
 
-You can create an instance of `CSVLookup` and name it `cloud-instance-metadata` and add it to the `initialize` block in your manifest file. 
+You can create an instance of `CSVLookup` and name it `cloud-instance-metadata` and add it to the `initialize` block in your manifest file.
 
 The lookup query is configured in `config`. You provide the parameters you want to use as selectors, and the selector value is a field from your `inputs` array. You also provide the target columns you want to return data from (we'll use a wildcard and grab everything).
 
@@ -47,7 +47,6 @@ Add the following data to your `inputs` array:
 
 Now, add the `CSVLookup` instance to your `initialize` block. Configure your query so that you select your row based on the value in the `instance-class` column. The value should be `cloud/instance-type`. You want data from all the other rows, so `output` can be a wildcard `"*"`.
 
-
 ```yaml
 name: csv-demo
 description:
@@ -56,12 +55,12 @@ initialize:
   plugins:
     cloud-instance-metadata:
       method: CSVLookup
-      path: "builtin"
+      path: 'builtin'
       config:
         filepath: https://raw.githubusercontent.com/Green-Software-Foundation/if-data/main/cloud-metdata-azure-instances.csv
         query:
-          instance-class: "cloud/instance-type"
-        output: "*"
+          instance-class: 'cloud/instance-type'
+        output: '*'
 ```
 
 The CSV lookup can return multiple values for the processor name, because the same instance can use different processors in different circumstances. Multiple values are returned as a single string, separated using commas. Therefore, you can easily parse out the first individual value by selecting the entire string up to the first comma. This is a simple regex task.
@@ -70,15 +69,15 @@ Create an instance of your `regex` plugin, and select all characters up to the f
 
 ```
 extract-processor-name:
-    method: Regex
-    path: "builtin"
-    config:
+  method: Regex
+  path: "builtin"
+  config:
     parameter: cpu-model-name
     match: /^([^,])+/g
     output: cpu/name
 ```
 
-That's it! 
+That's it!
 
 ## Run the manifest
 
@@ -92,15 +91,15 @@ initialize:
   plugins:
     cloud-instance-metadata:
       method: CSVLookup
-      path: "builtin"
+      path: 'builtin'
       config:
         filepath: https://raw.githubusercontent.com/Green-Software-Foundation/if-data/main/cloud-metdata-azure-instances.csv
         query:
-          instance-class: "cloud/instance-type"
-        output: "*"
+          instance-class: 'cloud/instance-type'
+        output: '*'
     extract-processor-name:
       method: Regex
-      path: "builtin"
+      path: 'builtin'
       config:
         parameter: cpu-model-name
         match: /^([^,])+/g
@@ -130,7 +129,6 @@ if-run -m instance-metadata.yml -o output.yml
 ```
 
 Your new `output.yml` file will contain the following:
-
 
 ```yaml
 name: csv-demo

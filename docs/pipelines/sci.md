@@ -183,10 +183,10 @@ sum-carbon:
   path: 'builtin'
   method: Sum
   config:
-  input-parameters:
-    - carbon-operational
-    - carbon-embodied
-  output-parameter: carbon
+    input-parameters:
+      - carbon-operational
+      - carbon-embodied
+    output-parameter: carbon
 ```
 
 ## Step 6: Calculate SCI
@@ -200,7 +200,7 @@ Add an instance of the SCI plugin to your `initialize: plugins:` block as follow
   path: 'builtin'
   method: Sci
   config:
-  functional-unit: 'component'
+    functional-unit: 'component'
 ```
 
 SCI will look in each element in the `inputs` array for the `component` key. To ensure it is there, we can add it to `defaults` as follows:
@@ -406,7 +406,6 @@ tree:
           - operational-carbon
           - sum-carbon
           - sci
-      config: null
       defaults:
         cpu/thermal-design-power: 100
         vcpus-total: 8

@@ -207,7 +207,6 @@ initialize:
 tree:
   children:
     child:
-      config:
       inputs:
 ```
 

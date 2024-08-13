@@ -43,7 +43,6 @@ tree:
         observe:
         regroup:
         compute:
-      config:
       defaults:
       inputs:
         - timestamp: 2023-08-06T00:00
@@ -91,18 +90,12 @@ plugins:
           - carbon-embodied
       output-parameter: carbon
     parameter-metadata:
-tree:
-  children:
-    child:
-      pipeline:
-        compute:
-          - sum-carbon
       inputs:
-          carbon-operational:
+        carbon-operational:
           description: "carbon emitted due to an application's execution"
           unit: "gCO2eq"
-          aggregation-method: 'sum',
-          carbon-embodied:
+          aggregation-method: 'sum'
+        carbon-embodied:
           description: "carbon emitted during the production, distribution and disposal of a hardware component, scaled by the fraction of the component's lifespan being allocated to the application under investigation"
           unit: "gCO2eq"
           aggregation-method: 'sum'
@@ -214,7 +207,6 @@ tree:
             regroup:
             compute:
               - sum
-          config: null
           defaults: null
           inputs:
             - timestamp: 2023-07-06T00:00
@@ -235,7 +227,6 @@ tree:
                 regroup:
                 compute:
                   - sum
-              config: null
               defaults: null
               inputs:
                 - timestamp: 2023-07-06T00:00
@@ -537,8 +528,6 @@ tree:
         regroup:
         compute:
           - sum
-      config:
-        sum: null
       inputs:
         - timestamp: 2023-08-06T00:00
           duration: 3600
