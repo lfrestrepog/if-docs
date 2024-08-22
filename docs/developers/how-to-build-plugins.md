@@ -106,7 +106,16 @@ initialize:
 
 ### Mapping
 
-The `mapping` is another argument passed to the plugin. It's an object with key-value pairs, where the `key` is the parameter name that the plugin uses, and the `value` is the name that persists in the input.
+The `mapping` is an optional argument passed to the plugin. Its purpose is to rename the arguments expected or returned from the plugin as part of the plugin's execution, avoiding the need to use additional plugins to rename parameters. 
+
+For example, your plugin might expect `cpu/energy` and your input data has the parameter `cpu-energy` returned from another plugin. Instead of using an additional plugin to rename the parameter and add a new one, you can use `mapping` to:
+
+a) rename the output from the first plugin so that `cpu/energy` is returned instead of the default `cpu-energy`
+
+b) instruct the second plugin to accept `cpu-energy` instead of the default `cpu/energy`
+
+
+The `mapping` config is an object with key-value pairs, where the `key` is the 'original' parameter name that the plugin uses, and the `value` is the 'new' name that you want to use instead.
 The `mapping` block is an optional and allows mapping the input and output parameters of the plugin. The structure of the `mapping` block is:
 
 ```yaml
