@@ -148,7 +148,7 @@ tree:
           requests: 100
 ```
 
-In the `outputs`, instead of the result of the Sci plugin `sci` will be `if-sci`.
+In the `outputs`, the `sci` value returned by the `Sci` plugin will be named `if-sci`.
 
 ### Methods
 
