@@ -54,7 +54,8 @@ Global config is passed as an argument to the plugin. In your plugin code you ca
 // Here's the function definition - notice that global config is passed in here!
 export const Plugin = (
   globalConfig: YourConfig,
-  parametersMetadata: PluginParametersMetadata
+  parametersMetadata: PluginParametersMetadata,
+  mapping: MappingParams
 ): ExecutePlugin => {
   // in here you have access to globalConfig[your-params]
 };
@@ -75,7 +76,7 @@ initialize:
 
 ### Parameter metadata
 
-The `parameter-metadata` is passed as an argument to the plugin as the global config. It contains information about the `description` and `unit` of the parameters of the inputs and outputs that defined in the manifest.
+The `parameter-metadata` is passed as an argument to the plugin as the global config. It contains information about the `description`, `unit` and `aggregation-method` of the parameters of the inputs and outputs that defined in the manifest.
 
 ```yaml
 initialize:
@@ -91,14 +92,63 @@ initialize:
           cpu/energy:
             description: energy consumed by the cpu
             unit: kWh
+            aggregation-method: sum
           network/energy:
             description: energy consumed by data ingress and egress
             unit: kWh
+            aggregation-method: sum
         outputs:
           energy-sum:
             description: sum of energy components
             unit: kWh
+            aggregation-method: sum
 ```
+
+### Mapping
+
+The `mapping` is an optional argument passed to the plugin. Its purpose is to rename the arguments expected or returned from the plugin as part of the plugin's execution, avoiding the need to use additional plugins to rename parameters. 
+
+For example, your plugin might expect `cpu/energy` and your input data has the parameter `cpu-energy` returned from another plugin. Instead of using an additional plugin to rename the parameter and add a new one, you can use `mapping` to:
+
+a) rename the output from the first plugin so that `cpu/energy` is returned instead of the default `cpu-energy`
+
+b) instruct the second plugin to accept `cpu-energy` instead of the default `cpu/energy`
+
+
+The `mapping` config is an object with key-value pairs, where the `key` is the 'original' parameter name that the plugin uses, and the `value` is the 'new' name that you want to use instead.
+The `mapping` block is an optional and allows mapping the input and output parameters of the plugin. The structure of the `mapping` block is:
+
+```yaml
+name: sci
+description: successful path
+tags:
+initialize:
+  plugins:
+    sci:
+      kind: plugin
+      method: Sci
+      path: 'builtin'
+      config:
+        functional-unit: requests
+      mapping:
+        sci: if-sci
+tree:
+  children:
+    child:
+      pipeline:
+        compute:
+          - sci
+      inputs:
+        - timestamp: 2023-07-06T00:00
+          duration: 3600
+          energy: 5
+          carbon-operational: 5
+          carbon-embodied: 0.02
+          carbon: 5.02
+          requests: 100
+```
+
+In the `outputs`, the `sci` value returned by the `Sci` plugin will be named `if-sci`.
 
 ### Methods
 

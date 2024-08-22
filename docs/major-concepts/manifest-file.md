@@ -78,7 +78,33 @@ There is also an optional `global-config` field that can be used to set _global_
 
 Impact Framework uses the `initialize` section to instantiate each plugin. A plugin cannot be invoked elsewhere in the manifest file unless it is included in this section.
 
-You can also add information here about parameter metadata if you wish to add or override the metadata hardcoded into the plugin. This is what will be reported by the `explainer` feature if you enable it. E.g.
+There is also the option to provide a mapping to the plugin in the initialize block. Its purpose is to rename the arguments expected or returned from the plugin as part of the plugin's execution, avoiding the need to use additional plugins to rename parameters.
+
+For example, your plugin might expect cpu/energy and your input data has the parameter cpu-energy returned from another plugin. Instead of using an additional plugin to rename the parameter and add a new one, you can use mapping to:
+
+a) rename the output from the first plugin so that cpu/energy is returned instead of the default cpu-energy
+
+b) instruct the second plugin to accept cpu-energy instead of the default cpu/energy
+
+e.g. 
+
+```yaml
+initialize:
+  plugins:
+    sci:
+      kind: plugin
+      method: Sci
+      path: 'builtin'
+      config:
+        functional-unit: requests
+      mapping:
+        sci: if-sci
+```
+
+In the outputs, the `sci` value returned by the Sci plugin will be named if-sci.
+
+
+You can also add information to the plugin's initialize section about parameter metadata if you wish to add or override the metadata hardcoded into the plugin. This is what will be reported by the `explainer` feature if you enable it. E.g.
 
 ```yaml
 plugins:
