@@ -54,7 +54,8 @@ Global config is passed as an argument to the plugin. In your plugin code you ca
 // Here's the function definition - notice that global config is passed in here!
 export const Plugin = (
   globalConfig: YourConfig,
-  parametersMetadata: PluginParametersMetadata
+  parametersMetadata: PluginParametersMetadata,
+  mapping: MappingParams
 ): ExecutePlugin => {
   // in here you have access to globalConfig[your-params]
 };
@@ -75,7 +76,7 @@ initialize:
 
 ### Parameter metadata
 
-The `parameter-metadata` is passed as an argument to the plugin as the global config. It contains information about the `description` and `unit` of the parameters of the inputs and outputs that defined in the manifest.
+The `parameter-metadata` is passed as an argument to the plugin as the global config. It contains information about the `description`, `unit` and `aggregation-method` of the parameters of the inputs and outputs that defined in the manifest.
 
 ```yaml
 initialize:
@@ -91,14 +92,54 @@ initialize:
           cpu/energy:
             description: energy consumed by the cpu
             unit: kWh
+            aggregation-method: sum
           network/energy:
             description: energy consumed by data ingress and egress
             unit: kWh
+            aggregation-method: sum
         outputs:
           energy-sum:
             description: sum of energy components
             unit: kWh
+            aggregation-method: sum
 ```
+
+### Mapping
+
+The `mapping` is another argument passed to the plugin. It's an object with key-value pairs, where the `key` is the parameter name that the plugin uses, and the `value` is the name that persists in the input.
+The `mapping` block is an optional and allows mapping the input and output parameters of the plugin. The structure of the `mapping` block is:
+
+```yaml
+name: sci
+description: successful path
+tags:
+initialize:
+  plugins:
+    sci:
+      kind: plugin
+      method: Sci
+      path: 'builtin'
+      config:
+        functional-unit: requests
+      mapping:
+        sci: if-sci
+tree:
+  children:
+    child:
+      pipeline:
+        compute:
+          - sci
+      inputs:
+        - timestamp: 2023-07-06T00:00
+          duration: 3600
+          energy: 5
+          carbon-operational: 5
+          carbon-embodied: 0.02
+          carbon: 5.02
+          requests: 100
+```
+
+In the `outputs`, instead of the result of the Sci plugin `sci` will be `if-sci`.
 
 ### Methods
 
